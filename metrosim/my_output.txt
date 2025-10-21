@@ -133,3 +133,4 @@ TRAIN: [4] Fenwood Rd {}
        [23] Magoun Square {}
        [24] Ball Square {}
        [25] College Ave {}
+Thanks for playing MetroSim. Have a nice day!
