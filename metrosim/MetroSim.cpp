@@ -194,7 +194,7 @@ void MetroSim::read_commands_file(string filename) {
     cmd_stream.close();
 
     // if it got to the end of the file without a "m f", end the sim now
-    if (keep_asking) {end_sim;}
+    if (keep_asking) {end_sim();}
 }
 
 // Prints the message at the end of the simulation.
