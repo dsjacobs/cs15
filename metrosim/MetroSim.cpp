@@ -148,13 +148,13 @@ void MetroSim::add_passenger(int arrival, int departure) {
 
     // stations must be positive and comparable to actual stations
     if (arrival > 0 and departure > 0) {
-   	 // stations must be in bounds
-	int ns = num_stations();
-	if (arrival < ns and departure < ns) {
-        	station_list[arrival].pq_waiting.enqueue(new_pgr);
-        	psgr_ctr++;
-        	print_all(cout);
-    	}
+    // stations must be in bounds
+    int ns = num_stations();
+    if (arrival < ns and departure < ns) {
+            station_list[arrival].pq_waiting.enqueue(new_pgr);
+            psgr_ctr++;
+            print_all(cout);
+        }
     }
     else {cout << "Invalid station";}
 };
