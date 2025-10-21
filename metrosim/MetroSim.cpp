@@ -35,7 +35,7 @@ MetroSim::MetroSim(string stations_fname, string output_fname)
 
     // wont use it now, but this ensures it exists/clears out old copies and
     // tests for errors. used later
-    std::ifstream of_stream = open_file_output_stream(output_fname, true);
+    std::ofstream of_stream = open_file_output_stream(output_fname, true);
     of_stream.close();
 };
 
