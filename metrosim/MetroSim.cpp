@@ -144,9 +144,12 @@ void MetroSim::move_train() {
 // can have the next ID.
 void MetroSim::add_passenger(int arrival, int departure) {
     Passenger new_pgr(psgr_ctr + 1, arrival, departure);
-    station_list[arrival].pq_waiting.enqueue(new_pgr);
-    psgr_ctr++;
-    print_all(cout);
+    if (arrival < num_stations() and departure < num_stations) {
+        station_list[arrival].pq_waiting.enqueue(new_pgr);
+        psgr_ctr++;
+        print_all(cout);
+    }
+    else {cout << "Invalid station";}
 };
 
 // No parameters or output. Removes from the train, and from the simulation,
