@@ -112,20 +112,13 @@ Data Structures:
 
 Testing:
 
-<!-- Here describe the following: process of testing (unit tests), mention
-of bugs you encountered while testing, mention of testing on inputs of
-different sizes and edge cases, good description of base cases you
-considered while testing. Demonstrate a methodical approach to
-testing.  This section of your REAMDE should be very thorough for
-assignments. -->
-
 In part 1, I tested passenger and passenger queue in the unit tests file.
 Here I tested creating a null passenger, a passenger with values, and
-creating passengers in a loop, and similar for the stations. Once I 
+creating passengers in a loop, and similar for the stations. Once I
 added the MetroSim class, I went back and edited these unit tests to
-be based on a MetroSim instance. This was able to help me debug file 
+be based on a MetroSim instance. This was able to help me debug file
 creation and reading, and whether I was correctly handling the wrong number
-or unopenable input files. 
+or unopenable input files.
 
 I next wanted to make sure that instantiation worked. This meant building
 train and station classes and their print function, and testing that they
@@ -139,28 +132,26 @@ last one. I kept station and train as simple classes.
 I made sure that at the end of an input commands file, even without m f,
 that the simulation ended.
 
-My first few autograder attempts failed because I had a new line after 
+My first few autograder attempts failed because I had a new line after
 "Command? " and I hadn't been printing the state after a passenger was added,
 only after initialization and after the train had moved.
 
-I tested on fewer stations, on passengers that had arrival or departure 
-stations that wer greater than the number of stations, on adding many
+I tested on fewer stations, on passengers that had arrival or departure
+stations that were greater than the number of stations, on adding many
 passengers at once or departing at once.  On having passengers get on and off
-at the same stop.For a long time, I wanted to save the output file stream as a member
-of the MetroSim class. I tried to save it as a pointer and ran into
-many memory errors with Valgrind, b
-:
+at the same stop (they stay on a whole round). I tested on empty input files,
+ on having just one station.
 
 Part that you found most difficult:
 
-I found the MakeFile most difficult, learning how to write it and how
-to keep track of all the moving pieces and various files in this assignment.
+During part 1, I found the MakeFile most difficult, learning how to write it
+and how to keep track of all the moving pieces and various files
+in this assignment.
 
-For a long time, I wanted to save the output file stream as a member
-of the MetroSim class. I tried to save it as a pointer and ran into
+During part 2, For a long time, I wanted to save the output file stream as
+a member of the MetroSim class. I tried to save it as a pointer and ran into
 many memory errors with Valgrind, both during unit testing and when
-testing the simulation as a whole. Eventually I was able to find about 
+testing the simulation as a whole. Eventually I was able to find
 the append mode of an output stream.
 
-
-Time Spent: Approximately 20 hours.
+Time Spent: Approximately 25 hours.
