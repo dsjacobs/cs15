@@ -175,7 +175,7 @@ void MetroSim::onboarding() {
 // and prints it.
 void MetroSim::print_offboarding(int psgr_id, int station_id) {
     string station_name = station_list[station_id].name;
-    std::ofstream of_stream = open_file_output_stream(output_filename)
+    std::ofstream of_stream = open_file_output_stream(output_filename);
     of_stream << "Passenger " << psgr_id << " left train at station ";
     of_stream << station_name << endl;
 }
@@ -214,7 +214,7 @@ std::ifstream MetroSim::read_file_open_stream(string filename) {
 // Given a filename, creates and returns an output stream to that file. 
 std::ofstream MetroSim::open_file_output_stream(string filename) {
         std::ofstream myofstream;   
-        myofstream.open(filename);
+        myofstream.open(filename, ios::app);
         if (not myofstream.is_open()) {
                 cerr << "Error: could not open file " << filename << std::endl;
                 end_sim();

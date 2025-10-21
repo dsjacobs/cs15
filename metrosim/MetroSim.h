@@ -27,7 +27,6 @@ class MetroSim
     public:
         MetroSim();
         MetroSim(string stations_filename, string output_filename);
-        ~MetroSim();
         
         bool keep_asking;
         bool file_read_error;

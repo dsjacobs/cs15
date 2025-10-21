@@ -1,0 +1,3 @@
+Passenger 4 left train at station Mission Park
+Passenger 1 left train at station Riverway
+Passenger 2 left train at station Riverway
