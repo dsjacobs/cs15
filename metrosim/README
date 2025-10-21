@@ -81,13 +81,19 @@ Makefile:
 README: this file.
 
 stations.txt:
-     an example file containing a list of stations.
+     an example file containing a list of stations (provided)
 
 test_commands.txt:
-     sample list of commands that you could give to the simulator
+     sample list of commands that you could give to the simulator (provided)
 
 the_metroSim:
-     reference implementation for students to see
+     reference implementation for students to see (provided)
+
+cmds_one.txt, cmds_zero.txt, test_commands_short.txt
+     test command files with one, zero, and a few commands for testing
+
+station_few.txt, station_one.txt, station_zero.txt
+     test station files with one, zero, and a few stations for testing
 
 Data Structures:
      A passenger queue is a list where you can only edit the
