@@ -137,7 +137,25 @@ Node* AVLTree::insert(Node* np, int value) {
  * Does: If unbalanced, balances the subtree of node.
  */
 Node* AVLTree::balance(Node* np) {
-    /* TODO: Students write code here */
+    if (heightDiff(np) > 0) {
+    //left
+        if(heightDiff np->left > 0) {
+            // left left
+        }
+        else {
+            // left right
+        }
+    }
+    else {
+    // right
+        if(heightDiff np->right) {
+            // right left
+        }
+        else {
+            // right right
+        }
+    }
+
     return np; // This line is in here so that the code compiles
                // Remove it if not needed when implementing
 }
