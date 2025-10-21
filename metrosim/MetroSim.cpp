@@ -129,6 +129,7 @@ void MetroSim::determine_command(string input_command) {
 // the current train and stations. then
 void MetroSim::move_train() {
    onboarding();
+   // if its at the last station, move it to station 0 next
     if (the_train.current_location==num_stations()-1)
         {
             the_train.current_location = 0;
@@ -144,7 +145,16 @@ void MetroSim::move_train() {
 // can have the next ID.
 void MetroSim::add_passenger(int arrival, int departure) {
     Passenger new_pgr(psgr_ctr + 1, arrival, departure);
-    if (arrival < num_stations() and departure < num_stations) {
+
+    // stations must be positive and comparable to actual stations
+    if (arrival > 0 and departure > 0) {
+        size_t arrival_t = static_cast<size_t>(arrival);
+        size_t departure_t = static_cast<size_t>(departure);
+    }
+    else {cout << "Station number must be positive";}
+
+    // stations must be in bounds
+    if (arrival_t < num_stations() and departure_t < num_stations()) {
         station_list[arrival].pq_waiting.enqueue(new_pgr);
         psgr_ctr++;
         print_all(cout);
@@ -217,6 +227,7 @@ std::ifstream MetroSim::read_file_open_stream(string filename) {
         myifstream.open(filename);
         if (not myifstream.is_open()) {
                 cerr << "Error: could not open file " << filename << std::endl;
+                // when Main.cpp sees this is true, it will throw end sim
                 file_read_error = true;
         }
         return myifstream;
@@ -225,9 +236,11 @@ std::ifstream MetroSim::read_file_open_stream(string filename) {
 // Given a filename, creates and returns an output stream to that file. 
 std::ofstream MetroSim::open_file_output_stream(string filename, bool first) {
         std::ofstream myofstream;   
+        // during initialization, make a new output stream
         if (first) {
             myofstream.open(filename);
         }
+        // otherwise append to existing output stream
         else {
             myofstream.open(filename, ios::app);
         }

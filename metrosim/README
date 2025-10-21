@@ -138,9 +138,9 @@ only after initialization and after the train had moved.
 
 I tested on fewer stations, on passengers that had arrival or departure
 stations that were greater than the number of stations, on adding many
-passengers at once or departing at once.  On having passengers get on and off
+passengers at once or departing at once. On having passengers get on and off
 at the same stop (they stay on a whole round). I tested on empty input files,
- on having just one station.
+and on having just one station.
 
 Part that you found most difficult:
 
