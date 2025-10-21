@@ -36,7 +36,7 @@ MetroSim::MetroSim(string stations_fname, string output_fname)
     // wont use it now, but this ensures it exists/clears out old copies and
     // tests for errors. used later
     std::ifstream of_stream = read_file_open_stream(output_fname);
-    of_stream.close()
+    of_stream.close();
 };
 
 // Takes a command filename, opens it, and creates input stream.
@@ -214,10 +214,14 @@ std::ifstream MetroSim::read_file_open_stream(string filename) {
         myifstream.open(filename);
         if (not myifstream.is_open()) {
                 cerr << "Error: could not open file " << filename << std::endl;
-                fisle_read_error = true;
-                return EXIT_FAILURE;
+                file_read_error = true;
+                exit_failure();
         }
         return myifstream;
+}
+
+void MetroSim::exit_failure() {
+    return EXIT_FAILURE;
 }
 
 // Given a filename, creates and returns an output stream to that file. 

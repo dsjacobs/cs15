@@ -61,6 +61,7 @@ class MetroSim
 
         int psgr_ctr;
         string output_filename;
+        void exit_failure();
 };
 
 #endif
