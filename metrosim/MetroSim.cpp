@@ -209,7 +209,8 @@ std::ifstream MetroSim::read_file_open_stream(string filename) {
         myifstream.open(filename);
         if (not myifstream.is_open()) {
                 cerr << "Error: could not open file " << filename << std::endl;
-                file_read_error = true;
+                fisle_read_error = true;
+                return EXIT_FAILURE;
         }
         return myifstream;
 }
