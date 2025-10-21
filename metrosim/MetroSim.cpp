@@ -22,7 +22,7 @@ using namespace std;
 // constructor takes filenames for stations and outputs, creates
 // list of stations and output stream. Creates MetroSim instance.
 // Sets initial values for how many passengers have been created, 
-// whether to keep asking for commands, and whether there are
+// whether to keep askigng for commands, and whether there are
 // file read errors.
 MetroSim::MetroSim(string stations_fname, string output_fname) 
 {
@@ -32,6 +32,11 @@ MetroSim::MetroSim(string stations_fname, string output_fname)
     keep_asking = true;
     file_read_error = false;
     output_filename = output_fname;
+
+    // wont use it now, but this ensures it exists/clears out old copies and
+    // tests for errors. used later
+    std::ifstream of_stream = read_file_open_stream(output_fname);
+    of_stream.close()
 };
 
 // Takes a command filename, opens it, and creates input stream.
