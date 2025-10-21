@@ -32,15 +32,18 @@ int  main(int argc, char *argv[])
                 commands_filename = argv[3];
                 my_metrosim.add_cmd_file(commands_filename);
                 if (not my_metrosim.file_read_error) {
-                my_metrosim.print_all(std::cout);
-                my_metrosim.read_commands_file(commands_filename);
+                        my_metrosim.print_all(std::cout);
+                        my_metrosim.read_commands_file(commands_filename);
+                }
+                else {
+                        return EXIT_FAILURE;
                 }
         }
         else {
                 my_metrosim.print_all(std::cout);
                 while (my_metrosim.keep_asking) {
-                string cmd = my_metrosim.ask_for_command();
-                my_metrosim.determine_command(cmd);
+                        string cmd = my_metrosim.ask_for_command();
+                        my_metrosim.determine_command(cmd);
                 }
         }
 
