@@ -35,7 +35,7 @@ MetroSim::MetroSim(string stations_fname, string output_fname)
 
     // wont use it now, but this ensures it exists/clears out old copies and
     // tests for errors. used later
-    std::ifstream of_stream = read_file_open_stream(output_fname);
+    std::ifstream of_stream = open_file_output_stream(output_fname, true);
     of_stream.close();
 };
 
@@ -181,7 +181,7 @@ void MetroSim::onboarding() {
 // and prints it.
 void MetroSim::print_offboarding(int psgr_id, int station_id) {
     string station_name = station_list[station_id].name;
-    std::ofstream of_stream = open_file_output_stream(output_filename);
+    std::ofstream of_stream = open_file_output_stream(output_filename, false);
     of_stream << "Passenger " << psgr_id << " left train at station ";
     of_stream << station_name << endl;
 }
@@ -220,9 +220,14 @@ std::ifstream MetroSim::read_file_open_stream(string filename) {
 }
 
 // Given a filename, creates and returns an output stream to that file. 
-std::ofstream MetroSim::open_file_output_stream(string filename) {
+std::ofstream MetroSim::open_file_output_stream(string filename, bool first) {
         std::ofstream myofstream;   
-        myofstream.open(filename, ios::app);
+        if (first) {
+            myofstream.open(filename);
+        }
+        else {
+            myofstream.open(filename, ios::app);
+        }
         if (not myofstream.is_open()) {
                 cerr << "Error: could not open file " << filename << std::endl;
         }

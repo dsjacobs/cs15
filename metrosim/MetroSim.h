@@ -53,7 +53,7 @@ class MetroSim
         void print_offboarding(int psgr_id, int station_id);
 
         std::ifstream read_file_open_stream(string filename);
-        std::ofstream open_file_output_stream(string filename);
+        std::ofstream open_file_output_stream(string filename, bool first);
 
     private:
         vector<Station> station_list;
