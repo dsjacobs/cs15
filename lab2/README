@@ -1,0 +1,107 @@
+/*
+ * Comp 15 Lab 2: Planets
+ *
+ * README
+ * Author: Hayden Wolff, edited by Elizabeth Hom (Sept 2020)
+ *         Updated by Matt R - Feb, 2021
+ * Name: 
+ * Date:
+ * 
+ * Note: This is an example README file
+ */
+
+PROGRAM PURPOSE:
+---------------
+    This lab assignment offers Comp 15 students with hands on practice
+    with linked lists. Specifically, this program implements a singly 
+    linked list of Planet objects.
+
+ACKNOWLEDGEMENTS:
+----------------
+    I read about Linked Lists on: 
+    https://www.interviewbit.com/courses/programming/topics/linked-lists/
+    to refresh my memory from Comp 11.  I also got help from my lab TA
+    Lawrence when the order of my planets were not being printed
+    correctly. I also discussed some initial ideas with other students in
+    my lab. *REPLACE THIS WITH YOUR OWN ACKNOWLEDGMENTS*
+
+FILES:
+-----
+
+   planet-driver.cpp: Main driver for the linked list of planets.
+        Reads in planets from cin, before adding them to two lists. Also 
+        has space for a JFFE that reverses the first list. 
+          ** STUDENT TODO: Insert planets to two lists - one by pushAtFront, the
+          other by pushAtBack. Then, implement the destructor. 
+
+    LinkedList.cpp: Implementation of the LinkedList class which includes
+        key functions regarding the linked list, such as the default and
+        parametrized constructor, assignment operator, print function, 
+        other helper functions.
+          ** STUDENT TODO: Write pushAtFront, pushAtBack, and the destructor.
+
+    LinkedList.h: Interface of LinkedList class, which includes key information
+        regarding the LinkedList class.
+
+    Planet.cpp: Implementation of Planet class which includes a default and
+        parametrized constructor which creates Planet objects, a print
+        function, and assignment operator.
+
+    Planet.h: Interface of Planet class, which includes key information
+        regarding Planet objects.
+
+
+HOW TO COMPILE/LINK/RUN:
+-----------------------
+    * Compile with "make planet-driver"
+    * Run with "./planet-driver"
+
+    * Note: The student must implement two functions: insert_planet_at_back
+            and reverse_list.
+
+DATA STRUCTURES:
+---------------
+
+    The main data structure of this lab is a singly linked list. Inserting
+    at the front of a linked list is O(1). Inserting at the back is
+    O(list_length) (or O(1) if there is a back pointer). Access is O(n),
+    because the worst case run time is if the element that is being looked
+    for is the last element in the list.  A linked list is useful because it
+    can be used dynamically and it is relatively easy to insert and delete
+    nodes. A disadvantage of linked lists is that it is difficult to access
+    elements quickly, as you cannot directly access elements like with an array
+    and must traverse the list to access elements.
+    ** This section of your README should be quite thorough for homeworks!
+
+TESTING:
+-------
+    ** REPLACE WITH YOUR TESTING STRATEGIES. **
+    You can describe: process of testing (unit tests), bugs you encountered,
+    testing inputs (different sizes and edge cases), base cases you considered
+    while testing. Demonstrate a methodical approach to testing. This section
+    of your README should be quite thorough for homework assignments!
+
+QUESTIONS:
+-------
+    **ANSWER THESE QUESTIONS BELOW FOR FULL CREDIT ON THIS LAB**
+    1. What is Valgrind?
+
+
+
+
+    2. How do you run Valgrind?
+
+
+
+
+    3. Why is Valgrind useful? What kinds of errors can Valgrind tell you about?
+
+
+
+
+
+NOTE: As stated earlier, this lab comes partially implemented. The
+Planet class is already written and the majority of the Linked List
+class is also written. The driver also already is mostly implemented,
+but students must write and utilize two insertion functions, as well as the 
+destructor. 

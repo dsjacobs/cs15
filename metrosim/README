@@ -1,0 +1,119 @@
+/*
+* Project 1: Metro Simulator
+* CS 15
+* Danielle Jacobs
+* README
+*/
+
+Compile/run:
+     - Compile using
+            make MetroSim
+     - run executable with
+            ./MetroSim stationsFile passFile [commands]
+
+Program Purpose:
+     Simulates a train moving between stations. Stations are provided by the
+     user, and users can move the train and add passengers. After every
+     action, the state of all the stations and the train are printed.
+
+Acknowledgements
+     Class chatbot
+     cplusplus.com
+     geeksforgeeks.org
+     w3schools.com
+
+Files:
+
+main.cpp:
+     Validates number of input arguments and determines which MetroSim.cpp
+     functions to call based on input.
+
+MetroSim.cpp:
+     Defines how to handle input and output streams and files, moves trains,
+     and moving passengers. Connects stationw, train, and passenger queues.
+     Defines printing the state of the simulation and the onboarding and
+     offboarding processes.
+
+MetroSim.h:
+     Metrosim class defines how passengers, stations, and trains interact
+     in order to support the simulation as a whole. It contains all
+     information relevant to an individual session, and supports all
+     actions the user can take.
+
+Passenger.cpp:
+     A passenger can be printed, which is called as part of printing
+     passenger queues later on.
+
+Passenger.h:
+     A passenger has an ID, an arrival station, and a departure station.
+     They wait in both stations to get on the train, and on the
+     train to depart.
+
+PassengerQueue.cpp:
+     Passengers can be added or removed from the front of a queue. Passenger
+     queues can be printed, which calls print on each passenger.
+     The first passenger in a queue can be returned, and so can the size of
+     the passenger queue.
+
+PassengerQueue.h:
+     Passenger queues make up stations and the train. Passengers are first in,
+     first out. Passengers cannot be added or removed from the middle.
+
+Station.h:
+     A station has an ID and a passenger queue of passengers waiting to board
+     the train at that station.
+
+Train.cpp:
+     A train can be printed as its series of passenger queues.
+
+Train.h:
+     A train has a list of passenger queues, each belonging to a train that
+     passengers on the train are waiting to get off at.
+
+unit_tests.cpp:
+     Passengers and passenger queues are tested with null, queues of 1, and
+     queues of many passengers.
+
+Makefile:
+     Defines how ./unit_tests and ./MetroSim are compiled and run.
+
+README: this file.
+
+stations.txt:
+     an example file containing a list of stations.
+
+test_commands.txt:
+     sample list of commands that you could give to the simulator
+
+the_metroSim:
+     reference implementation for students to see
+
+Data Structures:
+     A passenger queue is a limited list that can only edit the
+     first and last values. Members are first in, first out, meaning
+     the first queue member to be added is also the first to be
+     removed. Members can be added to the back. Queues simplify
+     lists by having limited functionality to build and test,
+     ie the limit of not being able to add or remove from the
+     middle of the list.
+
+     Standard vector is part of the C++ std library, which
+     can take any element type.
+     the ability to check for the size, and add elements to the back.
+     Standard vectors have flexible size.
+
+Testing:
+
+<!-- Here describe the following: process of testing (unit tests), mention
+of bugs you encountered while testing, mention of testing on inputs of
+different sizes and edge cases, good description of base cases you
+considered while testing. Demonstrate a methodical approach to
+testing.  This section of your REAMDE should be very thorough for
+assignments. -->
+
+Part that you found most difficult:
+
+I found the MakeFile most difficult, learning how to write it and how
+to keep track of all the moving pieces and various files in this assignment.
+
+Time Spent: Approximately 20 hours.

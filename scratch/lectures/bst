@@ -1,0 +1,5 @@
+// empty tree
+// duplicate one fewer
+// leaf, update pointer to leaf
+// one child, update pointer from parent to child
+// two children: replace with largest on small side or smallest on large side

@@ -1,0 +1,88 @@
+## A. Title and Name
+
+    Homework 2: LinkedLists
+    Danielle (Dani) Jacobs
+
+## B. Purpose
+
+    The purpose is to implement a character linked list in C++.
+    This allows clients to add to and remove characters from any point
+    in the list, as well as convert it to a string forwards and
+    backwards, check its size and whether or not its empty.
+
+## C. Acknowledgements
+
+    I went to Daniel's office hours.
+    I discussed strategy of this assignment with Ariel Jacobs.
+    I used templates from class.
+    I consulted the linkedlist lab for a place to start.
+    I did research into, and used, a formatter (clang-format) in order
+    to help me stay under the 80 column limit.
+
+## D. Files provided
+
+    CharLinkedList.h
+    CharLinkedList.cpp
+    unit_tests.cpp
+    Makefile
+    README
+
+## E. How to compile and run
+
+   Run "make" which will compile all files, the unit tests, and the
+   timer file. Then run "./unit_tests" or "./timer" to run either.
+
+## F. Outline
+
+    A doubly linked list has a front pointer and a series of nodes, each of
+    which contain a value, and their own pointers to the nodes on either
+    side of them. I have optionally included a back pointer on the whole 
+    list, as well as a size variable to keep track of the size of the linked
+    list. The first node has a previous pointer of null, and the last node
+    has a next pointer of null. For any intermediate nodes, their previous
+    and next pointers are both populated with the location of the nodes on
+    either side of them. To add or remove from a linked list, it is faster
+    than an array list because no values need to be copied or moved over.
+    All that needs to happen is the relevant pointers must be updated.
+    Reading from a linked list, however, takes longer, because one must
+    traverse the whole list up until the specified index, since there is
+    no native indexing like there is in an array list.
+
+## G. Testing
+
+    I was able to leverage my unit tests from the array lists assignment.
+    These tested each function on arrays of 0, size 1, and larger sizes. For
+    functions that are supposed to throw errors, I made sure to include
+    situations that would throw that eror. These can all be found in the
+    unit_tests file. I also ran Valgrind on both my unit tests file and
+    the timer file and worked on fixing the errors it came up with.
+
+## H. Hours worked
+
+    I spent at least 20 hours on this assignment.
+
+## I. Timer Questions
+
+    **a.  There are three categories of operations listed (insertion, 
+    removal, and access). Within each category, list the times each
+    operation took and rank the operations from fastest to slowest.**
+
+    
+
+    **b.  Discuss these rankings. Why were certain operations so much
+    faster or slower than others?
+    What are the features of linked lists that cause these disparities?**
+
+    **c. Now compare these measurements with the measurements you took for 
+    HW1. Which operations are faster when using array lists? Which are
+    faster using linked lists? Why?**
+
+## J. Additional questions
+
+    **a. Which functions in the interface were easier to implement for
+    linked lists compared to array lists? Why?**
+    **b. Which functions in the interface were harder to implement for
+    linked lists compared to array lists? Why?**
+    **c. If a client had an existing program that uses CharArrayLists,
+    what changes would they have to make to their code to switch 
+    to CharLinkedLists?**

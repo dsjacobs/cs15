@@ -1,0 +1,142 @@
+## A. Title and Name
+
+    Homework 2: LinkedLists
+    Danielle (Dani) Jacobs
+
+## B. Purpose
+
+    The purpose is to implement a character linked list in C++.
+    This allows clients to add to and remove characters from any point
+    in the list, as well as convert it to a string forwards and
+    backwards, check its size and whether or not its empty.
+
+## C. Acknowledgements
+
+    I went to Daniel's office hours.
+    I discussed strategy of this assignment with Ariel Jacobs.
+    I used templates from the last assignment.
+    I consulted the linkedlist lab for a place to start.
+    I did research into autofomatters in order
+    to help me stay under the 80 column limit.
+
+## D. Files provided
+
+    CharLinkedList.h
+    CharLinkedList.cpp
+    unit_tests.cpp
+    Makefile
+    README
+
+## E. How to compile and run
+
+   Run "make" which will compile all files, the unit tests, and the
+   timer file. Then run "./unit_tests" or "./timer" to run either.
+
+## F. Outline
+
+    A doubly linked list has a front pointer and a series of nodes, each of
+    which contain a value, and their own pointers to the nodes on either
+    side of them. I have optionally included a back pointer on the whole 
+    list, as well as a size variable to keep track of the size of the linked
+    list. The first node has a previous pointer of null, and the last node
+    has a next pointer of null. For any intermediate nodes, their previous
+    and next pointers are both populated with the location of the nodes on
+    either side of them. To add or remove from a linked list, it is faster
+    than an array list because no values need to be copied or moved over.
+    All that needs to happen is the relevant pointers must be updated.
+    Reading from a linked list, however, takes longer, because one must
+    traverse the whole list up until the specified index, since there is
+    no native indexing like there is in an array list.
+
+## G. Testing
+
+    I was able to leverage my unit tests from the array lists assignment.
+    These tested each function on arrays of 0, size 1, and larger sizes. For
+    functions that are supposed to throw errors, I made sure to include
+    situations that would throw that eror. These can all be found in the
+    unit_tests file. I also ran Valgrind on both my unit tests file and
+    the timer file and worked on fixing the errors it came up with.
+
+## H. Hours worked
+
+    I spent at least 20 hours on this assignment.
+
+## I. Timer Questions
+
+    **a.  There are three categories of operations listed (insertion, 
+    removal, and access). Within each category, list the times each
+    operation took and rank the operations from fastest to slowest.**
+
+    Insertions
+        1. pushAtBack 100 times - 294796
+        2. pushAtFront 100 times - 612981
+        3. insertAt middle of list 100 times - 91370045
+
+    Removals
+        1. popFromBack 100 times - 377265
+        2. popFromFront 100 times - 496479
+        3. removeAt middle of list 100 times  - 38273022
+
+    Access
+       1. call first() 100 times - 183303
+       2. call last() 100 times  -  212378
+       3. call elementAt() for middle of list 100 times  - 39593610
+
+    **b.  Discuss these rankings. Why were certain operations so much
+    faster or slower than others?
+    What are the features of linked lists that cause these disparities?**
+
+        Operations in the middle are substantially slower because there are no
+        direct pointers there, one must travel through all nodes to reach them.
+        Reading values (access) is faster than both insertions and removals,
+        because nothing must be changed.
+
+    **c. Now compare these measurements with the measurements you took for 
+    HW1. Which operations are faster when using array lists? Which are
+    faster using linked lists? Why?**
+
+        Pushing at the front is 42 times faster for a linked list than for an 
+        array list, because we didn't need to copy any
+        elements. Pushing at the back is very similar, which makes sense, and
+        inserting at the middle takes slightly longer for a linked list.
+
+        Removals at the front are faster in a linked list since nothing needs
+        to be copied. Removals at the back are similar. I'd expect removals in
+        the middle to be faster in a linked list (no copying), but in my
+        implementations, they are slower. I can imagine I did not implement
+        as efficiently as I could have. They're relatively similar, and it
+        could also be that the time the linkedlist spends traveling to the
+        right spot could compare to the time the array list spends copying.
+
+        Access at front and back are similar, and access in the middle is much
+        longer for linked lists because they lack the built in indexing
+        and you need to traverse.
+
+## J. Additional questions
+
+    **a. Which functions in the interface were easier to implement for
+    linked lists compared to array lists? Why?**
+
+        Replace at was significantly easier for linked lists since all I had to
+        do was replace the value of the existing node. toString, reverseString,
+        and throwing errors were easier simply as I was able to build on
+        the experience from last time.
+
+    **b. Which functions in the interface were harder to implement for
+    linked lists compared to array lists? Why?**
+
+        Most functions were harder to implement for linked lists, especially
+        those in the middle (insert at, remove at), because it became difficult
+        to keep track of all the pointers.
+
+        The destructor was challenging as the memory management was more
+        complex. Rather than just simply deleting the array, I had to ensure
+        that each node was deleted. It was also difficult not to keep making
+        new nodes I didn't need during the implementation of other functions.
+
+    **c. If a client had an existing program that uses CharArrayLists,
+    what changes would they have to make to their code to switch 
+    to CharLinkedLists?**
+
+        They would not need to make any changes as the interfaces are exactly
+        the same.

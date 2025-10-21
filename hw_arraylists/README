@@ -1,0 +1,96 @@
+A. Title and Name
+    Homework One, Array Lists
+    Danielle (Dani) Jacobs
+
+B. Purpose
+    The purpose is to implement a character arary list in C++.
+    This allows clients to add to and remove characters from any point
+    in the list, as well as convert it to a string forwards and
+    backwards, check its size and whether or not its empty.
+C. Acknowledgements
+    I went to office hours with Daniel Martin and Yaman Bosnali.
+    I used the testing template written by Tyler Calabrese, January in
+    2021 and edited by Milod Kazerounian, January 2022.
+    For the expand function, I used the code posted on Piazza.
+    I did some research on stackoverflow.
+
+D. Files and their purpose
+    CharArrayList.cpp - defines the functions used to add to, remove
+    from, and otherwise manipulate a Character Array List.
+    CharArrayList.h - outlines the functions used to add to, remove
+    from, and otherwise manipulate a Character Array List.
+    unit_tests.cpp - runs all above functions on character array lists
+    of sizes 0, 1, and greater than 1 to ensure they work properly.
+
+E. How to compile and run
+    Run "make" which will compile all files, the unit tests, and the
+    timer file. Then run "./unit_tests" or "./timer" to run either.
+
+F. Outline of data structures and algorithms
+    A character array list has a size, a capacity, and a pointer to an
+    array. It is more difficult to add to the beginning of an array list
+    than it is to the end, because before adding to the beginning, you
+    must copy all existing elements over by one. However adding to the
+    end, as long as you have capacity, is as simple as inserting the
+    value there. Whenever size reaches over capacity, one must make a
+    new array somewhere else in memory, copy over all existing elements,
+    free the original location, and repoint the character array list to
+    the new location. While this might take more time than a linked
+    list, it is easier to access elements by their index than it would
+    be in a linked list, where you have to read all elements before
+    finding the one you are looking for.
+
+G. Explanation of testing
+    I tested each function on arrays of 0, size 1, and larger sizes. I
+    had printing statements that I have since removed. For functions
+    that are supposed to throw errors, I made sure to include situations
+    that would throw that eror. These can all be found in the unit_tests
+    file. I also ran Valgrind on both my unit tests file and the timer
+    file and worked on fixing all the errors it came up with (most of
+    which were off by one errors).
+
+    I tried to create an array with a negative size to ensure that 
+    throws an error, but the compiler and valgrind threw that error 
+    before I could.
+
+H. Hours worked
+    I spent at least three hours a day every day for approximately a
+    week and a half/two weeks, and on some days slightly more, so
+    approximately 40 hours.
+
+I. Answers to two questions:
+   a. There are three categories of operations listed (insertion,
+   removal, and access). Within each category, list the times each
+   operation took and rank the operations from fastest to slowest.
+
+        Insesrtion Operations
+        pushAtFront 100 times - 26215180 nanoseconds
+        pushAtBack 100 times - 301597 nanoseconds
+        insertAt middle of list 100 times - 14957182 nanoseconds
+
+        Removal Operations
+        popFromFront 100 times - 46456483 nanoseconds
+        popFromBack 100 times - 4357982 nanoseconds
+        removeAt middle of list 100 times - 19457521 nanoseconds
+
+        Access Operation
+        call first() 100 times - 288786 nanoseconds
+        call last() 100 times = 294009 nanoseconds
+        call elementAt() for middle of list 100 times - 331712
+
+   b. Discuss these rankings. Why were certain operations so much
+    faster or slower than others? Which operations took approxi-
+    mately the same amount of time? What are the features of array
+    lists that caused these disparities or similarities in times?
+
+        Access operations are quickest because no size, capacity, or 
+        elements need to change, and no new space needs to be allocated. 
+        Those all took approximately the same amount of time because the 
+        index is already a builtin feature of an array. For removal and 
+        insertion, operations on the front took significantly longer 
+        since the rest of the array list must be copied. Removal and 
+        insertion operations at the end are quicker since none of the 
+        other elements need to be changed. Adding to and removing from 
+        the middle of the list take some amount of time in between the 
+        front and back, since you need to copy/move some number of 
+        elements between 0 and all.

@@ -1,0 +1,35 @@
+
+
+
+ADD
+- by index (insertAt)
+- from front or back (pushAtFront and pushAtBack)
+- in alpha (ascii) order (insertInOrder)
+- append a whole other array (concatenate)
+
+REMOVE
+- by index (removeAt)
+- from front or back (popFromFront and popFromBack)
+
+CHECK
+- for empty (isEmpty)
+- size (size)
+
+RETURN
+- first (first)
+- last (last)
+- by index (elementAt)
+- index <> string (toString and toReverseString)
+
+TRANSFORM
+- truncate (clear)
+- update element at index (replaceAt)
+
+OTHER
+- deep sort (&operator)
+
+
+
+
+
+
