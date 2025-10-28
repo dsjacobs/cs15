@@ -43,16 +43,30 @@ void Heap::insert(int value)
 int Heap::min() const
 {
     // "TODO: YOUR CODE HERE";
-    return -1;
+    return heap[1];
+
 }
 
 /*
  * remove and return smallest element in heap
  */
 int Heap::removeMin()
-{
+{   
     // "TODO: YOUR CODE HERE";
-    return -1;
+
+    /*This function is exactly as discussed in class: the root value will be
+returned, the heap size shrinks by one, and the value in the rightmost
+node of the last level of the tree is copied to the root and down heaping
+begins from the root*/
+
+    int temp_min = heap[1];
+    int size = heap.size();
+    last_elem = heap[size - 1];
+    heap[1] = last_elem;
+
+    heap.pop_back();
+    downHeap(1);
+    return temp_min;
 }
 
 /*
@@ -64,7 +78,29 @@ int Heap::removeMin()
 void Heap::downHeap(int location)
 {
     // TODO: your code here
-    (void)location; // remove this line
+    int leftchild = leftChild(location);
+    int rightChild = rightChild(location);
+
+    int to_replace = -1 /// -1 means dont swap
+
+    if (leftchild < heap.size() and if heap[leftchild] < heap[location]) {
+        to_replace = leftchild;
+    }
+    
+    if (rightchild < heap.size() and if heap[rightchild] < heap[location]) {
+        if (to_replace == -1 or heap[rightchild] < heap[leftchild]) {
+            to_replace = rightchild;
+        }    
+    }
+
+    if (to_replace != -1) {
+        int temp = heap[location];
+        heap[location] = heap[to_replace];
+        heap[to_replace] = temp;
+
+        downHeap(to_replace);
+    }
+
 }
 
 /* NOT required for this lab, but you can write it if you have time
