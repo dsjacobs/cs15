@@ -6,6 +6,7 @@
  * Interface for the ActionStack class.
  *
  * Author: Milod Kazerounian (Sept 2025)
+ * Edited By: Danielle Jacobs (Oct 2025)
  */
 
 #ifndef __ACTIONSTACK_H__
