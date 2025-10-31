@@ -1,5 +1,5 @@
-Name:
-utln:        
+Name: Dani Jacobs
+utln: djacob09
 
 Answer the questions below, and submit your answers under the
 assignment "typewriter Design Checkoff" on Gradescope.  You must
@@ -24,7 +24,56 @@ logfile.text? Paste both below, and *briefly* describe the contents
 of logfile.text; what information is logged?
 
 Answer:
+pingpong.text:
+ping
 
+logfile.text:
+: Cursor Position: [0, 0]
+
+: Cursor Position: [1, 0]
+p
+: Cursor Position: [2, 0]
+pi
+: Cursor Position: [3, 0]
+pin
+: Cursor Position: [4, 0]
+ping
+: Cursor Position: [0, 1]
+ping
+
+: Cursor Position: [1, 1]
+ping
+p
+: Cursor Position: [2, 1]
+ping
+po
+: Cursor Position: [3, 1]
+ping
+pon
+: Cursor Position: [4, 1]
+ping
+pong
+: Cursor Position: [0, 2]
+ping
+pong
+
+: Cursor Position: [4, 1]
+ping
+pong
+: Cursor Position: [3, 1]
+ping
+pon
+: Cursor Position: [2, 1]
+ping
+po
+: Cursor Position: [1, 1]
+ping
+p
+: Cursor Position: [0, 1]
+ping
+
+Logfile has the location of the cursor before every action, as well as what the
+entire textfile looked like at that point in time.
 
 2. Now run the keylogger that was provided with the starter files
 (i.e., `./keylogger`). When prompted for a filename, enter
@@ -43,6 +92,10 @@ contents. If you see anything other than "pongping", try creating the
 file test.input again.
 
 Answer:
+pongping
+
+The contents of test.input were fed to the typewriter command, which 
+had tracked our steps a-h. 
 
 
 3. What public functions from the TextUI class do you think you will
@@ -51,7 +104,11 @@ information on the user's terminal screen? Describe the arguments to
 that function.
 
 Answer:
-
+I will need to use render, getChar to take in input from the user, 
+savePrompt to save, and startLogMode. Render is what displays information.
+It takes the current test of the file as a vector of string lines, and the
+current position of the cursor/active editing location
+as column and row numbers.
 
 4. Consider implementing the handling of the input "backspace." What
 are the different cases your implementation must consider? What
@@ -60,6 +117,11 @@ inputs to TextUI's render() function altered? You should play around
 with the reference implementation when coming up with your answers.
 
 Answer:
+At the top the file (0,0), pressing backspace does nothing.
+
+At the beginning of any line but the first (x>=1,any y), backspace deletes the new line character and moves the cursor to the end of the previous line. (Subtract 1 from x, and y is end of previous line). 
+
+When the cursor is in any column but the first (any x, y>=1), backspace should erase the previous letter (and add it to the action stack so that it can later be undone if needed). (X stays the same, subtract 1 from y).
 
 
 5. How many ActionStack instances will your program use? When are the
@@ -67,6 +129,9 @@ different times an Action should be pushed on to one of these
 ActionStacks? What information does each Action store?
 
 Answer:
+There will be undo and redo action stacks, so 2. One will keep track 
+of all changes made so that they can potentially be undone, 
+and the other will keep track of all changes undone so that they can potentially be redone.
 
 
 6. Use the reference implementation to play extensively with the
@@ -81,7 +146,32 @@ encourage you to write your pseudocode using an ActionStack---this
 will more closely match the code you eventually write!
 
 Answer:
+def undo() {
+// make sure there is what to undo
+while (DoneActionStack.isNotEmpty())
+{
+   // identify top element
+   char elem = DoneActionStack.top();   
 
+   // if its a backspace keep adding the characters back until i hit something thats not a backspace
+   if (elem == BACKSPACE) {
+
+   }
+
+   // if its a new line character treat that as a one off
+   if (elem == '\n') {
+      DoneActionStack.pop();
+      break;
+   }
+
+   // ignore anything that happens with arrow keys
+   else if (elem not in (UP, DOWN, LEFT, RIGHT))
+   {   
+      // keep removing characters until I hit a new line character or a backspace
+      undo();
+   }
+}
+}
 
 7. Now use the reference to play with "redo" functionality (in
 typewriter: "escape" then "r") after undoing actions. Write
@@ -89,11 +179,22 @@ pseudocode below capturing the rules for how many characters should
 be "redone" each time "redo" is pressed.
 
 Answer:
+while ( UndoneActionStack.isNotEmpty()
+      and UndoneActionStack.top() != '/n',KEY_BACKSPACE )
+{
+   char elem = UndoneActionStack.top();
+   UndoneActionStack.pop();
+   if (elem not up, down, left, right) {
+      DoneActionStack.push(elem);
+   }
+}
 
 8. Consider implementing the "up" arrow key functionality.
 
    (a) What functions from the TextUI class will you need to use to
        implement "up"?
+
+       getChar, render, getTerminalHeight, and getTerminalWidth.
 
 Answer:
 
