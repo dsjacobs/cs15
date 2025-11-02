@@ -22,13 +22,13 @@ int ActionStack::size() const {
 }
 ActionStack::Action ActionStack::top() const {
     if (isEmpty()) {
-        throw std::runtime_error('empty_stack');
+        throw std::runtime_error("empty_stack");
     }
     return listStack.front();
 }
 void ActionStack::pop() {
     if (isEmpty()) {
-        throw std::runtime_error('empty_stack');
+        throw std::runtime_error("empty_stack");
     }
     listStack.pop_front();
 }
