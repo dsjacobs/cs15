@@ -9,7 +9,7 @@
  */
 
 #include "ActionStack.h"
-using namespace std;
+#include <stdexcept>
 
 ActionStack::ActionStack() {};
 ActionStack::~ActionStack() {};

@@ -12,7 +12,10 @@
 #ifndef __ACTIONSTACK_H__
 #define __ACTIONSTACK_H__
 
-using namespace std;
+#include <cstddef>
+#include <stdexcept>
+#include <list>
+
 
 class ActionStack {
 public:
