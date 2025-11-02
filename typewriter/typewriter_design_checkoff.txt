@@ -119,9 +119,13 @@ with the reference implementation when coming up with your answers.
 Answer:
 At the top the file (0,0), pressing backspace does nothing.
 
-At the beginning of any line but the first (x>=1,any y), backspace deletes the new line character and moves the cursor to the end of the previous line. (Subtract 1 from x, and y is end of previous line). 
+At the beginning of any line but the first (x>=1,any y), backspace deletes 
+the new line character and moves the cursor to the end of the previous line. 
+(Subtract 1 from x, and y is end of previous line). 
 
-When the cursor is in any column but the first (any x, y>=1), backspace should erase the previous letter (and add it to the action stack so that it can later be undone if needed). (X stays the same, subtract 1 from y).
+When the cursor is in any column but the first (any x, y>=1), backspace should 
+erase the previous letter (and add it to the action stack so that it can later
+be undone if needed). (X stays the same, subtract 1 from y).
 
 
 5. How many ActionStack instances will your program use? When are the
@@ -148,26 +152,30 @@ will more closely match the code you eventually write!
 Answer:
 def undo() {
 // make sure there is what to undo
-while (DoneActionStack.isNotEmpty())
+while (UndoActionStack.isNotEmpty())
 {
    // identify top element
-   char elem = DoneActionStack.top();   
-
-   // if its a backspace keep adding the characters back until i hit something thats not a backspace
-   if (elem == BACKSPACE) {
-
-   }
+   char Action = UndoActionStack.top();   
 
    // if its a new line character treat that as a one off
-   if (elem == '\n') {
+   if (Action.char == '\n') {
       DoneActionStack.pop();
-      break;
+   }
+
+   // if its a backspace
+   if (Action.char == BACKSPACE) {
+      // go until the next non-backspace
+      DoneActionStack.pop();
+      char newTop = DoneActionStack.top();
+      while (newTop.char == BACKSPACE) {
+         undo();
+         }
    }
 
    // ignore anything that happens with arrow keys
    else if (elem not in (UP, DOWN, LEFT, RIGHT))
    {   
-      // keep removing characters until I hit a new line character or a backspace
+      // keep removing characters until I hit new line or backspace
       undo();
    }
 }
@@ -179,14 +187,35 @@ pseudocode below capturing the rules for how many characters should
 be "redone" each time "redo" is pressed.
 
 Answer:
-while ( UndoneActionStack.isNotEmpty()
-      and UndoneActionStack.top() != '/n',KEY_BACKSPACE )
+def redo() {
+// make sure there is what to redo
+while (UndoneActionStack.isNotEmpty())
 {
-   char elem = UndoneActionStack.top();
-   UndoneActionStack.pop();
-   if (elem not up, down, left, right) {
-      DoneActionStack.push(elem);
+   // identify top element
+   char elem = UndoneActionStack.top();   
+
+   // if its a new line character treat that as a one off
+   if (elem == '\n') {
+      UndoneActionStack.pop();
    }
+
+   // if its a backspace
+   if (elem == BACKSPACE) {
+      // go until the next non-backspace
+      UndoneActionStack.pop();
+      char newTop = UndoneActionStack.top();
+      while (newTop == BACKSPACE) {
+         redo();
+         }
+   }
+
+   // ignore anything that happens with arrow keys
+   else if (elem not in (UP, DOWN, LEFT, RIGHT))
+   {   
+      // keep removing characters until I hit new line or backspace
+      redo();
+   }
+}
 }
 
 8. Consider implementing the "up" arrow key functionality.
@@ -204,15 +233,54 @@ Answer:
        the cursor is located, and different lengths for the line prior
        to the current line.
 
+       If the document is empty, don't do anything.
+       If the current line of text is SHORTER than the users screen width,
+       and not the first row, go up a line. If in the first row, do nothing.
+
+       If the current line of text is LONGER than the users screen, and not
+       the first row, subtract the length of the users screen and move
+       the cursor back that many characters. If we're in the first line,
+       and such substraction would return a negative location, don't.
+
 Answer:
 
-
    (c) Provide pseudocode for the handling of the "up" arrow.
+
+   if (curString.isNotEmpty()) {
+      if (curLine.size() < getTerminalWidth() and curLine != 0) {
+         cursor.height --
+      }
+      else {
+         if (cursor.width - getTerminalHeight() >= 0) {
+            cursor.width = cursor.width - getTerminalHeight();
+         }
+         else if curLine != 0{
+            cursor.height --
+            }
+         }
+   }
+   
+
 
 Answer:
 
 
    (d) Now, provide psuedocode for the handling of the "down" arrow.
+      if ((cursor.height + 1) <= lines.size()) {
+         if (curLine.size() < getTerminalWidth() and curLine != 0) {
+            cursor.height ++;
+         }
+      else {
+         if (cursor.width + getTerminalHeight() <= curLine.size()) {
+            cursor.width = cursor.width + getTerminalHeight();
+         }
+         else {
+            cursor.height ++;
+            }
+         }
+      }
+
+   
 
 Answer:
 
@@ -224,14 +292,40 @@ others)?
 
 Answer:
 
+Main.cpp will handle saving to files and log files.
+The editor class will include a 
+cursor struct that stores the cursor's current location,
+and a vector of string lists that is the current text.
+There will be more functions and not many other 
+data structures for this.
+There will be a Main function which determine next action
+function that happens on a key press. The options
+will be command mode, nothing (upon a nonvalid character),
+a cursor movement (upon an arrow key), or editing the string
+and editing the action stacks. After each action, render is called,
+and the cursor location and string are sent for printing
+to the log file.
 
 10. How do you plan to test your program? What evidence of testing do
 you plan to submit?
 
 Answer:
 
+I will test the actionstack, like the passengerqueue class, with a unit tests
+file. I will use the log file to test all valid keys and characters,
+and the keylogger to test actions like undo, redo, and save. I plan
+to submit log files, test input files, and diff files.
+
 
 11. What is your timeline for completing this project? What would you
 like to have completed, and by which dates?  
 
 Answer: 
+
+Sunday Nov 2, action stacks
+Tuesday Nov 5, file handling and the run function 
+Friday Nov 7, ascii characters and aarow keys
+Sunday Nov 9, all command mode options 
+Wednesday Nov 12, backspace and new lines
+Friday Nov 14, testing, formatting, documentation
+Sunday Nov 16, testing, formatting, documentation

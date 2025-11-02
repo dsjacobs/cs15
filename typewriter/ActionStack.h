@@ -41,7 +41,7 @@ public:
     void clear();
 
 private:
-    // Add any private member variables or functions as you see fit.
+    std::list<Action> listStack;
 };
 
 
