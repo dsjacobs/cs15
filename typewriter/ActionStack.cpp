@@ -44,5 +44,5 @@ void ActionStack::push(char c, bool was_delete, std::size_t line, std::size_t co
     push(elem);
 }
 void ActionStack::clear() {
-    listStack.erase();
+    listStack.clear();
 }
