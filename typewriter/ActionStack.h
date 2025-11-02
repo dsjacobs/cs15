@@ -12,6 +12,8 @@
 #ifndef __ACTIONSTACK_H__
 #define __ACTIONSTACK_H__
 
+using namespace std;
+
 class ActionStack {
 public:
     /* The ActionStack will store Action instances, which capture actions
