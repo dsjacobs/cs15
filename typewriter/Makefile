@@ -6,7 +6,7 @@
  * TODO: Purpose
  *
  * Author: Danielle Jacobs
- */S
+ */
 
 CXX      = clang++
 CXXFLAGS = -g3 -Wall -Wextra -Wpedantic -Wshadow
