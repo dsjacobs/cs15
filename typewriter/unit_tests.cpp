@@ -9,3 +9,14 @@
  */
 
 #include ActionStack.h
+#include <cassert>
+
+void isEmpty_test() {
+    my_stack ActionStack();
+    assert my_stack.isEmpty();
+}
+
+int main() {
+    isEmpty();
+    return 0;
+}
