@@ -12,11 +12,11 @@
 #include <cassert>
 
 void isEmpty_test() {
-    my_stack ActionStack();
-    assert(my_stack.isEmpty();)
+    ActionStack my_stack();
+    assert(my_stack.isEmpty());
 }
 
 int main() {
-    isEmpty_test();
+    isEmptcaty_test();
     return 0;
 }
