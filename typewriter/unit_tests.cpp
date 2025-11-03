@@ -8,15 +8,15 @@
  * Author: Danielle Jacobs
  */
 
-#include ActionStack.h
+#include "ActionStack.h"
 #include <cassert>
 
 void isEmpty_test() {
     my_stack ActionStack();
-    assert my_stack.isEmpty();
+    assert(my_stack.isEmpty();)
 }
 
 int main() {
-    isEmpty();
+    isEmpty_test();
     return 0;
 }
