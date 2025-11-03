@@ -135,8 +135,7 @@ ActionStacks? What information does each Action store?
 Answer:
 There will be undo and redo action stacks, so 2. One will keep track 
 of all changes made so that they can potentially be undone, 
-and the other will keep track of all changes undone so that they can potentially be redone.
-
+and the other will keep track of all changes undone so that they can potentially be redone - at least until its reset when typing something new.
 
 6. Use the reference implementation to play extensively with the
 "undo" feature (in typewriter: "escape" then "u"). Try undoing with
