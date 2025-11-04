@@ -12,14 +12,18 @@ CXX      = clang++
 CXXFLAGS = -g3 -Wall -Wextra -Wpedantic -Wshadow
 LDFLAGS  = -g3 
 
+typewriter: main.o Editor.o ActionStack.object
+	$(CXX) $(CXXFLAGS) -o typewriter main.o ActionStack ActionStack.o
+
 ActionStack: ActionStack.o
 	$(CXX) $(CXXFLAGS) -o ActionStack ActionStack.o
 
-Editor: Editor.o ActionStack.o main.o
-	$(CXX) $(CXXFLAGS) -o Editor Editor.o ActionStack.o main.o
+Editor: Editor.o ActionStack.o 
+	$(CXX) $(CXXFLAGS) -o Editor Editor.o ActionStack.o 
 
 main.o: main.cpp Editor.h ActionStack.h
 	$(CXX) $(CXXFLAGS) -c main.cpp
+
 # This rule builds unit_tests.o
 unit_tests.o: unit_tests.cpp ActionStack.h
 	$(CXX) $(CXXFLAGS) -c unit_tests.cpp
