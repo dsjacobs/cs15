@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
         log_filename = argv[2];
     }
     std::cout << "printing input file" << std::endl;
-    my_editor.print_inp_file(text_filename, cout);     
+    my_editor.print_inp_file(text_filename, std::cout);     
     
     return 0;
 }
