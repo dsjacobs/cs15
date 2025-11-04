@@ -12,8 +12,8 @@ CXX      = clang++
 CXXFLAGS = -g3 -Wall -Wextra -Wpedantic -Wshadow
 LDFLAGS  = -g3 
 
-typewriter: main.o Editor.o ActionStack.object
-	$(CXX) $(CXXFLAGS) -o typewriter main.o ActionStack ActionStack.o
+typewriter: main.o Editor.o ActionStack.o
+	$(CXX) $(CXXFLAGS) -o typewriter main.o Editor.o ActionStack.o
 
 ActionStack: ActionStack.o
 	$(CXX) $(CXXFLAGS) -o ActionStack ActionStack.o
