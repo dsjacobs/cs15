@@ -13,7 +13,6 @@
 #include <fstream>
 #include <sstream>
 #include <string>
-#include <
 
 Editor::Editor(std::string text_fname) {
     std::ifstream text_fs = read_file_open_stream(text_fname);
@@ -25,7 +24,7 @@ std::ifstream Editor::read_file_open_stream(std::string text_file) {
         if (not myifstream.is_open()) {
          std::cerr << "Error: could not open file " << text_file << std::endl;
                 // when Main.cpp sees this is true, it will throw end sim
-                bool file_read_error = true;
+                file_read_error = true;
         }
         return myifstream;
 }
