@@ -12,8 +12,9 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <string>
 
-Editor::Editor(string text_fname) {
+Editor::Editor(std::string text_fname) {
     std::ifstream text_fs = read_file_open_stream(text_fname);
 }
 

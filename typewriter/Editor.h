@@ -8,10 +8,15 @@
  * Author: Danielle Jacobs
  */
 
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
+
  class Editor {
     public:
-        Editor(string text_fname);
+        Editor(std::string text_fname);
         ~Editor();
-        std::ifstream read_text_file(ifstream &text_file);
+        std::ifstream read_text_file(std::ifstream &text_file);
     private:
- }
+ };
