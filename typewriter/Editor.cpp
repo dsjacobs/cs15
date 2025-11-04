@@ -31,10 +31,11 @@ std::ifstream Editor::read_file_open_stream(std::string text_file) {
         return myifstream;
 }
 
-void Editor::print_inp_file(std::ifstream inp_file, std::ostream &output)
+void Editor::print_inp_file(std::string inp_file, std::ostream &output)
 {
+    std::ifstream inp_fs = read_file_open_stream(inp_file);
     std::string line;
-    while (std::getline(inp_file, line)) {
+    while (std::getline(inp_fs, line)) {
         output << line << std::endl; 
     }
 }

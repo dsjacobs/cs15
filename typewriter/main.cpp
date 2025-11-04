@@ -25,9 +25,8 @@ int main(int argc, char *argv[])
     if (argc == 2) {
         log_filename = argv[2];
     }
-    // else {
-    //     my_editor.print_all(std::cout);
-    //     my_editor.run()        
-    // }
+    else {
+        my_editor.print_inp_file(text_filename, cout);     
+    }
     return 0;
 }
