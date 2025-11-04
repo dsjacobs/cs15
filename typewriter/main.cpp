@@ -25,9 +25,9 @@ int main(int argc, char *argv[])
     std::cout << log_filename << std::endl;
     Editor my_editor(text_filename);
     std::cout << "was able to make an instance" << std::endl;
-    if (argc == 2) {
-        log_filename = argv[2];
-    }
+//    if (argc == 2) {
+//        log_filename = argv[2];
+//    }
     std::cout << "printing input file" << std::endl;
     my_editor.print_inp_file(text_filename, std::cout);     
     
