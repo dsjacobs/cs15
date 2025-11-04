@@ -50,5 +50,8 @@ void size_many() {
 int main() {
     isEmpty_test();
     isEmpty_false();
+    size_zero();
+    size_one();
+    size_many();
     return 0;
 }
