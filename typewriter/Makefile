@@ -15,10 +15,12 @@ LDFLAGS  = -g3
 ActionStack: ActionStack.o
 	$(CXX) $(CXXFLAGS) -o ActionStack ActionStack.o
 
-Editor: Editor.o ActionStack.o
-	$(CXX) $(CXXFLAGS) -o Editor Editor.o ActionStack.o 
-# This rule builds unit_tests.o
+Editor: Editor.o ActionStack.o main.o
+	$(CXX) $(CXXFLAGS) -o Editor Editor.o ActionStack.o main.o
 
+main.o: main.cpp Editor.h ActionStack.h
+	$(CXX) $(CXXFLAGS) -c main.cpp
+# This rule builds unit_tests.o
 unit_tests.o: unit_tests.cpp ActionStack.h
 	$(CXX) $(CXXFLAGS) -c unit_tests.cpp
 
@@ -28,7 +30,7 @@ ActionStack.o: ActionStack.cpp ActionStack.h
 
 Editor.o: Editor.cpp ActionStack.h
 	$(CXX) $(CXXFLAGS) -c Editor.cpp
-	
+
 # This rule builds Unit Tests
 unit_tests: unit_tests.o ActionStack.o
 	$(CXX) $(CXXFLAGS) -o unit_tests unit_tests.o ActionStack.o
