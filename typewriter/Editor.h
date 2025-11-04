@@ -18,5 +18,6 @@
         Editor(std::string text_fname);
         ~Editor();
         std::ifstream read_text_file(std::ifstream &text_file);
+        read_file_open_stream(std::string text_file);
     private:
  };
