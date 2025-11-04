@@ -42,7 +42,15 @@ FunkeyTable::FunkeyTable()
  */
 void FunkeyTable::deleteList(ChainNode *node)
 {
-        // TODO:  Students write code here
+        for (int i=0; i<ChainedTable.size(); i++) {
+                *chain curr = ChainedTable[i]
+                while (curr != nullptr) {
+                        *node next = curr.next;
+                        delete curr;
+                        curr = next;
+                }
+        }
+        delete ChainedTable;
 }
 
 /*
@@ -50,7 +58,9 @@ void FunkeyTable::deleteList(ChainNode *node)
  */
 FunkeyTable::~FunkeyTable()
 {
-        // TODO: Students write code here
+        for (int i=0; i<ChainedTable.size(); i++) {
+                deleteList(ChainedTable[i];)
+        }
 }
 
 static size_t good_hash_function(KeyType key)
