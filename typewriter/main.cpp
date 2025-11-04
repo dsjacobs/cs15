@@ -21,11 +21,7 @@ int main(int argc, char *argv[])
     }
     std::string text_filename = argv[1];
     std::string log_filename = "";
-    std::cout << text_filename << std::endl;
-    std::cout << log_filename << std::endl;
     Editor my_editor(text_filename);
-    std::cout << "was able to make an instance" << std::endl;
-    std::cout << "printing input file" << std::endl;
     my_editor.print_inp_file(text_filename, std::cout);     
     
     return 0;
