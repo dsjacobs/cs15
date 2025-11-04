@@ -30,3 +30,8 @@ std::ifstream Editor::read_file_open_stream(std::string text_file) {
         }
         return myifstream;
 }
+
+Editor::print_inp_file(std::ifstream inp_file, std::ostream &output)
+{
+    output << inp_file;
+}
