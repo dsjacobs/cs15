@@ -24,6 +24,7 @@
         std::vector<std::string> curTextLines;
         size_t cursorCol;
         size_t cursorLine;
+        bool end;
         TextUI UI;
 
         std::ifstream read_text_file(std::ifstream &text_file);
