@@ -19,7 +19,7 @@ Editor::Editor(std::string text_fname) {
     std::ifstream ifstream = read_file_open_stream(text_fname);
     std::string ifstream_string;
     while (getline (ifstream, ifstream_string)) {
-        curTextLines.pushback(ifstream_string);
+        curTextLines.push_back(ifstream_string);
     }
 }
 
@@ -39,15 +39,15 @@ void Editor::print_text(std::ostream &output)
 {
     std::string line;
     while (std::getline(curTextLines, line)) {
-        output << cur << std::endl; 
+        output << line << std::endl; 
     }
 }
 
 void Editor::save() 
 {
-  ofstream text_ofs(text_filename);
+  std::ofstream text_ofs(text_filename);
 
-  for (int i = 0; i < curTextLines.size(); i++) {
+  for (size_t i = 0; i < curTextLines.size(); i++) {
     text_ofs << curTextLines[i];
   }
 
