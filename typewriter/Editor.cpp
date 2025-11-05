@@ -37,19 +37,13 @@ std::ifstream Editor::read_file_open_stream(std::string text_file) {
 
 void Editor::print_text(std::ostream &output)
 {
-    std::string line;
-    while (std::getline(curTextLines, line)) {
-        output << line << std::endl; 
+    for (size_t i = 0; i < curTextLines.size(); i++) {
+        output << curTextLines[i];
     }
 }
 
 void Editor::save() 
 {
   std::ofstream text_ofs(text_filename);
-
-  for (size_t i = 0; i < curTextLines.size(); i++) {
-    text_ofs << curTextLines[i];
-  }
-
-  text_ofs.close();
+  print_text(text_ofs);
 }
