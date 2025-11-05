@@ -21,10 +21,14 @@
 
         std::string text_filename;
         std::vector<std::string> curTextLines;
+        size_t cursorCol;
+        size_t cursorLine;
+
         std::ifstream read_text_file(std::ifstream &text_file);
         std::ifstream read_file_open_stream(std::string text_file);
         bool file_read_error;
+        void run();
         void print_text(std::ostream &output);
-
         void save();
+        void determine_next();
  };
