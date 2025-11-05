@@ -15,8 +15,6 @@
 #include <sstream>
 #include <string>
 
-render(const std::vector<std::string> &lines, const int &cursorCol, const int &cursorLine);
-
 Editor::Editor(std::string text_fname) {
     text_filename = text_fname;
     std::ifstream ifstream = read_file_open_stream(text_fname);
@@ -26,21 +24,22 @@ Editor::Editor(std::string text_fname) {
     }
     cursorCol = 0;
     cursorLine = 0;
+    UI = TextUI();
 }
 
 Editor::~Editor() {};
 
 void Editor::run() {
-    char c = TextUI::getChar();
+    int c = UI.getChar();
     determine_next(c);
-    TextUI::render(curTextLines, cursorCol, cursorLine);
+    UI.render(curTextLines, cursorCol, cursorLine);
 }
 
 void Editor::determine_next(char c) {
     // if ascii
     if (32 <= c and c <= 126) {
         std::string curLine = curTextLines[cursorLine];
-        curLine[cursorCol] == c;
+        curLine[cursorCol] = c;
     }
     // else if (c is escape) {
 
