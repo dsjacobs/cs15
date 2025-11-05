@@ -25,15 +25,19 @@ Editor::Editor(std::string text_fname) {
     cursorCol = 0;
     cursorLine = 0;
     UI = TextUI();
+    end = false;
 }
 
 Editor::~Editor() {};
 
 void Editor::run() {
-    int c = UI.getChar();
-    std::cout << "running" << std::endl;
-    determine_next(c);
-    UI.render(curTextLines, cursorCol, cursorLine);
+    while (bool end == false) {
+        UI.render(curTextLines, cursorCol, cursorLine);
+        int c = UI.getChar();
+        std::cout << "running" << std::endl;
+        determine_next(c);
+    }
+    save();
 }
 
 void Editor::determine_next(char c) {
@@ -42,9 +46,10 @@ void Editor::determine_next(char c) {
         std::string curLine = curTextLines[cursorLine];
         curLine[cursorCol] = c;
     }
-    // else if (c is escape) {
-
-    // }
+    // if backspace
+    else if (c == 27) {
+        end = true;
+    }
     // else if (c is backspace) {
         
     // }
