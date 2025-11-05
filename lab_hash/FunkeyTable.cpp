@@ -42,25 +42,22 @@ FunkeyTable::FunkeyTable()
  */
 void FunkeyTable::deleteList(ChainNode *node)
 {
-        for (int i=0; i<ChainedTable.size(); i++) {
-                *chain curr = ChainedTable[i]
-                while (curr != nullptr) {
-                        *node next = curr.next;
-                        delete curr;
-                        curr = next;
-                }
+        if (node != nullptr) {
+                deleteList(node->next);
+                node->next = nullptr;
+                delete node; 
         }
-        delete ChainedTable;
 }
-
 /*
  * destructor
  */
 FunkeyTable::~FunkeyTable()
 {
-        for (int i=0; i<ChainedTable.size(); i++) {
-                deleteList(ChainedTable[i];)
+        delete[] linearTable;
+        for (int i=0; i<chainedTable.size(); i++) {
+                deleteList(chainedTable[i];)
         }
+        delete[] chainedTable;
 }
 
 static size_t good_hash_function(KeyType key)
@@ -93,13 +90,17 @@ int FunkeyTable::insertProbing(KeyType key, ValueType value,
         int attempt = 0;
         bool found = false;
 
-        // NOTE:  You can put things here if it helps you
-
+        size_t index;
+        size_t hashcode = hashValue(key, hashFunction)
+       
         while (not found)
         {
-                // TODO:  Students write code here
-                //        (you may write code outside the loop, too)
+                int table_loc = hashFunction(key)%currentTableSize + attempt;
+                found = linearTable[table_loc].isEmpty();
+                attempt++;
         }
+        linearTable[table_loc]
+
         return attempt;
 }
 

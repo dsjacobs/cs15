@@ -16,6 +16,10 @@
 
 Editor::Editor(std::string text_fname) {
     std::ifstream text_fs = read_file_open_stream(text_fname);
+    std::string line;
+    while (std::getline(text_fs, line)) {
+       curTextLines.push_back(line);
+    }
 }
 
 Editor::~Editor() {};
@@ -31,11 +35,15 @@ std::ifstream Editor::read_file_open_stream(std::string text_file) {
         return myifstream;
 }
 
-void Editor::print_inp_file(std::string inp_file, std::ostream &output)
+void Editor::print_text(std::ostream &output)
 {
-    std::ifstream inp_fs = read_file_open_stream(inp_file);
-    std::string line;
-    while (std::getline(inp_fs, line)) {
-        output << line << std::endl; 
+    for (int i=0; i < curTextLines.size(); i++) {
+        output << curTextLines[i] << std::endl;
     }
+}
+
+void Editor::save(std::string text_fname) {
+    std::ofstream text_ofs(text_fname);
+    print_text(text_ofs);
+    text_ofs.close();
 }
