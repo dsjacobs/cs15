@@ -31,7 +31,7 @@ Editor::Editor(std::string text_fname) {
 Editor::~Editor() {};
 
 void Editor::run() {
-    while (bool end == false) {
+    while (end == false) {
         UI.render(curTextLines, cursorCol, cursorLine);
         int c = UI.getChar();
         std::cout << "running" << std::endl;
