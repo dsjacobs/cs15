@@ -22,6 +22,7 @@ int main(int argc, char *argv[])
     std::string text_filename = argv[1];
     std::string log_filename = "";
     Editor my_editor(text_filename);
+    my_editor.run();
     my_editor.save();   
     
     return 0;
