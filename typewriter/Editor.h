@@ -17,9 +17,12 @@
     public:
         Editor(std::string text_fname);
         ~Editor();
+
+        std::string text_filename;
+        std::vector<std::string> curTextLines;
         std::ifstream read_text_file(std::ifstream &text_file);
         std::ifstream read_file_open_stream(std::string text_file);
         bool file_read_error;
         void print_inp_file(std::string inp_file, std::ostream &output);
-    private:
+        void save();
  };
