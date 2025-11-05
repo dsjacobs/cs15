@@ -1,0 +1,136 @@
+Name:
+utln:        
+
+Answer the questions below, and submit your answers under the
+assignment "typewriter Design Checkoff" on Gradescope.  You must
+sign up for a design checkoff slot with a TA to discuss your provided
+answers (see spec for link).
+
+1. Run the reference implementation using the following command:
+`./the_typewriter pingpong.text logfile.text`
+
+Once it is running, do the following:
+        a) Type "ping"
+        b) Press return
+        c) Type "pong"
+        d) Press backspace 5 times
+        e) Press escape
+        f) Type "x"
+        g) Type "y"
+        h) Press "return"
+
+After doing this, what are the contents of pingpong.text? What about
+logfile.text? Paste both below, and *briefly* describe the contents
+of logfile.text; what information is logged?
+
+Answer:
+
+
+2. Now run the keylogger that was provided with the starter files
+(i.e., `./keylogger`). When prompted for a filename, enter
+"test.input". Then carry out the exact steps (a)-(h) as stated in
+the previous question, except swap steps (a) and (c). Conclude the
+keylogger by pressing "escape" two times. You should now have a
+file named "test.input". 
+
+Without editing/removing either of the files created in the previous
+question, run the reference implementation again, this time sending
+it the test input file you just created:
+`./the_typewriter pingpong.text logfile.text < test.input`
+
+What are the contents of pingpong.text now? Explain why those are the
+contents. If you see anything other than "pongping", try creating the
+file test.input again.
+
+Answer:
+
+
+3. What public functions from the TextUI class do you think you will
+need to use? Which TextUI function is used to actually display
+information on the user's terminal screen? Describe the arguments to
+that function.
+
+Answer:
+
+
+4. Consider implementing the handling of the input "backspace." What
+are the different cases your implementation must consider? What
+should your implementation do in each case; specifically, how are the
+inputs to TextUI's render() function altered? You should play around
+with the reference implementation when coming up with your answers.
+
+Answer:
+
+
+5. How many ActionStack instances will your program use? When are the
+different times an Action should be pushed on to one of these
+ActionStacks? What information does each Action store?
+
+Answer:
+
+
+6. Use the reference implementation to play extensively with the
+"undo" feature (in typewriter: "escape" then "u"). Try undoing with
+many different inputs (printable characters, backspaces, newlines,
+etc.) and different combinations of these inputs. Make sure to try
+pressing undo multiple times in a row.
+
+What are the rules determining how many characters should be undone
+each time "undo" is entered? Express your answer using pseudocode. We
+encourage you to write your pseudocode using an ActionStack---this
+will more closely match the code you eventually write!
+
+Answer:
+
+
+7. Now use the reference to play with "redo" functionality (in
+typewriter: "escape" then "r") after undoing actions. Write
+pseudocode below capturing the rules for how many characters should
+be "redone" each time "redo" is pressed.
+
+Answer:
+
+8. Consider implementing the "up" arrow key functionality.
+
+   (a) What functions from the TextUI class will you need to use to
+       implement "up"?
+
+Answer:
+
+   (b) What are the different cases you need to consider for "up"?
+       In particular, consider: different lengths of the current line
+       (including lines that are long enough to wrap around), where
+       the cursor is located, and different lengths for the line prior
+       to the current line.
+
+Answer:
+
+
+   (c) Provide pseudocode for the handling of the "up" arrow.
+
+Answer:
+
+
+   (d) Now, provide psuedocode for the handling of the "down" arrow.
+
+Answer:
+
+
+9. What classes will you need in your program?  What are the important
+functions and member variables that those classes will comprise? How
+will the classes interact (i.e., which classes will be clients of
+others)?
+
+Answer:
+
+
+10. How do you plan to test your program? What evidence of testing do
+you plan to submit?
+
+Answer:
+
+
+11. What is your timeline for completing this project? What would you
+like to have completed, and by which dates?  
+
+Answer: 
