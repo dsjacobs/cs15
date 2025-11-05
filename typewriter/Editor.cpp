@@ -31,6 +31,7 @@ Editor::~Editor() {};
 
 void Editor::run() {
     int c = UI.getChar();
+    cout << "running" << std::endl;
     determine_next(c);
     UI.render(curTextLines, cursorCol, cursorLine);
 }
