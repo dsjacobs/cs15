@@ -13,7 +13,7 @@ CXXFLAGS = -g3 -Wall -Wextra -Wpedantic -Wshadow
 LDFLAGS  = -g3 
 
 typewriter: main.o Editor.o ActionStack.o TextUI.o
-	$(CXX) $(CXXFLAGS) -o typewriter main.o Editor.o ActionStack.o
+	$(CXX) $(CXXFLAGS) -o typewriter main.o Editor.o ActionStack.o -lncurses 
 
 ActionStack: ActionStack.o
 	$(CXX) $(CXXFLAGS) -o ActionStack ActionStack.o
