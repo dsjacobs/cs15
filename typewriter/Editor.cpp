@@ -16,7 +16,11 @@
 
 Editor::Editor(std::string text_fname) {
     text_filename = text_fname;
-    curTextLines = read_file_open_stream(text_fname);
+    std::ifstream ifstream = read_file_open_stream(text_fname);
+    std::string ifstream_string;
+    while (getline (ifstream, ifstream_string)) {
+        curTextLines.pushback(ifstream_string);
+    }
 }
 
 Editor::~Editor() {};
@@ -26,7 +30,6 @@ std::ifstream Editor::read_file_open_stream(std::string text_file) {
         myifstream.open(text_file);
         if (not myifstream.is_open()) {
          std::cerr << "Error: could not open file " << text_file << std::endl;
-                // when Main.cpp sees this is true, it will throw end sim
                 file_read_error = true;
         }
         return myifstream;
