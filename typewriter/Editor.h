@@ -24,6 +24,7 @@
         std::ifstream read_text_file(std::ifstream &text_file);
         std::ifstream read_file_open_stream(std::string text_file);
         bool file_read_error;
-        void print_inp_file(std::string inp_file, std::ostream &output);
+        void print_text(std::ostream &output);
+
         void save();
  };
