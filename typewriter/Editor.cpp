@@ -34,34 +34,34 @@ void Editor::run() {
     while (end == false) {
         int c  = UI.getChar();
         std::cout << "running" << std::endl;
-        determine_next(input);
+        determine_next(c);
         UI.render(curTextLines, cursorCol, cursorLine);
     }
     save();
 }
 
-void Editor::determine_next(std::string input) {
+void Editor::determine_next(int c) {
     // if ascii
-    if (32 <= c and cerr <= 126) {
+    if (32 <= c and c <= 126) {
         curTextLines[cursorLine][cursorCol] = c;
     }
     // if escape
     else if (c == 27) {
         end = true;
     }
-    if (input == KEY_BACKSPACE) {
+    if (c == KEY_BACKSPACE) {
             std::cout << "backspace pressed";
         }
-    else if (input == KEY_LEFT) {
+    else if (c == KEY_LEFT) {
         move_left();
     }
-    else if (input == KEY_RIGHT) {
+    else if (c == KEY_RIGHT) {
         move_right();
     }
-    else if (input == KEY_UP) {
+    else if (c == KEY_UP) {
         move_up();
     }
-    else if (input == KEY_DOWN) {
+    else if (c == KEY_DOWN) {
         move_down();
     }
     else {
