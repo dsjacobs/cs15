@@ -15,9 +15,8 @@
 #include <sstream>
 #include <string>
 
-Editor::Editor(std::string text_fname) {
-    text_filename = text_fname;
-    std::ifstream ifstream = read_file_open_stream(text_fname);
+Editor::Editor(std::string filename) {
+    std::ifstream ifstream = read_file_open_stream(filename);
     std::string ifstream_string;
     while (getline (ifstream, ifstream_string)) {
         curTextLines.push_back(ifstream_string);
@@ -29,8 +28,7 @@ Editor::Editor(std::string text_fname) {
 }
 
 Editor::Editor(std::string filename, std::string logfile) {
-    text_filename = text_fname;
-    std::ifstream ifstream = read_file_open_stream(text_fname);
+    std::ifstream ifstream = read_file_open_stream(filename);
     std::string ifstream_string;
     while (getline (ifstream, ifstream_string)) {
         curTextLines.push_back(ifstream_string);
