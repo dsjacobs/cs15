@@ -18,8 +18,11 @@
  class Editor {
     public:
         Editor(std::string text_fname);
+        Editor(std::string filename, std::string logfile);
         ~Editor();
-
+        void run();
+      
+    private:
         std::string text_filename;
         std::vector<std::string> curTextLines;
         size_t cursorCol;
@@ -30,14 +33,23 @@
         std::ifstream read_text_file(std::ifstream &text_file);
         std::ifstream read_file_open_stream(std::string text_file);
         bool file_read_error;
-        void run();
+
         void print_text(std::ostream &output);
         void save();
         void determine_next(int c);
 
-    private:
+
         void move_down();
         void move_up();
         void move_right();
         void move_left();
+        void ascii(int c);
+        void command_mode();
+        void backspace();
+
+        void command_save();
+        void command_quit();
+        void command_undo();
+        void command_redo();
+        void close_command_mode();
  };

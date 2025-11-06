@@ -28,6 +28,8 @@ Editor::Editor(std::string text_fname) {
     end = false;
 }
 
+Editor::Editor(std::string filename, std::string logfile) {};
+
 Editor::~Editor() {};
 
 void Editor::run() {
@@ -43,15 +45,14 @@ void Editor::run() {
 void Editor::determine_next(int c) {
     // if ascii
     if (32 <= c and c <= 126) {
-        curTextLines[cursorLine][cursorCol] = c;
-        std::cout << curTextLines[cursorLine] << std::endl;
+        ascii(c);
     }
     // if escapes
     else if (c == 27) {
-        end = true;
+        escape_menu();
     }
-    if (c == KEY_BACKSPACE) {
-        std::cout << "backspace pressed";
+    else if (c == KEY_BACKSPACE) {
+        backspace();
     }
     else if (c == KEY_LEFT) {
         move_left();
@@ -94,7 +95,43 @@ void Editor::save()
 }
 
 
-void Editor::move_down() {};
-void Editor::move_up() {};
-void Editor::move_right() {};
-void Editor::move_left() {};
+void Editor::move_down() {
+    cursorCol++;
+};
+void Editor::move_up() {
+    cursorCol--;
+};
+void Editor::move_right() {
+    cursorLine++;
+};
+void Editor::move_left() {
+    cursorLine--;
+};
+void Editor::ascii(int c) {
+    curTextLines[cursorLine][cursorCol] = c;
+    std::cout << curTextLines[cursorLine] << std::endl;
+};
+void Editor::command_mode() {
+    int c = getChar();
+    if (c=='s') {
+        command_save();
+    }
+    else if (c=='x') {
+        command_quit();
+    }
+    else if (c=='u') {
+        command_undo();
+    }
+    else if (c=='r') {
+        command_redo();
+    }
+    else {
+        close_command_mode();
+    }
+};
+void Editor::backspace() {};
+void Editor::command_save();
+void Editor::command_quit();
+void Editor::command_undo();
+void Editor::command_redo();
+void Editor::close_command_mode();
