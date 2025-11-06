@@ -44,17 +44,18 @@ void Editor::run() {
 void Editor::determine_next(char c) {
     // if ascii
     if (32 <= c and c <= 126) {
-        std::string curLine = curTextLines[cursorLine];
-        curLine[cursorCol] = c;
+        curTextLines[cursorLine][cursorCol] = c;
     }
-    // if backspace
+    // if escape
     else if (c == 27) {
         end = true;
     }
-    // else if (c is backspace) {
-        
-    // }
+    // if backspace
+    else if (c == KEY_BACKSPACE) {
+        std::cout << "backspace pressed";
+    }
 }
+
 std::ifstream Editor::read_file_open_stream(std::string text_file) {
         std::ifstream myifstream;   
         myifstream.open(text_file);
