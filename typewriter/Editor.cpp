@@ -92,20 +92,6 @@ std::ifstream Editor::read_file_open_stream(std::string text_file) {
         return myifstream;
 }
 
-void Editor::print_text(std::ostream &output)
-{
-    for (size_t i = 0; i < curTextLines.size(); i++) {
-        output << curTextLines[i];
-    }
-}
-
-void Editor::save() 
-{
-  std::ofstream text_ofs(text_filename);
-  print_text(text_ofs);
-}
-
-
 void Editor::move_down() {
     if (cursorLine != curTextLines.size())
     {
@@ -128,13 +114,16 @@ void Editor::move_left() {
         cursorCol--;
     }
 };
+
 void Editor::ascii(int c) {
     size_t curLineLength = curTextLines[cursorLine].size();
     std::string preCursorText = curTextLines[cursorLine].substr(0, cursorCol);
     std::string postCursorText = curTextLines[cursorLine].substr(cursorCol, curLineLength);
     char c_char = static_cast<char>(c);
     curTextLines[cursorLine] = preCursorText + c_char + postCursorText;
+    ActionStack.push(c_char,false,cursorLine,cursorCol);
 };
+
 void Editor::command_mode() {
     int c = UI.getChar();
     if (c=='s') {
@@ -153,7 +142,12 @@ void Editor::command_mode() {
         close_command_mode();
     }
 };
-void Editor::backspace() {};
+
+void Editor::backspace() {
+    char curChar = curTextLines[cursorLine][cursorCol];
+    redoStack.push(c_char,true,cursorLine,cursorCol);
+};
+
 void Editor::command_save() {
     std::ofstream savefile(text_filename);
     for (size_t i=0; i < curTextLines.size(); i++) {
@@ -163,8 +157,15 @@ void Editor::command_save() {
     UI.displaySaveMessage();
 };
 void Editor::command_quit() {
+    bool save_bool = UI.savePrompt();
+    if (save_bool) {command_save};
+    UI.close();
     end = true;
 };
-void Editor::command_undo() {};
-void Editor::command_redo() {};
+void Editor::command_undo() {
+    undoStack.pop();
+};
+void Editor::command_redo() {
+    redoStack.pop();
+};
 void Editor::close_command_mode() {};

@@ -9,6 +9,7 @@
  */
 
 #include "TextUI.h"
+#include "ActionStack.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -30,14 +31,14 @@
         bool end;
         TextUI UI;
 
+        ActionStack undoStack;
+        ActionStack redoStack; 
+
         std::ifstream read_text_file(std::ifstream &text_file);
         std::ifstream read_file_open_stream(std::string text_file);
         bool file_read_error;
 
-        void print_text(std::ostream &output);
-        void save();
         void determine_next(int c);
-
 
         void move_down();
         void move_up();
