@@ -120,6 +120,7 @@ void Editor::ascii(int c) {
     char c_char = static_cast<char>(c);
     curTextLines[cursorLine] = preCursorText + c_char + postCursorText;
     undoStack.push(c_char,false,cursorLine,cursorCol);
+    cursorLine++;
 };
 
 void Editor::command_mode() {
