@@ -33,7 +33,7 @@
         void run();
         void print_text(std::ostream &output);
         void save();
-        void determine_next(char c);
+        void determine_next(int c);
 
     private:
         void move_down();
