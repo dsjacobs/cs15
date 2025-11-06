@@ -44,14 +44,15 @@ void Editor::determine_next(int c) {
     // if ascii
     if (32 <= c and c <= 126) {
         curTextLines[cursorLine][cursorCol] = c;
+        std::cout << curTextLines[cursorLine] << std::endl;
     }
-    // if escape
+    // if escapes
     else if (c == 27) {
         end = true;
     }
     if (c == KEY_BACKSPACE) {
-            std::cout << "backspace pressed";
-        }
+        std::cout << "backspace pressed";
+    }
     else if (c == KEY_LEFT) {
         move_left();
     }
