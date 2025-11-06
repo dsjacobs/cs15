@@ -28,7 +28,18 @@ Editor::Editor(std::string text_fname) {
     end = false;
 }
 
-Editor::Editor(std::string filename, std::string logfile) {};
+Editor::Editor(std::string filename, std::string logfile) {
+    text_filename = text_fname;
+    std::ifstream ifstream = read_file_open_stream(text_fname);
+    std::string ifstream_string;
+    while (getline (ifstream, ifstream_string)) {
+        curTextLines.push_back(ifstream_string);
+    }
+    cursorCol = 0;
+    cursorLine = 0;
+    UI = TextUI();
+    end = false;
+};
 
 Editor::~Editor() {};
 
@@ -49,7 +60,7 @@ void Editor::determine_next(int c) {
     }
     // if escapes
     else if (c == 27) {
-        escape_menu();
+        command_mode();
     }
     else if (c == KEY_BACKSPACE) {
         backspace();
@@ -112,7 +123,7 @@ void Editor::ascii(int c) {
     std::cout << curTextLines[cursorLine] << std::endl;
 };
 void Editor::command_mode() {
-    int c = getChar();
+    int c = UI.getChar();
     if (c=='s') {
         command_save();
     }
@@ -130,8 +141,8 @@ void Editor::command_mode() {
     }
 };
 void Editor::backspace() {};
-void Editor::command_save();
-void Editor::command_quit();
-void Editor::command_undo();
-void Editor::command_redo();
-void Editor::close_command_mode();
+void Editor::command_save() {};
+void Editor::command_quit() {};
+void Editor::command_undo() {};
+void Editor::command_redo() {};
+void Editor::close_command_mode() {};
