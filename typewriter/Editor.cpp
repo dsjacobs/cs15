@@ -129,8 +129,10 @@ void Editor::move_left() {
     }
 };
 void Editor::ascii(int c) {
-    curTextLines[cursorLine][cursorCol] = c;
-    std::cout << curTextLines[cursorLine] << std::endl;
+    curLineLength = curTextLines[cursorLine].size();
+    std::string preCursorText = curTextLines[cursorLine].substr(0, cursorCol);
+    std::string postCursorText = curTextLines[cursorLine].substr(cursorCol, curLineLength);
+    curTextLines[cursorLine] = preCursorText + c + postCursorText;
 };
 void Editor::command_mode() {
     int c = UI.getChar();
