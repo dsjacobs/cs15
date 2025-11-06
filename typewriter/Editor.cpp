@@ -16,6 +16,7 @@
 #include <string>
 
 Editor::Editor(std::string filename) {
+    text_filename = filename;
     std::ifstream ifstream = read_file_open_stream(filename);
     std::string ifstream_string;
     while (getline (ifstream, ifstream_string)) {
@@ -28,6 +29,7 @@ Editor::Editor(std::string filename) {
 }
 
 Editor::Editor(std::string filename, std::string logfile) {
+    text_filename = filename;
     std::ifstream ifstream = read_file_open_stream(filename);
     std::string ifstream_string;
     while (getline (ifstream, ifstream_string)) {
@@ -105,16 +107,26 @@ void Editor::save()
 
 
 void Editor::move_down() {
-    cursorCol++;
+    if (cursorLine != curTextLines.size())
+    {
+        cursorLine++;
+    }
 };
 void Editor::move_up() {
-    cursorCol--;
+    if (cursorLine > 0) 
+    {
+        cursorLine--;
+    }
 };
 void Editor::move_right() {
-    cursorLine++;
+    if (cursorCol < curTextLines[cursorLine].size()){
+        cursorCol++;
+    }
 };
 void Editor::move_left() {
-    cursorLine--;
+    if (cursorCol > 0) {
+        cursorCol--;
+    }
 };
 void Editor::ascii(int c) {
     curTextLines[cursorLine][cursorCol] = c;
@@ -139,8 +151,17 @@ void Editor::command_mode() {
     }
 };
 void Editor::backspace() {};
-void Editor::command_save() {};
-void Editor::command_quit() {};
+void Editor::command_save() {
+    std::ofstream savefile(text_filename);
+    for (size_t i=0; i < curTextLines.size(); i++) {
+        savefile << curTextLines[i];
+    }
+    savefile.close();
+    UI.displaySaveMessage();
+};
+void Editor::command_quit() {
+    end = true;
+};
 void Editor::command_undo() {};
 void Editor::command_redo() {};
 void Editor::close_command_mode() {};
