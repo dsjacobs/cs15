@@ -32,7 +32,7 @@ Editor::~Editor() {};
 
 void Editor::run() {
     while (end == false) {
-        std::string input  = UI.getChar();
+        int c  = UI.getChar();
         std::cout << "running" << std::endl;
         determine_next(input);
         UI.render(curTextLines, cursorCol, cursorLine);
@@ -41,41 +41,31 @@ void Editor::run() {
 }
 
 void Editor::determine_next(std::string input) {
-    try {
-        int c = std::stoi(str);
-        // if ascii
-        if (32 <= c and cerr <= 126) {
-            curTextLines[cursorLine][cursorCol] = c;
-        }
-        // if escape
-        else if (c == 27) {
-            end = true;
-        }
+    // if ascii
+    if (32 <= c and cerr <= 126) {
+        curTextLines[cursorLine][cursorCol] = c;
     }
-    catch (...) {
-    //https://www.w3schools.com/cpp/cpp_exceptions.asp
-        if (input == "KEY_BACKSPACE") {
-                std::cout << "backspace pressed";
-            }
-        else if (input == "KEY_LEFT") {
-            move_left();
-        }
-        else if (input == "KEY_RIGHT") {
-            move_right();
-        }
-        else if (input == "KEY_UP") {
-            move_up();
-        }
-        else if (input == "KEY_DOWN") {
-            move_down();
-        }
-        else {
-            std::cout << "Invalid character" << std::endl;
-        }
+    // if escape
+    else if (c == 27) {
+        end = true;
     }
-    // if backspace
-    else if (c == KEY_BACKSPACE) {
-        std::cout << "backspace pressed";
+    if (input == KEY_BACKSPACE) {
+            std::cout << "backspace pressed";
+        }
+    else if (input == KEY_LEFT) {
+        move_left();
+    }
+    else if (input == KEY_RIGHT) {
+        move_right();
+    }
+    else if (input == KEY_UP) {
+        move_up();
+    }
+    else if (input == KEY_DOWN) {
+        move_down();
+    }
+    else {
+        std::cout << "Invalid character" << std::endl;
     }
 }
 
