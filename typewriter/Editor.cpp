@@ -21,6 +21,7 @@ Editor::Editor(std::string text_fname) {
     std::string ifstream_string;
     while (getline (ifstream, ifstream_string)) {
         curTextLines.push_back(ifstream_string);
+        curTextLines.push_back('\n');
     }
     cursorCol = 0;
     cursorLine = 0;
