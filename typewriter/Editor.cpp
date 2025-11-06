@@ -21,7 +21,6 @@ Editor::Editor(std::string text_fname) {
     std::string ifstream_string;
     while (getline (ifstream, ifstream_string)) {
         curTextLines.push_back(ifstream_string);
-        curTextLines.push_back('\n');
     }
     cursorCol = 0;
     cursorLine = 0;
@@ -34,9 +33,10 @@ Editor::~Editor() {};
 void Editor::run() {
     while (end == false) {
         UI.render(curTextLines, cursorCol, cursorLine);
-        int c = UI.getChar();
+        std::string input  = UI.getChar();
         std::cout << "running" << std::endl;
         determine_next(c);
+        UI.render(curTextLines, cursorCol, cursorLine);
     }
     save();
 }
