@@ -156,7 +156,7 @@ void Editor::command_save() {
 };
 void Editor::command_quit() {
     bool save_bool = UI.savePrompt();
-    if (save_bool) {command_save()};
+    if (save_bool) {command_save();}
     UI.close();
     end = true;
 };
