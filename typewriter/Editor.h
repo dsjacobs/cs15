@@ -34,4 +34,10 @@
         void print_text(std::ostream &output);
         void save();
         void determine_next(char c);
+
+    private:
+        void move_down();
+        void move_up();
+        void move_right();
+        void move_left();
  };

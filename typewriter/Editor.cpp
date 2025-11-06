@@ -32,23 +32,46 @@ Editor::~Editor() {};
 
 void Editor::run() {
     while (end == false) {
-        UI.render(curTextLines, cursorCol, cursorLine);
         std::string input  = UI.getChar();
         std::cout << "running" << std::endl;
-        determine_next(c);
+        determine_next(input);
         UI.render(curTextLines, cursorCol, cursorLine);
     }
     save();
 }
 
-void Editor::determine_next(char c) {
-    // if ascii
-    if (32 <= c and c <= 126) {
-        curTextLines[cursorLine][cursorCol] = c;
+void Editor::determine_next(std::string input) {
+    try {
+        int c = std::stoi(str);
+        // if ascii
+        if (32 <= c and cerr <= 126) {
+            curTextLines[cursorLine][cursorCol] = c;
+        }
+        // if escape
+        else if (c == 27) {
+            end = true;
+        }
     }
-    // if escape
-    else if (c == 27) {
-        end = true;
+    catch (...) {
+    //https://www.w3schools.com/cpp/cpp_exceptions.asp
+        if (input == "KEY_BACKSPACE") {
+                std::cout << "backspace pressed";
+            }
+        else if (input == "KEY_LEFT") {
+            move_left();
+        }
+        else if (input == "KEY_RIGHT") {
+            move_right();
+        }
+        else if (input == "KEY_UP") {
+            move_up();
+        }
+        else if (input == "KEY_DOWN") {
+            move_down();
+        }
+        else {
+            std::cout << "Invalid character" << std::endl;
+        }
     }
     // if backspace
     else if (c == KEY_BACKSPACE) {
@@ -78,3 +101,9 @@ void Editor::save()
   std::ofstream text_ofs(text_filename);
   print_text(text_ofs);
 }
+
+
+void Editor::move_down() {};
+void Editor::move_up() {};
+void Editor::move_right() {};
+void Editor::move_left() {};
