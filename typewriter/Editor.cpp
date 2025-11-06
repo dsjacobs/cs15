@@ -46,11 +46,9 @@ Editor::~Editor() {};
 void Editor::run() {
     while (end == false) {
         int c  = UI.getChar();
-        std::cout << "running" << std::endl;
         determine_next(c);
         UI.render(curTextLines, cursorCol, cursorLine);
     }
-    save();
 }
 
 void Editor::determine_next(int c) {
@@ -121,7 +119,7 @@ void Editor::ascii(int c) {
     std::string postCursorText = curTextLines[cursorLine].substr(cursorCol, curLineLength);
     char c_char = static_cast<char>(c);
     curTextLines[cursorLine] = preCursorText + c_char + postCursorText;
-    ActionStack.push(c_char,false,cursorLine,cursorCol);
+    undoStack.push(c_char,false,cursorLine,cursorCol);
 };
 
 void Editor::command_mode() {
@@ -145,7 +143,7 @@ void Editor::command_mode() {
 
 void Editor::backspace() {
     char curChar = curTextLines[cursorLine][cursorCol];
-    redoStack.push(c_char,true,cursorLine,cursorCol);
+    redoStack.push(curChar,true,cursorLine,cursorCol);
 };
 
 void Editor::command_save() {
@@ -158,7 +156,7 @@ void Editor::command_save() {
 };
 void Editor::command_quit() {
     bool save_bool = UI.savePrompt();
-    if (save_bool) {command_save};
+    if (save_bool) {command_save()};
     UI.close();
     end = true;
 };
