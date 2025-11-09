@@ -154,10 +154,9 @@ void Editor::new_line() {
     size_t curLine = cursorLine;
     std::cout << curLine << std::endl;
     if (curLine < curTextLines.size()) {
-        for (size_t i = curTextLines.size(); i > curLine; i--) {
+        for (size_t i = curTextLines.size()-1; i > curLine; i--) {
             std::cout << i << std::endl;
-            if (i==curTextLines.size()) {curTextLines.push(curTextLines[i])}
-            else {curTextLines[i+1] = curTextLines[i];}
+            curTextLines[i+1] = curTextLines[i];
         }
     }
     std::cout << "finished for loop" << std::endl;
