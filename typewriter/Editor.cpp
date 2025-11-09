@@ -109,7 +109,7 @@ void Editor::move_left() {
 };
 
 void Editor::insert(int c) {
-    size_t curLineLength = lineLength();
+    size_t curLineLength = lineLength(cursorLine);
     std::string preCursorText = pre_character(cursorLine, cursorCol); 
     std::string postCursorText = post_character(cursorLine, cursorCol); 
     char c_char = static_cast<char>(c);
@@ -180,7 +180,7 @@ void Editor::command_redo() {
 void Editor::close_command_mode() {};
 
 
-std::string Editor::lineLength(int Line) {
+size_t Editor::lineLength(int Line) {
     size_t curLineLength = curTextLines[cursorLine].size();
     return lineLength;
 }
