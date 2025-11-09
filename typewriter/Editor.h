@@ -50,6 +50,7 @@
         void delete_char(int line, int col);
         void command_mode();
         void backspace();
+        void new_line();
 
         void command_save();
         void command_quit();

@@ -50,11 +50,15 @@ void Editor::determine_next(int c) {
     // if ascii
     if (32 <= c and c <= 126) {
         insert(c, cursorLine, cursorCol);
-        cursorLine++;
+        cursorCol++;
     }
     // if escapes
     else if (c == 27) {
         command_mode();
+    }
+    // if new line
+    else if (c == 10) {
+        new_line();
     }
     else if (c == KEY_BACKSPACE or c==263) {
         backspace();
@@ -145,6 +149,19 @@ void Editor::backspace() {
     delete_char(cursorLine, cursorCol);
     undoStack.push(curChar,true,cursorLine,cursorCol);
 };
+
+void Editor::new_line() {
+    int curLine = cursorLine;
+    if (curLine < curTextLines.size()) {
+        (int i = curTextLines.size(); i > curLine; i--) {
+            curTextLines[i+1] = curTextLines[i];
+        }
+    }
+    curTextLines[curLine] = pre_character(cursorLine, cursorCol);
+    curTextLines[curLine+1] = post_character(cursorLine, cursorCol);
+    cursorLine++;
+    undoStack.push('/n',false,cursorLine, cursorCol)
+}
 
 void Editor::command_save() {
     std::ofstream savefile(text_filename);
