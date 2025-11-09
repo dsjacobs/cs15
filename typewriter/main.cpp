@@ -23,13 +23,13 @@ int main(int argc, char *argv[])
     std::string log_filename = "";
     if (argc == 2) {
         log_filename = argv[2];
-        my_editor(text_filename, log_filename);
-            my_editor.run();
+        Editor my_editor(text_filename, log_filename);
+        my_editor.run();
 
     }
     else {
-        my_editor(text_filename);
-            my_editor.run();
+        Editor my_editor(text_filename);
+        my_editor.run();
 
     }
     return 0;
