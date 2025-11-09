@@ -56,6 +56,7 @@ void Editor::determine_next(int c) {
         command_mode();
     }
     else if (c == KEY_BACKSPACE) {
+        std::cout << "calling backspace now." << std::endl;
         backspace();
     }
     else if (c == KEY_LEFT) {
