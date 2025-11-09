@@ -153,13 +153,13 @@ void Editor::backspace() {
 void Editor::new_line() {
     size_t curLine = cursorLine;
     std::cout << curLine << std::endl;
+    curTextLines.push_back("");
     if (curLine < curTextLines.size()) {
         for (size_t i = curTextLines.size()-1; i > curLine; i--) {
             std::cout << i << std::endl;
             curTextLines[i+1] = curTextLines[i];
         }
     }
-    std::cout << "finished for loop" << std::endl;
     curTextLines[curLine] = pre_character(cursorLine, cursorCol);
     curTextLines[curLine+1] = post_character(cursorLine, cursorCol);
     cursorLine++;
