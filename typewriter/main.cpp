@@ -13,13 +13,13 @@
 #include <string>
 #include "Editor.h"
 
-Editor which_constructor(int argc, std::string text_file, log_gile) {
-    if (argc == 2) {
-        log_filename = argv[2];
-        return Editor my_editor(text_filename, log_filename);
+Editor which_constructor(int arg_c, std::string text, std::string log) {
+    if (arg_c == 2) {
+        log = argv[2];
+        return Editor(text, log);
     }
     else {
-        return Editor my_editor(text_filename);
+        return Editor(text);
     }
 }
 
