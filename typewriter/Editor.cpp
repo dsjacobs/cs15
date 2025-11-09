@@ -142,6 +142,7 @@ void Editor::delete_char(int line, int col) {
 };
 
 void Editor::backspace() {
+    char curChar = curTextLines[cursorLine][cursorCol];
     delete_char(cursorLine, cursorCol);
     undoStack.push(curChar,true,line,col);
 };
@@ -173,7 +174,7 @@ void Editor::command_undo() {
             delete_char(latest.character, latest.line, latest.column)
         }
         undoStack.pop();
-        redoStack.push(latest.character, not latest.was_delete, latest.line, latest.column)
+        redoStack.push(latest.character, not latest.was_delete, latest.line, latest.column);
     }
 };
 
