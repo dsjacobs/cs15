@@ -26,6 +26,7 @@ Editor::Editor(std::string filename) {
     cursorLine = 0;
     UI = TextUI();
     end = false;
+
 }
 
 Editor::Editor(std::string filename, std::string logfile) {
@@ -38,7 +39,8 @@ Editor::Editor(std::string filename, std::string logfile) {
     cursorCol = 0;
     cursorLine = 0;
     UI = TextUI();
-    end = false;    log_filename = logfile;
+    end = false;    
+    log_filename = logfile;
 }
 
 Editor::~Editor() {};
