@@ -169,9 +169,27 @@ void Editor::delete_char(int line, int col) {
 };
 
 void Editor::backspace() {
-    char curChar = curTextLines[cursorLine][cursorCol];
-    delete_char(cursorLine, cursorCol);
-    undoStack.push(curChar,true,cursorLine,cursorCol);
+    // middle of a row
+    if (cursorCol != 0) 
+    {
+        char curChar = curTextLines[cursorLine][cursorCol];
+        delete_char(cursorLine, cursorCol); 
+        undoStack.push(curChar,true,cursorLine,cursorCol);
+       
+    }
+    // beginning of a row
+    else {
+        if (cursorLine > 0) {
+            curTextLines[cursorLine-1] += curTextLines[cursorLine];
+            for (size_t i = cursorLine; i < curTextLines.size(); i++) {
+                curTextLines[i] = curTextLines[i+1];
+                curTextLines.pop_back();
+            }
+            cursorLine--;
+            undoStack.push(curChar,true,cursorLine,cursorCol);  
+        }      
+    }
+
 };
 
 void Editor::new_line() {
