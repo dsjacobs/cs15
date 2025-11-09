@@ -14,6 +14,7 @@
 #include "Editor.h"
 
 Editor which(int argc, char *argv[], std::string text, std::string log) {
+    std::cout << argc << std::endl;
     if (argc == 2) {
         log = argv[2];
         return Editor(text, log);
@@ -26,12 +27,14 @@ Editor which(int argc, char *argv[], std::string text, std::string log) {
 int main(int argc, char *argv[])
 {
     if (argc > 2 or argc == 0) {
-        std::cerr << "Invalid number of arguments";
+        std::cerr << "Invalid number of arguments" << std::endl;
     }
-    std::string text_filename = argv[1];
-    std::string log_filename = "";
-    Editor my_editor = which(argc, argv, text_filename, log_filename);
-    my_editor.run();
+    else {
+        std::string text_filename = argv[1];
+        std::string log_filename = "";
+        Editor my_editor = which(argc, argv, text_filename, log_filename);
+        my_editor.run();
+    }
 
     return 0;
 }
