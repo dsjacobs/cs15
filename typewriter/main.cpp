@@ -13,9 +13,9 @@
 #include <string>
 #include "Editor.h"
 
-Editor which_constructor(int arg_c, std::string text, std::string log) {
-    if (arg_c == 2) {
-        log = argv[2];
+Editor which_constructor(char *arg_v[], std::string text, std::string log) {
+    if (arg_v.size() == 2) {
+        log = arg_v[2];
         return Editor(text, log);
     }
     else {
