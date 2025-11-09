@@ -16,17 +16,21 @@
 #include <string>
 
 Editor::Editor(std::string filename) {
+    std::cout << "foo" << std::endl;
     text_filename = filename;
     std::ifstream ifstream = read_file_open_stream(filename);
     std::string ifstream_string;
+        std::cout << "waaa" << std::endl;
+
     while (getline (ifstream, ifstream_string)) {
         curTextLines.push_back(ifstream_string);
     }
+        std::cout << "dino" << std::endl;
+
     cursorCol = 0;
     cursorLine = 0;
     UI = TextUI();
     end = false;
-
 }
 
 Editor::Editor(std::string filename, std::string logfile) {
