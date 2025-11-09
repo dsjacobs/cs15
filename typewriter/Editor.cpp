@@ -95,6 +95,7 @@ void Editor::move_down() {
     {
         size_t curLineLength = lineLength(cursorLine);
         size_t nextLineLength = lineLength(cursorLine+1);
+        std::cout << nextLineLength << std::endl;
         size_t term_width = UI.getTerminalWidth();
 
         if (curLineLength > term_width and cursorLine < term_width) {
@@ -102,7 +103,8 @@ void Editor::move_down() {
         }
         else {
             if (nextLineLength < cursorLine) {
-            cursorCol = nextLineLength;
+                cursorCol = nextLineLength;
+                std::cout << "moving cursor to line" << std::endl;
             }
             cursorLine++;
         }
@@ -111,7 +113,6 @@ void Editor::move_down() {
 void Editor::move_up() {
     if (cursorLine > 0) 
     {
-        size_t curLineLength = lineLength(cursorLine);
         size_t prevLineLength = lineLength(cursorLine-1);
         size_t term_width = UI.getTerminalWidth();
 
