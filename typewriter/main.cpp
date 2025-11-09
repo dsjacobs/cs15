@@ -26,7 +26,7 @@ Editor which(int argc, char *argv[], std::string text, std::string log) {
 int main(int argc, char *argv[])
 {
     if (argc < 2 or argc > 3 ) {
-        std::cerr << "Invalid number of arguments" << std::endl;
+        std::cerr << "Usage: ./typewriter textFile [logFile]" << std::endl;
     }
     else {
         std::string text_filename = argv[1];

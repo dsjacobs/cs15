@@ -39,7 +39,7 @@ void Editor::constructor_helper(std::string filename) {
 Editor::~Editor() {};
 
 void Editor::run() {
-    while (end == false) {
+    while (not end) {
         int c  = UI.getChar();
         determine_next(c);
         UI.render(curTextLines, cursorCol, cursorLine);
@@ -185,15 +185,19 @@ void Editor::command_quit() {
 void Editor::command_undo() {
     if (not undoStack.isEmpty()) {
         ActionStack::Action latest = undoStack.top();
+        char c = latest.character;
+        int line = latest.line;
+        int col = latest.col;
+        bool deleted = latest.deleted;
         // if a character was undone, put it back
-        if (latest.deleted) {
-            insert(latest.character, latest.line, latest.column);
+        if (deleted) {
+            insert(c, line, column);
         }
         else {
-            delete_char(latest.line, latest.column);
+            delete_char(line, column);
         }
         undoStack.pop();
-        redoStack.push(latest.character, not latest.deleted, latest.line, latest.column);
+        redoStack.push(c, not deleted, line, column);
     }
 };
 

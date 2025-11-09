@@ -35,7 +35,8 @@ void ActionStack::pop() {
 void ActionStack::push(ActionStack::Action elem) {
     listStack.push_front(elem);
 }
-void ActionStack::push(char c, bool was_delete, std::size_t line, std::size_t column) {
+void ActionStack::push(char c, bool was_delete, std::size_t line,
+                                             std::size_t column) {
     ActionStack::Action elem;
     elem.character = c;
     elem.deleted = was_delete;
