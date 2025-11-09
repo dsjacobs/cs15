@@ -110,8 +110,8 @@ void Editor::move_left() {
 
 void Editor::insert(int c) {
     size_t curLineLength = lineLength();
-    std::string preCursorText = pre_character(cursorLine, corsorCol); 
-    std::string postCursorText = post_character(cursorLine, corsorCol); 
+    std::string preCursorText = pre_character(cursorLine, cursorCol); 
+    std::string postCursorText = post_character(cursorLine, cursorCol); 
     char c_char = static_cast<char>(c);
     curTextLines[cursorLine] = preCursorText + c_char + postCursorText;
     undoStack.push(c_char,false,cursorLine,cursorCol);
@@ -165,10 +165,9 @@ void Editor::command_undo() {
     ActionStack::Action latest = undoStack.top();
     // if a character was undone, put it back
     if (latest.deleted) {
-        curTextLines.insert()
+        curTextLines.insert(latest);
     }
     undoStack.pop();
-    if latest.
 };
 void Editor::command_redo() {
     ActionStack::Action latest = redoStack.top();
@@ -181,7 +180,7 @@ void Editor::command_redo() {
 void Editor::close_command_mode() {};
 
 
-std::string Editor::lineLength(int cursorLine) {
+std::string Editor::lineLength(int Line) {
     size_t curLineLength = curTextLines[cursorLine].size();
     return lineLength;
 }

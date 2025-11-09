@@ -58,4 +58,5 @@
 
         std::string pre_character(int col, int row);
         std::string post_character(int col, int row);
+        size_t lineLength(int Line);
  };
