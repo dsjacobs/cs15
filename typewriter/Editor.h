@@ -34,6 +34,7 @@
         ActionStack undoStack;
         ActionStack redoStack; 
 
+        void constructor_helper(std::string filename);
         std::ifstream read_text_file(std::ifstream &text_file);
         std::ifstream read_file_open_stream(std::string text_file);
         bool file_read_error;
