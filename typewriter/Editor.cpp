@@ -40,7 +40,6 @@ Editor::Editor(std::string filename, std::string logfile) {
     cursorLine = 0;
     UI = TextUI();
     end = false;    
-    log_filename = logfile;
 }
 
 Editor::~Editor() {};
