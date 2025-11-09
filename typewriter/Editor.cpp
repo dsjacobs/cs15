@@ -186,7 +186,7 @@ void Editor::backspace() {
                 curTextLines.pop_back();
             }
             cursorLine--;
-            undoStack.push(curChar,true,cursorLine,cursorCol);  
+            undoStack.push('n',true,cursorLine,cursorCol);  
         }      
     }
 
