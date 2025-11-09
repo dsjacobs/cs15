@@ -151,16 +151,16 @@ void Editor::backspace() {
 };
 
 void Editor::new_line() {
-    int curLine = cursorLine;
+    size_t curLine = cursorLine;
     if (curLine < curTextLines.size()) {
-        (int i = curTextLines.size(); i > curLine; i--) {
+        for (int i = curTextLines.size(); i > curLine; i--) {
             curTextLines[i+1] = curTextLines[i];
         }
     }
     curTextLines[curLine] = pre_character(cursorLine, cursorCol);
     curTextLines[curLine+1] = post_character(cursorLine, cursorCol);
     cursorLine++;
-    undoStack.push('/n',false,cursorLine, cursorCol)
+    undoStack.push('n',false,cursorLine, cursorCol)
 }
 
 void Editor::command_save() {
