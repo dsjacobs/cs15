@@ -109,7 +109,6 @@ void Editor::move_left() {
 };
 
 void Editor::insert(int c) {
-    size_t curLineLength = lineLength(cursorLine);
     std::string preCursorText = pre_character(cursorLine, cursorCol); 
     std::string postCursorText = post_character(cursorLine, cursorCol); 
     char c_char = static_cast<char>(c);
@@ -165,10 +164,11 @@ void Editor::command_undo() {
     ActionStack::Action latest = undoStack.top();
     // if a character was undone, put it back
     if (latest.deleted) {
-        curTextLines.insert(latest);
+        insert(latest);
     }
     undoStack.pop();
 };
+
 void Editor::command_redo() {
     ActionStack::Action latest = redoStack.top();
     if (latest.deleted) {
@@ -179,10 +179,9 @@ void Editor::command_redo() {
 
 void Editor::close_command_mode() {};
 
-
 size_t Editor::lineLength(int Line) {
-    size_t curLineLength = curTextLines[cursorLine].size();
-    return lineLength;
+    size_t curLineLength = curTextLines[Line].size();
+    return curLineLength;
 }
 
 std::string Editor::pre_character(int line, int col) {
@@ -191,7 +190,7 @@ std::string Editor::pre_character(int line, int col) {
 }
 
 std::string Editor::post_character(int line, int col) {
-    size_t length = lineLength();
+    size_t length = lineLength(line);
     std::string postCursorText = curTextLines[line].substr(col, length);
     return postCursorText;
 }
