@@ -21,6 +21,7 @@ Editor::Editor(std::string filename) {
 
 Editor::Editor(std::string filename, std::string logfile) {
     constructor_helper(filename);
+    UI.startLogMode(logfile);
 }
 
 void Editor::constructor_helper(std::string filename) {
