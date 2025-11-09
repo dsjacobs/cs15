@@ -141,7 +141,7 @@ void Editor::backspace() {
     int col = cursorCol;
     char curChar = curTextLines[line][col];
     curTextLines[line] = pre_character(line, col) + post_character(line, col);
-    redoStack.push(curChar,true,line,col);
+    undoStack.push(curChar,true,line,col);
 };
 
 void Editor::command_save() {
@@ -161,12 +161,14 @@ void Editor::command_quit() {
 };
 
 void Editor::command_undo() {
-    ActionStack::Action latest = undoStack.top();
-    // if a character was undone, put it back
-    if (latest.deleted) {
-        insert(latest.character);
+    if (not undoStack.isEmpty()) {
+        ActionStack::Action latest = undoStack.top();
+        // if a character was undone, put it back
+        if (latest.deleted) {
+            insert(latest.character);
+        }
+        undoStack.pop();
     }
-    undoStack.pop();
 };
 
 void Editor::command_redo() {
