@@ -49,14 +49,14 @@ void Editor::run() {
 void Editor::determine_next(int c) {
     // if ascii
     if (32 <= c and c <= 126) {
-        insert(c);
+        insert(c, cursorLine, cursorCol);
+        cursorLine++;
     }
     // if escapes
     else if (c == 27) {
         command_mode();
     }
     else if (c == KEY_BACKSPACE or c==263) {
-        std::cout << "calling backspace now." << std::endl;
         backspace();
     }
     else if (c == KEY_LEFT) {
@@ -109,13 +109,12 @@ void Editor::move_left() {
     }
 };
 
-void Editor::insert(int c) {
-    std::string preCursorText = pre_character(cursorLine, cursorCol); 
-    std::string postCursorText = post_character(cursorLine, cursorCol); 
+void Editor::insert(int c, int line, int col) {
+    std::string preCursorText = pre_character(line, col); 
+    std::string postCursorText = post_character(line, col); 
     char c_char = static_cast<char>(c);
-    curTextLines[cursorLine] = preCursorText + c_char + postCursorText;
-    undoStack.push(c_char,false,cursorLine,cursorCol);
-    cursorCol++;
+    curTextLines[line] = preCursorText + c_char + postCursorText;
+    undoStack.push(c_char,false,line,col);
 };
 
 void Editor::command_mode() {
@@ -137,11 +136,13 @@ void Editor::command_mode() {
     }
 };
 
-void Editor::backspace() {
-    int line = cursorLine;
-    int col = cursorCol;
+void Editor::delete_char(int line, int col) {
     char curChar = curTextLines[line][col];
-    curTextLines[line] = "ab" + pre_character(line, col) + post_character(line, col+1);
+    curTextLines[line] = pre_character(line, col) + post_character(line, col+1);
+};
+
+void Editor::backspace() {
+    delete_char(cursorLine, cursorCol);
     undoStack.push(curChar,true,line,col);
 };
 
@@ -166,18 +167,24 @@ void Editor::command_undo() {
         ActionStack::Action latest = undoStack.top();
         // if a character was undone, put it back
         if (latest.deleted) {
-            insert(latest.character);
+            insert(latest.character, latest.line, latest.column);
+        }
+        else {
+            delete_char(latest.character, latest.line, latest.column)
         }
         undoStack.pop();
+        redoStack.push(latest.character, not latest.was_delete, latest.line, latest.column)
     }
 };
 
 void Editor::command_redo() {
+    if (not redoStack.isEmpty()) {
     ActionStack::Action latest = redoStack.top();
     if (latest.deleted) {
 
     }
     redoStack.pop();
+    }
 };
 
 void Editor::close_command_mode() {};
