@@ -38,6 +38,7 @@
         std::ifstream read_file_open_stream(std::string text_file);
         bool file_read_error;
 
+        void add_logfile(std::string log_filename);
         void determine_next(int c);
 
         void move_down();

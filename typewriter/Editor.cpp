@@ -29,17 +29,8 @@ Editor::Editor(std::string filename) {
 }
 
 Editor::Editor(std::string filename, std::string logfile) {
-    text_filename = filename;
-    std::ifstream ifstream = read_file_open_stream(filename);
-    std::string ifstream_string;
-    while (getline (ifstream, ifstream_string)) {
-        curTextLines.push_back(ifstream_string);
-    }
-    cursorCol = 0;
-    cursorLine = 0;
-    UI = TextUI();
-    end = false;
-};
+    Editor(filename);
+    log_filename = logfile;
 
 Editor::~Editor() {};
 
@@ -122,6 +113,10 @@ void Editor::ascii(int c) {
     undoStack.push(c_char,false,cursorLine,cursorCol);
     cursorLine++;
 };
+
+void Editor::add_logfile(std::string log_filename) {
+    log_filename = log_filename;
+}
 
 void Editor::command_mode() {
     int c = UI.getChar();
