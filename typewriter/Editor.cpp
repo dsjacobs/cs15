@@ -29,8 +29,16 @@ Editor::Editor(std::string filename) {
 }
 
 Editor::Editor(std::string filename, std::string logfile) {
-    Editor(filename);
-    log_filename = logfile;
+    text_filename = filename;
+    std::ifstream ifstream = read_file_open_stream(filename);
+    std::string ifstream_string;
+    while (getline (ifstream, ifstream_string)) {
+        curTextLines.push_back(ifstream_string);
+    }
+    cursorCol = 0;
+    cursorLine = 0;
+    UI = TextUI();
+    end = false;    log_filename = logfile;
 }
 
 Editor::~Editor() {};
