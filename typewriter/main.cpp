@@ -15,7 +15,7 @@
 
 Editor which(int argc, char *argv[], std::string text, std::string log) {
     if (argc == 2) {
-        log = arg_v[2];
+        log = argv[2];
         return Editor(text, log);
     }
     else {
@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
     }
     std::string text_filename = argv[1];
     std::string log_filename = "";
-    Editor my_editor = which(argv, text_filename, log_filename);
+    Editor my_editor = which(argc, argv, text_filename, log_filename);
     my_editor.run();
 
     return 0;
