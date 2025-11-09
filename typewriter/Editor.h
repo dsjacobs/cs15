@@ -25,6 +25,7 @@
       
     private:
         std::string text_filename;
+        std::string log_filename;
         std::vector<std::string> curTextLines;
         size_t cursorCol;
         size_t cursorLine;

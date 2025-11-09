@@ -31,6 +31,7 @@ Editor::Editor(std::string filename) {
 Editor::Editor(std::string filename, std::string logfile) {
     Editor(filename);
     log_filename = logfile;
+}
 
 Editor::~Editor() {};
 
