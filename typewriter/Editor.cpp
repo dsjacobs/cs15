@@ -23,7 +23,7 @@ Editor::Editor(std::string filename, std::string logfile) {
     constructor_helper(filename);
 }
 
-Editor::constructor_helper(std::string filename) {
+void Editor::constructor_helper(std::string filename) {
     std::ifstream ifstream = read_file_open_stream(filename);
     std::string ifstream_string;
     while (getline (ifstream, ifstream_string)) {
