@@ -123,10 +123,6 @@ void Editor::ascii(int c) {
     cursorLine++;
 };
 
-void Editor::add_logfile(std::string log_filename) {
-    log_filename = log_filename;
-}
-
 void Editor::command_mode() {
     int c = UI.getChar();
     if (c=='s') {
