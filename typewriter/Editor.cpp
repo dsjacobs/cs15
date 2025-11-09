@@ -185,12 +185,12 @@ size_t Editor::lineLength(int Line) {
     return lineLength;
 }
 
-std::string pre_character(int line, int col) {
+std::string Editor::pre_character(int line, int col) {
     std::string preCursorText = curTextLines[line].substr(0, col);
     return preCursorText;
 }
 
-std::string post_character(int line, int col) {
+std::string Editor::post_character(int line, int col) {
     size_t length = lineLength();
     std::string postCursorText = curTextLines[line].substr(col, length);
     return postCursorText;
