@@ -164,7 +164,7 @@ void Editor::command_undo() {
     ActionStack::Action latest = undoStack.top();
     // if a character was undone, put it back
     if (latest.deleted) {
-        insert(latest);
+        insert(latest.character);
     }
     undoStack.pop();
 };
