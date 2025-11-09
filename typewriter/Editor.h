@@ -46,8 +46,8 @@
         void move_up();
         void move_right();
         void move_left();
-        void insert(int c, int col, int line);
-        void delete_char(int c, int col, int line)
+        void insert(int c, int line, int col);
+        void delete_char(int line, int col)
         void command_mode();
         void backspace();
 

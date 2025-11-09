@@ -136,13 +136,13 @@ void Editor::command_mode() {
     }
 };
 
-void Editor::delete_char(int c, int line, int col) {
+void Editor::delete_char(int line, int col) {
     curTextLines[line] = pre_character(line, col) + post_character(line, col+1);
 };
 
 void Editor::backspace() {
     char curChar = curTextLines[cursorLine][cursorCol];
-    delete_char(curChar, cursorLine, cursorCol);
+    delete_char(cursorLine, cursorCol);
     undoStack.push(curChar,true,cursorLine,cursorCol);
 };
 
@@ -167,13 +167,13 @@ void Editor::command_undo() {
         ActionStack::Action latest = undoStack.top();
         // if a character was undone, put it back
         if (latest.deleted) {
-            insert(latest.character, latest.line, latest.column);
+            insert(latesst.character, latest.line, latest.column);
         }
         else {
-            delete_char(latest.character, latest.line, latest.column)
+            delete_char(latest.line, latest.column)
         }
         undoStack.pop();
-        redoStack.push(latest.character, not latest.was_delete, latest.line, latest.column);
+        redoStack.push(latest.character, not latest.deleted, latest.line, latest.column);
     }
 };
 
