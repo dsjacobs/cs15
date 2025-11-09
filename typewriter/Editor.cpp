@@ -90,16 +90,41 @@ std::ifstream Editor::read_file_open_stream(std::string text_file) {
         return myifstream;
 }
 
-void Editor::move_down() {
+void Editor::move_down() {    
     if (cursorLine != curTextLines.size())
     {
-        cursorLine++;
+        size_t curLineLength = lineLength(cursorLine);
+        size_t nextLineLength = lineLength(cursorLine+1);
+        int term_width = UI.getTerminalWidth;
+
+        if (curLineLength > term_width and cursorLine < term_width) {
+            cursorLine = cursorLine + term_width;
+        }
+        else {
+            if (nextLineLength < cursorLine) {
+            cursorCol = nextLineLength;
+            }
+            cursorLine++;
+        }
     }
 };
 void Editor::move_up() {
     if (cursorLine > 0) 
     {
-        cursorLine--;
+        size_t curLineLength = lineLength(cursorLine);
+        size_t prevLineLength = lineLength(cursorLine-1);
+        int term_width = UI.getTerminalWidth;
+
+        if (cursorLine > term_width) {
+            cursorLine = cursorLine - term_width;
+        }
+
+        else {
+            if (prevLineLength < cursorLine) {
+                cursorCol = prevLineLength;
+            }
+            cursorLine--;
+        }
     }
 };
 void Editor::move_right() {
