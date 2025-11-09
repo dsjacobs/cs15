@@ -140,7 +140,6 @@ void Editor::command_mode() {
 void Editor::backspace() {
     int line = cursorLine;
     int col = cursorCol;
-	std::cout << "Backspace has been called." << std::endl;
     char curChar = curTextLines[line][col];
     curTextLines[line] = pre_character(line, col) + post_character(line, col);
     undoStack.push(curChar,true,line,col);
