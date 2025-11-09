@@ -55,7 +55,7 @@ void Editor::determine_next(int c) {
     else if (c == 27) {
         command_mode();
     }
-    else if (c == KEY_BACKSPACE) {
+    else if (c == KEY_BACKSPACE or c==263) {
         std::cout << "calling backspace now." << std::endl;
         backspace();
     }

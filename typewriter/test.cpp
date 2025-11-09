@@ -1,8 +1,6 @@
 #include "TextUI.h"
 #include <iostream>
-int main() {
 
-TextUI ui = TextUI();
-int i = ui.getChar();
+TextUI UI = TextUI();
+int i = UI.getChar();
 std::cout << i << std::endl;
-};
