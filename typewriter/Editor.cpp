@@ -181,7 +181,10 @@ void Editor::command_redo() {
     if (not redoStack.isEmpty()) {
     ActionStack::Action latest = redoStack.top();
     if (latest.deleted) {
-
+            insert(latest.character, latest.line, latest.column);
+        }
+        else {
+            delete_char(latest.line, latest.column);
     }
     redoStack.pop();
     }
