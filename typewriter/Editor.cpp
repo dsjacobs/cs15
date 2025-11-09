@@ -136,15 +136,14 @@ void Editor::command_mode() {
     }
 };
 
-void Editor::delete_char(int line, int col) {
-    char curChar = curTextLines[line][col];
+void Editor::delete_char(int c, int line, int col) {
     curTextLines[line] = pre_character(line, col) + post_character(line, col+1);
 };
 
 void Editor::backspace() {
     char curChar = curTextLines[cursorLine][cursorCol];
-    delete_char(cursorLine, cursorCol);
-    undoStack.push(curChar,true,line,col);
+    delete_char(curChar, cursorLine, cursorCol);
+    undoStack.push(curChar,true,cursorLine,cursorCol);
 };
 
 void Editor::command_save() {
