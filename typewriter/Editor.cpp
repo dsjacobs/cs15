@@ -184,7 +184,6 @@ void Editor::backspace() {
             for (size_t i = cursorLine; i < curTextLines.size(); i++) {
                 curTextLines[i] = curTextLines[i+1];
             }
-            curTextLines.pop_back();
             cursorCol = lineLength(cursorLine-1);
             cursorLine--;
             undoStack.push('n',true,cursorLine,cursorCol);  
