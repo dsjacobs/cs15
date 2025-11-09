@@ -13,8 +13,8 @@
 #include <string>
 #include "Editor.h"
 
-Editor which_constructor(char *arg_v[], std::string text, std::string log) {
-    if (arg_v.size() == 2) {
+Editor which(int argc, char *argv[], std::string text, std::string log) {
+    if (argc == 2) {
         log = arg_v[2];
         return Editor(text, log);
     }
@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
     }
     std::string text_filename = argv[1];
     std::string log_filename = "";
-    Editor my_editor = which_constructor(argc, text_filename, log_filename);
+    Editor my_editor = which(argv, text_filename, log_filename);
     my_editor.run();
 
     return 0;
