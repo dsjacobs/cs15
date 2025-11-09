@@ -181,6 +181,8 @@ void Editor::backspace() {
     else {
         if (cursorLine > 0) {
             curTextLines[cursorLine-1] += curTextLines[cursorLine];
+            cursorCol = lineLength(cursorLine-1);
+            cursorLine--;
             // for (size_t i = cursorLine; i < curTextLines.size(); i++) {
             //     curTextLines[i] = curTextLines[i+1];
             // }
