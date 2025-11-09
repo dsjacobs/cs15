@@ -13,6 +13,15 @@
 #include <string>
 #include "Editor.h"
 
+Editor which_constructor(int argc, std::string text_file, log_gile) {
+    if (argc == 2) {
+        log_filename = argv[2];
+        return Editor my_editor(text_filename, log_filename);
+    }
+    else {
+        return Editor my_editor(text_filename);
+    }
+}
 
 int main(int argc, char *argv[])
 {
@@ -21,16 +30,8 @@ int main(int argc, char *argv[])
     }
     std::string text_filename = argv[1];
     std::string log_filename = "";
-    if (argc == 2) {
-        log_filename = argv[2];
-        Editor my_editor(text_filename, log_filename);
-        my_editor.run();
+    Editor my_editor = which_constructor(argc, text_filename, log_filename);
+    my_editor.run();
 
-    }
-    else {
-        Editor my_editor(text_filename);
-        my_editor.run();
-
-    }
     return 0;
 }
