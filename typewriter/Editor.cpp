@@ -181,12 +181,12 @@ void Editor::backspace() {
     else {
         if (cursorLine > 0) {
             curTextLines[cursorLine-1] += curTextLines[cursorLine];
-            for (size_t i = cursorLine; i < curTextLines.size(); i++) {
-                curTextLines[i] = curTextLines[i+1];
-            }
-            cursorCol = lineLength(cursorLine-1);
-            cursorLine--;
-            undoStack.push('n',true,cursorLine,cursorCol);  
+            // for (size_t i = cursorLine; i < curTextLines.size(); i++) {
+            //     curTextLines[i] = curTextLines[i+1];
+            // }
+            // cursorCol = lineLength(cursorLine-1);
+            // cursorLine--;
+            // undoStack.push('n',true,cursorLine,cursorCol);  
         }      
     }
 
