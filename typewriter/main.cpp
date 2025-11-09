@@ -15,7 +15,7 @@
 
 Editor which(int argc, char *argv[], std::string text, std::string log) {
     std::cout << argc << std::endl;
-    if (argc == 2) {
+    if (argc == 3) {
         log = argv[2];
         return Editor(text, log);
     }
@@ -26,7 +26,7 @@ Editor which(int argc, char *argv[], std::string text, std::string log) {
 
 int main(int argc, char *argv[])
 {
-    if (argc > 2 or argc == 0) {
+    if (argc > 3 or argc == 0) {
         std::cerr << "Invalid number of arguments" << std::endl;
     }
     else {
