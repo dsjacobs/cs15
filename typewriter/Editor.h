@@ -46,7 +46,7 @@
         void move_up();
         void move_right();
         void move_left();
-        void ascii(int c);
+        void insert(int c);
         void command_mode();
         void backspace();
 
@@ -55,4 +55,7 @@
         void command_undo();
         void command_redo();
         void close_command_mode();
+
+        std::string pre_character(int col, int row);
+        std::string post_character(int col, int row);
  };

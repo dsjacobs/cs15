@@ -49,7 +49,7 @@ void Editor::run() {
 void Editor::determine_next(int c) {
     // if ascii
     if (32 <= c and c <= 126) {
-        ascii(c);
+        insert(c);
     }
     // if escapes
     else if (c == 27) {
@@ -108,10 +108,10 @@ void Editor::move_left() {
     }
 };
 
-void Editor::ascii(int c) {
-    size_t curLineLength = curTextLines[cursorLine].size();
-    std::string preCursorText = curTextLines[cursorLine].substr(0, cursorCol);
-    std::string postCursorText = curTextLines[cursorLine].substr(cursorCol, curLineLength);
+void Editor::insert(int c) {
+    size_t curLineLength = lineLength();
+    std::string preCursorText = pre_character(cursorLine, corsorCol); 
+    std::string postCursorText = post_character(cursorLine, corsorCol); 
     char c_char = static_cast<char>(c);
     curTextLines[cursorLine] = preCursorText + c_char + postCursorText;
     undoStack.push(c_char,false,cursorLine,cursorCol);
@@ -138,8 +138,11 @@ void Editor::command_mode() {
 };
 
 void Editor::backspace() {
-    char curChar = curTextLines[cursorLine][cursorCol];
-    redoStack.push(curChar,true,cursorLine,cursorCol);
+    int line = cursorLine;
+    int col = cursorCol;
+    char curChar = curTextLines[line][col];
+    curTextLines[line] = pre_character(line, col) + post_character(line, col);
+    redoStack.push(curChar,true,line,col);
 };
 
 void Editor::command_save() {
@@ -150,16 +153,46 @@ void Editor::command_save() {
     savefile.close();
     UI.displaySaveMessage();
 };
+
 void Editor::command_quit() {
     bool save_bool = UI.savePrompt();
     if (save_bool) {command_save();}
     UI.close();
     end = true;
 };
+
 void Editor::command_undo() {
+    ActionStack::Action latest = undoStack.top();
+    // if a character was undone, put it back
+    if (latest.deleted) {
+        curTextLines.insert()
+    }
     undoStack.pop();
+    if latest.
 };
 void Editor::command_redo() {
+    ActionStack::Action latest = redoStack.top();
+    if (latest.deleted) {
+
+    }
     redoStack.pop();
 };
+
 void Editor::close_command_mode() {};
+
+
+std::string Editor::lineLength(int cursorLine) {
+    size_t curLineLength = curTextLines[cursorLine].size();
+    return lineLength;
+}
+
+std::string pre_character(int line, int col) {
+    std::string preCursorText = curTextLines[line].substr(0, col);
+    return preCursorText;
+}
+
+std::string post_character(int line, int col) {
+    size_t length = lineLength();
+    std::string postCursorText = curTextLines[line].substr(col, length);
+    return postCursorText;
+}
