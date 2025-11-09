@@ -141,7 +141,7 @@ void Editor::backspace() {
     int line = cursorLine;
     int col = cursorCol;
     char curChar = curTextLines[line][col];
-    curTextLines[line] = 'ab' + pre_character(line, col) + post_character(line, col);
+    curTextLines[line] = "ab" + pre_character(line, col) + post_character(line, col+1);
     undoStack.push(curChar,true,line,col);
 };
 

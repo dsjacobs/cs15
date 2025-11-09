@@ -1,59 +1,4 @@
-: Cursor Position: [0, 1]
-AB
-CD
-EF
-GH
-: Cursor Position: [1, 1]
-AB
-CD
-EF
-GH
-: Cursor Position: [2, 1]
-AB
-CD
-EF
-GH
-: Cursor Position: [2, 1]
-AB
-CD
-EF
-GH
-: Cursor Position: [2, 1]
-AB
-CD
-EF
-GH
-: Cursor Position: [2, 2]
-AB
-CD
-EF
-GH
-: Cursor Position: [1, 2]
-AB
-CD
-EF
-GH
-: Cursor Position: [1, 2]
-AB
-CD
-EF
-GH
-: Cursor Position: [1, 2]
-AB
-CD
-EF
-GH
-: Cursor Position: [1, 2]
-AB
-CD
-EF
-GH
-: Cursor Position: [1, 2]
-AB
-CD
-EF
-GH
-: Cursor Position: [1, 1]
+: Cursor Position: [0, 0]
 AB
 CD
 EF
@@ -64,103 +9,52 @@ CD
 EF
 GH
 : Cursor Position: [1, 0]
-AB
-CD
-EF
-GH
-: Cursor Position: [1, 0]
-AB
-CD
-EF
-GH
-: Cursor Position: [1, 0]
-AB
-CD
-EF
-GH
-: Cursor Position: [1, 0]
-AB
-CD
-EF
-GH
-: Cursor Position: [1, 0]
-AB
-CD
-EF
-GH
-: Cursor Position: [1, 0]
-AB
-CD
-EF
-GH
-: Cursor Position: [1, 0]
-AB
-CD
-EF
-GH
-: Cursor Position: [1, 0]
-AB
-CD
-EF
-GH
-: Cursor Position: [1, 0]
-AB
-CD
-EF
-GH
-: Cursor Position: [1, 0]
-AB
-CD
-EF
-GH
-: Cursor Position: [1, 0]
-AB
-CD
-EF
-GH
-: Cursor Position: [1, 0]
-AB
-CD
-EF
-GH
-: Cursor Position: [1, 0]
-AB
-CD
-EF
-GH
-: Cursor Position: [1, 0]
-AB
-CD
-EF
-GH
-: Cursor Position: [1, 0]
-AB
-CD
-EF
-GH
-: Cursor Position: [1, 0]
-AB
-CD
-EF
-GH
-: Cursor Position: [1, 0]
-AB
+abA
 CD
 EF
 GH
 : Cursor Position: [2, 0]
-AB
+abA
 CD
 EF
 GH
-: Cursor Position: [2, 0]
-AB
+: Cursor Position: [3, 0]
+abBA
 CD
 EF
 GH
-Do you wish to save before closing (y or n)?
-: Cursor Position: [2, 0]
-AB
+: Cursor Position: [4, 0]
+abBBA
+CD
+EF
+GH
+: Cursor Position: [5, 0]
+abBBBA
+CD
+EF
+GH
+: Cursor Position: [6, 0]
+abBBBA
+CD
+EF
+GH
+: Cursor Position: [7, 0]
+abBBBAB
+CD
+EF
+GH
+: Cursor Position: [8, 0]
+abBBBABB
+CD
+EF
+GH
+: Cursor Position: [9, 0]
+abBBBABBu
+CD
+EF
+GH
+: Cursor Position: [10, 0]
+abBBBABBuu
 CD
 EF
 GH
