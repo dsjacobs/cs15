@@ -215,8 +215,9 @@ void Editor::new_line() {
             curTextLines.pop_back();
         }
     }
-    curTextLines[curLine] = pre_character(cursorLine, cursorCol);
-    curTextLines.push_back(post_character(cursorLine, cursorCol));
+    std::string postCursorText = post_character(cursorLine, cursorCol);
+    curTextLines[curLine] = pre_character(cursorLine, cursorCol); 
+    curTextLines.push_back(postCursorText);
     cursorCol=0;
     cursorLine++;
     // for (size_t i = 0; i < latter_half.size(); i++) {
