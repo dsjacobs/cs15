@@ -216,7 +216,7 @@ void Editor::new_line() {
         }
     }
     curTextLines[curLine] = pre_character(cursorLine, cursorCol);
-    curTextLines.push_back(cursorLine, cursorCol);
+    curTextLines.push_back(post_character(cursorLine, cursorCol));
     cursorCol=0;
     cursorLine++;
     // for (size_t i = 0; i < latter_half.size(); i++) {
