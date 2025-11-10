@@ -135,7 +135,7 @@ void Editor::move_right() {
     if (cursorCol < curTextLines[cursorLine].size()){
         cursorCol++;
     }
-    else if (cursorLine < numLines) {
+    else if (cursorLine < numLines - 1) {
         cursorCol = 0;
         cursorLine++;
     }
