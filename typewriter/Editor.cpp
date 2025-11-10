@@ -224,9 +224,9 @@ void Editor::new_line() {
             curTextLines.pop_back();
         }
         curTextLines.push_back(postCursorText);
-        // for (size_t i = 0; i < latter_half.size(); i++) {
-        //     curTextLines.push_back(latter_half[i]);
-        // }
+        for (size_t i = 0; i < latter_half.size(); i++) {
+            curTextLines.push_back(latter_half[i]);
+        }
     }
     cursorCol = 0;
     cursorLine++;
