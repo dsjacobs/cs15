@@ -219,7 +219,7 @@ void Editor::new_line() {
     curTextLines[curLine+1] = post_character(cursorLine, cursorCol);
     cursorCol = 0;
     cursorLine++;
-    for (size_t i = 0; i < latter_half.size(); i++) {
+    for (size_t i = 0; i <= latter_half.size(); i++) {
         curTextLines.push_back(latter_half[i]);
     }
     undoStack.push('n',false,cursorLine, cursorCol);
