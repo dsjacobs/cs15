@@ -103,7 +103,7 @@ void Editor::move_down() {
             cursorCol = cursorCol + term_width;
         }
         else {
-            if (nextLineLengthg < cursorCol) { 
+            if (nextLineLength < cursorCol) { 
                 cursorCol = nextLineLength;
             }
             cursorLine++;
