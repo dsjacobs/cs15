@@ -102,7 +102,7 @@ void Editor::move_down() {
         size_t term_width = UI.getTerminalWidth();
 
         int add_termwidth = cursorCol + term_width;
-        if (add_termwidth < curLineLength) {
+        if (add_termwidth <= curLineLength) {
             cursorCol = add_termwidth;
         }
         else {
@@ -124,7 +124,7 @@ void Editor::move_up() {
 
         // if line is shorter than screen
         int subtract_termwidth = cursorCol - term_width;
-        if (subtract_termwidth > 0) {
+        if (subtract_termwidth >= 0) {
             cursorCol = subtract_termwidth;
         }
         else {
