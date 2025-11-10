@@ -206,7 +206,7 @@ void Editor::backspace() {
             }
             // remove current line
             curTextLines.pop_back();
-            curTextLines[cursorLuine-1] += curTextLines[cursorLine];
+            curTextLines[cursorLine-1] += curTextLines[cursorLine];
             for (size_t i = 0; i < latter_half.size(); i++) {
                 curTextLines.push_back(latter_half[i]);
             }
