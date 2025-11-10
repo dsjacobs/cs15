@@ -187,8 +187,9 @@ void Editor::backspace() {
     // middle of a row
     if (cursorCol != 0) 
     {
-        undoStack.push(curChar,true,cursorLine,cursorCol);
         char curChar = curTextLines[cursorLine][cursorCol];
+                undoStack.push(curChar,true,cursorLine,cursorCol);
+
         delete_char(cursorLine, cursorCol); 
         cursorCol--;
     }
