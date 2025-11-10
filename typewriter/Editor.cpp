@@ -249,7 +249,7 @@ void Editor::new_line() {
 void Editor::command_save() {
     std::ofstream savefile = open_file_output_stream(text_filename);
     for (size_t i=0; i < numLines; i++) {
-        savefile << curTextLines[i];
+        savefile << curTextLines[i] << std::endl;
     }
     savefile.close();
     UI.displaySaveMessage();
