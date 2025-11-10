@@ -181,7 +181,7 @@ void Editor::command_mode() {
 
 void Editor::delete_char(size_t line, size_t col) {
    std::string line_end = "";
-   if (col < lineLength(line)) {
+   if (col <= lineLength(line)) {
         line_end = post_character(line, col+1); 
    }
   curTextLines[line] = pre_character(line, col) + line_end;
@@ -192,8 +192,7 @@ void Editor::backspace() {
     if (cursorCol != 0) 
     {
         char curChar = curTextLines[cursorLine][cursorCol];
-                undoStack.push(curChar,true,cursorLine,cursorCol);
-
+        undoStack.push(curChar,true,cursorLine,cursorCol);
         delete_char(cursorLine, cursorCol); 
         cursorCol--;
     }
@@ -207,7 +206,7 @@ void Editor::backspace() {
             }
             // remove current line
             curTextLines.pop_back();
-            curTextLines[cursorLine-1] += curTextLines[cursorLine];
+            curTextLines[cursorLuine-1] += curTextLines[cursorLine];
             for (size_t i = 0; i < latter_half.size(); i++) {
                 curTextLines.push_back(latter_half[i]);
             }
