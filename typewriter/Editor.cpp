@@ -27,10 +27,12 @@ Editor::Editor(std::string filename, std::string logfile) {
 void Editor::constructor_helper(std::string filename) {
     cursorCol = 0;
     cursorLine = 0;
+    numLines = 0;
     std::ifstream ifstream = read_file_open_stream(filename);
     std::string ifstream_string;
     while (getline (ifstream, ifstream_string)) {
         curTextLines.push_back(ifstream_string);
+        numLines++;
     }
     UI = TextUI();
     end = false;
@@ -91,7 +93,7 @@ std::ifstream Editor::read_file_open_stream(std::string text_file) {
 }
 
 void Editor::move_down() {    
-    if (cursorLine != curTextLines.size())
+    if (cursorLine != numLines)
     {
         size_t curLineLength = lineLength(cursorLine);
         size_t nextLineLength = lineLength(cursorLine+1);
@@ -132,7 +134,7 @@ void Editor::move_right() {
     if (cursorCol < curTextLines[cursorLine].size()){
         cursorCol++;
     }
-    else if (cursorLine < curTextLines.size()) {
+    else if (cursorLine < numLines) {
         cursorCol = 0;
         cursorLine++;
     }
@@ -195,9 +197,10 @@ void Editor::backspace() {
             cursorCol = lineLength(cursorLine-1);
             cursorLine--;
             curTextLines[cursorLine-1] += curTextLines[cursorLine];
-            for (size_t i = cursorLine; i < curTextLines.size(); i++) {
+            for (size_t i = cursorLine; i < numLines; i++) {
                 curTextLines[i] = curTextLines[i+1];
             }
+            numLines--;
             // cursorCol = lineLength(cursorLine-1);
             // cursorLine--;
             // undoStack.push('n',true,cursorLine,cursorCol);  
@@ -210,13 +213,13 @@ void Editor::new_line() {
     size_t curLine = cursorLine;
     size_t curLineLength = lineLength(cursorLine);
     std::vector<std::string> latter_half;
-    if (curLine = curTextLines.size() and cursorCol = curLineLength) {
+    if (curLine = numLines and cursorCol = curLineLength) {
         curTextLines.push_back("");
     }
     else {
         std::string postCursorText = post_character(cursorLine, cursorCol);
         curTextLines[curLine] = pre_character(cursorLine, cursorCol); 
-        for (size_t i = curLine+1; i <= curTextLines.size(); i++) {
+        for (size_t i = curLine+1; i <= numLines; i++) {
             latter_half.push_back(curTextLines[i]);
             curTextLines.pop_back();
         }
@@ -227,12 +230,13 @@ void Editor::new_line() {
     }
     cursorCol = 0;
     cursorLine++;
+    numLines++;
     undoStack.push('n',false,cursorLine, cursorCol);
 }
 
 void Editor::command_save() {
     std::ofstream savefile(text_filename);
-    for (size_t i=0; i < curTextLines.size(); i++) {
+    for (size_t i=0; i < numLines; i++) {
         savefile << curTextLines[i];
     }
     savefile.close();

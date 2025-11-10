@@ -30,6 +30,7 @@
         size_t cursorLine;
         bool end;
         TextUI UI;
+        size_t numLines;
 
         ActionStack undoStack;
         ActionStack redoStack; 
