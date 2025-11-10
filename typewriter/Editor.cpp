@@ -130,10 +130,20 @@ void Editor::move_right() {
     if (cursorCol < curTextLines[cursorLine].size()){
         cursorCol++;
     }
+    else if (cursorLine < curTextLines.size()) {
+        cursorCol = 0;
+        cursorLine++;
+    }
 };
+
 void Editor::move_left() {
     if (cursorCol > 0) {
         cursorCol--;
+    }
+    else if (cursorLine > 0) {
+        prevLineLength = lineLength(curTextLines[cursorLine-1]);
+        cursorCol = prevLineLength;
+        cursorLine--;
     }
 };
 
@@ -180,12 +190,12 @@ void Editor::backspace() {
     // beginning of a row
     else {
         if (cursorLine > 0) {
-            curTextLines[cursorLine-1] += curTextLines[cursorLine];
             cursorCol = lineLength(cursorLine-1);
             cursorLine--;
-            // for (size_t i = cursorLine; i < curTextLines.size(); i++) {
-            //     curTextLines[i] = curTextLines[i+1];
-            // }
+            curTextLines[cursorLine-1] += curTextLines[cursorLine];
+            for (size_t i = cursorLine; i < curTextLines.size(); i++) {
+                curTextLines[i] = curTextLines[i+1];
+            }
             // cursorCol = lineLength(cursorLine-1);
             // cursorLine--;
             // undoStack.push('n',true,cursorLine,cursorCol);  
