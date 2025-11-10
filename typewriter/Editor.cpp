@@ -220,9 +220,9 @@ void Editor::new_line() {
     curTextLines.push_back(postCursorText);
     cursorCol=0;
     cursorLine++;
-    // for (size_t i = 0; i < latter_half.size(); i++) {
-    //     curTextLines.push_back(latter_half[i]);
-    // }
+    for (size_t i = 0; i < latter_half.size(); i++) {
+        curTextLines.push_back(latter_half[i]);
+    }
 
     undoStack.push('n',false,cursorLine, cursorCol);
 }
