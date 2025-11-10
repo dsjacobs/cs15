@@ -76,7 +76,7 @@ void Editor::determine_next(int c) {
         move_down();
     }
     else {
-        std::cout << "Invalid character" << std::endl;
+        std::cerr << "Invalid character" << std::endl;
     }
 }
 
@@ -208,7 +208,6 @@ void Editor::backspace() {
 
 void Editor::new_line() {
     size_t curLine = cursorLine;
-    std::cout << curLine << std::endl;
     curTextLines.push_back("");
     // if (curLine < curTextLines.size()) {
     //     for (size_t i = curTextLines.size()-1; i > curLine; i--) {
