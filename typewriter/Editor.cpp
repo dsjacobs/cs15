@@ -212,6 +212,7 @@ void Editor::new_line() {
     if (curLine < curTextLines.size()) {
         for (size_t i = curLine; i < curTextLines.size(); i++) {
             latter_half.push_back(curTextLines[i]);
+            curTextLines.pop_back();
         }
     }
     curTextLines[curLine] = pre_character(cursorLine, cursorCol);
