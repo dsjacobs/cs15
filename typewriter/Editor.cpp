@@ -210,18 +210,18 @@ void Editor::new_line() {
     size_t curLine = cursorLine;
     std::vector<std::string> latter_half;
     if (curLine < curTextLines.size()) {
-        for (size_t i = curLine+1; i <= curTextLines.size(); i++) {
+        for (size_t i = curLine; i <= curTextLines.size(); i++) {
             latter_half.push_back(curTextLines[i]);
             curTextLines.pop_back();
         }
     }
     curTextLines[curLine] = pre_character(cursorLine, cursorCol);
     curTextLines[curLine+1] = post_character(cursorLine, cursorCol);
+    // for (size_t i = 0; i < latter_half.size(); i++) {
+    //     curTextLines.push_back(latter_half[i]);
+    // }
     cursorCol = 0;
     cursorLine++;
-    for (size_t i = 0; i < latter_half.size(); i++) {
-        curTextLines.push_back(latter_half[i]);
-    }
     undoStack.push('n',false,cursorLine, cursorCol);
 }
 
