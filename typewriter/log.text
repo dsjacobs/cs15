@@ -3,58 +3,19 @@ AB
 CD
 EF
 GH
-: Cursor Position: [1, 0]
+: Cursor Position: [0, 1]
 AB
 CD
 EF
 GH
-: Cursor Position: [1, 0]
-abA
-CD
-EF
-GH
-: Cursor Position: [2, 0]
-abA
-CD
-EF
-GH
-: Cursor Position: [3, 0]
-abBA
-CD
-EF
-GH
 : Cursor Position: [4, 0]
-abBBA
+ABCD
 CD
 EF
 GH
-: Cursor Position: [5, 0]
-abBBBA
-CD
-EF
-GH
-: Cursor Position: [6, 0]
-abBBBA
-CD
-EF
-GH
-: Cursor Position: [7, 0]
-abBBBAB
-CD
-EF
-GH
-: Cursor Position: [8, 0]
-abBBBABB
-CD
-EF
-GH
-: Cursor Position: [9, 0]
-abBBBABBu
-CD
-EF
-GH
-: Cursor Position: [10, 0]
-abBBBABBuu
+Do you wish to save before closing (y or n)?
+: Cursor Position: [4, 0]
+ABCD
 CD
 EF
 GH
