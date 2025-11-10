@@ -190,7 +190,7 @@ void Editor::backspace() {
         char curChar = curTextLines[cursorLine][cursorCol];
         delete_char(cursorLine, cursorCol); 
         undoStack.push(curChar,true,cursorLine,cursorCol);
-        cursorLine--;
+        cursorCol--;
     }
     // beginning of a row
     else {
