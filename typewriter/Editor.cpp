@@ -214,7 +214,7 @@ void Editor::new_line() {
     size_t curLineLength = lineLength(cursorLine);
     std::vector<std::string> latter_half;
     if (curLine == numLines and cursorCol == curLineLength) {
-        curTextLines.push_back("");
+        curTextLines.push_back("abs");
     }
     // else {
     //     std::string postCursorText = post_character(cursorLine, cursorCol);
