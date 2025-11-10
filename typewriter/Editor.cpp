@@ -141,7 +141,7 @@ void Editor::move_left() {
         cursorCol--;
     }
     else if (cursorLine > 0) {
-        prevLineLength = lineLength(curTextLines[cursorLine-1]);
+        size_t prevLineLength = lineLength(curTextLines[cursorLine-1]);
         cursorCol = prevLineLength;
         cursorLine--;
     }
