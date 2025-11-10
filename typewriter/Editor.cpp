@@ -208,22 +208,25 @@ void Editor::backspace() {
 
 void Editor::new_line() {
     size_t curLine = cursorLine;
+    size_t curLineLength = lineLength(cursorLine);
     std::vector<std::string> latter_half;
-    if (curLine < curTextLines.size()) {
+    if (curLine == curTextLines.size() and cursorCol = curLineLength) {
+        curTextLines.push_back("");
+    }
+    else {
+        std::string postCursorText = post_character(cursorLine, cursorCol);
+        curTextLines[curLine] = pre_character(cursorLine, cursorCol); 
         for (size_t i = curLine+1; i <= curTextLines.size(); i++) {
             latter_half.push_back(curTextLines[i]);
             curTextLines.pop_back();
         }
+        curTextLines.push_back(postCursorText);
+        for (size_t i = 0; i < latter_half.size(); i++) {
+            curTextLines.push_back(latter_half[i]);
+        }
     }
-    std::string postCursorText = post_character(cursorLine, cursorCol);
-    curTextLines[curLine] = pre_character(cursorLine, cursorCol); 
-    curTextLines.push_back(postCursorText);
-    cursorCol=0;
+    cursorCol = 0;
     cursorLine++;
-    for (size_t i = 0; i < latter_half.size(); i++) {
-        curTextLines.push_back(latter_half[i]);
-    }
-
     undoStack.push('n',false,cursorLine, cursorCol);
 }
 
