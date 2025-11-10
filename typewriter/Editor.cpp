@@ -194,16 +194,19 @@ void Editor::backspace() {
     // beginning of a row
     else {
         if (cursorLine > 0) {
+            std::vector<std::string> latter_half;
+            for (size_t i = curLine+1; i < numLines; i++) {
+                latter_half.push_back(curTextLines[i]);
+                curTextLines.pop_back();
+            }
+            curTextLines[cursorLine-1] += curTextLines[cursorLine];
+            for (size_t i = 0; i < latter_half.size(); i++) {
+                curTextLines.push_back(latter_half[i]);
+            }
             cursorCol = lineLength(cursorLine-1);
             cursorLine--;
-            curTextLines[cursorLine-1] += curTextLines[cursorLine];
-            for (size_t i = cursorLine; i < numLines; i++) {
-                curTextLines[i] = curTextLines[i+1];
-            }
             numLines--;
-            // cursorCol = lineLength(cursorLine-1);
-            // cursorLine--;
-            // undoStack.push('n',true,cursorLine,cursorCol);  
+            undoStack.push('n',true,cursorLine,cursorCol);  
         }      
     }
 
