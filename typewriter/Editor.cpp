@@ -25,13 +25,13 @@ Editor::Editor(std::string filename, std::string logfile) {
 }
 
 void Editor::constructor_helper(std::string filename) {
+    cursorCol = 0;
+    cursorLine = 0;
     std::ifstream ifstream = read_file_open_stream(filename);
     std::string ifstream_string;
     while (getline (ifstream, ifstream_string)) {
         curTextLines.push_back(ifstream_string);
     }
-    cursorCol = 0;
-    cursorLine = 0;
     UI = TextUI();
     end = false;
 }
