@@ -216,13 +216,13 @@ void Editor::backspace() {
             undoStack.push('n',true,cursorLine,cursorCol);  
         }      
     }
-
 };
 
 void Editor::new_line() {
     size_t curLine = cursorLine;
     size_t curLineLength = lineLength(cursorLine);
     std::vector<std::string> latter_half;
+    // very end of file
     if (curLine==numLines - 1 and cursorCol == curLineLength) {
         curTextLines.push_back("");
     }
@@ -245,7 +245,7 @@ void Editor::new_line() {
 }
 
 void Editor::command_save() {
-    std::ofstream savefile(text_filename);
+    std::ofstream savefile = open_file_output_stream(text_filename);
     for (size_t i=0; i < numLines; i++) {
         savefile << curTextLines[i];
     }
@@ -308,4 +308,13 @@ std::string Editor::post_character(int line, int col) {
     size_t length = lineLength(line);
     std::string postCursorText = curTextLines[line].substr(col, length);
     return postCursorText;
+
+std::ofstream Editor::open_file_output_stream(std::string filename) {
+        std::ofstream myofstream;   
+        myofstream.open(filename);
+        if (not myofstream.is_open()) {
+                cerr << "Error: could not open file " << filename << std::endl;
+        }
+        return myofstream;
 }
+
