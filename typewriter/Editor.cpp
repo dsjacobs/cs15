@@ -40,9 +40,9 @@ Editor::~Editor() {};
 
 void Editor::run() {
     while (not end) {
+        UI.render(curTextLines, cursorCol, cursorLine);
         int c  = UI.getChar();
         determine_next(c);
-        UI.render(curTextLines, cursorCol, cursorLine);
     }
 }
 
