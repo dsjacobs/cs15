@@ -214,20 +214,20 @@ void Editor::new_line() {
     size_t curLineLength = lineLength(cursorLine);
     std::vector<std::string> latter_half;
     if (curLine==numLines - 1 and cursorCol == curLineLength) {
-        curTextLines.push_back("abs");
+        curTextLines.push_back("");
     }
-    // else {
-    //     std::string postCursorText = post_character(cursorLine, cursorCol);
-    //     curTextLines[curLine] = pre_character(cursorLine, cursorCol); 
-    //     for (size_t i = curLine+1; i <= numLines; i++) {
-    //         latter_half.push_back(curTextLines[i]);
-    //         curTextLines.pop_back();
-    //     }
-    //     curTextLines.push_back(postCursorText);
-    //     for (size_t i = 0; i < latter_half.size(); i++) {
-    //         curTextLines.push_back(latter_half[i]);
-    //     }
-    // }
+    else {
+        std::string postCursorText = post_character(cursorLine, cursorCol);
+        curTextLines[curLine] = pre_character(cursorLine, cursorCol); 
+        // for (size_t i = curLine+1; i <= numLines; i++) {
+        //     latter_half.push_back(curTextLines[i]);
+        //     curTextLines.pop_back();
+        // }
+        curTextLines.push_back(postCursorText);
+        // for (size_t i = 0; i < latter_half.size(); i++) {
+        //     curTextLines.push_back(latter_half[i]);
+        // }
+    }
     cursorCol = 0;
     cursorLine++;
     numLines++;
