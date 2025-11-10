@@ -217,6 +217,7 @@ void Editor::new_line() {
     // }
     curTextLines[curLine] = pre_character(cursorLine, cursorCol);
     curTextLines[curLine+1] = post_character(cursorLine, cursorCol);
+    cursorCol = 0;
     cursorLine++;
     undoStack.push('n',false,cursorLine, cursorCol);
 }
