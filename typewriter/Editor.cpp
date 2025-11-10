@@ -199,6 +199,8 @@ void Editor::backspace() {
                 latter_half.push_back(curTextLines[i]);
                 curTextLines.pop_back();
             }
+            // remove current line
+            curTextLines.pop_back();
             curTextLines[cursorLine-1] += curTextLines[cursorLine];
             for (size_t i = 0; i < latter_half.size(); i++) {
                 curTextLines.push_back(latter_half[i]);
