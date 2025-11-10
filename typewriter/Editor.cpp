@@ -28,6 +28,7 @@ void Editor::constructor_helper(std::string filename) {
     cursorCol = 0;
     cursorLine = 0;
     numLines = 0;
+    text_filename = filename;
     std::ifstream ifstream = read_file_open_stream(filename);
     std::string ifstream_string;
     while (getline (ifstream, ifstream_string)) {
