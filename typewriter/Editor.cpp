@@ -231,7 +231,7 @@ void Editor::new_line() {
     cursorCol = 0;
     cursorLine++;
     numLines++;
-    undoStack.push('n',false,cursorLine, cursorCol);
+    undoStack.push('\n',false, curLine, 0);
 }
 
 void Editor::command_save() {
