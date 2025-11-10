@@ -308,6 +308,7 @@ std::string Editor::post_character(int line, int col) {
     size_t length = lineLength(line);
     std::string postCursorText = curTextLines[line].substr(col, length);
     return postCursorText;
+}
 
 std::ofstream Editor::open_file_output_stream(std::string filename) {
         std::ofstream myofstream;   
