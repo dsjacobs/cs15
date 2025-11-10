@@ -209,12 +209,13 @@ void Editor::backspace() {
 void Editor::new_line() {
     size_t curLine = cursorLine;
     curTextLines.push_back("");
-    // if (curLine < curTextLines.size()) {
-    //     for (size_t i = curTextLines.size()-1; i > curLine; i--) {
+    if (curLine < curTextLines.size()) {
+        for (size_t i = curTextLines.size()-1; i > curLine; i--) {
+            curTextLines.push_back(curTextLines[i]);
     //         std::cout << i << std::endl;
     //         curTextLines[i+1] = curTextLines[i];
-    //     }
-    // }
+        }
+    }
     curTextLines[curLine] = pre_character(cursorLine, cursorCol);
     curTextLines[curLine+1] = post_character(cursorLine, cursorCol);
     cursorCol = 0;
