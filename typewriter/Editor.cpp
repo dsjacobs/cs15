@@ -195,7 +195,7 @@ void Editor::backspace() {
     else {
         if (cursorLine > 0) {
             std::vector<std::string> latter_half;
-            for (size_t i = curLine+1; i < numLines; i++) {
+            for (size_t i = cursorLine+1; i < numLines; i++) {
                 latter_half.push_back(curTextLines[i]);
                 curTextLines.pop_back();
             }
