@@ -180,7 +180,11 @@ void Editor::command_mode() {
 };
 
 void Editor::delete_char(int line, int col) {
-    curTextLines[line] = pre_character(line, col) + post_character(line, col+1);
+   std::string line_end = "";
+   if (col < lineLength(line) - 1) {
+        line_end = post_character(line, col+1); 
+   }
+  curTextLines[line] = pre_character(line, col) + line_end;
 };
 
 void Editor::backspace() {
