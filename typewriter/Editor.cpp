@@ -34,6 +34,7 @@ void Editor::constructor_helper(std::string filename) {
         curTextLines.push_back(ifstream_string);
         numLines++;
     }
+    ifstream.close();
     UI = TextUI();
     end = false;
 }
