@@ -216,18 +216,18 @@ void Editor::new_line() {
     if (curLine == numLines and cursorCol == curLineLength) {
         curTextLines.push_back("");
     }
-    else {
-        std::string postCursorText = post_character(cursorLine, cursorCol);
-        curTextLines[curLine] = pre_character(cursorLine, cursorCol); 
-        for (size_t i = curLine+1; i <= numLines; i++) {
-            latter_half.push_back(curTextLines[i]);
-            curTextLines.pop_back();
-        }
-        curTextLines.push_back(postCursorText);
-        for (size_t i = 0; i < latter_half.size(); i++) {
-            curTextLines.push_back(latter_half[i]);
-        }
-    }
+    // else {
+    //     std::string postCursorText = post_character(cursorLine, cursorCol);
+    //     curTextLines[curLine] = pre_character(cursorLine, cursorCol); 
+    //     for (size_t i = curLine+1; i <= numLines; i++) {
+    //         latter_half.push_back(curTextLines[i]);
+    //         curTextLines.pop_back();
+    //     }
+    //     curTextLines.push_back(postCursorText);
+    //     for (size_t i = 0; i < latter_half.size(); i++) {
+    //         curTextLines.push_back(latter_half[i]);
+    //     }
+    // }
     cursorCol = 0;
     cursorLine++;
     numLines++;
