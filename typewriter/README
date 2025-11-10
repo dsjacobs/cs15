@@ -8,9 +8,26 @@
  * Author: Danielle Jacobs
  */
 
+ Acknowledgments:
+ The class chatbot.
+
+
  files: 
  ActionStack.h
 
  ActionStack.cpp
 
+ Editor.h
+
+ Editor.cpp
+
+ main.cpp
+
  unit_tests.cpp
+
+ Instructions:
+ make
+
+ Data structures
+
+ Details
