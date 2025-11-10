@@ -27,6 +27,7 @@ int main(int argc, char *argv[])
 {
     if (argc < 2 or argc > 3 ) {
         std::cerr << "Usage: ./typewriter textFile [logFile]" << std::endl;
+        exit(1);
     }
     else {
         std::string text_filename = argv[1];
