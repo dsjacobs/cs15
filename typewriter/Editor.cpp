@@ -179,7 +179,7 @@ void Editor::command_mode() {
     }
 };
 
-void Editor::delete_char(int line, int col) {
+void Editor::delete_char(size_t line, size_t col) {
    std::string line_end = "";
    if (col < lineLength(line) - 1) {
         line_end = post_character(line, col+1); 
