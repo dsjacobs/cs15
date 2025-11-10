@@ -93,7 +93,7 @@ std::ifstream Editor::read_file_open_stream(std::string text_file) {
 }
 
 void Editor::move_down() {    
-    if (cursorLine != numLines)
+    if (cursorLine != numLines - 1)
     {
         size_t curLineLength = lineLength(cursorLine);
         size_t nextLineLength = lineLength(cursorLine+1);
@@ -103,7 +103,7 @@ void Editor::move_down() {
             cursorCol = cursorCol + term_width;
         }
         else {
-            if (nextLineLength < cursorCol) { 
+            if (nextLineLengthg < cursorCol) { 
                 cursorCol = nextLineLength;
             }
             cursorLine++;
@@ -114,10 +114,11 @@ void Editor::move_down() {
 void Editor::move_up() {
     if (cursorLine > 0) 
     {
+        size_t curLineLength = lineLength(cursorLine);
         size_t prevLineLength = lineLength(cursorLine-1);
         size_t term_width = UI.getTerminalWidth();
 
-        if (cursorCol > term_width) {
+        if (curLineLength > term_width and cursorCol > term_width) {
             cursorCol = cursorCol - term_width;
         }
 
