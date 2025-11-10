@@ -181,7 +181,7 @@ void Editor::command_mode() {
 
 void Editor::delete_char(size_t line, size_t col) {
    std::string line_end = "";
-   if (col < lineLength(line) - 1) {
+   if (col < lineLength(line)) {
         line_end = post_character(line, col+1); 
    }
   curTextLines[line] = pre_character(line, col) + line_end;
