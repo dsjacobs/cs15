@@ -208,6 +208,7 @@ void Editor::backspace() {
         cursorCol--;
     }
     else {
+        if (cursorLine != 0) {
         for (size_t i = 0; i < cursorLine - 1; i++) {
             new_version.push_back(curTextLines[i]);
         }
@@ -221,6 +222,7 @@ void Editor::backspace() {
         cursorCol = lineLength(cursorLine-1);
         cursorLine--;
         numLines--;
+        }
     }
 };
 
