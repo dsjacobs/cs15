@@ -103,7 +103,7 @@ void Editor::move_down() {
     {}
     else
     {
-        int add_termwidth = cursorCol + term_width;
+        size_t add_termwidth = cursorCol + term_width;
         // if we should keep within the same line
         if (add_termwidth <= curLineLength) {
             cursorCol = add_termwidth;
@@ -124,7 +124,6 @@ void Editor::move_down() {
 
 void Editor::move_up() {
     // make sure not at top
-    size_t curLineLength = lineLength(cursorLine);
     size_t prevLineLength = lineLength(cursorLine-1);
     size_t term_width = UI.getTerminalWidth();
 
