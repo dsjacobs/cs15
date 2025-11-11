@@ -102,21 +102,15 @@ void Editor::move_down() {
         size_t term_width = UI.getTerminalWidth();
 
         int add_termwidth = cursorCol + term_width;
+        // if we should keep within the same line
         if (add_termwidth <= curLineLength) {
             cursorCol = add_termwidth;
         }
+        // if we need to go down a line
         else {
-            if (nextLineLength < cursorCol) {
-                cursorCol = nextLineLength;
-            }
-            else if (nextLineLength > term_width) {
-                int cur_mod = cursorCol%term_width;
-                cursorCol = cur_mod;
-                cursorLine++;
-            }
-            else {
-                cursorLine++;
-            }
+            size_t curDisplayCol = cursorCol%curLineLength;
+            cursorCol = curDisplayCol;
+            cursorLine++;          
         }
     }
 };
@@ -129,28 +123,17 @@ void Editor::move_up() {
         size_t prevLineLength = lineLength(cursorLine-1);
         size_t term_width = UI.getTerminalWidth();
 
-        // if line is shorter than screen
+        // if we should stay within the line
         int subtract_termwidth = cursorCol - term_width;
         if (subtract_termwidth >= 0) {
             cursorCol = subtract_termwidth;
         }
+        // if we need to go up a line
         else {
-            if (prevLineLength < cursorCol) {
-                cursorCol = prevLineLength;
-            }
-            else if (prevLineLength > term_width) {
-                int sub_line = prevLineLength/term_width;
-                int sub_line_mod = prevLineLength%term_width;
-                if (sub_line_mod == 0) {
-                    cursorLine = sub_line;
-                }
-                else {
-                    cursorLine = sub_line -1;
-                }
-            }
-            else {
-                cursorLine--;
-            }
+            size_t curDisplayCol = cursorCol%curLineLength;
+            size_t numPrevLineWraps = cursorCol%curLineLength;
+            cursorCol = (numPrevLineWraps * curDisplayCol);
+            cursorLine--;
         }
     }
 };
