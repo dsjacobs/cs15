@@ -211,9 +211,9 @@ void Editor::backspace() {
     // middle of a row
     if (cursorCol != 0) 
     {
-        char curChar = curTextLines[cursorLine][cursorCol];
-        undoStack.push(curChar,true,cursorLine,cursorCol);
-        delete_char(cursorLine, cursorCol); 
+        char curChar = curTextLines[cursorLine][cursorCol-1];
+        undoStack.push(curChar,true,cursorLine,cursorCol-1);
+        delete_char(cursorLine, cursorCol-1); 
         cursorCol--;
     }
     else {
