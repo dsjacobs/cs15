@@ -122,7 +122,7 @@ void Editor::move_up() {
     size_t prevLineLength = lineLength(cursorLine-1);
     size_t term_width = UI.getTerminalWidth();
 
-    if (cursorLine d= 0 an cursorCol < term_width) {}
+    if (cursorLine = 0 and cursorCol < term_width) {}
     else
     {
         // if we should stay within the line
