@@ -237,12 +237,11 @@ void Editor::new_line() {
         curTextLines.push_back("");
     }
     else {
-        std::string postCursorText = post_character(cursorLine, cursorCol);
-        curTextLines[curLine] = pre_character(cursorLine, cursorCol); 
         for (size_t i = 0; i < curLine; i++) {
             new_version.push_back(curTextLines[i]);
         }
-        new_version.push_back(postCursorText);
+        new_version.push_back(pre_character(cursorLine, cursorCol)); 
+        new_version.push_back(post_character(cursorLine, cursorCol));
         for (size_t i = curLine + 1; i < numLines;  i++) {
             new_version.push_back(curTextLines[i]);
         }
