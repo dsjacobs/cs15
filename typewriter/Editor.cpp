@@ -112,9 +112,11 @@ void Editor::move_down() {
         // if we need to go down a line
         else {
             size_t curDisplayCol = cursorCol%term_width;
+            // if next line is too short, go to end
             if (curDisplayCol > nextLineLength) {
                 cursorCol = nextLineLength;
             }
+            // next line is long enough
             else {
                 cursorCol = curDisplayCol;
             }
@@ -141,9 +143,11 @@ void Editor::move_up() {
         else {
             size_t curDisplayCol = cursorCol%term_width;
             size_t numPrevLineWraps = prevLineLength/term_width;
+            // if previous line is too short, go to end
             if (curDisplayCol > prevLineLength) {
                 cursorCol = prevLineLength;
             }
+            // previous line is long enough
             else {
                 cursorCol = ((numPrevLineWraps * term_width) + curDisplayCol);
             }
@@ -153,9 +157,11 @@ void Editor::move_up() {
 };
 
 void Editor::move_right() {
-    if (cursorCol < curTextLines[cursorLine].size()){
+    // we are before the end of our line
+    if (cursorCol < lineLength(cursorCol)) {
         cursorCol++;
     }
+    // make sure we're not in the last line of file
     else if (cursorLine < numLines - 1) {
         cursorCol = 0;
         cursorLine++;
@@ -163,9 +169,11 @@ void Editor::move_right() {
 };
 
 void Editor::move_left() {
+    // if we're not at the beginning of a line   
     if (cursorCol > 0) {
         cursorCol--;
     }
+    // make sure we're not in first line of file
     else if (cursorLine > 0) {
         size_t prevLineLength = lineLength(cursorLine-1);
         cursorCol = prevLineLength;
@@ -218,7 +226,9 @@ void Editor::backspace() {
         delete_char(cursorLine, cursorCol-1); 
         cursorCol--;
     }
+    // beginning of a row
     else {
+        // not in first line
         if (cursorLine != 0) {
         for (size_t i = 0; i < cursorLine - 1; i++) {
             new_version.push_back(curTextLines[i]);
