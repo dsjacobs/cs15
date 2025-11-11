@@ -99,6 +99,7 @@ void Editor::move_down() {
     size_t nextLineLength = lineLength(cursorLine+1);
     size_t term_width = UI.getTerminalWidth();
 
+    // if on the last line and cant go down futher
     if (cursorLine == numLines - 1 and cursorCol + term_width > curLineLength)
     {}
     else
@@ -127,6 +128,7 @@ void Editor::move_up() {
     size_t prevLineLength = lineLength(cursorLine-1);
     size_t term_width = UI.getTerminalWidth();
 
+    // if on the top line and cant go up further
     if (cursorLine == 0 and cursorCol < term_width) {}
     else
     {
@@ -227,10 +229,10 @@ void Editor::backspace() {
         for (size_t i = cursorLine + 1; i < numLines;  i++) {
             new_version.push_back(curTextLines[i]);
         }
-        curTextLines = new_version;
-        cursorCol = 0;
+        cursorCol = lineLength(cursorLine-1);
         cursorLine--;
         numLines--;
+        curTextLines = new_version;
         }
     }
 };
