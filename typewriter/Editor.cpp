@@ -211,13 +211,14 @@ void Editor::backspace() {
         for (size_t i = 0; i < curLine - 1; i++) {
             new_version.push_back(curTextLines[i]);
         }
-        std::string new_line = curTextLines[i-1] + curTextLines[i];
+        std::string new_line = curTextLines[cursorLine-1];
+        new_line += curTextLines[cursorLine];
         new_version.push_back(new_line);
-        for (size_t i = curLine + 1; i < numLines;  i++) {
+        for (size_t i = cursorLine + 1; i < numLines;  i++) {
             new_version.push_back(curTextLines[i]);
         }
         curTextLines = new_version;
-        cursorCol = lineLength(i-1);
+        cursorCol = lineLength(cursorLine-1);
         cursorLine--;
         numLines--;
     }
