@@ -208,7 +208,7 @@ void Editor::backspace() {
         cursorCol--;
     }
     else {
-        for (size_t i = 0; i < curLine - 1; i++) {
+        for (size_t i = 0; i < cursorLine - 1; i++) {
             new_version.push_back(curTextLines[i]);
         }
         std::string new_line = curTextLines[cursorLine-1];
