@@ -228,7 +228,7 @@ void Editor::backspace() {
             new_version.push_back(curTextLines[i]);
         }
         curTextLines = new_version;
-        cursorCol = lineLength(cursorLine-1);
+        cursorCol = 0;
         cursorLine--;
         numLines--;
         }
