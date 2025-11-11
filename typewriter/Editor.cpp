@@ -111,7 +111,12 @@ void Editor::move_down() {
         // if we need to go down a line
         else {
             size_t curDisplayCol = cursorCol%term_width;
-            cursorCol = curDisplayCol;
+            if (curDisplayCol > nextLineLength) {
+                cursorCol = nextLineLength;
+            }
+            else {
+                cursorCol = curDisplayCol;
+            }
             cursorLine++;          
         }
     }
@@ -135,7 +140,12 @@ void Editor::move_up() {
         else {
             size_t curDisplayCol = cursorCol%term_width;
             size_t numPrevLineWraps = prevLineLength/term_width;
-            cursorCol = ((numPrevLineWraps * term_width)+ curDisplayCol);
+            if (curDisplayCol > prevLineLength) {
+                cursorCol = prevLineLength;
+            }
+            else {
+                cursorCol = ((numPrevLineWraps * term_width) + curDisplayCol);
+            }
             cursorLine--;
         }
     }
