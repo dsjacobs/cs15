@@ -95,12 +95,12 @@ std::ifstream Editor::read_file_open_stream(std::string text_file) {
 }
 
 void Editor::move_down() {    
-    if (cursorLine != numLines - 1)
-    {
-        size_t curLineLength = lineLength(cursorLine);
-        size_t nextLineLength = lineLength(cursorLine+1);
-        size_t term_width = UI.getTerminalWidth();
+    size_t curLineLength = lineLength(cursorLine);
+    size_t nextLineLength = lineLength(cursorLine+1);
+    size_t term_width = UI.getTerminalWidth();
 
+    if (cursorLine != numLines - 1) or ((cursorCol + term_width) < curLineLength)
+    {
         int add_termwidth = cursorCol + term_width;
         // if we should keep within the same line
         if (add_termwidth <= curLineLength) {
@@ -117,12 +117,11 @@ void Editor::move_down() {
 
 void Editor::move_up() {
     // make sure not at top
-    if (cursorLine > 0) 
+    size_t curLineLength = lineLength(cursorLine);
+    size_t prevLineLength = lineLength(cursorLine-1);
+    size_t term_width = UI.getTerminalWidth();
+    if (cursorLine > 0 or cursorCol > term_width) 
     {
-        size_t curLineLength = lineLength(cursorLine);
-        size_t prevLineLength = lineLength(cursorLine-1);
-        size_t term_width = UI.getTerminalWidth();
-
         // if we should stay within the line
         int subtract_termwidth = cursorCol - term_width;
         if (subtract_termwidth >= 0) {
