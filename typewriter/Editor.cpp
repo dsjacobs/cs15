@@ -198,6 +198,7 @@ void Editor::delete_char(size_t line, size_t col) {
 };
 
 void Editor::backspace() {
+    std::vector<std::string> new_version;
     // middle of a row
     if (cursorCol != 0) 
     {
@@ -206,25 +207,19 @@ void Editor::backspace() {
         delete_char(cursorLine, cursorCol); 
         cursorCol--;
     }
-    // beginning of a row
     else {
-        if (cursorLine > 0) {
-            std::vector<std::string> latter_half;
-            for (size_t i = cursorLine+1; i < numLines; i++) {
-                latter_half.push_back(curTextLines[i]);
-                curTextLines.pop_back();
-            }
-            // remove current line
-            curTextLines.pop_back();
-            curTextLines[cursorLine-1] += curTextLines[cursorLine];
-            for (size_t i = 0; i < latter_half.size(); i++) {
-                curTextLines.push_back(latter_half[i]);
-            }
-            cursorCol = lineLength(cursorLine-1);
-            cursorLine--;
-            numLines--;
-            undoStack.push('n',true,cursorLine,cursorCol);  
-        }      
+        for (size_t i = 0; i < curLine - 1; i++) {
+            new_version.push_back(curTextLines[i]);
+        }
+        std::string new_line = curTextLines[i-1] + curTextLines[i];
+        new_version.push_back(new_line);
+        for (size_t i = curLine + 1; i < numLines;  i++) {
+            new_version.push_back(curTextLines[i]);
+        }
+        curTextLines = new_version;
+        cursorCol = lineLength(i-1);
+        cursorLine--;
+        numLines--;
     }
 };
 
