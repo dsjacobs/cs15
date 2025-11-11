@@ -231,7 +231,7 @@ void Editor::backspace() {
 void Editor::new_line() {
     size_t curLine = cursorLine;
     size_t curLineLength = lineLength(cursorLine);
-    std::vector<std::string> latter_half;
+    std::vector<std::string> new_version;
     // very end of file
     if (curLine==numLines - 1 and cursorCol == curLineLength) {
         curTextLines.push_back("");
@@ -239,14 +239,14 @@ void Editor::new_line() {
     else {
         std::string postCursorText = post_character(cursorLine, cursorCol);
         curTextLines[curLine] = pre_character(cursorLine, cursorCol); 
-        for (size_t i = numLines; i > curLine; i--) {
-            latter_half.push_front(curTextLines[i]);
-            curTextLines.pop();
+        for (size_t i = 0; i < curLine; i++) {
+            new_version.push_back(curTextLines[i]);
         }
-        curTextLines.push_back(postCursorText);
-        for (size_t i = 0; i < latter_half.size(); i++) {
-            curTextLines.push_back(latter_half[i]);
+        new_version.push_back(postCursorText);
+        for (size_t i = curLine + 1; i < numLines;  i++) {
+            new_version.push_back(curTextLines[i]);
         }
+        curTextLines = new_version;
     }
     cursorCol = 0;
     cursorLine++;
