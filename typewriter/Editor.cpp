@@ -99,7 +99,7 @@ void Editor::move_down() {
     size_t nextLineLength = lineLength(cursorLine+1);
     size_t term_width = UI.getTerminalWidth();
 
-    if (cursorLine == numLines - 1 and cursorCol + term_width < curLineLength)
+    if (cursorLine == numLines - 1 and cursorCol + term_width > curLineLength)
     {}
     else
     {
@@ -135,7 +135,7 @@ void Editor::move_up() {
         else {
             size_t curDisplayCol = cursorCol%term_width;
             size_t numPrevLineWraps = prevLineLength/term_width;
-            cursorCol = (numPrevLineWraps + curDisplayCol);
+            cursorCol = ((numPrevLineWraps * term_width)+ curDisplayCol);
             cursorLine--;
         }
     }
