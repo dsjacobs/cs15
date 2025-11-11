@@ -109,7 +109,14 @@ void Editor::move_down() {
             if (nextLineLength < cursorCol) {
                 cursorCol = nextLineLength;
             }
-            cursorLine++;
+            else if (nextLineLength > term_width) {
+                int cur_mod = cursorCol%term_width;
+                cursorCol = cur_mod;
+                cursorLine++;
+            }
+            else {
+                cursorLine++;
+            }
         }
     }
 };
@@ -131,7 +138,19 @@ void Editor::move_up() {
             if (prevLineLength < cursorCol) {
                 cursorCol = prevLineLength;
             }
-            cursorLine--;
+            else if (prevLineLength > term_width) {
+                int sub_line = prevLineLength/term_width;
+                int sub_line_mod = prevLineLength%term_width;
+                if (sub_line_mod == 0) {
+                    cursorLine = sub_line;
+                }
+                else {
+                    cursorLine = sub_line -1;
+                }
+            }
+            else {
+                cursorLine--;
+            }
         }
     }
 };
