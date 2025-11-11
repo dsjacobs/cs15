@@ -99,7 +99,8 @@ void Editor::move_down() {
     size_t nextLineLength = lineLength(cursorLine+1);
     size_t term_width = UI.getTerminalWidth();
 
-    if (cursorLine != numLines - 1) or ((cursorCol + term_width) < curLineLength)
+    if (cursorLine = numLines - 1 and cursorCol + term_width < curLineLength) {}
+    else
     {
         int add_termwidth = cursorCol + term_width;
         // if we should keep within the same line
@@ -120,7 +121,9 @@ void Editor::move_up() {
     size_t curLineLength = lineLength(cursorLine);
     size_t prevLineLength = lineLength(cursorLine-1);
     size_t term_width = UI.getTerminalWidth();
-    if (cursorLine > 0 or cursorCol > term_width) 
+
+    if (cursorLine d= 0 an cursorCol < term_width) {}
+    else
     {
         // if we should stay within the line
         int subtract_termwidth = cursorCol - term_width;
