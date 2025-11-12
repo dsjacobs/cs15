@@ -158,7 +158,7 @@ void Editor::move_up() {
 
 void Editor::move_right() {
     // we are before the end of our line
-    if (cursorCol < lineLength(cursorCol)) {
+    if (cursorCol < lineLength(cursorLine)) {
         cursorCol++;
     }
     // make sure we're not in the last line of file
@@ -219,7 +219,7 @@ void Editor::delete_char(size_t line, size_t col) {
 void Editor::backspace(size_t line, size_t col, bool in_place) {
     std::vector<std::string> new_version;
     // middle of a row
-    if (line != 0) 
+    if (col != 0) 
     {
         char curChar = curTextLines[line][col-1];
         undoStack.push(curChar,true,line,col-1);
@@ -229,11 +229,11 @@ void Editor::backspace(size_t line, size_t col, bool in_place) {
     // beginning of a row
     else {
         // not in first line
-        delete_new_line_char(cursorLine, cursorCol, true);
+        delete_new_line_char(Line, true);
     }
 };
 
-void Editor::delete_new_line_char(size_t Line, size_t Col, bool in_place) {
+void Editor::delete_new_line_char(size_t Line, bool in_place) {
     if (Line != 0) {
     std::vector<std::string> new_version;
     for (size_t i = 0; i < Line - 1; i++) {

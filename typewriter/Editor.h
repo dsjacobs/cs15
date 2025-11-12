@@ -51,7 +51,7 @@
         void delete_char(size_t line, size_t col);
         void backspace(size_t line, size_t col, bool in_place);
         void new_line(size_t line, size_t col, bool in_place);
-        void delete_new_line_char(size_t Line, size_t Col, bool in_place);
+        void delete_new_line_char(size_t Line, bool in_place);
         
         void command_mode();
         void command_save();
