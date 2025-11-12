@@ -216,15 +216,15 @@ void Editor::delete_char(size_t line, size_t col) {
   curTextLines[line] = pre_character(line, col) + line_end;
 };
 
-void Editor::backspace() {
+void Editor::(size_t line, size_t col, bool in_place) {
     std::vector<std::string> new_version;
     // middle of a row
-    if (cursorCol != 0) 
+    if (line != 0) 
     {
-        char curChar = curTextLines[cursorLine][cursorCol-1];
-        undoStack.push(curChar,true,cursorLine,cursorCol-1);
-        delete_char(cursorLine, cursorCol-1); 
-        cursorCol--;
+        char curChar = curTextLines[line][col-1];
+        undoStack.push(curChar,true,line,col-1);
+        delete_char(line, col-1); 
+        if (in_place) {cursorCol--;}
     }
     // beginning of a row
     else {
@@ -235,6 +235,7 @@ void Editor::backspace() {
 
 void Editor::delete_new_line_char(size_t Line, size_t Col, bool in_place) {
     if (Line != 0) {
+    std::vector<std::string> new_version;
     for (size_t i = 0; i < Line - 1; i++) {
         new_version.push_back(curTextLines[i]);
     }
