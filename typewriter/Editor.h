@@ -49,10 +49,10 @@
         void move_left();
         void insert(int c, int line, int col);
         void delete_char(size_t line, size_t col);
+        void backspace(size_t line, size_t col, bool in_place);
+        void new_line(size_t line, size_t col, bool in_place);
+        
         void command_mode();
-        void backspace();
-        void new_line();
-
         void command_save();
         void command_quit();
         void command_undo();

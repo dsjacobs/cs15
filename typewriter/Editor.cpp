@@ -62,10 +62,10 @@ void Editor::determine_next(int c) {
     }
     // if new line
     else if (c == 10) {
-        new_line();
+        new_line(cursorLine, cursorCol, true);
     }
-    else if (c == KEY_BACKSPACE or c==263) {
-        backspace();
+    else if (c == KEY_BACKSPACE) {
+        backspace(cursorLine, cursorCol, true);
     }
     else if (c == KEY_LEFT) {
         move_left();
@@ -229,27 +229,32 @@ void Editor::backspace() {
     // beginning of a row
     else {
         // not in first line
-        if (cursorLine != 0) {
-        for (size_t i = 0; i < cursorLine - 1; i++) {
-            new_version.push_back(curTextLines[i]);
-        }
-        std::string new_line = curTextLines[cursorLine-1];
-        new_line += curTextLines[cursorLine];
-        new_version.push_back(new_line);
-        for (size_t i = cursorLine + 1; i < numLines;  i++) {
-            new_version.push_back(curTextLines[i]);
-        }
-        cursorCol = lineLength(cursorLine-1);
-        cursorLine--;
-        numLines--;
-        curTextLines = new_version;
-        }
+        delete_new_line_char(cursorLine, cursorCol, true);
     }
 };
 
-void Editor::new_line() {
-    size_t curLine = cursorLine;
-    size_t curLineLength = lineLength(cursorLine);
+void Editor::delete_new_line_char(size_t Line, size_t Col, bool in_place) {
+    if (Line != 0) {
+    for (size_t i = 0; i < Line - 1; i++) {
+        new_version.push_back(curTextLines[i]);
+    }
+    std::string new_line = curTextLines[Line-1];
+    new_line += curTextLines[Line];
+    new_version.push_back(new_line);
+    for (size_t i = Line + 1; i < numLines;  i++) {
+        new_version.push_back(curTextLines[i]);
+    }
+    if (in_place) {
+        cursorCol = lineLength(Line-1);
+        cursorLine--;
+    }
+    numLines--;
+    curTextLines = new_version;
+}
+}
+
+void Editor::new_line(size_t Line, size_t Col, bool in_place) {
+    size_t curLineLength = lineLength(Line);
     std::vector<std::string> new_version;
     // very end of file
     if (curLine==numLines - 1 and cursorCol == curLineLength) {
@@ -259,15 +264,17 @@ void Editor::new_line() {
         for (size_t i = 0; i < curLine; i++) {
             new_version.push_back(curTextLines[i]);
         }
-        new_version.push_back(pre_character(cursorLine, cursorCol)); 
-        new_version.push_back(post_character(cursorLine, cursorCol));
+        new_version.push_back(pre_character(Line, Col)); 
+        new_version.push_back(post_character(Line, Col));
         for (size_t i = curLine + 1; i < numLines;  i++) {
             new_version.push_back(curTextLines[i]);
         }
         curTextLines = new_version;
     }
-    cursorCol = 0;
-    cursorLine++;
+    if (in_place) {
+        cursorCol = 0;
+        cursorLine++;
+    }
     numLines++;
     undoStack.push('\n',false, curLine, 0);
 }
@@ -289,13 +296,12 @@ void Editor::command_quit() {
 };
 
 void Editor::command_undo() {
-    if (not undoStack.isEmpty()) {
-        ActionStack::Action latest = undoStack.top();
-        char c = latest.character;
-        int line = latest.line;
-        int col = latest.column;
-        bool deleted = latest.deleted;
-        // if a character was undone, put it back
+    ActionStack::Action latest = undoStack.top();
+    char c = latest.character;
+    int line = latest.line;
+    int col = latest.column;
+    bool deleted = latest.deleted;
+    while (not undoStack.isEmpty() and c!='\n') {
         if (deleted) {
             insert(c, line, col);
         }
@@ -304,8 +310,20 @@ void Editor::command_undo() {
         }
         undoStack.pop();
         redoStack.push(c, not deleted, line, col);
+        command_undo();
     }
-};
+    if (c=='\n') {
+        undoStack.pop();
+        redoStack.push(c, not deleted, line, col);
+        if (deleted) {
+            new_line(line, col, false);
+        }
+        else {
+            delete_new_line_char(line, col, false);
+        }
+    }
+}
+
 
 void Editor::command_redo() {
     if (not redoStack.isEmpty()) {
