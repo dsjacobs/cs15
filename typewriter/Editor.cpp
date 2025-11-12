@@ -257,16 +257,16 @@ void Editor::new_line(size_t Line, size_t Col, bool in_place) {
     size_t curLineLength = lineLength(Line);
     std::vector<std::string> new_version;
     // very end of file
-    if (curLine==numLines - 1 and cursorCol == curLineLength) {
+    if (Line==numLines - 1 and cursorCol == curLineLength) {
         curTextLines.push_back("");
     }
     else {
-        for (size_t i = 0; i < curLine; i++) {
+        for (size_t i = 0; i < Line; i++) {
             new_version.push_back(curTextLines[i]);
         }
         new_version.push_back(pre_character(Line, Col)); 
         new_version.push_back(post_character(Line, Col));
-        for (size_t i = curLine + 1; i < numLines;  i++) {
+        for (size_t i = Line + 1; i < numLines;  i++) {
             new_version.push_back(curTextLines[i]);
         }
         curTextLines = new_version;
