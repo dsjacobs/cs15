@@ -321,8 +321,6 @@ void Editor::command_redo() {
     }
 };
 
-void Editor::close_command_mode() {};
-
 size_t Editor::lineLength(int Line) {
     size_t curLineLength = curTextLines[Line].size();
     return curLineLength;
