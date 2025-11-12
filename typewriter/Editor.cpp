@@ -158,7 +158,7 @@ void Editor::move_up() {
 
 void Editor::move_right() {
     // we are before the end of our line
-    if (cursorCol < lineLength(cursorCol)) {
+    if (cursorCol < lineLength(cursorLine)) {
         cursorCol++;
     }
     // make sure we're not in the last line of file
@@ -295,28 +295,32 @@ void Editor::command_undo() {
         int line = latest.line;
         int col = latest.column;
         bool deleted = latest.deleted;
-        // if a character was undone, put it back
-        if (deleted) {
-            insert(c, line, col);
+        while (c!='\n') {
+            if (deleted) {
+                insert(c, line, col);
+            }
+            else {
+                delete_char(line, col);
+            }
+            undoStack.pop();
+            redoStack.push(c, not deleted, line, col);
+            command_undo();
         }
-        else {
-            delete_char(line, col);
-        }
-        undoStack.pop();
-        redoStack.push(c, not deleted, line, col);
     }
 };
 
 void Editor::command_redo() {
     if (not redoStack.isEmpty()) {
-    ActionStack::Action latest = redoStack.top();
-    if (latest.deleted) {
-            insert(latest.character, latest.line, latest.column);
+        ActionStack::Action latest = redoStack.top();
+        while (latest.character != '\n') { 
+        if (latest.deleted) {
+                insert(latest.character, latest.line, latest.column);
+            }
+            else {
+                delete_char(latest.line, latest.column);
         }
-        else {
-            delete_char(latest.line, latest.column);
-    }
-    redoStack.pop();
+        redoStack.pop();
+        }
     }
 };
 
