@@ -229,7 +229,7 @@ void Editor::backspace(size_t line, size_t col, bool in_place) {
     // beginning of a row
     else {
         // not in first line
-        delete_new_line_char(Line, true);
+        delete_new_line_char(line, true);
     }
 };
 
@@ -320,7 +320,7 @@ void Editor::command_undo() {
             new_line(line, col, false);
         }
         else {
-            delete_new_line_char(line, col, false);
+            delete_new_line_char(line, false);
         }
     }
 }
