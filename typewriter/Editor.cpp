@@ -297,30 +297,29 @@ void Editor::command_quit() {
 };
 
 void Editor::command_undo() {
-    ActionStack::Action latest = undoStack.top();
-    char c = latest.character;
-    int line = latest.line;
-    int col = latest.column;
-    bool deleted = latest.deleted;
-    while (not undoStack.isEmpty() and c!='\n') {
-        if (deleted) {
-            insert(c, line, col);
-        }
-        else {
-            delete_char(line, col);
-        }
+    while (not undoStack.isEmpty()) {
+        ActionStack::Action latest = undoStack.top();
+        char c = latest.character;
+        int line = latest.line;
+        int col = latest.column;
+        bool deleted = latest.deleted;
         undoStack.pop();
         redoStack.push(c, not deleted, line, col);
-        command_undo();
-    }
-    if (c=='\n') {
-        undoStack.pop();
-        redoStack.push(c, not deleted, line, col);
-        if (deleted) {
-            new_line(line, col, false);
+        if (c=='\n') {
+            if (deleted) {
+                new_line(line, col, false);
+            }
+            else {
+                delete_new_line_char(line, false);
+            }
         }
         else {
-            delete_new_line_char(line, false);
+            if (deleted) {
+                insert(c, line, col);
+            }
+            else {
+                delete_char(line, col);
+            }
         }
     }
 }
