@@ -84,7 +84,7 @@ void Editor::determine_next(int c) {
 }
 
 std::ifstream Editor::read_file_open_stream(std::string text_file) {
-        std::ifstream myifsstream;
+        std::ifstream myifstream;
         myifstream.open(text_file);
         return myifstream;
 }
