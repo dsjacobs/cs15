@@ -299,7 +299,7 @@ void Editor::command_undo() {
         undoStack.pop();
         redoStack.push(c, not deleted, line, col);
         cursorCol = col;
-        cursorLine = line-1;
+        cursorLine = 0;
         if (not undoStack.isEmpty() and c != '\n')
             command_undo();
         }
