@@ -38,7 +38,6 @@
         void constructor_helper(std::string filename);
         std::ifstream read_text_file(std::ifstream &text_file);
         std::ifstream read_file_open_stream(std::string text_file);
-        bool file_read_error;
 
         void add_logfile(std::string log_filename);
         void determine_next(int c);
@@ -47,17 +46,19 @@
         void move_up();
         void move_right();
         void move_left();
+
+        void type_char(int c, int line, int col);
         void insert(int c, int line, int col);
-        void delete_char(size_t line, size_t col);
-        void command_mode();
+       
         void backspace();
+        void delete_char(size_t line, size_t col);
         void new_line();
 
+        void command_mode();
         void command_save();
         void command_quit();
         void command_undo();
         void command_redo();
-        void close_command_mode();
 
         std::string pre_character(int col, int row);
         std::string post_character(int col, int row);

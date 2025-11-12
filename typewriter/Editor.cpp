@@ -53,8 +53,7 @@ void Editor::run() {
 void Editor::determine_next(int c) {
     // if ascii
     if (32 <= c and c <= 126) {
-        insert(c, cursorLine, cursorCol);
-        cursorCol++;
+        type_char(c, cursorLine, cursorCol);
     }
     // if escapes
     else if (c == 27) {
@@ -181,12 +180,18 @@ void Editor::move_left() {
     }
 };
 
-void Editor::insert(int c, int line, int col) {
+
+void Editor::type_char(int c, int line, int col) {
+    insert(int c, int line, int col);
+    undoStack.push(c_char,false,line,col);
+    cursorCol++;
+};
+
+void Editor::insert(int c, int line, int col, bool in_place) {
     std::string preCursorText = pre_character(line, col); 
     std::string postCursorText = post_character(line, col); 
     char c_char = static_cast<char>(c);
     curTextLines[line] = preCursorText + c_char + postCursorText;
-    undoStack.push(c_char,false,line,col);
 };
 
 void Editor::command_mode() {
@@ -239,6 +244,7 @@ void Editor::backspace() {
         cursorLine--;
         numLines--;
         curTextLines = new_version;
+        undoStack.push(curChar,true,cursorLine,cursorCol-1);
         }
     }
 };
