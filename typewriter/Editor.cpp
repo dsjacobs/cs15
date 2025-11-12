@@ -84,11 +84,11 @@ void Editor::determine_next(int c) {
 }
 
 std::ifstream Editor::read_file_open_stream(std::string text_file) {
-        std::ifstream myifstream;   
+        std::ofstream ostream;   
+        ostream.open(text_file);
+        ostream.close();
+        std::ifstream myifstream;
         myifstream.open(text_file);
-        if (not myifstream.is_open()) {
-         std::cerr << "Error: could not open file " << text_file << std::endl;
-        }
         return myifstream;
 }
 
