@@ -298,11 +298,11 @@ void Editor::command_undo() {
         }
         undoStack.pop();
         redoStack.push(c, not deleted, line, col);
-        cursorLine = line;
-        cursorCol = 0;
         if (not undoStack.isEmpty() and c != '\n')
             command_undo();
         }
+        cursorCol = 0;
+        cursorLine = 0;
     };
 
 void Editor::command_redo() {
