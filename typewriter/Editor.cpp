@@ -209,11 +209,7 @@ void Editor::command_mode() {
 };
 
 void Editor::delete_char(size_t line, size_t col) {
-   std::string line_end = "";
-   if (col <= lineLength(line)) {
-        line_end = post_character(line, col+1); 
-   }
-  curTextLines[line] = pre_character(line, col) + line_end;
+  curTextLines[line] = pre_character(line, col) + post_character(line, col);
 };
 
 void Editor::backspace() {
@@ -303,7 +299,7 @@ void Editor::command_undo() {
         }
         undoStack.pop();
         redoStack.push(c, not deleted, line, col);
-        if (not undoStack.isEmpty())
+        if (not undoStack.isEmpty() and c != '\n')
             command_undo();
         }
     };
