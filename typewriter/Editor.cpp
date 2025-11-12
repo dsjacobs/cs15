@@ -289,25 +289,24 @@ void Editor::command_quit() {
 };
 
 void Editor::command_undo() {
-    while (not undoStack.isEmpty()) {
+    if (not undoStack.isEmpty()) {
         ActionStack::Action latest = undoStack.top();
         char c = latest.character;
         int line = latest.line;
         int col = latest.column;
         bool deleted = latest.deleted;
-        while (c!='\n') {
-            if (deleted) {
-                insert(c, line, col);
-            }
-            else {
-                delete_char(line, col);
-            }
-            undoStack.pop();
-            redoStack.push(c, not deleted, line, col);
+        if (deleted) {
+            insert(c, line, col);
+        }
+        else {
+            delete_char(line, col);
+        }
+        undoStack.pop();
+        redoStack.push(c, not deleted, line, col);
+        if (not undoStack.isEmpty())
             command_undo();
         }
-    }
-};
+    };
 
 void Editor::command_redo() {
     if (not redoStack.isEmpty()) {
