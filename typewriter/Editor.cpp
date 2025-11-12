@@ -210,7 +210,7 @@ void Editor::command_mode() {
 };
 
 void Editor::delete_char(size_t line, size_t col) {
-  curTextLines[line] = pre_character(line, col) + post_character(line, col);
+  curTextLines[line] = pre_character(line, col) + post_character(line, col+1);
 };
 
 void Editor::backspace() {
