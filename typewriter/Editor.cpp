@@ -301,6 +301,8 @@ void Editor::command_undo() {
         if (not undoStack.isEmpty() and c != '\n')
             command_undo();
         }
+        cursorCol = col;
+        cursorLine = line;
     };
 
 void Editor::command_redo() {
