@@ -88,7 +88,6 @@ std::ifstream Editor::read_file_open_stream(std::string text_file) {
         myifstream.open(text_file);
         if (not myifstream.is_open()) {
          std::cerr << "Error: could not open file " << text_file << std::endl;
-                file_read_error = true;
         }
         return myifstream;
 }
@@ -182,12 +181,12 @@ void Editor::move_left() {
 
 
 void Editor::type_char(int c, int line, int col) {
-    insert(int c, int line, int col);
-    undoStack.push(c_char,false,line,col);
+    insert(c, line, col);
+    undoStack.push(static_cast<char>(c),false,line,col);
     cursorCol++;
 };
 
-void Editor::insert(int c, int line, int col, bool in_place) {
+void Editor::insert(int c, int line, int col) {
     std::string preCursorText = pre_character(line, col); 
     std::string postCursorText = post_character(line, col); 
     char c_char = static_cast<char>(c);
@@ -207,9 +206,6 @@ void Editor::command_mode() {
     }
     else if (c=='r') {
         command_redo();
-    }
-    else {
-        close_command_mode();
     }
 };
 
@@ -244,7 +240,7 @@ void Editor::backspace() {
         cursorLine--;
         numLines--;
         curTextLines = new_version;
-        undoStack.push(curChar,true,cursorLine,cursorCol-1);
+        undoStack.push('\n',true,cursorLine,cursorCol-1);
         }
     }
 };
