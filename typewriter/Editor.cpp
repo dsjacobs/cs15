@@ -289,7 +289,7 @@ void Editor::command_quit() {
 };
 
 void Editor::command_undo() {
-    if (not undoStack.isEmpty()) {
+    while (not undoStack.isEmpty()) {
         ActionStack::Action latest = undoStack.top();
         char c = latest.character;
         int line = latest.line;
