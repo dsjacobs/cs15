@@ -259,7 +259,7 @@ void Editor::insert_new_line(size_t line) {
     size_t curLineLength = lineLength(line);
     std::vector<std::string> new_version;
     // very end of file
-    if (curLine==numLines - 1 and cursorCol == curLineLength) {
+    if (line==numLines - 1 and cursorCol == curLineLength) {
         curTextLines.push_back("");
     }
     else {
