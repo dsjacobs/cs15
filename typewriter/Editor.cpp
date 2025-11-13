@@ -232,19 +232,19 @@ void Editor::backspace() {
 void Editor::delete_new_line(size_t line) {
     // not in first line
     if (line != 0) {
-    for (size_t i = 0; i < line - 1; i++) {
-        new_version.push_back(curTextLines[i]);
-    }
-    std::vector<std::string> new_version;
-    std::string new_line = curTextLines[line-1];
-    new_line += curTextLines[line];
-    new_version.push_back(new_line);
-    for (size_t i = line + 1; i < numLines;  i++) {
-        new_version.push_back(curTextLines[i]);
-    }
-    cursorCol = lineLength(cursorLine-1);
-    numLines--;
-    curTextLines = new_version;
+        std::vector<std::string> new_version;
+        for (size_t i = 0; i < line - 1; i++) {
+            new_version.push_back(curTextLines[i]);
+        }
+        std::string new_line = curTextLines[line-1];
+        new_line += curTextLines[line];
+        new_version.push_back(new_line);
+        for (size_t i = line + 1; i < numLines;  i++) {
+            new_version.push_back(curTextLines[i]);
+        }
+        cursorCol = lineLength(cursorLine-1);
+        numLines--;
+        curTextLines = new_version;
     }
 }
 
