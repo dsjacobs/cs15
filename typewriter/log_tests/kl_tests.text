@@ -1,0 +1,15 @@
+./typewriter maggiesfarm.text log_tests/kl01_m.text < log_tests/kl_01
+./the_typewriter maggiesfarm.text log_tests/kl01_t.text < log_tests/kl_01
+diff log_tests/kl01_m.text log_tests/kl01_t.text
+
+./typewriter maggiesfarm.text log_tests/kl02_m.text < log_tests/kl_02
+./the_typewriter maggiesfarm.text log_tests/kl02_t.text  < log_tests/kl_02
+diff log_tests/kl02_m.text log_tests/kl02_t.text
+
+./typewriter maggiesfarm.text log_tests/type_undo_m.text < log_tests/type_undo
+./the_typewriter maggiesfarm.text log_tests/type_undo_t.text < type_undo
+diff log_tests/type_undo_m.text log_tests/type_undo_t.text
+
+type_undo_redo
+new_line_undo_redo
+backspace_undo

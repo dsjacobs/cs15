@@ -341,14 +341,7 @@ std::ofstream Editor::open_file_output_stream(std::string filename) {
         std::ofstream myofstream;   
         myofstream.open(filename);
         if (not myofstream.is_open()) {
-            std::cerr << "Error: could not open file " << filename << std::endl;
-            if (errno == ENOENT) {
-                std::cerr << "Reason: File " << filename << " does not exist." << std::endl;
-            } else if (errno == EACCES) {
-                std::cerr << "Reason: Permission denied." << std::endl;
-            } else {
-                std::cerr << "Reason: Unknown error." << std::endl;
-            }
+            std::cerr << "Could not open file." 
         }
         return myofstream;
 }
