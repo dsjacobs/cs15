@@ -52,7 +52,9 @@
        
         void backspace();
         void delete_char(size_t line, size_t col);
-        void new_line();
+        void enter_key();
+        void insert_new_line(size_t line);
+        void delete_new_line(size_t line);
 
         void command_mode();
         void command_save();
