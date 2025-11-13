@@ -320,7 +320,7 @@ void Editor::command_redo() {
         }
         redoStack.pop();
         if (not redoStack.isEmpty() and c != '\n')
-            command_undo();
+            command_redo();
         }
         cursorCol = 0;
         cursorLine = 0;
