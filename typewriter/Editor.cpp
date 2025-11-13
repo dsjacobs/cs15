@@ -347,7 +347,7 @@ std::ofstream Editor::open_file_output_stream(std::string filename) {
         std::ofstream myofstream;   
         myofstream.open(filename);
         if (not myofstream.is_open()) {
-            std::cerr << "Could not open file." 
+            std::cerr << "Could not open file." << std::endl;
         }
         return myofstream;
 }
