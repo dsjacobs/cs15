@@ -308,16 +308,22 @@ void Editor::command_undo() {
 void Editor::command_redo() {
     if (not redoStack.isEmpty()) {
         ActionStack::Action latest = redoStack.top();
-        while (latest.character != '\n') { 
-        if (latest.deleted) {
-                insert(latest.character, latest.line, latest.column);
-            }
-            else {
-                delete_char(latest.line, latest.column);
+        char c = latest.character;
+        int line = latest.line;
+        int col = latest.column;
+        bool deleted = latest.deleted;
+        if (deleted) {
+            insert(c, line, col);
+        }
+        else {
+            delete_char(line, col);
         }
         redoStack.pop();
+        if (not redoStack.isEmpty() and c != '\n')
+            command_undo();
         }
-    }
+        cursorCol = 0;
+        cursorLine = 0;
 };
 
 size_t Editor::lineLength(int Line) {
