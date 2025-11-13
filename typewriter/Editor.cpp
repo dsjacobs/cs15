@@ -320,8 +320,8 @@ void Editor::command_undo() {
         if (not undoStack.isEmpty() and c != '\n')
             command_undo();
         }
-        cursorCol = 0;
-        cursorLine = 0;
+        cursorCol = col;
+        cursorLine = line;
     };
 
 void Editor::command_redo() {
@@ -341,8 +341,8 @@ void Editor::command_redo() {
         if (not redoStack.isEmpty() and c != '\n')
             command_redo();
         }
-        cursorCol = 0;
-        cursorLine = 0;
+        cursorCol = col;
+        cursorLine = line;
 };
 
 size_t Editor::lineLength(int Line) {
