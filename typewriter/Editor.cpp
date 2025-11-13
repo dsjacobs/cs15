@@ -222,14 +222,14 @@ void Editor::backspace() {
     }
     // beginning of a row
     else {
-        delete_new_line();
+        delete_new_line(curLine);
         cursorLine--;
         undoStack.push('\n',true,cursorLine,cursorCol-1);
     }
 };
 
 
-void::Editor delete_new_line(size_t line) {
+void Editor::delete_new_line(size_t line) {
     // not in first line
     if (cursorLine != 0) {
     for (size_t i = 0; i < cursorLine - 1; i++) {
@@ -251,7 +251,7 @@ void Editor::enter_key() {
     insert_new_line(cursorLine);
     cursorCol = 0;
     cursorLine++;
-    undoStack.push('\n',false, curLine, 0);
+    undoStack.push('\n',false, cursorLine, 0);
 }
 
 void Editor::insert_new_line(size_t line) {
