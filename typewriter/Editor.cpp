@@ -315,13 +315,14 @@ void Editor::command_undo() {
                 delete_char(line, col);
             }
         }
-        undoStack.pop();
-        redoStack.push(c, not deleted, line, col);
         if (not undoStack.isEmpty() and c != '\n')
             command_undo();
         }
         cursorCol = col;
         cursorLine = line;
+        undoStack.pop();
+        redoStack.push(c, not deleted, line, col);
+
     };
 
 void Editor::command_redo() {
@@ -337,12 +338,12 @@ void Editor::command_redo() {
         else {
             delete_char(line, col);
         }
-        redoStack.pop();
         if (not redoStack.isEmpty() and c != '\n')
             command_redo();
         }
         cursorCol = col;
         cursorLine = line;
+        redoStack.pop();
 };
 
 size_t Editor::lineLength(int Line) {
