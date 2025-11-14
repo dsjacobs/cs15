@@ -31,6 +31,7 @@ void Editor::constructor_helper(std::string filename) {
     text_filename = filename;
     std::ifstream ifstream = read_file_open_stream(filename);
     std::string ifstream_string;
+    curTextLines = std::vector<std::string>
     while (getline (ifstream, ifstream_string)) {
         curTextLines.push_back(ifstream_string);
         numLines++;
@@ -44,9 +45,7 @@ Editor::~Editor() {};
 
 void Editor::run() {
     while (not end) {
-        if (not curTextLines.empty()) {
         UI.render(curTextLines, cursorCol,cursorLine);
-        }
         int c  = UI.getChar();
         determine_next(c);
     }
