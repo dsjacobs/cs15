@@ -30,12 +30,12 @@ void Editor::constructor_helper(std::string filename) {
     numLines = 0;
     text_filename = filename;
     std::ifstream myifstream;
-    myifstream.open(text_file);
+    myifstream.open(filename);
     if (not myifstream.is_open()) {
         curTextLines = std::vector<std::string>(); 
     }
     std::string ifstream_string;
-    while (getline (ifstream, ifstream_string)) {
+    while (getline (myifstream, ifstream_string)) {
         curTextLines.push_back(ifstream_string);
         numLines++;
     }
