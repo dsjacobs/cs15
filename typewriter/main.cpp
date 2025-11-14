@@ -38,3 +38,5 @@ int main(int argc, char *argv[])
 
     return 0;
 }
+
+// Consider nine points in space, no four  of which are coplanar. Each pair of points is joined by an edge (that is, a line segment) and each edge is either   colored blue or red or left uncolored. Find the smallest value of n such that whenever exactly n edges are colored, the set of colored edges necessarily contains a triangle all of whose edges 0have the same color.  

@@ -31,9 +31,11 @@ void Editor::constructor_helper(std::string filename) {
     text_filename = filename;
     std::ifstream ifstream = read_file_open_stream(filename);
     std::string ifstream_string;
+    if (ifstream_string != "") {
     while (getline (ifstream, ifstream_string)) {
         curTextLines.push_back(ifstream_string);
         numLines++;
+        }
     }
     ifstream.close();
     UI = TextUI();
