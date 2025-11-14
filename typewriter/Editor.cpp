@@ -323,7 +323,7 @@ void Editor::command_undo() {
         cursorCol = col;
         cursorLine = line;
         undoStack.pop();
-        redoStack.push(c, not deleted, line, column);
+        redoStack.push(c, not deleted, line, col);
     }
     };
 
