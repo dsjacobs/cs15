@@ -31,7 +31,7 @@ void Editor::constructor_helper(std::string filename) {
     text_filename = filename;
     std::ifstream ifstream = read_file_open_stream(filename);
     std::string ifstream_string;
-    curTextLines = std::vector<std::string>;
+    curTextLines = std::vector<std::string>();
     while (getline (ifstream, ifstream_string)) {
         curTextLines.push_back(ifstream_string);
         numLines++;
@@ -85,11 +85,13 @@ void Editor::determine_next(int c) {
 }
 
 std::ifstream Editor::read_file_open_stream(std::string text_file) {
-        std::ifstream myifstream;
-        myifstream.open(text_file);
-        if (myifstream.is_open()) {
-            return myifstream;
-        }
+    std::ifstream myifstream;
+    myifstream.open(text_file);
+    if (not myifstream.is_open()) {
+            std::ofstream newFile(text_file);
+        newFile.close(); // Close the ne
+    }
+    return myifstream;
 }
 
 void Editor::move_down() {    
