@@ -320,10 +320,10 @@ void Editor::command_undo() {
         if (not undoStack.isEmpty() and c != '\n')
             command_undo();
         }
-        cursorCol = col;
-        cursorLine = line;
+        cursorCol = latest.column;
+        cursorLine = latest.line;
         undoStack.pop();
-        redoStack.push(c, not deleted, line, col);
+        redoStack.push(latest.character, not latest.deleted, latest.line, latest.column);
 
     };
 
