@@ -33,7 +33,6 @@ void Editor::constructor_helper(std::string filename) {
     cursorLine = 0;
     numLines = 0;
     text_filename = filename;
-    std::ifstream myifstream;
     myifstream = read_file_open_stream(filename);
     curTextLines = std::vector<std::string>(); 
     std::string ifstream_string;
