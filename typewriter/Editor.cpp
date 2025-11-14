@@ -319,12 +319,12 @@ void Editor::command_undo() {
         }
         if (not undoStack.isEmpty() and c != '\n')
             command_undo();
-        }
-        cursorCol = latest.column;
-        cursorLine = latest.line;
+        
+        cursorCol = col;
+        cursorLine = line;
         undoStack.pop();
-        redoStack.push(latest.character, not latest.deleted, latest.line, latest.column);
-
+        redoStack.push(c, not deleted, line, column);
+    }
     };
 
 void Editor::command_redo() {
@@ -342,10 +342,11 @@ void Editor::command_redo() {
         }
         if (not redoStack.isEmpty() and c != '\n')
             command_redo();
-        }
+    
         cursorCol = col;
         cursorLine = line;
         redoStack.pop();
+    }
 };
 
 size_t Editor::lineLength(int Line) {
