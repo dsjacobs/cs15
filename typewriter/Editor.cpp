@@ -39,7 +39,7 @@ void Editor::constructor_helper(std::string filename) {
         curTextLines.push_back(ifstream_string);
         numLines++;
     }
-    ifstream.close();
+    myifstream.close();
     UI = TextUI();
     end = false;
 }
