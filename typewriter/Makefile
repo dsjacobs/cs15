@@ -1,5 +1,5 @@
 #########################################################
-#             PROJECT 2            #
+#             PROJECT 2  Typewriter          
 # Danielle Jacobs
 # November 2, 2025
 
@@ -12,16 +12,20 @@ CXX      = clang++
 CXXFLAGS = -g3 -Wall -Wextra -Wpedantic -Wshadow
 LDFLAGS  = -g3 
 
+#builds and links the main Typewriter
 typewriter: main.o Editor.o ActionStack.o TextUI.o
-	$(CXX) $(CXXFLAGS) -o typewriter main.o Editor.o ActionStack.o \
-	TextUI.o -lncurses
+	$(CXX) $(CXXFLAGS) -o typewriter main.o Editor.o \
+	ActionStack.o TextUI.o -lncurses
 
+#builds and links the ActionStack
 ActionStack: ActionStack.o
 	$(CXX) $(CXXFLAGS) -o ActionStack ActionStack.o
 
+#builds and links the Editor
 Editor: Editor.o ActionStack.o 
 	$(CXX) $(CXXFLAGS) -o Editor Editor.o ActionStack.o 
 
+#This rule builds main.o
 main.o: main.cpp Editor.h ActionStack.h
 	$(CXX) $(CXXFLAGS) -c main.cpp
 
@@ -33,10 +37,11 @@ unit_tests.o: unit_tests.cpp ActionStack.h
 ActionStack.o: ActionStack.cpp ActionStack.h
 	$(CXX) $(CXXFLAGS) -c ActionStack.cpp
 
+# This rule builds Editor.o
 Editor.o: Editor.cpp ActionStack.h
 	$(CXX) $(CXXFLAGS) -c Editor.cpp
 
-# This rule builds Unit Tests
+# This rule builds unit tests for Action Stacks
 unit_tests: unit_tests.o ActionStack.o
 	$(CXX) $(CXXFLAGS) -o unit_tests unit_tests.o ActionStack.o
 

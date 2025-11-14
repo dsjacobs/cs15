@@ -3,16 +3,16 @@
  *
  * CS15 Proj 2: Typewriter
  * 
- * TODO: Purpose
+ * The Editor class can either make a new file or open an existing file,
+ * and allows the user to insert characters, use backspace and enter keys,
+ * undo and redo actions, quit and save the file.
  *
  * Author: Danielle Jacobs
+ * Date: November 3, 2025
  */
 
 #include "TextUI.h"
 #include "ActionStack.h"
-#include <iostream>
-#include <fstream>
-#include <sstream>
 #include <string>
 #include <vector>
 
@@ -41,6 +41,7 @@
 
         void add_logfile(std::string log_filename);
         void determine_next(int c);
+        void determine_next_arrow_keys(int c);
 
         void move_down();
         void move_up();

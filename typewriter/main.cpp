@@ -3,9 +3,11 @@
  *
  * CS15 Proj 2: Typewriter
  * 
- * TODO: Purpose
+ * Takes in ./typewriter with a filename and, optionally, a logfile name.
+ * Either opens a file or makes a new file and begins the Editor simulation.
  *
  * Author: Danielle Jacobs
+ * Date: November 3, 2025
  */
 
 #include <iostream>
@@ -14,6 +16,7 @@
 #include "Editor.h"
 
 Editor which(int argc, char *argv[], std::string text, std::string log) {
+    // for 3 arguments, make a log file
     if (argc == 3) {
         log = argv[2];
         return Editor(text, log);
@@ -25,6 +28,7 @@ Editor which(int argc, char *argv[], std::string text, std::string log) {
 
 int main(int argc, char *argv[])
 {
+    // invalid number of arguments
     if (argc < 2 or argc > 3 ) {
         std::cerr << "Usage: ./typewriter textFile [logFile]" << std::endl;
         exit(1);
@@ -38,5 +42,3 @@ int main(int argc, char *argv[])
 
     return 0;
 }
-
-// Consider nine points in space, no four  of which are coplanar. Each pair of points is joined by an edge (that is, a line segment) and each edge is either   colored blue or red or left uncolored. Find the smallest value of n such that whenever exactly n edges are colored, the set of colored edges necessarily contains a triangle all of whose edges 0have the same color.  

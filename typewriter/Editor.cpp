@@ -3,14 +3,14 @@
  *
  * CS15 Proj 2: Typewriter
  * 
- * TO_DO: Purpose
+ * Defines how to open a new or existing file, take input from the user,
+ * run the typewriter program, save to files, determine which action
+ * to take based on which key has been pressed, define the actions needed
+ * for aarow key moveents, undo, redo, new line, and backspace.
  *
  * Author: Danielle Jacobs
+ * Date: November 3, 2025
  */
-
-
- // backspace at very top
- // undoing U
 
 #include "Editor.h"
 #include "TextUI.h"
@@ -33,25 +33,29 @@ void Editor::constructor_helper(std::string filename) {
     cursorLine = 0;
     numLines = 0;
     text_filename = filename;
-    std::ifstream myifstream; // = read_file_open_stream(filename);
-    curTextLines = std::vector<std::string>(); 
-    // std::string ifstream_string;
-    // while (getline (myifstream, ifstream_string)) {
-    //     curTextLines.push_back(ifstream_string);
-    //     numLines++;
-    // }
-    // myifstream.close();
     UI = TextUI();
     end = false;
+    std::ifstream myifstream = read_file_open_stream(filename);
+    std::string ifstream_string;
+    curTextLines = std::vector<std::string>(); 
+    while (getline (myifstream, ifstream_string)) {
+        curTextLines.push_back(ifstream_string);
+        numLines++;
+    }
+    if (curTextLines.empty()) {
+        curTextLines.push_back("");
+    }
+    myifstream.close();
 }
 
-std::ifstream Editor::read_file_open_stream(std::string text_file) {
-    std::ifstream myifstream;
-    myifstream.open(text_file);
+std::ifstream Editor::read_file_open_stream(std::string filename) {
+   std::ifstream myifstream; 
+    myifstream.open(filename);
+    curTextLines = std::vector<std::string>(); 
     if (not myifstream.is_open()) {
-        std::ofstream newFile(text_file);
-        newFile.close(); 
-    }
+            std::ofstream newFile(filename);
+            newFile.close(); 
+        }
     return myifstream;
 }
 
@@ -60,43 +64,47 @@ Editor::~Editor() {};
 void Editor::run() {
     while (not end) {
         UI.render(curTextLines, cursorCol,cursorLine);
-        int c  = UI.getChar();
+        int c = UI.getChar();
         determine_next(c);
     }
 }
 
 void Editor::determine_next(int c) {
     // if ascii
-    if (32 <= c and c <= 126) {
+    if (32<=c and c <=126) {
         type_char(c, cursorLine, cursorCol);
     }
     // if escapes
-    else if (c == 27) {
+    else if (c==27) {
         command_mode();
     }
     // if new line
-    else if (c == 10) {
+    else if (c==10) {
         enter_key();
     }
-    else if (c == KEY_BACKSPACE or c==263) {
+    else if (c==KEY_BACKSPACE) {
         backspace();
     }
-    else if (c == KEY_LEFT) {
+    else determine_next_arrow_keys();
+}
+
+void Editor::determine_next_arrow_keys(int c) {
+    else if (c==KEY_LEFT) {
         move_left();
     }
-    else if (c == KEY_RIGHT) {
+    else if (c==KEY_RIGHT) {
         move_right();
     }
-    else if (c == KEY_UP) {
+    else if (c==KEY_UP) {
         move_up();
     }
-    else if (c == KEY_DOWN) {
+    else if (c==KEY_DOWN) {
         move_down();
     }
     else {
         std::cerr << "Invalid character" << std::endl;
     }
-}
+};
 
 void Editor::move_down() {    
     size_t curLineLength = lineLength(cursorLine);
@@ -104,20 +112,17 @@ void Editor::move_down() {
     size_t term_width = UI.getTerminalWidth();
 
     // if on the last line and cant go down futher
-    if (cursorLine == numLines - 1 and cursorCol + term_width > curLineLength)
-    {}
+    if (cursorLine==numLines and cursorCol + term_width > curLineLength) {}
     else
     {
-        size_t add_termwidth = cursorCol + term_width;
         // if we should keep within the same line
-        if (add_termwidth <= curLineLength) {
+        if (cursorCol + term_width<=curLineLength) {
             cursorCol = add_termwidth;
         }
         // if we need to go down a line
         else {
-            size_t curDisplayCol = cursorCol%term_width;
             // if next line is too short, go to end
-            if (curDisplayCol > nextLineLength) {
+            if (cursorCol % term_width > nextLineLength) {
                 cursorCol = nextLineLength;
             }
             // next line is long enough
@@ -135,12 +140,12 @@ void Editor::move_up() {
     size_t term_width = UI.getTerminalWidth();
 
     // if on the top line and cant go up further
-    if (cursorLine == 0 and cursorCol < term_width) {}
+    if (cursorLine==0 and cursorCol < term_width) {}
     else
     {
         // if we should stay within the line
         int subtract_termwidth = cursorCol - term_width;
-        if (subtract_termwidth >= 0) {
+        if (subtract_termwidth>=0) {
             cursorCol = subtract_termwidth;
         }
         // if we need to go up a line
@@ -166,7 +171,7 @@ void Editor::move_right() {
         cursorCol++;
     }
     // make sure we're not in the last line of file
-    else if (cursorLine < numLines - 1) {
+    else if (cursorLine < numLines) {
         cursorCol = 0;
         cursorLine++;
     }
@@ -222,7 +227,7 @@ void Editor::delete_char(size_t line, size_t col) {
 void Editor::backspace() {
     std::vector<std::string> new_version;
     // middle of a row
-    if (cursorCol != 0) 
+    if (cursorCol!=0) 
     {
         char curChar = curTextLines[cursorLine][cursorCol-1];
         undoStack.push(curChar,true,cursorLine,cursorCol-1);
@@ -231,7 +236,7 @@ void Editor::backspace() {
     }
     // beginning of a row
     else {
-        if (cursorLine != 0) {
+        if (cursorLine!=0) {
         delete_new_line(cursorLine);
         cursorLine--;
         undoStack.push('\n',true,cursorLine,cursorCol-1);
@@ -242,7 +247,7 @@ void Editor::backspace() {
 
 void Editor::delete_new_line(size_t line) {
     // not in first line
-    if (line != 0) {
+    if (line!=0) {
         std::vector<std::string> new_version;
         for (size_t i = 0; i < line - 1; i++) {
             new_version.push_back(curTextLines[i]);
@@ -270,7 +275,7 @@ void Editor::insert_new_line(size_t line) {
     size_t curLineLength = lineLength(line);
     std::vector<std::string> new_version;
     // very end of file
-    if (line==numLines - 1 and cursorCol == curLineLength) {
+    if (line==numLines - 1 and cursorCol==curLineLength) {
         curTextLines.push_back("");
     }
     else {
@@ -289,7 +294,7 @@ void Editor::insert_new_line(size_t line) {
 
 void Editor::command_save() {
     std::ofstream savefile = open_file_output_stream(text_filename);
-    for (size_t i=0; i < numLines; i++) {
+    for (size_t i = 0; i < numLines; i++) {
         savefile << curTextLines[i] << std::endl;
     }
     savefile.close();
@@ -304,7 +309,6 @@ void Editor::command_quit() {
 };
 
 
-
 void Editor::command_undo() {
     if (not undoStack.isEmpty()) {
         ActionStack::Action latest = undoStack.top();
@@ -312,31 +316,37 @@ void Editor::command_undo() {
         int line = latest.line;
         int col = latest.column;
         bool deleted = latest.deleted;
-        if (deleted) {
-            if(c=='\n') {
+        undoStack.pop();
+        redoStack.push(c, not deleted, line, col);
+        if(c=='\n') {
+            if (deleted) {
                 insert_new_line(line);
+                cursorCol = 0;
+                cursorLine = line+1;
             }
             else {
-                insert(c, line, col);
-            }
+                delete_new_line(line);
+                cursorCol = lineLength(line-1);
+                cursorLine = line-1;
+           }
         }
         else {
-            if(c=='\n') {
-                delete_new_line(line);
+            if(deleted) {
+                insert(c, line, col);
             }
             else {
                 delete_char(line, col);
-            }
+            } 
+            cursorCol = col;
+            cursorLine = line;
+            if (not undoStack.isEmpty())
+                {ActionStack::Action next = undoStack.top();
+                if (next.deleted==deleted and next.character!='\n') { 
+                command_undo(); }
+           }
         }
-        if (not undoStack.isEmpty() and c != '\n')
-            command_undo();
-        
-        cursorCol = col;
-        cursorLine = line;
-        undoStack.pop();
-        redoStack.push(c, not deleted, line, col);
     }
-    };
+};
 
 void Editor::command_redo() {
     if (not redoStack.isEmpty()) {
@@ -351,12 +361,11 @@ void Editor::command_redo() {
         else {
             delete_char(line, col);
         }
-        if (not redoStack.isEmpty() and c != '\n')
-            command_redo();
-    
         cursorCol = col;
         cursorLine = line;
         redoStack.pop();
+        while (not redoStack.isEmpty() and c!='\n')
+           { command_redo(); }
     }
 };
 
