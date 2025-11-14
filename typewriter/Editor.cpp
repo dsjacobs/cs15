@@ -292,6 +292,8 @@ void Editor::command_quit() {
     end = true;
 };
 
+
+
 void Editor::command_undo() {
     if (not undoStack.isEmpty()) {
         ActionStack::Action latest = undoStack.top();
