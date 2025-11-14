@@ -8,6 +8,10 @@
  * Author: Danielle Jacobs
  */
 
+
+ // backspace at very top
+ // undoing U
+
 #include "Editor.h"
 #include "TextUI.h"
 #include <iostream>
@@ -34,7 +38,7 @@ void Editor::constructor_helper(std::string filename) {
     curTextLines = std::vector<std::string>(); 
     std::string ifstream_string;
     while (getline (myifstream, ifstream_string)) {
-        curTextLines.push_basck(ifstream_string);
+        curTextLines.push_back(ifstream_string);
         numLines++;
     }
     myifstream.close();
@@ -228,9 +232,11 @@ void Editor::backspace() {
     }
     // beginning of a row
     else {
+        if (cursorLine != 0) {
         delete_new_line(cursorLine);
         cursorLine--;
         undoStack.push('\n',true,cursorLine,cursorCol-1);
+        }
     }
 };
 
