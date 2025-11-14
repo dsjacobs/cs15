@@ -44,7 +44,9 @@ Editor::~Editor() {};
 
 void Editor::run() {
     while (not end) {
-        UI.render(curTextLines, 0,0);
+        if (not curTextLines.Empty()) {
+        UI.render(curTextLines, cursorCol,cursorLine);
+        }
         int c  = UI.getChar();
         determine_next(c);
     }
