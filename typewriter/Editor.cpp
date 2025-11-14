@@ -48,10 +48,10 @@ void Editor::constructor_helper(std::string filename) {
 std::ifstream Editor::read_file_open_stream(std::string text_file) {
     std::ifstream myifstream;
     myifstream.open(text_file);
-    if (not myifstream.is_open()) {
-        std::ofstream newFile(text_file);
-        newFile.close(); 
-    }
+    // if (not myifstream.is_open()) {
+    //     std::ofstream newFile(text_file);
+    //     newFile.close(); 
+    // }
     return myifstream;
 }
 
