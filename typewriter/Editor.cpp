@@ -386,13 +386,14 @@ void Editor::command_undo() {
         size_t col = latest.column;
         bool deleted = latest.deleted;
         undoStack.pop();
-        redoStack.push(c, not deleted, line, col);
         // if undoing a new line characterd
         if(c=='\n') {
             undo_new_line(line, col, deleted);
+            redoStack.push(c, not deleted, cursorLine, cursorCol);
         }
         else {
             undo_character(c, line, col, deleted);
+            redoStack.push(c, not deleted, line, col);
             // keep undoing until nothing left to be undone OR a new line
              if (not undoStack.isEmpty())
                 {
@@ -412,13 +413,14 @@ void Editor::command_undo() {
 void Editor::undo_new_line(size_t line, size_t col, bool deleted) {
     if (deleted) {
         insert_new_line(line, col);
-        move_down(line, col);
+        cursorCol = 0;
+        cursorLine = line + 1;
     }
     else {
         size_t prev_line_length = lineLength(line-1);
         delete_new_line(line);
+        cursorLine--;
         cursorCol = prev_line_length;
-        cursorLine = line--;
     }
 };
 
@@ -452,13 +454,15 @@ void Editor::command_redo() {
         size_t col = latest.column;
         bool deleted = latest.deleted;
         redoStack.pop();
-        undoStack.push(c, not deleted, line, col);
+     
         // if new line
         if (c=='\n') {
             undo_new_line(line, col, deleted);
+            undoStack.push(c, not deleted, cursorLine, cursorCol);
         }
         else {
             undo_character(c, line, col, deleted);
+            undoStack.push(c, not deleted, line, col);
             // keep redoing until nothing left to be redone OR new line
             while (not redoStack.isEmpty()) {
                 ActionStack::Action next = redoStack.top();
