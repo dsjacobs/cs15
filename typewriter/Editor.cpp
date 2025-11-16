@@ -19,15 +19,27 @@
 #include <sstream>
 #include <string>
 
+// Given a filename, opens and reads that file, loads
+// it for editing. See constructor helper for additional 
+// effects.
 Editor::Editor(std::string filename) {
     constructor_helper(filename);
 }
 
+// Given two filenames, opens and reads the first, loading
+// it for editing. Establishes the second file as a log file.
+// See constructor helper for additional effects.
 Editor::Editor(std::string filename, std::string logfile) {
     constructor_helper(filename);
     UI.startLogMode(logfile);
 }
 
+// Takes in a file name and sets cursor location to top left 
+// of the editor. If there is a matching file, opens it and
+// loads it for reading. If there is not, creates a new file
+// by that name. Used by both constructors. Sets the number
+// of lines in the editor, and creates the UI instance,and 
+// ensures the editor starts as open.
 void Editor::constructor_helper(std::string filename) {
     cursorCol = 0;
     cursorLine = 0;
@@ -48,6 +60,9 @@ void Editor::constructor_helper(std::string filename) {
     myifstream.close();
 }
 
+// Used by the constructor helper to open a file or determine
+// that a new file must be made, and if so, makes it. Returns
+// an input file stream for the constructor to read.
 std::ifstream Editor::read_file_open_stream(std::string filename) {
    std::ifstream myifstream; 
     myifstream.open(filename);
@@ -59,8 +74,11 @@ std::ifstream Editor::read_file_open_stream(std::string filename) {
     return myifstream;
 }
 
+// Destructor called automatically.
 Editor::~Editor() {};
 
+// Called by main.cpp, the run function keeps the editor running 
+// until exit (Escape X) is called.
 void Editor::run() {
     while (not end) {
         UI.render(curTextLines, cursorCol,cursorLine);
@@ -69,12 +87,17 @@ void Editor::run() {
     }
 }
 
+// Takes in a character from the user and determines what action
+// to take with it. This will only work on ASCII characters,
+// the escape key, new line and backspace, otherwise it will
+// continue to the next function, determine_next_arrow_keys 
+// to continue to check it against the arrow keys.
 void Editor::determine_next(int c) {
     // if ascii
     if (32<=c and c <=126) {
         type_char(c, cursorLine, cursorCol);
     }
-    // if escapes
+    // if escape
     else if (c==27) {
         command_mode();
     }
@@ -82,31 +105,41 @@ void Editor::determine_next(int c) {
     else if (c==10) {
         enter_key();
     }
+    // if backspace
     else if (c==KEY_BACKSPACE) {
         backspace();
     }
-    else determine_next_arrow_keys();
+    // else
+    else determine_next_arrow_keys(c);
 }
 
+// A continuation of determine next, this function determines
+// if the user has pressed an arrow key, and which function to call.
+// Otherwise, throws an error that it is not a valid input. To
+// review, only arrows, backspace, enter, the escape key,
+// and ASCII characters are accepted by the Editor.
 void Editor::determine_next_arrow_keys(int c) {
-    else if (c==KEY_LEFT) {
+    if (c==KEY_LEFT) {
         move_left();
     }
     else if (c==KEY_RIGHT) {
         move_right();
     }
     else if (c==KEY_UP) {
-        move_up();
+        move_up(cursorLine, cursorCol);
     }
     else if (c==KEY_DOWN) {
-        move_down();
+        move_down(cursorLine, cursorCol);
     }
     else {
         std::cerr << "Invalid character" << std::endl;
     }
 };
 
-void Editor::move_down() {    
+// When the down arrow is pressed, determine if any movement is needed. 
+// Will not move at all at the end of the file. Otherwise, will determine where
+// to move the cursor based on line lengths and move it.
+void Editor::move_down(int line, int col) {    
     size_t curLineLength = lineLength(cursorLine);
     size_t nextLineLength = lineLength(cursorLine+1);
     size_t term_width = UI.getTerminalWidth();
@@ -117,7 +150,7 @@ void Editor::move_down() {
     {
         // if we should keep within the same line
         if (cursorCol + term_width<=curLineLength) {
-            cursorCol = add_termwidth;
+            cursorCol = cursorCol + term_width;
         }
         // if we need to go down a line
         else {
@@ -125,16 +158,19 @@ void Editor::move_down() {
             if (cursorCol % term_width > nextLineLength) {
                 cursorCol = nextLineLength;
             }
-            // next line is long enough
             else {
-                cursorCol = curDisplayCol;
+                cursorCol = cursorCol % term_width;
             }
             cursorLine++;          
         }
     }
 };
 
-void Editor::move_up() {
+
+// When the up arrow is pressed, determine if any movement is needed. 
+// Will not move at all at the top of the file. Otherwise, will determine where
+// to move the cursor based on line lengths and move it.
+void Editor::move_up(int line, int col) {
     // make sure not at top
     size_t prevLineLength = lineLength(cursorLine-1);
     size_t term_width = UI.getTerminalWidth();
@@ -165,6 +201,9 @@ void Editor::move_up() {
     }
 };
 
+// When the right arrow is pressed, determine if any movement is needed. 
+// Will not move at all at the end of the file. Otherwise, will determine where
+// to move the cursor and move it.
 void Editor::move_right() {
     // we are before the end of our line
     if (cursorCol < lineLength(cursorLine)) {
@@ -177,6 +216,9 @@ void Editor::move_right() {
     }
 };
 
+// When the left arrow is pressed, determine if any movement is needed. 
+// Will not move at all at the top of the file. Otherwise, will determine where
+// to move the cursor and move it.
 void Editor::move_left() {
     // if we're not at the beginning of a line   
     if (cursorCol > 0) {
@@ -190,13 +232,18 @@ void Editor::move_left() {
     }
 };
 
-
+// Takes in a character and a cursor location. Inserts the character
+// at that location and updates the location of the cursor.
+// Also stores the action in able to be undone later.
 void Editor::type_char(int c, int line, int col) {
     insert(c, line, col);
     undoStack.push(static_cast<char>(c),false,line,col);
     cursorCol++;
 };
 
+// Takes in a character and a cursor location. Inserts the character
+// at that location. Does NOT update cursor location or store
+// action to be able to be undone later.
 void Editor::insert(int c, int line, int col) {
     std::string preCursorText = pre_character(line, col); 
     std::string postCursorText = post_character(line, col); 
@@ -204,6 +251,8 @@ void Editor::insert(int c, int line, int col) {
     curTextLines[line] = preCursorText + c_char + postCursorText;
 };
 
+// If the escape key is pressed, the program enters command mode
+// and waits for either save (S), exit (X), undo (U), or redo (R).
 void Editor::command_mode() {
     int c = UI.getChar();
     if (c=='s') {
@@ -220,10 +269,17 @@ void Editor::command_mode() {
     }
 };
 
+// Given a character and cursor location, deletes that character.
+// Does NOT move cursor or store deletion to be able to be undone
+// later.P
 void Editor::delete_char(size_t line, size_t col) {
   curTextLines[line] = pre_character(line, col) + post_character(line, col+1);
 };
 
+// Given a character and cursor location, deletes that character.
+// DOES move cursor and stores deletion to be able to be undone
+// later. At the beginning of a line besides the first, will delete
+// the new line character and move cursor to end of previous line.
 void Editor::backspace() {
     std::vector<std::string> new_version;
     // middle of a row
@@ -244,7 +300,8 @@ void Editor::backspace() {
     }
 };
 
-
+// Deletes a new line, puts the cursor at the end of the previous line,
+// combines the text from previous and current lines into one.
 void Editor::delete_new_line(size_t line) {
     // not in first line
     if (line!=0) {
@@ -264,6 +321,9 @@ void Editor::delete_new_line(size_t line) {
     }
 }
 
+// When the enter key is pressed, inserts a new line, moves the cursor down
+// one row and to the beginning of that new line. Stores the action to be able
+// to be undone later.
 void Editor::enter_key() {
     insert_new_line(cursorLine);
     cursorCol = 0;
@@ -271,6 +331,9 @@ void Editor::enter_key() {
     undoStack.push('\n',false, cursorLine, 0);
 }
 
+// Creates a new line (combines text of previous and current lines)
+// without moving the cursor. Does not store the action to be able to
+// be undone later.
 void Editor::insert_new_line(size_t line) {
     size_t curLineLength = lineLength(line);
     std::vector<std::string> new_version;
@@ -292,6 +355,8 @@ void Editor::insert_new_line(size_t line) {
     numLines++;
 } 
 
+// Saves the current state of the editor to the file specified by the
+// user before the simulation. Displays a save message.
 void Editor::command_save() {
     std::ofstream savefile = open_file_output_stream(text_filename);
     for (size_t i = 0; i < numLines; i++) {
@@ -301,6 +366,7 @@ void Editor::command_save() {
     UI.displaySaveMessage();
 };
 
+// Asks the user if they would like to save, and then closes the program.
 void Editor::command_quit() {
     bool save_bool = UI.savePrompt();
     if (save_bool) {command_save();}
@@ -308,7 +374,9 @@ void Editor::command_quit() {
     end = true;
 };
 
-
+// When Undo is pressed, determines whether to proceed with deleteing
+// a new line, or deleting a character. Removes action from 
+// being stored to be undone, in order to be stored to be redone later.
 void Editor::command_undo() {
     if (not undoStack.isEmpty()) {
         ActionStack::Action latest = undoStack.top();
@@ -318,36 +386,55 @@ void Editor::command_undo() {
         bool deleted = latest.deleted;
         undoStack.pop();
         redoStack.push(c, not deleted, line, col);
+        // if undoing a new line characterd
         if(c=='\n') {
-            if (deleted) {
-                insert_new_line(line);
-                cursorCol = 0;
-                cursorLine = line+1;
-            }
-            else {
-                delete_new_line(line);
-                cursorCol = lineLength(line-1);
-                cursorLine = line-1;
-           }
+            undo_new_line(line, col, deleted);
         }
         else {
-            if(deleted) {
-                insert(c, line, col);
-            }
-            else {
-                delete_char(line, col);
-            } 
-            cursorCol = col;
-            cursorLine = line;
-            if (not undoStack.isEmpty())
-                {ActionStack::Action next = undoStack.top();
+            undo_character(c, line, col, deleted);
+            // keep undoing until nothing left to be undone OR a new line
+             if (not undoStack.isEmpty())
+                {
+                ActionStack::Action next = undoStack.top();
                 if (next.deleted==deleted and next.character!='\n') { 
-                command_undo(); }
-           }
+                command_undo(); 
+            }
+    }
         }
     }
 };
 
+// Called by command undo. If a new line character was deleted, makes a new
+// line and sets the cursor to the beggining of that line. If a new line 
+// had been made, deletes it, and moves the cursor to the beginning of the
+// previous line.
+void Editor::undo_new_line(int line, int col, bool deleted) {
+    if (deleted) {
+        insert_new_line(line);
+        move_up(line, col);
+    }
+    else {
+        delete_new_line(line);
+        move_down(line, col);
+    }
+};
+
+// Called by command undo. If a character was deleted, adds it back, and if
+// it was entered, deletes it. Continues until either there are no more
+// actions to be undone or the next thing to be undone is a new line.
+void Editor::undo_character(char c, int line, int col, bool deleted) {
+    if (deleted) {
+        insert(c, line, col);
+    }
+    else {
+        delete_char(line, col);
+    } 
+    cursorCol = col;
+    cursorLine = line;
+};
+
+// Redo can 'undo' 'undone' characters and new lines, putting them back in 
+// place.
 void Editor::command_redo() {
     if (not redoStack.isEmpty()) {
         ActionStack::Action latest = redoStack.top();
@@ -355,37 +442,47 @@ void Editor::command_redo() {
         int line = latest.line;
         int col = latest.column;
         bool deleted = latest.deleted;
-        if (deleted) {
-            insert(c, line, col);
+        redoStack.pop();
+        // if new line
+        if (c=='\n') {
+            undo_new_line(line, col, deleted);
         }
         else {
-            delete_char(line, col);
+            undo_character(c, line, col, deleted);
+            // keep redoing until nothing left to be redone OR new line
+            while (not redoStack.isEmpty()) {
+                ActionStack::Action next = undoStack.top();
+                if (next.character!='\n')
+                 { command_redo(); }
+            }
         }
-        cursorCol = col;
-        cursorLine = line;
-        redoStack.pop();
-        while (not redoStack.isEmpty() and c!='\n')
-           { command_redo(); }
+
     }
 };
 
-size_t Editor::lineLength(int Line) {
-    size_t curLineLength = curTextLines[Line].size();
+// Takes in a line number and returns the length of that line.
+size_t Editor::lineLength(int line) {
+    size_t curLineLength = curTextLines[line].size();
     return curLineLength;
 }
 
+// Takes in a line number and column number and returns any part of that 
+// line thats to the left of that column.
 std::string Editor::pre_character(int line, int col) {
     std::string preCursorText = curTextLines[line].substr(0, col);
     return preCursorText;
 }
 
+// Takes in a line number and column number and returns any part of that 
+// line thats to the right of that column.
 std::string Editor::post_character(int line, int col) {
     size_t length = lineLength(line);
     std::string postCursorText = curTextLines[line].substr(col, length);
     return postCursorText;
 }
 
-
+// Given a filename, opens the file and returns an output stream. If file
+// cannot be opened, returns an error.
 std::ofstream Editor::open_file_output_stream(std::string filename) {
         std::ofstream myofstream;   
         myofstream.open(filename);

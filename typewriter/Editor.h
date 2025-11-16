@@ -43,8 +43,8 @@
         void determine_next(int c);
         void determine_next_arrow_keys(int c);
 
-        void move_down();
-        void move_up();
+        void move_down(int line, int col);
+        void move_up(int line, int col);
         void move_right();
         void move_left();
 
@@ -61,10 +61,12 @@
         void command_save();
         void command_quit();
         void command_undo();
+        void undo_new_line(int line, int col, bool deleted);
+        void undo_character(char c, int line, int col, bool deleted);
         void command_redo();
 
         std::string pre_character(int col, int row);
         std::string post_character(int col, int row);
-        size_t lineLength(int Line);
+        size_t lineLength(int line);
         std::ofstream open_file_output_stream(std::string filename);
  };
