@@ -126,10 +126,10 @@ void Editor::determine_next_arrow_keys(int c) {
         move_right();
     }
     else if (c==KEY_UP) {
-        move_up(cursorLine, cursorCol);
+        move_up();
     }
     else if (c==KEY_DOWN) {
-        move_down(cursorLine, cursorCol);
+        move_down();
     }
     else {
         std::cerr << "Invalid character" << std::endl;
@@ -139,7 +139,7 @@ void Editor::determine_next_arrow_keys(int c) {
 // When the down arrow is pressed, determine if any movement is needed. 
 // Will not move at all at the end of the file. Otherwise, will determine where
 // to move the cursor based on line lengths and move it.
-void Editor::move_down(int line, int col) {    
+void Editor::move_down() {    
     size_t curLineLength = lineLength(cursorLine);
     size_t nextLineLength = lineLength(cursorLine+1);
     size_t term_width = UI.getTerminalWidth();
@@ -170,7 +170,7 @@ void Editor::move_down(int line, int col) {
 // When the up arrow is pressed, determine if any movement is needed. 
 // Will not move at all at the top of the file. Otherwise, will determine where
 // to move the cursor based on line lengths and move it.
-void Editor::move_up(int line, int col) {
+void Editor::move_up() {
     // make sure not at top
     size_t prevLineLength = lineLength(cursorLine-1);
     size_t term_width = UI.getTerminalWidth();
@@ -388,7 +388,7 @@ void Editor::command_undo() {
         redoStack.push(c, not deleted, line, col);
         // if undoing a new line characterd
         if(c=='\n') {
-            undo_new_line(line, col, deleted);
+            undo_new_line(line, deleted);
         }
         else {
             undo_character(c, line, col, deleted);
@@ -408,14 +408,16 @@ void Editor::command_undo() {
 // line and sets the cursor to the beggining of that line. If a new line 
 // had been made, deletes it, and moves the cursor to the beginning of the
 // previous line.
-void Editor::undo_new_line(int line, int col, bool deleted) {
+void Editor::undo_new_line(int line, bool deleted) {
     if (deleted) {
         insert_new_line(line);
-        move_up(line, col);
+        
     }
     else {
+        int prev_line_length = lineLength(line-1);
         delete_new_line(line);
-        move_down(line, col);
+        cursorCol = prev_line_length;
+        cursorLine = line-1;
     }
 };
 
@@ -445,7 +447,7 @@ void Editor::command_redo() {
         redoStack.pop();
         // if new line
         if (c=='\n') {
-            undo_new_line(line, col, deleted);
+            undo_new_line(line, deleted);
         }
         else {
             undo_character(c, line, col, deleted);
