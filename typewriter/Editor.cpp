@@ -126,10 +126,10 @@ void Editor::determine_next_arrow_keys(size_t c) {
         move_right();
     }
     else if (c==KEY_UP) {
-        move_up();
+        move_up(cursorCol, cursorLine);
     }
     else if (c==KEY_DOWN) {
-        move_down();
+        move_down(cursorCol, cursorLine);
     }
     else {
         std::cerr << "Invalid character" << std::endl;
@@ -139,67 +139,66 @@ void Editor::determine_next_arrow_keys(size_t c) {
 // When the down arrow is pressed, determine if any movement is needed. 
 // Will not move at all at the end of the file. Otherwise, will determine where
 // to move the cursor based on line lengths and move it.
-void Editor::move_down() {    
-    size_t curLineLength = lineLength(cursorLine);
-    size_t nextLineLength = lineLength(cursorLine+1);
+void Editor::move_down(size_t col, size_t line) {    
+    size_t curLineLength = lineLength(line);
     size_t term_width = UI.getTerminalWidth();
 
     // if on the last line and cant go down futher
-    if (cursorLine==numLines and cursorCol + term_width > curLineLength) {}
+    if (line==numLines-1 and col + term_width>curLineLength) {}
     else
     {
         // if we should keep within the same line
-        if (cursorCol + term_width<=curLineLength) {
-            cursorCol = cursorCol + term_width;
+        if (col + term_width<=curLineLength) {
+            col = col + term_width;
         }
         // if we need to go down a line
         else {
+            size_t nextLineLength = lineLength(line+1);
             // if next line is too short, go to end
-            if (cursorCol % term_width > nextLineLength) {
-                cursorCol = nextLineLength;
+            if (col % term_width > nextLineLength) {
+                col = nextLineLength;
             }
             else {
-                cursorCol = cursorCol % term_width;
+                col = col%term_width;
             }
-            cursorLine++;          
+            line++;          
         }
     }
+    cursorCol = col;
+    cursorLine = line;
 };
 
 
 // When the up arrow is pressed, determine if any movement is needed. 
 // Will not move at all at the top of the file. Otherwise, will determine where
 // to move the cursor based on line lengths and move it.
-void Editor::move_up() {
-    // make sure not at top
-    size_t prevLineLength = lineLength(cursorLine-1);
+void Editor::move_up(size_t col, size_t line) {
     size_t term_width = UI.getTerminalWidth();
-
     // if on the top line and cant go up further
-    if (cursorLine==0 and cursorCol < term_width) {}
-    else
-    {
+    if (line==0 and col < term_width) {}
+    else {
         // if we should stay within the line
-        size_t subtract_termwidth = cursorCol - term_width;
-        if (subtract_termwidth>=0) {
-            cursorCol = subtract_termwidth;
+        if (col>=term_width) {
+            col = col - term_width;
         }
-        // if we need to go up a line
+        // line wont be 0 anymore
         else {
-            size_t curDisplayCol = cursorCol%term_width;
+            size_t prevLineLength = lineLength(line-1);
+            size_t curDisplayCol = col%term_width;
             size_t numPrevLineWraps = prevLineLength/term_width;
-            // if previous line is too short, go to end
             if (curDisplayCol > prevLineLength) {
-                cursorCol = prevLineLength;
+                col = prevLineLength;
             }
             // previous line is long enough
             else {
-                cursorCol = ((numPrevLineWraps * term_width) + curDisplayCol);
+                col = ((numPrevLineWraps * term_width) + curDisplayCol);
             }
-            cursorLine--;
+            line--;
         }
     }
-};
+    cursorCol = col;
+    cursorLine = line;
+}
 
 // When the right arrow is pressed, determine if any movement is needed. 
 // Will not move at all at the end of the file. Otherwise, will determine where
@@ -210,7 +209,7 @@ void Editor::move_right() {
         cursorCol++;
     }
     // make sure we're not in the last line of file
-    else if (cursorLine < numLines) {
+    else if (cursorLine < numLines - 1) {
         cursorCol = 0;
         cursorLine++;
     }
@@ -299,7 +298,7 @@ void Editor::backspace() {
         delete_new_line(cursorLine);
         cursorCol = prev_line_length;
         cursorLine--;
-        undoStack.push('\n',true,cursorLine,cursorCol-1);
+        undoStack.push('\n',true,cursorLine,cursorCol);
         }
     }
 };
@@ -413,8 +412,7 @@ void Editor::command_undo() {
 void Editor::undo_new_line(size_t line, size_t col, bool deleted) {
     if (deleted) {
         insert_new_line(line, col);
-        cursorCol = 0;
-        cursorLine = line++;
+        move_down(line, col);
     }
     else {
         size_t prev_line_length = lineLength(line-1);

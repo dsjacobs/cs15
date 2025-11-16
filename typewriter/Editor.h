@@ -43,8 +43,8 @@
         void determine_next(size_t c);
         void determine_next_arrow_keys(size_t c);
 
-        void move_down();
-        void move_up();
+        void move_down(size_t col, size_t line);
+        void move_up(size_t col, size_t line);
         void move_right();
         void move_left();
 
