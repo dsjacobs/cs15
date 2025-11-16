@@ -3,32 +3,75 @@
  *
  * CS15 Proj 2: Typewriter
  * 
- * TODO: Purpose
+ * Purpose: Explain what Typewriter does, testing and debugging 
+ * process, how to run. Typewriter is an in-line text editor.
  *
  * Author: Danielle Jacobs
- * Date: November 3, 2025
+ * Date: November 14, 2025
  */
 
- Acknowledgments:
- The class chatbot.
- I asked Ariel Jacobs to help test my program for bugs.
+Purpose:
+The typewriter is a text editor that allows users to edit text files
+on the command line. It supports typing of ASCII characters, 
+backspace and enter, as well asundo and redoing of characters and 
+new lines. The command menu allows users to save, exit, undo or 
+redo. Files can be new or existing.
 
+Acknowledgments:
+The class chatbot.
+I asked Ariel Jacobs to help test my program for bugs.
 
- files: 
+File List: 
  ActionStack.h
+    ActionStacks store actions for undoing and redoing.
 
  ActionStack.cpp
+    ActionStacks can be added to, popped from, and cleared.
+    An action consists of a character, whether it was deleted,
+    and its line and column.
 
  Editor.h
+    Editor class
 
  Editor.cpp
 
  main.cpp
+    Takes in the names of text file and optionally the logfile.
+    If these parameters are correct, opens and runs the text editor.
 
- unit_tests.cpp
+ test logs:
+    enter_delete: 
+        a keylogger test that includes enter and then delete
+    enter_delete_M.text: 
+        result of running enter_delete on my typewriter
+    enter_delete_T.text: 
+        result of running enter_delete on the example typewriter.
+
+    newline_undo_redo
+        a keylogger test that includes making, undoing, and redoing 
+        a new line.
+    newline_undo_redo_M.text
+        result of running newline_undo_redo on my typewriter.
+    newline_undo_redo_T.text
+        result of running newline_undo_redo on the example typewriter.
+
+    type_one_line
+        a keylogger test that involves writing one line.
+    type_one_line_M.text
+        result or running type_one_line on my typewriter.
+    type_one_line_T.text
+        result of running type_one_line on the example typewriter.
+
+    undo_redo 
+        a keylogger test that undoes and redoes a character.
+    undo_redo_M.text
+        result of running undo_redo on my typewriter.
+    undo_redo_T.text
+        result of running undo_redo on the example typewriter.
 
  Instructions:
- make
+    compile: make
+    run: ./typewriter textfile.txt logfile.txt
 
  Data structures
 
