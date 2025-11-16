@@ -62,7 +62,7 @@
         void command_quit();
         void command_undo();
         void undo_new_line(size_t line, size_t col, bool deleted);
-        void undo_character(ActionStack::Action act);
+        void undo_character(char c, size_t line, size_t col, bool deleted);
         void command_redo();
 
         std::string pre_character(size_t col, size_t row);
