@@ -82,7 +82,7 @@ Editor::~Editor() {};
 void Editor::run() {
     while (not end) {
         UI.render(curTextLines, cursorCol,cursorLine);
-        int c = UI.getChar();
+        size_t c = UI.getChar();
         determine_next(c);
     }
 }
@@ -92,7 +92,7 @@ void Editor::run() {
 // the escape key, new line and backspace, otherwise it will
 // continue to the next function, determine_next_arrow_keys 
 // to continue to check it against the arrow keys.
-void Editor::determine_next(int c) {
+void Editor::determine_next(size_t c) {
     // if ascii
     if (32<=c and c <=126) {
         type_char(c, cursorLine, cursorCol);
@@ -118,7 +118,7 @@ void Editor::determine_next(int c) {
 // Otherwise, throws an error that it is not a valid input. To
 // review, only arrows, backspace, enter, the escape key,
 // and ASCII characters are accepted by the Editor.
-void Editor::determine_next_arrow_keys(int c) {
+void Editor::determine_next_arrow_keys(size_t c) {
     if (c==KEY_LEFT) {
         move_left();
     }
@@ -180,7 +180,7 @@ void Editor::move_up() {
     else
     {
         // if we should stay within the line
-        int subtract_termwidth = cursorCol - term_width;
+        size_t subtract_termwidth = cursorCol - term_width;
         if (subtract_termwidth>=0) {
             cursorCol = subtract_termwidth;
         }
@@ -235,7 +235,8 @@ void Editor::move_left() {
 // Takes in a character and a cursor location. Inserts the character
 // at that location and updates the location of the cursor.
 // Also stores the action in able to be undone later.
-void Editor::type_char(int c, int line, int col) {
+void Editor::type_char(size_t c, size_t line, size_t col) {
+    redoStack.clear();
     insert(c, line, col);
     undoStack.push(static_cast<char>(c),false,line,col);
     cursorCol++;
@@ -244,7 +245,7 @@ void Editor::type_char(int c, int line, int col) {
 // Takes in a character and a cursor location. Inserts the character
 // at that location. Does NOT update cursor location or store
 // action to be able to be undone later.
-void Editor::insert(int c, int line, int col) {
+void Editor::insert(size_t c, size_t line, size_t col) {
     std::string preCursorText = pre_character(line, col); 
     std::string postCursorText = post_character(line, col); 
     char c_char = static_cast<char>(c);
@@ -254,7 +255,7 @@ void Editor::insert(int c, int line, int col) {
 // If the escape key is pressed, the program enters command mode
 // and waits for either save (S), exit (X), undo (U), or redo (R).
 void Editor::command_mode() {
-    int c = UI.getChar();
+    size_t c = UI.getChar();
     if (c=='s') {
         command_save();
     }
@@ -281,6 +282,7 @@ void Editor::delete_char(size_t line, size_t col) {
 // later. At the beginning of a line besides the first, will delete
 // the new line character and move cursor to end of previous line.
 void Editor::backspace() {
+    redoStack.clear();
     std::vector<std::string> new_version;
     // middle of a row
     if (cursorCol!=0) 
@@ -293,15 +295,16 @@ void Editor::backspace() {
     // beginning of a row
     else {
         if (cursorLine!=0) {
+        size_t prev_line_length = lineLength(cursorLine-1);
         delete_new_line(cursorLine);
+        cursorCol = prev_line_length;
         cursorLine--;
         undoStack.push('\n',true,cursorLine,cursorCol-1);
         }
     }
 };
 
-// Deletes a new line, puts the cursor at the end of the previous line,
-// combines the text from previous and current lines into one.
+// Deletes a new line, combines the text from previous and current lines into one. Does NOT affect cursor location.
 void Editor::delete_new_line(size_t line) {
     // not in first line
     if (line!=0) {
@@ -315,7 +318,6 @@ void Editor::delete_new_line(size_t line) {
         for (size_t i = line + 1; i < numLines;  i++) {
             new_version.push_back(curTextLines[i]);
         }
-        cursorCol = lineLength(cursorLine-1);
         numLines--;
         curTextLines = new_version;
     }
@@ -325,7 +327,7 @@ void Editor::delete_new_line(size_t line) {
 // one row and to the beginning of that new line. Stores the action to be able
 // to be undone later.
 void Editor::enter_key() {
-    insert_new_line(cursorLine);
+    insert_new_line(cursorLine, cursorCol);
     cursorCol = 0;
     cursorLine++;
     undoStack.push('\n',false, cursorLine, 0);
@@ -334,19 +336,19 @@ void Editor::enter_key() {
 // Creates a new line (combines text of previous and current lines)
 // without moving the cursor. Does not store the action to be able to
 // be undone later.
-void Editor::insert_new_line(size_t line) {
+void Editor::insert_new_line(size_t line, size_t col) {
     size_t curLineLength = lineLength(line);
     std::vector<std::string> new_version;
     // very end of file
-    if (line==numLines - 1 and cursorCol==curLineLength) {
+    if (line==numLines - 1 and col==curLineLength) {
         curTextLines.push_back("");
     }
     else {
         for (size_t i = 0; i < line; i++) {
             new_version.push_back(curTextLines[i]);
         }
-        new_version.push_back(pre_character(line, cursorCol)); 
-        new_version.push_back(post_character(line, cursorCol));
+        new_version.push_back(pre_character(line, col)); 
+        new_version.push_back(post_character(line, col));
         for (size_t i = line + 1; i < numLines;  i++) {
             new_version.push_back(curTextLines[i]);
         }
@@ -374,21 +376,21 @@ void Editor::command_quit() {
     end = true;
 };
 
-// When Undo is pressed, determines whether to proceed with deleteing
+// When Undo is pressed, detrmines whether to proceed with deleteing
 // a new line, or deleting a character. Removes action from 
 // being stored to be undone, in order to be stored to be redone later.
 void Editor::command_undo() {
     if (not undoStack.isEmpty()) {
         ActionStack::Action latest = undoStack.top();
         char c = latest.character;
-        int line = latest.line;
-        int col = latest.column;
+        size_t line = latest.line;
+        size_t col = latest.column;
         bool deleted = latest.deleted;
         undoStack.pop();
         redoStack.push(c, not deleted, line, col);
         // if undoing a new line characterd
         if(c=='\n') {
-            undo_new_line(line, deleted);
+            undo_new_line(line, col, deleted);
         }
         else {
             undo_character(c, line, col, deleted);
@@ -399,7 +401,7 @@ void Editor::command_undo() {
                 if (next.deleted==deleted and next.character!='\n') { 
                 command_undo(); 
             }
-    }
+        }
         }
     }
 };
@@ -408,28 +410,35 @@ void Editor::command_undo() {
 // line and sets the cursor to the beggining of that line. If a new line 
 // had been made, deletes it, and moves the cursor to the beginning of the
 // previous line.
-void Editor::undo_new_line(int line, bool deleted) {
+void Editor::undo_new_line(size_t line, size_t col, bool deleted) {
     if (deleted) {
-        insert_new_line(line);
-        
+        insert_new_line(line, col);
+        cursorCol = 0;
+        cursorLine = line++;
     }
     else {
-        int prev_line_length = lineLength(line-1);
+        size_t prev_line_length = lineLength(line-1);
         delete_new_line(line);
         cursorCol = prev_line_length;
-        cursorLine = line-1;
+        cursorLine = line--;
     }
 };
 
 // Called by command undo. If a character was deleted, adds it back, and if
 // it was entered, deletes it. Continues until either there are no more
 // actions to be undone or the next thing to be undone is a new line.
-void Editor::undo_character(char c, int line, int col, bool deleted) {
+void Editor::undo_character(char c, size_t line, size_t col, bool deleted) {
     if (deleted) {
         insert(c, line, col);
+        if (col!=lineLength(line)) {
+            col++;
+        }
     }
     else {
         delete_char(line, col);
+        if (col!=0) {
+            col--;
+        }
     } 
     cursorCol = col;
     cursorLine = line;
@@ -441,19 +450,20 @@ void Editor::command_redo() {
     if (not redoStack.isEmpty()) {
         ActionStack::Action latest = redoStack.top();
         char c = latest.character;
-        int line = latest.line;
-        int col = latest.column;
+        size_t line = latest.line;
+        size_t col = latest.column;
         bool deleted = latest.deleted;
         redoStack.pop();
+        undoStack.push(c, not deleted, line, col);
         // if new line
         if (c=='\n') {
-            undo_new_line(line, deleted);
+            undo_new_line(line, col, deleted);
         }
         else {
             undo_character(c, line, col, deleted);
             // keep redoing until nothing left to be redone OR new line
             while (not redoStack.isEmpty()) {
-                ActionStack::Action next = undoStack.top();
+                ActionStack::Action next = redoStack.top();
                 if (next.character!='\n')
                  { command_redo(); }
             }
@@ -463,21 +473,21 @@ void Editor::command_redo() {
 };
 
 // Takes in a line number and returns the length of that line.
-size_t Editor::lineLength(int line) {
+size_t Editor::lineLength(size_t line) {
     size_t curLineLength = curTextLines[line].size();
     return curLineLength;
 }
 
 // Takes in a line number and column number and returns any part of that 
 // line thats to the left of that column.
-std::string Editor::pre_character(int line, int col) {
+std::string Editor::pre_character(size_t line, size_t col) {
     std::string preCursorText = curTextLines[line].substr(0, col);
     return preCursorText;
 }
 
 // Takes in a line number and column number and returns any part of that 
 // line thats to the right of that column.
-std::string Editor::post_character(int line, int col) {
+std::string Editor::post_character(size_t line, size_t col) {
     size_t length = lineLength(line);
     std::string postCursorText = curTextLines[line].substr(col, length);
     return postCursorText;

@@ -1,0 +1,28 @@
+: Cursor Position: [0, 0]
+
+: Cursor Position: [1, 0]
+a
+: Cursor Position: [2, 0]
+ab
+: Cursor Position: [3, 0]
+abc
+: Cursor Position: [0, 1]
+abc
+
+: Cursor Position: [1, 1]
+abc
+d
+: Cursor Position: [2, 1]
+abc
+de
+: Cursor Position: [1, 1]
+abc
+d
+: Cursor Position: [0, 1]
+abc
+
+: Cursor Position: [3, 0]
+abc
+: Cursor Position: [0, 1]
+abc
+

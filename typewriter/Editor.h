@@ -40,33 +40,33 @@
         std::ifstream read_file_open_stream(std::string text_file);
 
         void add_logfile(std::string log_filename);
-        void determine_next(int c);
-        void determine_next_arrow_keys(int c);
+        void determine_next(size_t c);
+        void determine_next_arrow_keys(size_t c);
 
         void move_down();
         void move_up();
         void move_right();
         void move_left();
 
-        void type_char(int c, int line, int col);
-        void insert(int c, int line, int col);
+        void type_char(size_t c, size_t line, size_t col);
+        void insert(size_t c, size_t line, size_t col);
        
         void backspace();
         void delete_char(size_t line, size_t col);
         void enter_key();
-        void insert_new_line(size_t line);
+        void insert_new_line(size_t line, size_t col);
         void delete_new_line(size_t line);
 
         void command_mode();
         void command_save();
         void command_quit();
         void command_undo();
-        void undo_new_line(int line, int col, bool deleted);
-        void undo_character(char c, int line, int col, bool deleted);
+        void undo_new_line(size_t line, size_t col, bool deleted);
+        void undo_character(char c, size_t line, size_t col, bool deleted);
         void command_redo();
 
-        std::string pre_character(int col, int row);
-        std::string post_character(int col, int row);
-        size_t lineLength(int line);
+        std::string pre_character(size_t col, size_t row);
+        std::string post_character(size_t col, size_t row);
+        size_t lineLength(size_t line);
         std::ofstream open_file_output_stream(std::string filename);
  };
