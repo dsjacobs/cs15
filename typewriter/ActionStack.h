@@ -3,7 +3,8 @@
  *
  * CS15 Proj 2: Typewriter
  * 
- * Interface for the ActionStack class.
+ * ActionStacks allow the typewriter to maintain lists of actions for the
+ * user to undo and redo.
  *
  * Author: Milod Kazerounian (Sept 2025)
  * Edited By: Danielle Jacobs (Oct 2025)

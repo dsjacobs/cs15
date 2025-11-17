@@ -19,7 +19,9 @@ redo. Files can be new or existing.
 
 Acknowledgments:
 The class chatbot.
-I asked Ariel Jacobs to help test my program for bugs.
+I asked Ariel Jacobs to help test my program.
+I went to office hours.
+I consulted class lecture slides.
 
 File List: 
  ActionStack.h
@@ -31,15 +33,22 @@ File List:
     and its line and column.
 
  Editor.h
-    Editor class
+    The editor class contains most of the functionality for opening, editing,
+    and saving a text file.
 
  Editor.cpp
-
+    Users can add ascii characters, press enter and backspace to make
+    new lines and delete characters, edit existing files or make
+    new ones, save, and undo and redo changes.
+    
  main.cpp
     Takes in the names of text file and optionally the logfile.
     If these parameters are correct, opens and runs the text editor.
 
  test logs:
+    tests:
+        the commands used to generate the test files below.
+
     enter_delete: 
         a keylogger test that includes enter and then delete
     enter_delete_M.text: 
@@ -69,10 +78,59 @@ File List:
     undo_redo_T.text
         result of running undo_redo on the example typewriter.
 
+    arrow_keys
+        a keylogger test with just arrow key actions.
+    arrow_keys_m.text
+        result of running arrow_keys on my typewriter.
+    arrow_keys_t.text
+        result of running arrow_keys on the example typewriter.
+
  Instructions:
     compile: make
     run: ./typewriter textfile.txt logfile.txt
 
  Data structures
+    For action stacks, stacks allowed for easy push and pop, and last
+    in first out access for undoing and redoing actions. I implemented the
+    text as a vector of strings in order to fit nicely with the
+    provided UI function. I could also have implemented it
+    as a binary search tree, but that would have required constant
+    conversion to the vector for the render function. It would, however,
+    have allowed quicker editing. In the current format, if I'm editing
+    the first line of a long text, I have to copy the rest of the
+    text over, which would be O(n) where n is the length/number of characters
+    in the text. With a tree, editing the first line might be closer to log(n)
+    because I wouldn't have to copy as much over.
+
+    Arrow keys in wrapped lines, undo and redo are complex. For arrows in 
+    wrapped lines, we must aim to match the display column as much as possible
+    (which is the actual column mod the screen width). If even the display
+    column is longer than the line being moved to, we must move to the end
+    of that line.
+    For undo and redo, characters of matching insertion/deletion status that
+    are not new lines are continued to be undone or redone together, and new
+    lines, whether inserted or deleted, are undone and redone one at a time,
+    with no other actions.
 
  Details
+    Fow a while, I edited the provided files (threelonglines, mindfulness, and
+    maggies farm). I started with arrow keys in the simplest situations, and
+    then expanded to when they wrap. Then I added enter and backspace. Once I
+    got to undo and redo, I realized that I had to refactor most of the other
+    functions into two pieces: one that did the actual work, and one that 
+    updated the cursor. For example, "insert new line" does most of the work
+    of physically updating the text, and "enter" calls that and also updates
+    the cursor. Separating these out allowed me to be able to call most of the
+    functionality from undo and redo without separating out the cursor. I soon
+    realized I hadn't worked with new files, and edited my filestream handling
+    to be able to add new files. I found it challenging to keep track of the 
+    cursor when undoing and redoing new line characters. I built keylogger
+    files and ran them against both my typewriter and the class one. In 
+    submission they were all ran on threelonglines but throughout testing
+    process I tried them on other texts as well. These tests make sure to test
+    arrow keys, undoing and redoing a line, undoing and redoing a character,
+    backspace and enter, and simply writing a new line. 
+
+
+ Hours
+ I spent probably 10 hours on part one, and 25 hours on part two.

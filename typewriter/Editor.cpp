@@ -26,19 +26,18 @@ Editor::Editor(std::string filename) {
     constructor_helper(filename);
 }
 
-// Given two filenames, opens and reads the first, loading
-// it for editing. Establishes the second file as a log file.
-// See constructor helper for additional effects.
+// Given two filenames, opens and reads the first, loading it for editing. 
+// Establishes the second file as a log file. See constructor helper for 
+// additional effects.
 Editor::Editor(std::string filename, std::string logfile) {
     constructor_helper(filename);
     UI.startLogMode(logfile);
 }
 
-// Takes in a file name and sets cursor location to top left 
-// of the editor. If there is a matching file, opens it and
-// loads it for reading. If there is not, creates a new file
-// by that name. Used by both constructors. Sets the number
-// of lines in the editor, and creates the UI instance,and 
+// Takes in a file name and sets cursor location to top left of the editor. If 
+// there is a matching file, opens it and loads it for reading. If there is 
+// not, creates a new file by that name. Used by both constructors. Sets the 
+// number of lines in the editor, and creates the UI instance, and 
 // ensures the editor starts as open.
 void Editor::constructor_helper(std::string filename) {
     cursorCol = 0;
@@ -47,29 +46,33 @@ void Editor::constructor_helper(std::string filename) {
     text_filename = filename;
     UI = TextUI();
     end = false;
-    std::ifstream myifstream = read_file_open_stream(filename);
+    std::ifstream myifstream = read_file_open_stream(text_filename);
     std::string ifstream_string;
     curTextLines = std::vector<std::string>(); 
+    // existing file with text
     while (getline (myifstream, ifstream_string)) {
         curTextLines.push_back(ifstream_string);
         numLines++;
     }
+    // UI render function requires at least an empty line
     if (curTextLines.empty()) {
         curTextLines.push_back("");
+        numLines++;
     }
     myifstream.close();
 }
 
-// Used by the constructor helper to open a file or determine
-// that a new file must be made, and if so, makes it. Returns
-// an input file stream for the constructor to read.
+// Used by the constructor helper to open a file or to determine that a new 
+// file must be made, and if so, makes it. Returns an input file stream for the 
+// constructor to read.
 std::ifstream Editor::read_file_open_stream(std::string filename) {
    std::ifstream myifstream; 
     myifstream.open(filename);
-    curTextLines = std::vector<std::string>(); 
+    // if file does not exist, make it
     if (not myifstream.is_open()) {
             std::ofstream newFile(filename);
             newFile.close(); 
+            myifstream.open(filename);
         }
     return myifstream;
 }
@@ -77,8 +80,8 @@ std::ifstream Editor::read_file_open_stream(std::string filename) {
 // Destructor called automatically.
 Editor::~Editor() {};
 
-// Called by main.cpp, the run function keeps the editor running 
-// until exit (Escape X) is called.
+// Called by main.cpp, the run function keeps the editor running  until the 
+// command menu is called. 
 void Editor::run() {
     while (not end) {
         UI.render(curTextLines, cursorCol,cursorLine);
@@ -87,11 +90,10 @@ void Editor::run() {
     }
 }
 
-// Takes in a character from the user and determines what action
-// to take with it. This will only work on ASCII characters,
-// the escape key, new line and backspace, otherwise it will
-// continue to the next function, determine_next_arrow_keys 
-// to continue to check it against the arrow keys.
+// Takes in a character from the user and determines what action to take with //
+// it. This will only work on ASCII characters, the escape key, new line and 
+// backspace, otherwise it will continue to the next function.
+// determine_next_arrow_keys to continue to check input against the arrow keys.
 void Editor::determine_next(size_t c) {
     // if ascii
     if (32<=c and c <=126) {
@@ -113,11 +115,10 @@ void Editor::determine_next(size_t c) {
     else determine_next_arrow_keys(c);
 }
 
-// A continuation of determine next, this function determines
-// if the user has pressed an arrow key, and which function to call.
-// Otherwise, throws an error that it is not a valid input. To
-// review, only arrows, backspace, enter, the escape key,
-// and ASCII characters are accepted by the Editor.
+// A continuation of determine next, this function determines if the user has 
+// pressed an arrow key, and which function to call. Otherwise, throws an error 
+// that it is not a valid input. To review, only arrows, backspace, enter, the 
+// escape key, and ASCII characters are accepted by the Editor.
 void Editor::determine_next_arrow_keys(size_t c) {
     if (c==KEY_LEFT) {
         move_left();
@@ -154,10 +155,11 @@ void Editor::move_down(size_t col, size_t line) {
         // if we need to go down a line
         else {
             size_t nextLineLength = lineLength(line+1);
-            // if next line is too short, go to end
+            // next line is too short
             if (col % term_width > nextLineLength) {
                 col = nextLineLength;
             }
+            // next line is long enough
             else {
                 col = col%term_width;
             }
@@ -181,11 +183,12 @@ void Editor::move_up(size_t col, size_t line) {
         if (col>=term_width) {
             col = col - term_width;
         }
-        // line wont be 0 anymore
+        // if we need to move up to the previous line
         else {
             size_t prevLineLength = lineLength(line-1);
             size_t curDisplayCol = col%term_width;
             size_t numPrevLineWraps = prevLineLength/term_width;
+            // previous line is too short
             if (curDisplayCol > prevLineLength) {
                 col = prevLineLength;
             }
@@ -233,7 +236,7 @@ void Editor::move_left() {
 
 // Takes in a character and a cursor location. Inserts the character
 // at that location and updates the location of the cursor.
-// Also stores the action in able to be undone later.
+// Also stores the action in able to be undone later. Clears redo stack.
 void Editor::type_char(size_t c, size_t line, size_t col) {
     redoStack.clear();
     insert(c, line, col);
@@ -243,7 +246,7 @@ void Editor::type_char(size_t c, size_t line, size_t col) {
 
 // Takes in a character and a cursor location. Inserts the character
 // at that location. Does NOT update cursor location or store
-// action to be able to be undone later.
+// action to be able to be undone later. 
 void Editor::insert(size_t c, size_t line, size_t col) {
     std::string preCursorText = pre_character(line, col); 
     std::string postCursorText = post_character(line, col); 
@@ -271,7 +274,7 @@ void Editor::command_mode() {
 
 // Given a character and cursor location, deletes that character.
 // Does NOT move cursor or store deletion to be able to be undone
-// later.P
+// later.
 void Editor::delete_char(size_t line, size_t col) {
   curTextLines[line] = pre_character(line, col) + post_character(line, col+1);
 };
@@ -279,7 +282,8 @@ void Editor::delete_char(size_t line, size_t col) {
 // Given a character and cursor location, deletes that character.
 // DOES move cursor and stores deletion to be able to be undone
 // later. At the beginning of a line besides the first, will delete
-// the new line character and move cursor to end of previous line.
+// the new line character and move cursor to end of previous line. Clears
+// the redo stack.
 void Editor::backspace() {
     redoStack.clear();
     std::vector<std::string> new_version;
@@ -293,6 +297,7 @@ void Editor::backspace() {
     }
     // beginning of a row
     else {
+        // not the first row
         if (cursorLine!=0) {
         size_t prev_line_length = lineLength(cursorLine-1);
         delete_new_line(cursorLine);
@@ -304,7 +309,7 @@ void Editor::backspace() {
 };
 
 // Deletes a new line, combines the text from previous and current lines
-//  into one. Does NOT affect cursor location.
+//  into one. Does NOT affect cursor location or store the action.
 void Editor::delete_new_line(size_t line) {
     // not in first line
     if (line!=0) {
@@ -376,9 +381,11 @@ void Editor::command_quit() {
     end = true;
 };
 
-// When Undo is pressed, detrmines whether to proceed with deleteing
-// a new line, or deleting a character. Removes action from 
-// being stored to be undone, in order to be stored to be redone later.
+// When Undo is pressed, detrmines whether to proceed with inserting or
+//  deleting a new line or a character. Removes action from 
+//  undone stack, adds to redo stack. Continues undoing actions as long as 
+// those actions are on characters and not new lines, and as long as their 
+// deletion statuses match (both inserted or both deleted).
 void Editor::command_undo() {
     if (not undoStack.isEmpty()) {
         ActionStack::Action latest = undoStack.top();
@@ -387,7 +394,7 @@ void Editor::command_undo() {
         size_t col = latest.column;
         bool deleted = latest.deleted;
         undoStack.pop();
-        // if undoing a new line characterd
+        // if undoing a new line character
         if(c=='\n') {
             undo_new_line(line, col, deleted);
             redoStack.push(c, not deleted, cursorLine, cursorCol);
@@ -412,11 +419,13 @@ void Editor::command_undo() {
 // had been made, deletes it, and moves the cursor to the beginning of the
 // previous line.
 void Editor::undo_new_line(size_t line, size_t col, bool deleted) {
+    // to reinsert a deleted new line
     if (deleted) {
         insert_new_line(line, col);
         cursorCol = 0;
         cursorLine = line + 1;
     }
+    // to delete an inserted new line
     else {
         size_t prev_line_length = lineLength(line-1);
         delete_new_line(line);
@@ -426,15 +435,16 @@ void Editor::undo_new_line(size_t line, size_t col, bool deleted) {
 };
 
 // Called by command undo. If a character was deleted, adds it back, and if
-// it was entered, deletes it. Continues until either there are no more
-// actions to be undone or the next thing to be undone is a new line.
+// it was entered, deletes it. 
 void Editor::undo_character(char c, size_t line, size_t col, bool deleted) {
+    // to reinsert a deleted character
     if (deleted) {
         insert(c, line, col);
         if (col!=lineLength(line)) {
             col++;
         }
     }
+    // to delete an inserted character
     else {
         delete_char(line, col);
         if (col!=0) {
@@ -446,7 +456,11 @@ void Editor::undo_character(char c, size_t line, size_t col, bool deleted) {
 };
 
 // Redo can 'undo' 'undone' characters and new lines, putting them back in 
-// place.
+// place. Detrmines whether to proceed with inserting or
+//  deleting a new line or a character. Removes action from 
+//  redone stack, adds to undo stack. Continues redoing actions as long as 
+// those actions are on characters and not new lines, and as long as their 
+// deletion statuses match (both inserted or both deleted).
 void Editor::command_redo() {
     if (not redoStack.isEmpty()) {
         ActionStack::Action latest = redoStack.top();
@@ -471,7 +485,6 @@ void Editor::command_redo() {
                  { command_redo(); }
             }
         }
-
     }
 };
 

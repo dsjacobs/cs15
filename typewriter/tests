@@ -1,0 +1,24 @@
+# Arrow Keys
+./the_typewriter threelonglines.text arrow_keys_t.text < arrow_keys
+./typewriter threelonglines.text arrow_keys_m.text < arrow_keys
+diff arrow_keys_t.text arrow_keys_m.text
+
+# Enter Delete
+./the_typewriter threelonglines.text enter_delete_t.text < enter_delete
+./typewriter threelonglines.text enter_delete_m.text < enter_delete
+diff enter_delete_t.text enter_delete_m.text
+
+# Undo Redo a Newline
+./typewriter threelonglines.text newline_unlo_redo_m.text < newline_undo_redo
+./the_typewriter threelonglines.text newline_unlo_redo_t.text<newline_undo_redo
+diff newline_unlo_redo_m.text newline_unlo_redo_t.text
+
+# Type one line
+./the_typewriter threelonglines.text type_one_line_t.text < type_one_line
+./typewriter threelonglines.text type_one_line_m.text < type_one_line
+diff type_one_line_t.text type_one_line_m.text
+
+# Undo Redo a Character
+./typewriter threelonglines.text undo_redo_m.text < undo_redo
+./the_typewriter threelonglines.text undo_redo_t.text < undo_redo
+diff undo_redo_m.text undo_redo_t.text
