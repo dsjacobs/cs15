@@ -112,7 +112,7 @@ File List:
     lines, whether inserted or deleted, are undone and redone one at a time,
     with no other actions.
 
- Details
+ Detail
     Fow a while, I edited the provided files (threelonglines, mindfulness, and
     maggies farm). I started with arrow keys in the simplest situations, and
     then expanded to when they wrap. Then I added enter and backspace. Once I
