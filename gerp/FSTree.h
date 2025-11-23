@@ -39,9 +39,6 @@ public:
         // returns true if tree is empty
         bool isEmpty();
 
-        // destroys the tree and deletes all the allocated data.
-        void burnTree();
-
 private:
         // Root of the n-ery tree
         DirNode *root;
@@ -85,6 +82,9 @@ private:
                 // return newNode (copy of currNode)
                 return newNode;
         }
+
+        // destroys the tree and deletes all the allocated data.
+        void burnTree();
 };
 
 #endif

@@ -1,5 +1,5 @@
-Names:
-utlns:
+Name: Danielle Jacobs
+utln: djacob09
 
 Answer the questions below, and submit your answers under the assignment
 "gerp Design Checkoff" on Gradescope. You must sign up for a design checkoff
@@ -8,16 +8,43 @@ Make sure to submit this file *prior* to your design checkoff.
 
 For each question, give as much detail as you feel is necessary.
 
-1. What classes and structs will you implement for your program? For each class,
+1. What classes and strucsts will you implement for your program? For each class,
    provide a list of public functions of that class; for each struct, provide a
    list of member variables.
 
 Answer:
-        
+   A file struct where each file has a name, an ID, and a vector of strings
+   that represents the text.
+
+   Gerp class will have public constructor and destructor, and functions for 
+   run, case sensitive search, case insensitve search, change output file name, 
+   and quit.  
+
+   Hash/lookup table would have the hash for a search term, 
+   and a list of dictionaries where that search term appears with file id and
+   line number.
+
 2. Describe the index that you will build for querying. What specific data
    structures will you use to build this index?
 
 Answer:
+
+   I'm imagining:
+   File ID Array
+   FileID 1: bla.txt
+
+   Hash Table
+   hash(apple) = 35
+   35: [APPLE: [1:3]], [apple:[1:2, 1:4]]
+
+   (bla.txt would look like 
+      orange
+      banana
+      I ate an apple
+      APPLE
+      an apple every day
+   )
+
 
 3. To use your index, you will use something for lookup (the key) and you will
    get some associated data back (the value). What are the C++ *types* of your
@@ -29,8 +56,8 @@ Answer:
                 
 Answer:
 
-   Key type:
-   Value type:         
+   Key type: string
+   Value type:  array/list of dictionaries      
 
 4. Explain what a collision is versus having multiple lines associated with 
    a particular word. Write (and/or draw) out an example of when a 
@@ -39,31 +66,68 @@ Answer:
 
 Answer:
 
+   A collision would be multiple words having the same hash ID.
+   hash(apple) = 123456
+   hash(banana) = 123456
+   123456: [apple file:line, banana file:line, APPLE file:line]
+   Every time you look up either apple or banana, you'd get both.
+
+   multiple lines having the same word would just mean
+   hash(apple) = 123456
+   hash(banana) = 98
+   123456: [apple FileA:Line2, FileB:Line16] [APPLE FileC:Line22]
+   98: [banana FileA:Line8]
+
+
 5. What do you expect the *space* complexity of your index will be? How many
    times will a single line be stored according to your data structures?
 
 Answer:
+
+   Each line would be stored once in the vector of strings for that file.
+   For every word in the text, a dictionary with its file and line will be 
+   stored in the lookup hash table. Thus, a dictionary representing a line will 
+   be stored as many times as there are words in that line.
+
 
 6. What is the time complexity of *building* your index? If you refer to some
    variable, be sure to specify what the variable refers to, e.g., in "O(n)",
    state explicitly what "n" is.
 
 Answer:
+
+   If n is the number of words in the directory, building the index would
+   take O(n).
+
                 
 7. What is the time complexity of *using* your index for lookup? As above,
    be specific about variables you use.
 
 Answer:
 
+   Lookup would be constant time to answer whether or not the search term
+   is in the directory. 
+   However if the answer is yes, its in our directory, AND we are doing a case 
+   sensitive search, then it might take O(n) where n is the number of different 
+   ways that term appeared capitalized in the text (if 'apple' 'APPLE' and 
+   'appLE' all appeared, n would be 3).
+
 8. How will you handle case-sensitive search?
    What is the time complexity (should be close to O(1))?
 
 Answer:
 
+   See above - would be O(1) to find the hash table row with all the
+   forms of capitalization, and then O(n) where n is the number of different
+   ways that it has been capitalized in the text.
+
 9. How will you handle case-insensitive search?
    What is the time complexity (should be close to O(1))?
 
 Answer:
+
+   Would be O(1). If we found [apple 3:2,5:1] [APPLE 4:6]
+
 
 10. How are you handling duplicate words within a line? Consider these two example 
    lines: 
@@ -79,13 +143,42 @@ Answer:
 
 Answer:
 
+   presuming hash(the) = 32
+
+   (i) the cat and dog
+   32: ['the':[file(x) line(i)]]
+   When building, that casing, file line, and file number already exist and
+   would not get added again.
+
+   (ii) the cat and THE dog
+   32: ['the': [file(x) line(ii)], 'THE': [file(x) line(ii)]]
+
+
 11. How will you test your implementation and what specific evidence of testing
     will you submit?
 
 Answer:
+
+   I will diff compare my outputs with the reference for things like file
+   and error handling, formatting of each line in an answer, responses when 
+   the search term isn't found or is found once, and send those as
+   input & output files.
+
+   For cases when there are multiple results for a search term, I can't
+   diff text against the refrence. Therefore I will have unit tests that might 
+   read my output file and assert that the number of times the search term
+   has appeared meets expectations.
 
 12. What is your schedule for completing this assignment? Include specific dates
     and the tasks that you would like to accomplish by each date. Do not forget
     testing!
 
 Answer: 
+
+   By Sunday 11/23: phase one
+   By Wed 11/26: File handling, quit and new output file functions
+   By Sunday 11/30: Hash implementation, built out data structures
+   By Wed 12/3: case sensitive search
+   By EOD Sunday 12/7: case insitive search
+   By Wed 12/10: testing, formatting, documentation
+   Due date Sun 12/14
