@@ -28,9 +28,8 @@ void traverseDirNode(DirNode directory, string dirpath) {
         }
         for (int d = 0; d < numSubDirs; d++) {
             DirNode *child_directory = directory.getSubDir(d);
-            dirpath += "/";
-            dirpath += child_directory->getName();
-            traverseDirNode(*child_directory, dirpath);
+            std::string nextpath = dirpath + "/" + child_directory->getName();
+            traverseDirNode(*child_directory, nextpath);
         }
     }
 }
