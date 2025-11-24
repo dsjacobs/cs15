@@ -1,0 +1,6 @@
+Danielle Jacobs
+November 23, 2025
+
+Processing.cpp contains the strip non alpha numeric characters function,
+and the directory traversal function. Processing unit tests file is to test
+these functions.

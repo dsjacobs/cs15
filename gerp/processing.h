@@ -2,7 +2,8 @@
 #define __PROCESSING_H
 
 /*
-*   TODO: Update file header if you use this file in your solution to phase 2 
+Danielle Jacobs
+Nov 23, 2025
 */
 
 #include <string>

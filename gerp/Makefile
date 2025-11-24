@@ -16,15 +16,24 @@ CXX      = clang++
 CXXFLAGS = -g3 -Wall -Wextra -Wpedantic -Wshadow
 LDFLAGS  = -g3 
 
-gerp: main.o gerp.o
-	$(CXX) $(CXXFLAGS) -o gerp main.o gerp.o
+gerp: gerp.o main.o 
+	$(CXX) $(CXXFLAGS) -o gerp.o main.o
 
 main.o: main.cpp gerp.h 
 	$(CXX) $(CXXFLAGS) -c main.cpp
 
-gerp.o: gerp.o
+gerp.o: gerp.cpp
 	$(CXX) $(CXXFLAGS) -c gerp.cpp
 
+processing.o: processing.cpp
+	$(CXX) $(CXXFLAGS) -c processing.cpp
+
+processing_unit_tests.o: processing_unit_tests.cpp processing.h
+	$(CXX) $(CXXFLAGS) -c processing_unit_tests.cpp
+
+processing_unit_tests: processing_unit_tests.o processing.o
+	$(CXX) $(CXXFLAGS) -o processing_unit_tests processing_unit_tests.o \
+	processing.o DirNode.o FSTree.o
 ##
 ## Here is a special rule that removes all .o files besides the provided ones 
 ## (DirNode.o and FSTree.o), all temporary files (ending with ~), and 
