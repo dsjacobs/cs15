@@ -3,13 +3,11 @@
 ###
 ### Author:  Danielle Jacobs
 
-## 
-## Build up your Makefile in a similar manner as for Zap. Feel free 
-## to use that Makefile to guide you! Note, you do NOT need rules for
+## Note, you do NOT need rules for
 ## FSTree.o and DirNode.o as those (pre-compiled) object files are 
 ## provided to you.
 ## 
-## At the end, you can delete this comment!
+## At the end, you can delete this comment
 ## 
 
 CXX      = clang++
@@ -17,12 +15,12 @@ CXXFLAGS = -g3 -Wall -Wextra -Wpedantic -Wshadow
 LDFLAGS  = -g3 
 
 gerp: gerp.o main.o 
-	$(CXX) $(CXXFLAGS) -o gerp.o main.o
+	$(CXX) $(CXXFLAGS) -o gerp gerp.o main.o
 
-main.o: main.cpp gerp.h 
+main.o: main.cpp gerp.h
 	$(CXX) $(CXXFLAGS) -c main.cpp
 
-gerp.o: gerp.cpp
+gerp.o: gerp.cpp gerp.h
 	$(CXX) $(CXXFLAGS) -c gerp.cpp
 
 processing.o: processing.cpp

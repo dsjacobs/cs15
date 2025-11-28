@@ -6,6 +6,7 @@ Danielle Jacobs
 
 */
 #include <string>
+#include <fstream> 
 
 class gerp {
     public:
@@ -19,7 +20,9 @@ class gerp {
         bool has_quit;
         std::string output_file;
         std::string input_directory;
+        std::ofstream output_stream;
 
+        std::ofstream create_ofstream(std::string filename, bool first);
         std::string request_input();
         void determine_word(std::string input);
         void route_cmd(std::string input);

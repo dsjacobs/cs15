@@ -150,6 +150,8 @@ Answer:
    When building, that casing, file line, and file number already exist and
    would not get added again.
 
+   ----- make sure I don't confuse this with a collision
+
    (ii) the cat and THE dog
    32: ['the': [file(x) line(ii)], 'THE': [file(x) line(ii)]]
 
