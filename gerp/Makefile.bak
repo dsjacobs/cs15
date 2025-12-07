@@ -14,27 +14,27 @@ CXX      = clang++
 CXXFLAGS = -g3 -Wall -Wextra -Wpedantic -Wshadow
 LDFLAGS  = -g3 
 
-gerp: gerp.o main.o processing.o wordTable.o DirNode.o FSTree.o
-	$(CXX) $(CXXFLAGS) -o gerp gerp.o main.o processing.o \
-	wordTable.o DirNode.o FSTree.o
+gerp: gerp.o main.o structs.o processing.o DirNode.o FSTree.o
+	$(CXX) $(CXXFLAGS) -o gerp gerp.o main.o structs.o processing.o \
+	DirNode.o FSTree.o
 
 main.o: main.cpp gerp.h
-	$(CXX) $(CXXFLAGS) -c main.cpp gerp.h
+	$(CXX) $(CXXFLAGS) -c main.cpp
 
-gerp.o: gerp.cpp gerp.h processing.h 
+gerp.o: gerp.cpp gerp.h processing.o structs.o
 	$(CXX) $(CXXFLAGS) -c gerp.cpp
 
-processing.o: processing.cpp FSTree.h DirNode.h
-	$(CXX) $(CXXFLAGS) -c processing.cpp
+processing.o: processing.cpp FSTree.o DirNode.o
+	$(CXX) $(CXXFLAGS) -c processing.cpp FSTree.o DirNode.o
 
-wordTable.o: wordTable.cpp wordTable.h
-	$(CXX) $(CXXFLAGS) -c wordTable.cpp
+structs.o: structs.cpp processing.h
+	$(CXX) $(CXXFLAGS) -c structs.cpp processing.h
 
-unit_tests.o: unit_tests.cpp processing.h
-	$(CXX) $(CXXFLAGS) -c unit_tests.cpp
+processing_unit_tests.o: processing_unit_tests.cpp processing.h
+	$(CXX) $(CXXFLAGS) -c processing_unit_tests.cpp
 
-unit_tests: unit_tests.o processing.o
-	$(CXX) $(CXXFLAGS) -o unit_tests unit_tests.o \
+processing_unit_tests: processing_unit_tests.o processing.o
+	$(CXX) $(CXXFLAGS) -o processing_unit_tests processing_unit_tests.o \
 	processing.o DirNode.o FSTree.o
 ##
 ## Here is a special rule that removes all .o files besides the provided ones 
@@ -52,9 +52,4 @@ clean:
 		\) -exec rm -f {} \;
 	@rm -f *~ a.out
 
-# # DO NOT DELETE
-
-# gerp.o: gerp.h processing.h
-# main.o: gerp.h 
-# processing.o: processing.h FSTree.h DirNode.h
-# FSTree.o: DirNode.h
+# DO NOT DELETE

@@ -11,6 +11,8 @@ and prints out all file paths in a directory.
 #include <iostream>
 #include <string>
 #include <cctype>
+#include <sstream>
+#include <fstream>
 
 #include "processing.h"
 #include "FSTree.h"
@@ -18,27 +20,30 @@ and prints out all file paths in a directory.
 
 using namespace std;
 
-void traverseDirNode(DirNode directory, string dirpath) {
+void traverseDirNode(DirNode directory, string dirpath,std::stringstream &boo ) {
     if (not directory.isEmpty()) {
         int numSubDirs = directory.numSubDirs();
         int numFiles = directory.numFiles();
         for (int f = 0; f < numFiles; f++) {
             std::string filename =  directory.getFile(f);
-            std::cout << dirpath << "/" << filename <<  std::endl;
+            boo << dirpath << "/" << filename <<  std::endl;
         }
         for (int d = 0; d < numSubDirs; d++) {
             DirNode *child_directory = directory.getSubDir(d);
             std::string nextpath = dirpath + "/" + child_directory->getName();
-            traverseDirNode(*child_directory, nextpath);
+            traverseDirNode(*child_directory, nextpath, boo);
         }
     }
 }
 
-void traverseDirectory(string directory) {
+std::stringstream traverseDirectory(string directory) {
     FSTree my_fstree(directory);
     DirNode *root = my_fstree.getRoot();
-    traverseDirNode(*root, root->getName());
-
+    std::stringstream f;
+    std::string rootname = root->getName();
+    traverseDirNode(*root,rootname, f);
+    std::string line;
+    return f;
 }
 
 string stripNonAlphaNum(string input) {
@@ -59,3 +64,4 @@ string stripNonAlphaNum(string input) {
         return output;
     }
 }
+    

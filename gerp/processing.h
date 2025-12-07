@@ -7,9 +7,14 @@ Nov 23, 2025
 */
 
 #include <string>
+#include <sstream>
+#include <vector>
+
 using namespace std;
 
 string stripNonAlphaNum(string input);
-void traverseDirectory(string directory);
+stringstream traverseDirectory(string directory);
+ifstream read_file_open_stream(string filename);
+vector<string> process_line(string line);
 
 #endif 
