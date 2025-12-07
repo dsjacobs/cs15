@@ -4,3 +4,11 @@ November 23, 2025
 Processing.cpp contains the strip non alpha numeric characters function,
 and the directory traversal function. Processing unit tests file is to test
 these functions.
+
+Gerp.cpp
+Gerp.h
+main.cpp
+Makefile
+unit_tests.cpp
+WordTable.cpp
+WordTable.h

@@ -24,7 +24,8 @@ class WordTable {
         void expand();
         size_t size();
         void add(WordTableEntry);
-        bool contains(WordTableEntry);
+        bool contains(string word_lower);
+        void reHash();
     private:
         vector<WordTableEntry> entries;
         size_t entrySize;
