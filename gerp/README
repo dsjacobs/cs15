@@ -9,6 +9,7 @@ Gerp.cpp
 Gerp.h
 main.cpp
 Makefile
+myhash.cpp
 unit_tests.cpp
 WordTable.cpp
 WordTable.h
