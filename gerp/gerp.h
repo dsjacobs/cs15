@@ -13,7 +13,7 @@ Danielle Jacobs
 #include <fstream> 
 #include <vector>
 #include <functional>
-#include "wordTable.h"
+#include "WordTable.h"
 
 using namespace std;
 
@@ -31,9 +31,10 @@ class gerp {
         ~gerp();
         void run();
         ofstream create_ofstream(string filename);
-         void search(string search_string);
+        void search(string search_string);
         void insensitive_search(string search_string);
         WordTable gerpWordTable;
+        void quit();
 
     private:
         bool has_quit;
@@ -46,13 +47,16 @@ class gerp {
         string request_input();
         void determine_word(string input);
         void route_cmd(string input);
-        void quit();
 
         void initialize_files(string directory);
         void process_file(int fileID, string fileName);
         void process_line(string line, int fileID, int LineNum);
         void add_to_hash_table(string word, string word_lower, int fileID,int LineNum);
         void wordlist();
+
+        void lower_exists_and_exact(oneCase oc, int fileID, int LineNum);
+        void lower_exists_but_not_exact(WordTableEntry wte, string word, int fileID, int LineNum);
+        void add_lower(hash<string> hashValue, string word, string word_lower, int fileID, int LineNum);
 };
 
 #endif

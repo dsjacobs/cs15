@@ -2,308 +2,382 @@
 Danielle Jacobs
 November 23
 Gerp
-Unit Tests for Processing.h of phase 1
+Unit Tests
 
-Tests alphanumeric character stripping and directory traversal
 */
-#include processing.h
+#include "processing.h"  
+#include "gerp.h"
+#include "wordTable.h"
 #include <cassert>
 #include <iostream>
 
+using namespace std;
+
+string nonexistent = "not_there_1238.txt";
 
 //tests that a fully alphanumeric word remains unchanged
-void 01_Processing_stripNonAlphaNum_reg_word() {
+void a01_Processing_stripNonAlphaNum_reg_word() {
+    cout << "Test 01" << endl;
     string input = "Banana123";
     string output = stripNonAlphaNum(input);
     assert(output == "Banana123");
 };
 
-//tests leading characters are stripped
-void 02_Processing_stripNonAlphaNum_trail_beg() {
+//atests leading characters are stripped
+void a02_Processing_stripNonAlphaNum_trail_beg() {
+    cout << "Test 02" << endl;
     string input = "!!Banana456";
     string output = stripNonAlphaNum(input);
     assert(output == "Banana456");
 };
 
 //tests trailing characters are stripped
-void 03_Processing_stripNonAlphaNum_trail_end() {
+void a03_Processing_stripNonAlphaNum_trail_end() {
+    cout << "Test 03" << endl;
     string input = "Banana456@@";
     string output = stripNonAlphaNum(input);
     assert(output == "Banana456");
 };
 
 //tests both leading and trailing characters are stripped
-void 04_Processing_stripNonAlphaNum_trail_both() {
+void a04_Processing_stripNonAlphaNum_trail_both() {
+    cout << "Test 04" << endl;
     string input = "##Banana456%%";
     string output = stripNonAlphaNum(input);
     assert(output == "Banana456");
 };
 
 //tests non alpha-numeric characters in the middle of the string stay
-void 05_Processing_stripNonAlphaNum_mid() {
+void a05_Processing_stripNonAlphaNum_mid() {
+    cout << "Test 05" << endl;
     string input = "Ban&ana45@62";
     string output = stripNonAlphaNum(input);
     assert(output == "Ban&ana45@62");
 };
 
 //tests string cleaning on a non alpha-numeric string returns empty string
-void 06_Processing_stripNonAlphaNum_none() {
+void a06_Processing_stripNonAlphaNum_none() {
+    cout << "Test 06" << endl;
     string input = "@#$%###*";
     string output = stripNonAlphaNum(input);
     assert(output == "");
 };
 
 //tests the directory traversal
-void 07_Processing_traverseDirectory_dir() {
-    traverseDirectory("gerp-test-dirs/small-dir");
+void a07_Processing_traverseDirectory_dir() {
+    cout << "Test 07" << endl;
+    traverseDirectory("gerp-test-dirs/tinyData");
 };
 
 //non existent input directory
-void 08_Gerp_gerp_no_input_dir() {
-    traverseDirectory("gerp-test-dirs/banana");
+void a08_Gerp_gerp_no_input_dir() {
+    cout << "Test 08" << endl;
+    bool runtime_error_thrown = false;
+    std::string error_message = "";
+    try {
+        traverseDirectory("gerp-test-dirs/banana");
+    }
+    catch (const std::runtime_error &e) {
+        runtime_error_thrown = true;
+        error_message = e.what();
+    }
+    assert(runtime_error_thrown);
 };
 
 //non existent output file
-void 09_Gerp_gerp_no_output_file() {
-    gerp::gerp("gerp-test-dirs/small-dir", "/not_there.txt");
+void a09_Gerp_gerp_no_output_file() {
+    cout << "Test 09" << endl;
+    ifstream file(nonexistent);
+    assert(not file.is_open());
+    file.close();
+    gerp myGerp("gerp-test-dirs/tinyData", nonexistent);
+    ifstream file2(nonexistent);
+    assert(file2.is_open());
 };
 
 //existing input directory and output file
-void 10_Gerp_gerp_input_and_output() {
-    gerp::gerp("gerp-test-dirs/small-dir", "gerp-output.txt");
+void a10_Gerp_gerp_input_and_output() {
+    cout << "Test 10" << endl;
+    gerp myGerp("gerp-test-dirs/tinyData", "gerp-output.txt");
+    myGerp.quit();
 };
 
 //   create of_stream on working stream
-void 11_Gerp_create_ofstream_working_stream() {};
+void a11_Gerp_create_ofstream_working_stream() {
+    cout << "Test 11" << endl;
+    gerp myGerp("gerp-test-dirs/tinyData", "gerp-output.txt");
+    ofstream myStream = myGerp.create_ofstream("gerp_output.txt");
+    assert(myStream.is_open());
+    myGerp.quit();
+};
 
 //   create ofstream on not working stream
-void 12_Gerp_create_ofstream_not_working_stream() {};
+void a12_Gerp_create_ofstream_not_working_stream() {
+    cout << "Test 12" << endl;
+    gerp myGerp("gerp-test-dirs/tinyData", "gerp-output.txt");
+    ofstream myStream = myGerp.create_ofstream("emptyDir");
+    assert(not myStream.is_open());
+    myGerp.quit();
+};
 
 //before quit
-void 13_Gerp_run_before_quit() {
-    gerp::run();
+void a13_Gerp_run_before_quit() {
+    cout << "Test 13" << endl;
+    gerp myGerp("gerp-test-dirs/tinyData", "gerp-output.txt");
+    myGerp.run();
+    myGerp.quit();
 };
 
 //after quit
-void 14_Gerp_run_after_quit() {
-    gerp::run();
+void a14_Gerp_run_after_quit() {
+    cout << "Test 14" << endl;
+    gerp myGerp("gerp-test-dirs/tinyData", "gerp-output.txt");
+    myGerp.run();
+    myGerp.quit();
+    myGerp.run();
 };
 
-//   route cmd on @i searchterm
-void 15_Gerp_route_cmd_i_searchterm() {
-    gerp::route_cmd("@i searchterm");
-};
+// //   prints the message query?
+// void a24_Gerp_request_input_reg() {
+//     cout << "Test 24" << endl;
+//     std::ostringstream catch_cout;
+//     gerp myGerp("gerp-test-dirs/tinyData", "gerp-output.txt") > catch_cout;
+//     assert(catch_cout.str() == "Query?\n");
+// };
 
-//   route cmd on @insensitve searchterm
-void 16_Gerp_route_cmd_insensitve_searchterm() {
-    gerp::route_cmd("@insensitive searchterm");
-};
 
-//   route cmd on searchterm
-void 17_Gerp_route_cmd_searchterm() {
-    gerp::route_cmd("searchterm");
-};
+// //   one word
+// void a26_Gerp_request_input_one_word() {
+//     cout << "Test 26" << endl;
 
-//   route cmd on $$seartchterm%%
-void 18_Gerp_route_cmd_%%searchterm%%() {
-    gerp::route_cmd("%%searchterm%%");
-};
+// };
 
-//   route cmd on search&&term
-void 19_Gerp_route_cmd_search&term() {
-    gerp::route_cmd("search&term");
-};
+// //   two words
+// void a27_Gerp_request_input_two_words() {
+//     cout << "Test 27" << endl;
+// };
 
-//   route cmd on @quit
-void 20_Gerp_route_cmd_quit() {
-    gerp::route_cmd("@quit");
-};
+// //   three words
+// void a28_Gerp_request_input_three_words() {
+//     cout << "Test 28" << endl;
+// };
 
-//   rout cmd on @q
-void 21_Gerp_route_cmd_quit() {
-    gerp::route_cmd("@q");
-};
-
-//   route cmd on @f filename
-void 22_Gerp_route_cmd_f() {
-    gerp::route_cmd("@f filename");
-};
-
-//   route cmd on @fab
-void 23_Gerp_route_cmd_filename() {
-    gerp::route_cmd("@fab");
-};
-
-//   prints the message query?
-void 24_Gerp_request_input_reg() {};
-
-//   returns whatever was put in
-void 25_Gerp_request_input_return() {};
-
-//   one word
-void 26_Gerp_request_input_one_word() {};
-
-//   two words
-void 27_Gerp_request_input_two_words() {};
-
-//   three words
-void 28_Gerp_request_input_three_words() {};
-
-//   no directory
-void 29_Gerp_initialize_files_no_dir() {};
+// //   no directory
+// void a29_Gerp_initialize_files_no_dir() {
+//     cout << "Test 29" << endl;
+// };
 
 //   empty directory
-void 30_Gerp_initialize_files_empty_dir() {};
+void a30_Gerp_initialize_files_empty_dir() {
+    cout << "Test 30" << endl;
+};
 
 //   small directory
-void 31_Gerp_initialize_files_small_dir() {};
+void a31_Gerp_initialize_files_small_dir() {
+    cout << "Test 31" << endl;
+};
 
 //   medium directory
-void 32_Gerp_initialize_files_medium_dir() {};
+void a32_Gerp_initialize_files_medium_dir() {
+    cout << "Test 32" << endl;
+};
 
 //   new file
-void 33_Gerp_read_file_open_stream_new_file() {};
+void a33_Gerp_read_file_open_stream_new_file() {
+    cout << "Test 33" << endl;
+};
 
 //   hard to read file
-void 34_Gerp_read_file_open_stream_unreadable_file() {};
+void a34_Gerp_read_file_open_stream_unreadable_file() {
+    cout << "Test 34" << endl;
+};
 
 //   existing file
-void 35_Gerp_read_file_open_stream_reg_file() {};
+void a35_Gerp_read_file_open_stream_reg_file() {
+    cout << "Test 35" << endl;
+};
 
 //   non existent file id
-void 36_Gerp_process_file_no_file_id() {};
+void a36_Gerp_process_file_no_file_id() {
+    cout << "Test 36" << endl;
+};
 
 //   hard to read file
-void 38_Gerp_process_file_unreadable_file() {};
+void a38_Gerp_process_file_unreadable_file() {
+    cout << "Test 38" << endl;
+};
 
 //   regular file
-void 39_Gerp_process_file_reg_file() {};
+void a39_Gerp_process_file_reg_file() {
+    cout << "Test 39" << endl;
+};
 
 //   empty file
-void 40_Gerp_process_line_empty_file() {};
+void a40_Gerp_process_line_empty_file() {
+    cout << "Test 40" << endl;
+};
 
 //   some populated lines, some un populated
-void 41_Gerp_process_line_half_file() {};
+void a41_Gerp_process_line_half_file() {
+    cout << "Test 41" << endl;
+};
 
 //   fully populated file
-void 42_Gerp_process_line_full_file() {};
+void a42_Gerp_process_line_full_file() {
+    cout << "Test 42" << endl;
+};
 
 //   uncleaned word
-void 43_Gerp_add_to_hash_table_messy_word() {};
+void a43_Gerp_add_to_hash_table_messy_word() {
+    cout << "Test 43" << endl;
+};
 
 //   clean word
-void 44_Gerp_add_to_hash_table_clean_word() {};
+void a44_Gerp_add_to_hash_table_clean_word() {
+    cout << "Test 44" << endl;
+};
 
 //   nonexistent file
-void 45_Gerp_add_to_hash_table_no_file_id() {};
+void a45_Gerp_add_to_hash_table_no_file_id() {
+    cout << "Test 45" << endl;
+};
 
 //   linenum greater than file length
-void 46_Gerp_add_to_hash_table_great_line_num() {};
+void a46_Gerp_add_to_hash_table_great_line_num() {
+    cout << "Test 46" << endl;
+};
 
 //   all inputs as expected
-void 47_Gerp_add_to_hash_table_reg() {};
+void a47_Gerp_add_to_hash_table_reg() {
+    cout << "Test 47" << endl;
+};
 
 //   with @q
-void 48_Gerp_quit_q() {};
+void a48_Gerp_quit_q() {
+    cout << "Test 48" << endl;
+};
 
 //   with @quit
-void 49_Gerp_quit_quit() {};
-
+void a49_Gerp_quit_quit() {
+    cout << "Test 49" << endl;
+};
 //@word@
-void 50_Gerp_search_@word@() {};
+void a50_Gerp_search_word_leading_and_trailing() {
+    cout << "Test 50" << endl;
+};
 
 //wo@rd
-void 51_Gerp_search_wo@rd() {};
+void a51_Gerp_search_word_middle() {
+    cout << "Test 51" << endl;
+};
 
 //word
-void 52_Gerp_search_word() {};
+void a52_Gerp_search_word() {
+    cout << "Test 52" << endl;
+};
 
 //   @i word
-void 53_Gerp_insensitive_search_i_word() {};
+void a53_Gerp_insensitive_search_i_word() {
+    cout << "Test 53" << endl;
+};
 
 //   @insensitive word
-void 54_Gerp_insensitive_search_insensitive_word() {};
+void a54_Gerp_insensitive_search_insensitive_word() {
+    cout << "Test 54" << endl;
+};
 
 //   @i @word@
-void 55_Gerp_insensitive_search_i_@word@() {};
+void a55_Gerp_insensitive_search_i_leading_and_trailing() {
+    cout << "Test 55" << endl;
+};
 
 //   @i wo&rd
-void 56_Gerp_insensitive_search_i_wo#rd() {};
+void a56_Gerp_insensitive_search_i_word_middle() {
+    cout << "Test 56" << endl;
+};
 
 //   @i word
-void 57_Gerp_insensitive_search_1_word() {};
+void a57_Gerp_insensitive_search_1_word() {
+    cout << "Test 57" << endl;
+};
 
 //
-void 58_wordTable_expand_reg() {};
+void a58_wordTable_expand_reg() {
+    cout << "Test 58" << endl;
+};
 
 //
-void 59_wordTable_hash_reg() {};
+void a59_wordTable_hash_reg() {
+    cout << "Test 59" << endl;
+};
 
 //
-void 60_wordTable_contains_reg() {};
+void a60_wordTable_contains_reg() {
+    cout << "Test 60" << endl;
+};
 
 
 int main () {
 
-    01_Processing_stripNonAlphaNum_reg_word();
-    02_Processing_stripNonAlphaNum_trail_beg();
-    03_Processing_stripNonAlphaNum_trail_end();
-    04_Processing_stripNonAlphaNum_trail_both();
-    05_Processing_stripNonAlphaNum_mid();
-    06_Processing_stripNonAlphaNum_none();
-    07_Processing_traverseDirectory_dir();
-    08_Gerp_gerp_no_input_dir();
-    09_Gerp_gerp_no_output_file();
-    10_Gerp_gerp_input_and_output();
-    11_Gerp_create_ofstream_working_stream();
-    12_Gerp_create_ofstream_not_working_stream();
-    13_Gerp_run_before_quit();
-    14_Gerp_run_after_quit();
-    15_Gerp_route_cmd_i_searchterm();
-    16_Gerp_route_cmd_insensitve_searchterm();
-    17_Gerp_route_cmd_searchterm();
-    18_Gerp_route_cmd_%%searchterm%%();
-    19_Gerp_route_cmd_search&term();
-    20_Gerp_route_cmd_quit();
-    21_Gerp_route_cmd_quit();
-    22_Gerp_route_cmd_f();
-    23_Gerp_route_cmd_filename();
-    24_Gerp_request_input_reg();
-    25_Gerp_request_input_return();
-    26_Gerp_request_input_one_word();
-    27_Gerp_request_input_two_words();
-    28_Gerp_request_input_three_words();
-    29_Gerp_initialize_files_no_dir();
-    30_Gerp_initialize_files_empty_dir();
-    31_Gerp_initialize_files_small_dir();
-    32_Gerp_initialize_files_medium_dir();
-    33_Gerp_read_file_open_stream_new_file();
-    34_Gerp_read_file_open_stream_unreadable_file();
-    35_Gerp_read_file_open_stream_reg_file();
-    36_Gerp_process_file_no_file_id();
-    38_Gerp_process_file_unreadable_file();
-    39_Gerp_process_file_reg_file();
-    40_Gerp_process_line_empty_file();
-    41_Gerp_process_line_half_file();
-    42_Gerp_process_line_full_file();
-    43_Gerp_add_to_hash_table_messy_word();
-    44_Gerp_add_to_hash_table_clean_word();
-    45_Gerp_add_to_hash_table_no_file_id();
-    46_Gerp_add_to_hash_table_great_line_num();
-    47_Gerp_add_to_hash_table_reg();
-    48_Gerp_quit_q();
-    49_Gerp_quit_quit();
-    50_Gerp_search_@word@();
-    51_Gerp_search_wo@rd();
-    52_Gerp_search_word();
-    53_Gerp_insensitive_search_i_word();
-    54_Gerp_insensitive_search_insensitive_word();
-    55_Gerp_insensitive_search_i_@word@();
-    56_Gerp_insensitive_search_i_wo#rd();
-    57_Gerp_insensitive_search_1_word();
-    58_wordTable_expand_reg();
-    59_wordTable_hash_reg();
-    60_wordTable_contains_reg();
+    a01_Processing_stripNonAlphaNum_reg_word();
+    a02_Processing_stripNonAlphaNum_trail_beg();
+    a03_Processing_stripNonAlphaNum_trail_end();
+    a04_Processing_stripNonAlphaNum_trail_both();
+    a05_Processing_stripNonAlphaNum_mid();
+    a06_Processing_stripNonAlphaNum_none();
+    a07_Processing_traverseDirectory_dir();
+    a08_Gerp_gerp_no_input_dir();
+    a09_Gerp_gerp_no_output_file();
+    a10_Gerp_gerp_input_and_output();
+    a11_Gerp_create_ofstream_working_stream();
+    a12_Gerp_create_ofstream_not_working_stream();
+    a13_Gerp_run_before_quit();
+    a14_Gerp_run_after_quit();
+    // a15_Gerp_route_cmd_i_searchterm();
+    // a16_Gerp_route_cmd_insensitve_searchterm();
+    // a17_Gerp_route_cmd_searchterm();
+    // a18_Gerp_route_cmd_searchterm_leading_and_trailing();
+    // a19_Gerp_route_cmd_searchterm_middle();
+    // a20_Gerp_route_cmd_quit();
+    // a21_Gerp_route_cmd_quit();
+    // a22_Gerp_route_cmd_f();
+    // a23_Gerp_route_cmd_filename();
+    // a24_Gerp_request_input_reg();
+    // a25_Gerp_request_input_return();
+    // a26_Gerp_request_input_one_word();
+    // a27_Gerp_request_input_two_words();
+    // a28_Gerp_request_input_three_words();
+    a29_Gerp_initialize_files_no_dir();
+    a30_Gerp_initialize_files_empty_dir();
+    a31_Gerp_initialize_files_small_dir();
+    a32_Gerp_initialize_files_medium_dir();
+    a33_Gerp_read_file_open_stream_new_file();
+    a34_Gerp_read_file_open_stream_unreadable_file();
+    a35_Gerp_read_file_open_stream_reg_file();
+    a36_Gerp_process_file_no_file_id();
+    a38_Gerp_process_file_unreadable_file();
+    a39_Gerp_process_file_reg_file();
+    a40_Gerp_process_line_empty_file();
+    a41_Gerp_process_line_half_file();
+    a42_Gerp_process_line_full_file();
+    a43_Gerp_add_to_hash_table_messy_word();
+    a44_Gerp_add_to_hash_table_clean_word();
+    a45_Gerp_add_to_hash_table_no_file_id();
+    a46_Gerp_add_to_hash_table_great_line_num();
+    a47_Gerp_add_to_hash_table_reg();
+    a48_Gerp_quit_q();
+    a49_Gerp_quit_quit();
+    a50_Gerp_search_word_leading_and_trailing();
+    a51_Gerp_search_word_middle();
+    a52_Gerp_search_word();
+    a53_Gerp_insensitive_search_i_word();
+    a54_Gerp_insensitive_search_insensitive_word();
+    a55_Gerp_insensitive_search_i_leading_and_trailing();
+    a56_Gerp_insensitive_search_i_word_middle();
+    a57_Gerp_insensitive_search_1_word();
+    a58_wordTable_expand_reg();
+    a59_wordTable_hash_reg();
+    a60_wordTable_contains_reg();
 
     return 0;
 }

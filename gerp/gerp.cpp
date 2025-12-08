@@ -15,7 +15,7 @@ Purpose: TODO
 #include <functional>
 #include "processing.h"
 #include "gerp.h"
-#include "wordTable.h"
+#include "WordTable.h"
 
 using namespace std;
 
@@ -32,7 +32,8 @@ gerp::gerp(string input_directory, string output_file)
 
 // Given a filename, creates and returns an output stream to that file. 
 ofstream gerp::create_ofstream(string filename) {
-    ofstream myofstream;   
+    ofstream myofstream; 
+    myofstream.open(filename);  
     if (not myofstream.is_open()) {
             cerr << "Error: could not open file " << filename << endl;
     }
@@ -91,8 +92,6 @@ void gerp::initialize_files(string directory) {
     }
     for (size_t i = 0; i < filelist.size(); i++) {
         FileStruct file = filelist[i];
-        cout << "ID: " << file.ID << " Name: " << file.name << " ";
-        cout << file.text_vector.size() << " lines long" << endl;
     }
 };
 
@@ -137,11 +136,55 @@ void gerp::process_line(string line, int fileID, int LineNum) {
 }
 
 void gerp::add_to_hash_table(string word, string word_lower, int fileID,int LineNum) {
-    //
+    hash<string> myHash;
+
+    size_t hashValue = myHash(word_lower);
+    size_t hashmod = hashValue % gerpWordTable.word_capacity();
+    if (not gerpWordTable.contains(word_lower)) {
+        gerpWordTable.add_lower(hashValue, word, word_lower, fileID, LineNum);
+    }
+    else {
+        WordTableEntry wte = gerpWordTable.get(word_lower);
+          if (wte.contains(word)) {
+            oneCase oc = wte.get(word);
+            lower_exists_and_exact(oc, fileID, LineNum);
+          }
+          else {
+            lower_exists_but_not_exact(wte, word, fileID, LineNum);
+          }
+    }
+}
+
+void gerp::add_lower(hash<string> hashValue, string word, string word_lower, int fileID, int LineNum) {
+    if (
+        gerpWordTable.load_factor() > 0.7) {
+        gerpWordTable.expand();
+    }
+    WordTableEntry wte(word_lower, gerpWordTable.word_capacity());
+    gerpWordTable.add(wte);
+    oneCase oc;
+    oc.spelling = word;
+    oc.file_list.push_back(fileID);
+    oc.line_list.push_back(LineNum);
+    wte.entries.push_back(oc);
+}
+
+void gerp::lower_exists_and_exact(oneCase oc, int fileID, int LineNum) {
+    oc.file_list.push_back(fileID);
+    oc.line_list.push_back(LineNum);
+}
+
+void gerp::lower_exists_but_not_exact(WordTableEntry wte, string word, int fileID, int LineNum) {
+    oneCase oc;
+    oc.spelling = word;
+    oc.file_list.push_back(fileID);
+    oc.line_list.push_back(LineNum);
+    wte.entries.push_back(oc);
 }
 
 void gerp::quit() {
     has_quit = true;
+    cout << "Goodbye! Thank you and have a nice day." << endl;
 }
 
 void gerp::search(string input) {
