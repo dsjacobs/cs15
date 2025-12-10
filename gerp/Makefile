@@ -14,9 +14,9 @@ CXX      = clang++
 CXXFLAGS = -g3 -Wall -Wextra -Wpedantic -Wshadow
 LDFLAGS  = -g3 
 
-gerp: gerp.o main.o processing.o WordTable.o DirNode.o FSTree.o
+gerp: gerp.o main.o processing.o WordTable.o WordTableEntry.o DirNode.o FSTree.o
 	$(CXX) $(CXXFLAGS) -o gerp gerp.o main.o processing.o WordTable.o \
-	DirNode.o FSTree.o
+	WordTableEntry.o DirNode.o FSTree.o
 
 main.o: main.cpp
 	$(CXX) $(CXXFLAGS) -c main.cpp gerp.h
@@ -27,15 +27,18 @@ gerp.o: gerp.cpp gerp.h processing.h
 processing.o: processing.cpp FSTree.h DirNode.h
 	$(CXX) $(CXXFLAGS) -c processing.cpp
 
-WordTable.o: WordTable.cpp
+WordTable.o: WordTable.cpp WordTableEntry.h
 	$(CXX) $(CXXFLAGS) -c WordTable.cpp
+
+WordTableEntry.o: WordTableEntry.cpp
+	$(CXX) $(CXXFLAGS) -c WordTableEntry.cpp
 
 unit_tests.o: unit_tests.cpp processing.h
 	$(CXX) $(CXXFLAGS) -c unit_tests.cpp
 
-unit_tests: unit_tests.o processing.o gerp.o
+unit_tests: unit_tests.o 
 	$(CXX) $(CXXFLAGS) -o unit_tests unit_tests.o \
-	processing.o DirNode.o FSTree.o gerp.o WordTable.o Processing.p
+	processing.o DirNode.o FSTree.o gerp.o WordTable.o
 ##
 ## Here is a special rule that removes all .o files besides the provided ones 
 ## (DirNode.o and FSTree.o), all temporary files (ending with ~), and 

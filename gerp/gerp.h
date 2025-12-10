@@ -1,5 +1,7 @@
 /*
+
 gerp.h
+
 November 22, 2025
 Project 3, gerp
 Danielle Jacobs
@@ -18,45 +20,41 @@ Danielle Jacobs
 using namespace std;
 
 struct FileStruct {
-    int ID;
-    string name;
-    vector<string> text_vector;
+    int fileID;
+    string fileName;
+    vector<string> textVector;
     FileStruct(int myID, string myName, vector<string> myText) :
-        ID(myID), name(myName), text_vector(myText) {};
+        fileID(myID), fileName(myName), textVector(myText) {};
 };
 
 class gerp {
     public:
-        gerp(string input_directory, string output_file);
+        gerp(string inputDirectory, string outputFile);
         ~gerp();
         void run();
-        ofstream create_ofstream(string filename);
+        ofstream createOfstream(string filename);
         void search(string search_string);
-        void insensitive_search(string search_string);
+        void insensitiveSearch(string search_string);
         WordTable gerpWordTable;
         void quit();
 
     private:
-        bool has_quit;
-        string output_file;
-        string input_directory;
-        vector<FileStruct> filelist;
-        ofstream output_stream;
+        bool hasQuit;
+        string outputFile;
+        string inputDirectory;
+        vector<FileStruct> gerpFileList;
+        ofstream outputStream;
 
-       
-        string request_input();
-        void determine_word(string input);
-        void route_cmd(string input);
+        string requestInput();
+        void determineWord(string input);
+        void routeCmd(string input);
 
-        void initialize_files(string directory);
-        void process_file(int fileID, string fileName);
-        void process_line(string line, int fileID, int LineNum);
-        void add_to_hash_table(string word, string word_lower, int fileID,int LineNum);
-        void wordlist();
-
-        void lower_exists_and_exact(oneCase oc, int fileID, int LineNum);
-        void lower_exists_but_not_exact(WordTableEntry wte, string word, int fileID, int LineNum);
-        void add_lower(hash<string> hashValue, string word, string word_lower, int fileID, int LineNum);
+        void initializeFiles(string directory);
+        void processFile(int fileID, string fileName);
+        void processLine(string line, int fileID, int LineNum);
+        void printAllInstancesOfWord(WordTableEntry wte);
+        void printAllInstancesOfCasing(caseVariation cv);
+        vector<WordTableEntry> inputToCollisionList(string input);
 };
 
 #endif

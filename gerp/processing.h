@@ -1,11 +1,14 @@
-#ifndef __PROCESSING_H
-#define __PROCESSING_H
-
 /*
+processing.h
+
 Danielle Jacobs
 November 23, 2025
 Project 3, Gerp
+
 */
+
+#ifndef __PROCESSING_H
+#define __PROCESSING_H
 
 #include <string>
 #include <sstream>
@@ -15,7 +18,7 @@ using namespace std;
 
 string stripNonAlphaNum(string input);
 stringstream traverseDirectory(string directory);
-ifstream read_file_open_stream(string filename);
-vector<string> process_line(string line);
+ifstream readFileOpenStream(string filename);
+string wordToLower(string word);
 
 #endif 

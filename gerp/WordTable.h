@@ -1,58 +1,47 @@
+/*
+
+WordTable.h
+
+Danielle Jacobs
+December 7, 2025
+Project 3, Gerp
+
+*/
+
 #include <vector>
 #include <string>
 #include <functional>
+#include "WordTableEntry.h"
  
 using namespace std;
 
 #ifndef __WORDTABLE_H
 #define __WORDTABLE_H
 
-struct oneCase {
-    string spelling;
-    vector<size_t> file_list;
-    vector<size_t> line_list; 
-};
-
-struct WordTableEntry {
-    size_t hashID;
-    string spelling_lower;
-    vector<oneCase> entries;
-    size_t tableCapacity;
-    bool initialized;
-    WordTableEntry(string word_lower, size_t capacity): 
-       spelling_lower(word_lower),  tableCapacity(capacity)
-    {
-        hash<string> myHash;
-        hashID = myHash(spelling_lower)/capacity;
-        initialized = true;
-    };
-    //default constructor
-    WordTableEntry() {
-        initialized = false;
-    };
-    bool contains(string origCasing);
-    oneCase get(string origCasing);
-    void add(oneCase newCase);
-};
-
 class WordTable {
     public: 
         WordTable();
-        void expand();
-        size_t size();
-        size_t word_capacity();
-        float load_factor();
+        vector<vector<WordTableEntry>> gerpWordList;
 
-        void add(WordTableEntry);
-        bool contains(string word_lower);
+        size_t size();
+        size_t wordCapacity();
+        float loadFactor();
+        size_t myHash(string word);
         void reHash();
-        WordTableEntry get(string word_lower);
-        void add_lower(size_t hashValue, string word, string word_lower, int fileID, int LineNum);
+
+        bool contains(string wordLower);
+        WordTableEntry get(string wordLower);
+
+        void newWord(string word, string wordLower, int fileID,int LineNum);    
+        void ExactCasingExists(caseVariation cv, int fileID, int LineNum);
+        void LowercaseExists(WordTableEntry wte, string word, int fileID, int LineNum);
+        void addLower(string word, string wordLower, int fileID, int LineNum);
     
     private:
         size_t entrySize;
         size_t capacity;
-        vector<WordTableEntry> entries;
+        void expand();
+        void printWordTable();
 };
 
 #endif

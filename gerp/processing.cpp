@@ -64,4 +64,12 @@ string stripNonAlphaNum(string input) {
         return output;
     }
 }
+
+string wordToLower(string word) {
+    string word_lower = "";
+        for (size_t l = 0; l < word.size(); l++) {
+            word_lower += tolower(word[l]);
+        }
+    return word_lower;
+}
     

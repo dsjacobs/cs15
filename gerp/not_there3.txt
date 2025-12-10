@@ -1,0 +1,5 @@
+gerp-test-dirs/tinyData/test.txt:0: i wish this was gibberish
+a Not Found. Try with @insensitive or @i.
+gerp-test-dirs/tinyData/test.txt:4: we are the champions
+we Not Found. Try with @insensitive or @i.
+make Not Found. Try with @insensitive or @i.

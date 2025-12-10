@@ -1,0 +1,11 @@
+gerp-test-dirs/tinyData/test.txt:5: we are the champions
+gerp-test-dirs/tinyData/test.txt:6: we we we
+WE Not Found. Try with @insensitive or @i.
+make Not Found. Try with @insensitive or @i.
+MAKE Not Found. Try with @insensitive or @i.
+gerp-test-dirs/tinyData/test.txt:1: i wish this was gibberish
+gerp-test-dirs/tinyData/test.txt:5: we are the champions
+gerp-test-dirs/tinyData/test.txt:6: we we we
+gerp-test-dirs/tinyData/test.txt:5: we are the champions
+gerp-test-dirs/tinyData/test.txt:6: we we we
+make Not Found.

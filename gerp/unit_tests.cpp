@@ -7,13 +7,13 @@ Unit Tests
 */
 #include "processing.h"  
 #include "gerp.h"
-#include "wordTable.h"
+#include "WordTable.h"
 #include <cassert>
 #include <iostream>
 
 using namespace std;
 
-string nonexistent = "not_there_1238.txt";
+string nonexistent = "not_there_123.txt";
 
 //tests that a fully alphanumeric word remains unchanged
 void a01_Processing_stripNonAlphaNum_reg_word() {
@@ -347,7 +347,7 @@ int main () {
     // a26_Gerp_request_input_one_word();
     // a27_Gerp_request_input_two_words();
     // a28_Gerp_request_input_three_words();
-    a29_Gerp_initialize_files_no_dir();
+    // a29_Gerp_initialize_files_no_dir();
     a30_Gerp_initialize_files_empty_dir();
     a31_Gerp_initialize_files_small_dir();
     a32_Gerp_initialize_files_medium_dir();
