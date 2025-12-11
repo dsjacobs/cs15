@@ -18,6 +18,7 @@ using namespace std;
 #define __WORDTABLEENTRY_H
 
 struct caseVariation {
+    size_t caseVariationID;
     string spelling;
     bool initialized;
     vector<size_t> caseFileList;
@@ -35,7 +36,7 @@ class WordTableEntry {
         vector<caseVariation> caseVariations;
         size_t tableCapacity;
 
-        caseVariation get(string origCasing);
+        int caseVariationIndex(string origCasing);
         void add(caseVariation newVariation);
 };
 

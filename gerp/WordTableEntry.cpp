@@ -11,16 +11,15 @@ WordTableEntry::WordTableEntry(string wordLower, size_t capacity):
 
 WordTableEntry::WordTableEntry() {};
 
-caseVariation WordTableEntry::get(string origCasing) {
-    caseVariation uninit_case;
+int WordTableEntry::caseVariationIndex(string origCasing) {
     for (size_t e = 0; e < caseVariations.size(); e++)
     {
         caseVariation c = caseVariations[e];
         if (c.spelling==origCasing) {
-            return c;
+            return e;
         }
     }
-    return uninit_case;
+    return -1;
 };
 
 void WordTableEntry::add(caseVariation newVariation) {

@@ -81,38 +81,38 @@ size_t WordTable::wordCapacity() {
     return capacity;
 }
 
-void WordTable::newWord(string word, string wordLower, int fileID,int LineNum) {
-    size_t hashValue = myHash(wordLower);
-    size_t hashMod = hashValue % wordCapacity();
-    vector<WordTableEntry> wordlist = gerpWordList[hashMod];
-    bool found = false;
-    for (size_t x = 0; x < wordlist.size(); x++) {
-        WordTableEntry wte = wordlist[x];
-        // upper case match
-        if (wte.spellingLower==wordLower) {
-            found = true;
-            caseVariation cv = wte.get(word);
-            // lower case match
-            if (cv.initialized) {
-                ExactCasingExists(cv, fileID, LineNum);
-            }
-            // just upper case
-            else {
-                LowercaseExists(wte, word, fileID, LineNum);
+
+void WordTable::printWordTable() {
+    for (size_t x = 0; x < gerpWordList.size(); x++) {
+        cout << "Index/HashMod of: " << x << endl;
+        cout << gerpWordList[x].size(); 
+        cout << " words found here, including: " << endl;
+        for (size_t y=0; y < gerpWordList[x].size(); y++) {
+            WordTableEntry wte = gerpWordList[x][y]; 
+            for (size_t c = 0; c < wte.caseVariations.size(); c++) {
+                caseVariation cv = wte.caseVariations[c];
+                cout << cv.spelling << endl;
+                for (size_t k = 0; k < cv.caseFileList.size(); k++) {
+                    cout << "in file: " << cv.caseFileList[x] << endl;
+                    cout << "on line: " << cv.caseLineList[x] << endl;
+                }
             }
         }
     }
-    if (not found) {
-        addLower(word, wordLower, fileID, LineNum);
-    }
+    cout << loadFactor() << endl;
 }
 
-void WordTable::addLower(string word, string wordLower, int fileID, int LineNum) {
-    entrySize++;
+
+void WordTable::addLower(string word, string wordLower, int fileID, int 
+    LineNum) {
+    cout << "addLower: " << word << " " << wordLower << " " << fileID;
+    cout << " " << LineNum << endl;
+
     if (loadFactor() > 0.7) {
         expand();
     }
     size_t hashmod = myHash(wordLower)%wordCapacity();
+    
     // build lower case    
     caseVariation cv;
     cv.spelling = word;
@@ -124,30 +124,4 @@ void WordTable::addLower(string word, string wordLower, int fileID, int LineNum)
     WordTableEntry wte(wordLower, wordCapacity());
     wte.caseVariations.push_back(cv);
     gerpWordList[hashmod].push_back(wte);
-}
-
-void WordTable::ExactCasingExists(caseVariation cv, int fileID, int LineNum) {
-    cv.caseFileList.push_back(fileID);
-    cv.caseLineList.push_back(LineNum);
-}
-
-void WordTable::LowercaseExists(WordTableEntry wte, string word, int fileID, int LineNum) {
-    caseVariation cv;
-    cv.spelling = word;
-    cv.initialized = true;
-    cv.caseFileList.push_back(fileID);
-    cv.caseLineList.push_back(LineNum);
-    wte.add(cv);
-}
-
-void WordTable::printWordTable() {
-    for (size_t x = 0; x < gerpWordList.size(); x++) {
-        cout << "Index/HashMod of: " << x << endl;
-        cout << gerpWordList[x].size(); 
-        cout << " words found here, including: " << endl;
-        for (size_t y=0; y < gerpWordList[x].size(); y++) {
-            cout << gerpWordList[x][y].spellingLower << endl;
-        }
-    }
-    cout << loadFactor();
-}
+};

@@ -48,36 +48,52 @@ gerp::~gerp() {};
 // sends to route cmd for processing.
 void gerp::run() {
     while (not hasQuit) {
-        string input = requestInput();
+        vector<string> input = requestInput();
         routeCmd(input);
     }
 };
 
+// Requests input from the user with "Query?" and returns that input
+vector<string> gerp::requestInput() {
+    string input;
+    getline(cin, input);
+    stringstream inputstream(input);
+    vector<string> inputVec;
+    string word;
+    cout << "Query?" << endl;
+    while (inputstream >> word) {
+        inputVec.push_back(word);
+    }
+    return inputVec;
+};
+
 // Given an input string from the user, determines whether to quit, create a 
 // new file, or perform case sensitive or insensitve search.
-void gerp::routeCmd(string input) {
-    if (input.substr(0, 2)=="@f") {
-        string newFilename = input.substr(3, input.length());
+void gerp::routeCmd(vector<string> input) {
+    if (input[0]=="@f"){
+        string newFilename;
+        // TODO: Fix for multi word filenames
+        // for (size_t x = 1; x < input.size()-1; x++) {
+        //     newFilename += input[x];
+        //     newFilename += " "; 
+        // }
+        newFilename = input[1];
         outputStream = createOfstream(newFilename);
     }
-    else if (input=="@q" or input=="@quit") {
+    else if (input[0]=="@q" or input[0]=="@quit") {
         quit();
     }
-    else if(input.substr(0, 2)=="@i" or input.substr(0,12)=="@insensitive") {
-        insensitiveSearch(input);
+    else if(input[0]=="@i" or input[0]=="@insensitive") {
+        for (size_t x = 1; x < input.size(); x++) {
+            insensitiveSearch(input[x]);
+        }
     }
     else {
-        search(input);
+        for (size_t x = 0; x < input.size(); x++) {
+            search(input[x]);
+        }
     }
 }
-
-// Requests input from the user with "Query?" and returns that input
-string gerp::requestInput() {
-    string inputCommand;
-    cout << "Query?" << endl;
-    getline(cin, inputCommand);  
-    return inputCommand;
-};
 
 // Called as part of the constructor. Takes in a list files that is output
 // from traverse directory, and stores the content of each file.
@@ -94,6 +110,11 @@ void gerp::initializeFiles(string directory) {
     for (size_t i = 0; i < gerpFileList.size(); i++) {
         FileStruct file = gerpFileList[i];
     }
+    // comment out when not debugging
+    
+    gerpPrintWordTable();
+
+    //
 };
 
 ifstream readFileOpenStream(string filename) {
@@ -128,7 +149,7 @@ void gerp::processLine(string line, int fileID, int LineNum) {
     while (linestream >> word) {
         string wordClean = stripNonAlphaNum(word);
         string wordLower = wordToLower(wordClean);
-        gerpWordTable.newWord(wordClean, wordLower, fileID, LineNum); 
+        newWord(wordClean, wordLower, fileID, LineNum); 
     }
 }
 
@@ -148,6 +169,7 @@ void gerp::search(string input) {
             for (size_t x = 0; x < wte.caseVariations.size(); x++) {
                 caseVariation cv = wte.caseVariations[x];
                 if (cv.spelling==wordClean) {
+                    foundMatch = true;
                     printAllInstancesOfCasing(cv);
                 }
             }
@@ -200,3 +222,71 @@ vector<WordTableEntry> gerp::inputToCollisionList(string wordLower) {
     vector<WordTableEntry> wordlist = gerpWordTable.gerpWordList[hashMod];
     return wordlist;
 };
+
+void gerp::gerpPrintWordTable() {
+    for (size_t x = 0; x < gerpWordTable.gerpWordList.size(); x++) {
+        cout << "Index/HashMod of: " << x << endl;
+        cout << gerpWordTable.gerpWordList[x].size(); 
+        cout << " words found here, including: " << endl;
+        for (size_t y=0; y < gerpWordTable.gerpWordList[x].size(); y++) {
+            WordTableEntry wte = gerpWordTable.gerpWordList[x][y]; 
+            for (size_t c = 0; c < wte.caseVariations.size(); c++) {
+                caseVariation cv = wte.caseVariations[c];
+                cout << cv.spelling << endl;
+                cout << cv.caseFileList.size() << endl;
+                for (size_t k = 0; k < cv.caseFileList.size(); k++) {
+                    size_t fileNum = cv.caseFileList[k];
+                    size_t lineNum = cv.caseLineList[k];
+                    string text = gerpFileList[fileNum].textVector[lineNum];
+                    cout << fileNum << ":" << lineNum;
+                    cout << ": " << text << endl;
+                }
+            }
+
+        }
+    }
+    cout << gerpWordTable.loadFactor() << endl;
+}
+
+void gerp::newWord(string word, string wordLower, int fileID,int LineNum) {
+    size_t hashValue = gerpWordTable.myHash(wordLower);
+    size_t hashMod = hashValue % gerpWordTable.wordCapacity();
+    vector<WordTableEntry> wordlist = gerpWordTable.gerpWordList[hashMod];
+    bool found = false;
+    for (size_t x = 0; x < wordlist.size(); x++) {
+        WordTableEntry wte = wordlist[x];
+        // upper case match
+        if (wte.spellingLower==wordLower) {
+            found = true;
+            size_t wordIndex = x;
+            // lower case match
+            if (wte.caseVariationIndex(word)>=0) {
+                size_t CVI = wte.caseVariationIndex(word);
+                ExactCasingExists(hashMod, wordIndex, CVI, fileID, LineNum);
+            }
+            // just upper case
+            else {
+                LowercaseExists(word, hashMod, wordIndex, fileID, LineNum);
+            }
+        }
+    }
+    if (not found) {
+        gerpWordTable.addLower(word, wordLower, fileID, LineNum);
+    }
+}
+
+void gerp::ExactCasingExists(size_t hashMod, size_t wordIndex, size_t CVI, 
+                                    size_t fileID, size_t LineNum)
+ {
+    gerpWordTable.gerpWordList[hashMod][wordIndex].caseVariations[CVI].caseFileList.push_back(fileID);
+    gerpWordTable.gerpWordList[hashMod][wordIndex].caseVariations[CVI].caseLineList.push_back(LineNum);
+};
+
+void gerp::LowercaseExists(string word, size_t hashMod, size_t wordIndex, int fileID, int LineNum) {
+    caseVariation cv;
+    cv.spelling = word;
+    cv.initialized = true;
+    cv.caseFileList.push_back(fileID);
+    cv.caseLineList.push_back(LineNum);
+    gerpWordTable.gerpWordList[hashMod][wordIndex].caseVariations.push_back(cv);
+}
