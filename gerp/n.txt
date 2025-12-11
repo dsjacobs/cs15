@@ -2,3 +2,5 @@ gerp-test-dirs/tinyData/test.txt:4: we are the champions
 gerp-test-dirs/tinyData/test.txt:5: we we we
 gerp-test-dirs/tinyData/test.txt:5: we we we
 gerp-test-dirs/tinyData/test.txt:5: we we we
+WE Not Found. Try with @insensitive or @i.
+gerp-test-dirs/tinyData/test.txt:4: we are the champions

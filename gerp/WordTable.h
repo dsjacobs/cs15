@@ -21,14 +21,17 @@ using namespace std;
 class WordTable {
     public: 
         WordTable();
-        vector<vector<WordTableEntry>> gerpWordList;
+        ~WordTable();
+        WordTable(const WordTable &other);
+        vector<vector<WordTableEntry>> *gerpWordList;
 
         size_t size();
-        size_t wordCapacity();
+        size_t wordCapacity() const;
+
         float loadFactor();
         size_t myHash(string word);
-        void reHash();
-
+        void reHash(vector<vector<WordTableEntry>>* otherWordList, 
+                                                        size_t otherCapacity);
         bool contains(string wordLower);
         WordTableEntry get(string wordLower);
 
