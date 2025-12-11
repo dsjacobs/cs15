@@ -107,14 +107,6 @@ void gerp::initializeFiles(string directory) {
         processFile(newID, newName);
         counter++;
     }
-    for (size_t i = 0; i < gerpFileList.size(); i++) {
-        FileStruct file = gerpFileList[i];
-    }
-    // comment out when not debugging
-    
-    // gerpPrintWordTable();
-
-    //
 };
 
 ifstream readFileOpenStream(string filename) {
@@ -281,20 +273,6 @@ void gerp::ExactCasingExists(size_t hashMod, size_t wordIndex, size_t CVI,
     (*(gerpWordTable.gerpWordList))[hashMod][wordIndex].caseVariations[CVI].caseFileList.push_back(fileID);
     (*(gerpWordTable.gerpWordList))[hashMod][wordIndex].caseVariations[CVI].caseLineList.push_back(LineNum);
 };
-
-// void gerp::ExactCasingExists(size_t hashMod, size_t wordIndex, size_t CVI, 
-//                                     size_t fileID, size_t LineNum)
-//  {
-//     WordTableEntry *wte = gerpWordTable.gerpWordList[hashMod][wordIndex];
-//     caseVariation *cv = wte->caseVariations[CVI];
-//     size_t latestFileID = cv->caseFileList.back();
-//     size_t latestLineNum = cv->caseLineList.back();
-//     bool sameLine = (latestFileID==fileID and latestFileNum==latestFileNum);
-//     if (not sameLine) {
-//         cv->caseFileList.push_back(fileID);
-//         cv->caseLineList.push_back(lineNum);
-//     }
-// };
 
 void gerp::LowercaseExists(string word, size_t hashMod, size_t wordIndex, int fileID, int LineNum) {
     caseVariation cv;

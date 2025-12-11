@@ -33,6 +33,7 @@ WordTable::WordTable(const WordTable &other) {
 
 void WordTable::reHash(vector<vector<WordTableEntry>>* otherWordList, 
                                                         size_t otherCapacity) {
+    cout << "rehashing from: " << otherCapacity << " to: " << capacity << endl;
     vector<vector<WordTableEntry>> *newGerpWordList = new vector<vector<WordTableEntry>>(wordCapacity());
     for (size_t i = 0; i < otherCapacity; i++) {
         vector<WordTableEntry> collisionlist = (*otherWordList)[i];
@@ -148,4 +149,5 @@ void WordTable::addLower(string word, string wordLower, int fileID, int
     WordTableEntry wte(wordLower, wordCapacity());
     wte.caseVariations.push_back(cv);
     (*gerpWordList)[hashmod].push_back(wte);
+    entrySize++;
 };
