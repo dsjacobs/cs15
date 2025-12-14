@@ -50,9 +50,9 @@ class gerp {
         void routeCmd(vector<string> input);
 
         void newWord(string word, string wordLower, int fileID,int LineNum);    
-        void ExactCasingExists(size_t hashMod, size_t wordIndex, size_t CVI, 
+        void ExactCaseExists(WordTableEntry *wte, size_t CVI, 
                                     size_t fileID, size_t LineNum);
-        void LowercaseExists(string word, size_t hashMod, size_t wordIndex, int fileID, int LineNum);
+        void LowercaseExists(string word, WordTableEntry *wte, int fileID, int LineNum);
 
 
         void initializeFiles(string directory);
@@ -61,8 +61,6 @@ class gerp {
         void printAllInstancesOfWord(WordTableEntry wte);
         void printAllInstancesOfCasing(caseVariation cv);
         vector<WordTableEntry> inputToCollisionList(string input);
-
-        void gerpPrintWordTable();
 };
 
 #endif

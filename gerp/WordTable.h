@@ -30,24 +30,13 @@ class WordTable {
 
         float loadFactor();
         size_t myHash(string word);
-        void reHash(vector<vector<WordTableEntry>>* otherWordList, 
-                                                        size_t otherCapacity);
-        bool contains(string wordLower);
-        WordTableEntry get(string wordLower);
-
-        // void newWord(string word, string wordLower, int fileID,int LineNum);    
-        // void ExactCasingExists(size_t hashMod, size_t wordIndex, size_t CVI, 
-        //                             size_t fileID, size_t LineNum);
-        // void LowercaseExists(WordTableEntry wte, string word, int fileID, int LineNum);
+        void reHash(size_t oldCapacity);
+        void expand();
         void addLower(string word, string wordLower, int fileID, int LineNum);
-
-        void printWordTable();
-
     
     private:
         size_t entrySize;
         size_t capacity;
-        void expand();
 };
 
 #endif

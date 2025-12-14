@@ -7,9 +7,11 @@ these functions.
 
 Gerp.cpp
 Gerp.h
-main.cpp
-Makefile
-myhash.cpp
-unit_tests.cpp
 WordTable.cpp
 WordTable.h
+WordTableEntry.cpp
+WordTableEntry.h
+main.cpp
+Makefile
+unit_tests.cpp
+

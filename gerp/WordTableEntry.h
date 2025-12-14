@@ -18,18 +18,15 @@ using namespace std;
 #define __WORDTABLEENTRY_H
 
 struct caseVariation {
-    size_t caseVariationID;
     string spelling;
-    bool initialized;
     vector<size_t> caseFileList;
     vector<size_t> caseLineList; 
-    caseVariation() {initialized = false;}
 };
 
 class WordTableEntry {
     public:
         WordTableEntry();
-        WordTableEntry(string wordLower, size_t capacity);
+        WordTableEntry(string wordLower, size_t tableCapacity);
 
         size_t hashID;
         string spellingLower;

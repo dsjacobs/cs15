@@ -2,12 +2,11 @@
 
 using namespace std;
 
-WordTableEntry::WordTableEntry(string wordLower, size_t capacity): 
-       spellingLower(wordLower),  tableCapacity(capacity)
-    {
-        hash<string> myHash;
-        hashID = myHash(spellingLower)/capacity;
-    };
+WordTableEntry::WordTableEntry(string wordLower, size_t capacity):
+    spellingLower(wordLower), tableCapacity(capacity) {
+    hash<string> myHash;
+    hashID = myHash(spellingLower)/capacity;
+};
 
 WordTableEntry::WordTableEntry() {};
 
