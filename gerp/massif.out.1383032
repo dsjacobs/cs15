@@ -1,0 +1,1017 @@
+desc: (none)
+cmd: ./gerp gerp-test-dirs/smallGutenberg op.txt
+time_unit: i
+#-----------
+snapshot=0
+#-----------
+time=0
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=1
+#-----------
+time=146232103
+mem_heap_B=3887452
+mem_heap_extra_B=198260
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=2
+#-----------
+time=394849630
+mem_heap_B=13579992
+mem_heap_extra_B=264944
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=3
+#-----------
+time=629606602
+mem_heap_B=16221548
+mem_heap_extra_B=281724
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=4
+#-----------
+time=790930016
+mem_heap_B=26902890
+mem_heap_extra_B=452894
+mem_stacks_B=0
+heap_tree=detailed
+n5: 26902890 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 25067376 0x40DE42: std::__new_allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > >::allocate(unsigned long, void const*) (new_allocator.h:151)
+  n1: 25067376 0x40DDCF: allocate (alloc_traits.h:515)
+   n2: 25067376 0x40DDCF: std::_Vector_base<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::_M_allocate(unsigned long) (stl_vector.h:380)
+    n1: 15040416 0x40EAB8: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::_M_allocate_and_copy<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > > >(unsigned long, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >) (stl_vector.h:1621)
+     n1: 15040416 0x40D76E: std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::operator=(std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > const&) (vector.tcc:238)
+      n1: 15040416 0x40D0A4: WordTable::reHash(unsigned long) (WordTable.cpp:44)
+       n1: 15040416 0x40D1A0: WordTable::expand() (WordTable.cpp:51)
+        n1: 15040416 0x406593: gerp::addNewWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:279)
+         n1: 15040416 0x40608C: gerp::processWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:157)
+          n1: 15040416 0x405EAE: gerp::processLine(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:149)
+           n1: 15040416 0x405B4B: gerp::processFile(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:139)
+            n1: 15040416 0x404B4B: gerp::initializeFiles(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:114)
+             n1: 15040416 0x4048A8: gerp::gerp(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:32)
+              n0: 15040416 0x40BD9E: main (main.cpp:24)
+    n1: 10026960 0x40DD60: std::_Vector_base<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::_M_create_storage(unsigned long) (stl_vector.h:398)
+     n1: 10026960 0x40DC21: std::_Vector_base<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::_Vector_base(unsigned long, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > const&) (stl_vector.h:334)
+      n2: 10026960 0x40D548: std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::vector(unsigned long, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > const&) (stl_vector.h:557)
+       n1: 10026960 0x40CE6A: WordTable::reHash(unsigned long) (WordTable.cpp:30)
+        n1: 10026960 0x40D1A0: WordTable::expand() (WordTable.cpp:51)
+         n1: 10026960 0x406593: gerp::addNewWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:279)
+          n1: 10026960 0x40608C: gerp::processWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:157)
+           n1: 10026960 0x405EAE: gerp::processLine(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:149)
+            n1: 10026960 0x405B4B: gerp::processFile(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:139)
+             n1: 10026960 0x404B4B: gerp::initializeFiles(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:114)
+              n1: 10026960 0x4048A8: gerp::gerp(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:32)
+               n0: 10026960 0x40BD9E: main (main.cpp:24)
+       n0: 0 in 1 place, below massif's threshold (1.00%)
+ n1: 736560 0x407E32: std::__new_allocator<caseVariation>::allocate(unsigned long, void const*) (new_allocator.h:151)
+  n1: 736560 0x407DBF: allocate (alloc_traits.h:515)
+   n2: 736560 0x407DBF: std::_Vector_base<caseVariation, std::allocator<caseVariation> >::_M_allocate(unsigned long) (stl_vector.h:380)
+    n1: 736560 0x407CF0: std::_Vector_base<caseVariation, std::allocator<caseVariation> >::_M_create_storage(unsigned long) (stl_vector.h:398)
+     n1: 736560 0x407B61: std::_Vector_base<caseVariation, std::allocator<caseVariation> >::_Vector_base(unsigned long, std::allocator<caseVariation> const&) (stl_vector.h:334)
+      n1: 736560 0x407A4D: std::vector<caseVariation, std::allocator<caseVariation> >::vector(std::vector<caseVariation, std::allocator<caseVariation> > const&) (stl_vector.h:602)
+       n3: 736560 0x4072DB: WordTableEntry::WordTableEntry(WordTableEntry const&) (WordTableEntry.h:30)
+        n1: 392880 0x40E316: construct<WordTableEntry, const WordTableEntry &> (new_allocator.h:191)
+         n1: 392880 0x40E316: construct<WordTableEntry, const WordTableEntry &> (alloc_traits.h:575)
+          n1: 392880 0x40E316: void std::vector<WordTableEntry, std::allocator<WordTableEntry> >::_M_realloc_append<WordTableEntry const&>(WordTableEntry const&) (vector.tcc:634)
+           n2: 392880 0x40D69D: std::vector<WordTableEntry, std::allocator<WordTableEntry> >::push_back(WordTableEntry const&) (stl_vector.h:1294)
+            n1: 392880 0x40CF90: WordTable::reHash(unsigned long) (WordTable.cpp:36)
+             n1: 392880 0x40D1A0: WordTable::expand() (WordTable.cpp:51)
+              n1: 392880 0x406593: gerp::addNewWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:279)
+               n1: 392880 0x40608C: gerp::processWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:157)
+                n1: 392880 0x405EAE: gerp::processLine(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:149)
+                 n1: 392880 0x405B4B: gerp::processFile(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:139)
+                  n1: 392880 0x404B4B: gerp::initializeFiles(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:114)
+                   n1: 392880 0x4048A8: gerp::gerp(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:32)
+                    n0: 392880 0x40BD9E: main (main.cpp:24)
+            n0: 0 in 1 place, below massif's threshold (1.00%)
+        n1: 343680 0x40AAFC: void std::_Construct<WordTableEntry, WordTableEntry const&>(WordTableEntry*, WordTableEntry const&) (stl_construct.h:119)
+         n1: 343680 0x40AA1B: WordTableEntry* std::__do_uninit_copy<__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*>(__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, __gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*) (stl_uninitialized.h:120)
+          n1: 343680 0x40A9C4: WordTableEntry* std::__uninitialized_copy<false>::__uninit_copy<__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*>(__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, __gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*) (stl_uninitialized.h:137)
+           n1: 343680 0x40A97C: WordTableEntry* std::uninitialized_copy<__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*>(__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, __gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*) (stl_uninitialized.h:184)
+            n1: 343680 0x40A758: WordTableEntry* std::__uninitialized_copy_a<__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*, WordTableEntry>(__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, __gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*, std::allocator<WordTableEntry>&) (stl_uninitialized.h:373)
+             n1: 343680 0x40769D: std::vector<WordTableEntry, std::allocator<WordTableEntry> >::vector(std::vector<WordTableEntry, std::allocator<WordTableEntry> > const&) (stl_vector.h:606)
+              n1: 343680 0x40EEFC: void std::_Construct<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::vector<WordTableEntry, std::allocator<WordTableEntry> > const&>(std::vector<WordTableEntry, std::allocator<WordTableEntry> >*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > const&) (stl_construct.h:119)
+               n1: 343680 0x40EE1B: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::__do_uninit_copy<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*>(__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*) (stl_uninitialized.h:120)
+                n1: 343680 0x40EDC4: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::__uninitialized_copy<false>::__uninit_copy<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*>(__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*) (stl_uninitialized.h:137)
+                 n1: 343680 0x40ED7C: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::uninitialized_copy<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*>(__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*) (stl_uninitialized.h:184)
+                  n1: 343680 0x40ED38: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::__uninitialized_copy_a<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >(__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > >&) (stl_uninitialized.h:373)
+                   n1: 343680 0x40EAF1: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::_M_allocate_and_copy<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > > >(unsigned long, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >) (stl_vector.h:1624)
+                    n1: 343680 0x40D76E: std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::operator=(std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > const&) (vector.tcc:238)
+                     n1: 343680 0x40D0A4: WordTable::reHash(unsigned long) (WordTable.cpp:44)
+                      n1: 343680 0x40D1A0: WordTable::expand() (WordTable.cpp:51)
+                       n1: 343680 0x406593: gerp::addNewWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:279)
+                        n1: 343680 0x40608C: gerp::processWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:157)
+                         n1: 343680 0x405EAE: gerp::processLine(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:149)
+                          n1: 343680 0x405B4B: gerp::processFile(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:139)
+                           n1: 343680 0x404B4B: gerp::initializeFiles(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:114)
+                            n1: 343680 0x4048A8: gerp::gerp(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:32)
+                             n0: 343680 0x40BD9E: main (main.cpp:24)
+        n0: 0 in 1 place, below massif's threshold (1.00%)
+    n0: 0 in 1 place, below massif's threshold (1.00%)
+ n1: 546688 0x40A935: std::__new_allocator<WordTableEntry>::allocate(unsigned long, void const*) (new_allocator.h:151)
+  n1: 546688 0x40A8BF: allocate (alloc_traits.h:515)
+   n2: 546688 0x40A8BF: std::_Vector_base<WordTableEntry, std::allocator<WordTableEntry> >::_M_allocate(unsigned long) (stl_vector.h:380)
+    n1: 291072 0x40E29C: void std::vector<WordTableEntry, std::allocator<WordTableEntry> >::_M_realloc_append<WordTableEntry const&>(WordTableEntry const&) (vector.tcc:596)
+     n2: 291072 0x40D69D: std::vector<WordTableEntry, std::allocator<WordTableEntry> >::push_back(WordTableEntry const&) (stl_vector.h:1294)
+      n1: 291072 0x40CF90: WordTable::reHash(unsigned long) (WordTable.cpp:36)
+       n1: 291072 0x40D1A0: WordTable::expand() (WordTable.cpp:51)
+        n1: 291072 0x406593: gerp::addNewWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:279)
+         n1: 291072 0x40608C: gerp::processWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:157)
+          n1: 291072 0x405EAE: gerp::processLine(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:149)
+           n1: 291072 0x405B4B: gerp::processFile(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:139)
+            n1: 291072 0x404B4B: gerp::initializeFiles(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:114)
+             n1: 291072 0x4048A8: gerp::gerp(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:32)
+              n0: 291072 0x40BD9E: main (main.cpp:24)
+      n0: 0 in 1 place, below massif's threshold (1.00%)
+    n0: 255616 in 1 place, below massif's threshold (1.00%)
+ n1: 424480 0x408685: std::__new_allocator<unsigned long>::allocate(unsigned long, void const*) (new_allocator.h:151)
+  n1: 424480 0x40860F: allocate (alloc_traits.h:515)
+   n2: 424480 0x40860F: std::_Vector_base<unsigned long, std::allocator<unsigned long> >::_M_allocate(unsigned long) (stl_vector.h:380)
+    n1: 424480 0x408540: std::_Vector_base<unsigned long, std::allocator<unsigned long> >::_M_create_storage(unsigned long) (stl_vector.h:398)
+     n1: 424480 0x4083C1: std::_Vector_base<unsigned long, std::allocator<unsigned long> >::_Vector_base(unsigned long, std::allocator<unsigned long> const&) (stl_vector.h:334)
+      n1: 424480 0x40823D: std::vector<unsigned long, std::allocator<unsigned long> >::vector(std::vector<unsigned long, std::allocator<unsigned long> > const&) (stl_vector.h:602)
+       n0: 424480 in 2 places, all below massif's threshold (1.00%)
+    n0: 0 in 2 places, all below massif's threshold (1.00%)
+ n0: 127786 in 15 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=5
+#-----------
+time=1036660242
+mem_heap_B=31638972
+mem_heap_extra_B=317596
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=6
+#-----------
+time=1259463806
+mem_heap_B=52082070
+mem_heap_extra_B=515402
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=7
+#-----------
+time=1513988774
+mem_heap_B=42479412
+mem_heap_extra_B=577164
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=8
+#-----------
+time=1746382620
+mem_heap_B=22354784
+mem_heap_extra_B=470696
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=9
+#-----------
+time=1984008325
+mem_heap_B=63036734
+mem_heap_extra_B=678858
+mem_stacks_B=0
+heap_tree=detailed
+n4: 63036734 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 60161952 0x40DE42: std::__new_allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > >::allocate(unsigned long, void const*) (new_allocator.h:151)
+  n1: 60161952 0x40DDCF: allocate (alloc_traits.h:515)
+   n2: 60161952 0x40DDCF: std::_Vector_base<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::_M_allocate(unsigned long) (stl_vector.h:380)
+    n1: 40107984 0x40DD60: std::_Vector_base<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::_M_create_storage(unsigned long) (stl_vector.h:398)
+     n1: 40107984 0x40DC21: std::_Vector_base<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::_Vector_base(unsigned long, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > const&) (stl_vector.h:334)
+      n2: 40107984 0x40D548: std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::vector(unsigned long, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > const&) (stl_vector.h:557)
+       n1: 40107984 0x40CE6A: WordTable::reHash(unsigned long) (WordTable.cpp:30)
+        n1: 40107984 0x40D1A0: WordTable::expand() (WordTable.cpp:51)
+         n1: 40107984 0x406593: gerp::addNewWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:279)
+          n1: 40107984 0x40608C: gerp::processWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:157)
+           n1: 40107984 0x405EAE: gerp::processLine(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:149)
+            n1: 40107984 0x405B4B: gerp::processFile(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:139)
+             n1: 40107984 0x404B4B: gerp::initializeFiles(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:114)
+              n1: 40107984 0x4048A8: gerp::gerp(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:32)
+               n0: 40107984 0x40BD9E: main (main.cpp:24)
+       n0: 0 in 1 place, below massif's threshold (1.00%)
+    n1: 20053968 0x40EAB8: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::_M_allocate_and_copy<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > > >(unsigned long, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >) (stl_vector.h:1621)
+     n1: 20053968 0x40D76E: std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::operator=(std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > const&) (vector.tcc:238)
+      n1: 20053968 0x40D0A4: WordTable::reHash(unsigned long) (WordTable.cpp:44)
+       n1: 20053968 0x40D1A0: WordTable::expand() (WordTable.cpp:51)
+        n1: 20053968 0x406593: gerp::addNewWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:279)
+         n1: 20053968 0x40608C: gerp::processWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:157)
+          n1: 20053968 0x405EAE: gerp::processLine(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:149)
+           n1: 20053968 0x405B4B: gerp::processFile(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:139)
+            n1: 20053968 0x404B4B: gerp::initializeFiles(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:114)
+             n1: 20053968 0x4048A8: gerp::gerp(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:32)
+              n0: 20053968 0x40BD9E: main (main.cpp:24)
+ n1: 1239552 0x40A935: std::__new_allocator<WordTableEntry>::allocate(unsigned long, void const*) (new_allocator.h:151)
+  n1: 1239552 0x40A8BF: allocate (alloc_traits.h:515)
+   n2: 1239552 0x40A8BF: std::_Vector_base<WordTableEntry, std::allocator<WordTableEntry> >::_M_allocate(unsigned long) (stl_vector.h:380)
+    n1: 815744 0x40E29C: void std::vector<WordTableEntry, std::allocator<WordTableEntry> >::_M_realloc_append<WordTableEntry const&>(WordTableEntry const&) (vector.tcc:596)
+     n1: 815744 0x40D69D: std::vector<WordTableEntry, std::allocator<WordTableEntry> >::push_back(WordTableEntry const&) (stl_vector.h:1294)
+      n0: 815744 in 2 places, all below massif's threshold (1.00%)
+    n0: 423808 in 1 place, below massif's threshold (1.00%)
+ n1: 901200 0x407E32: std::__new_allocator<caseVariation>::allocate(unsigned long, void const*) (new_allocator.h:151)
+  n1: 901200 0x407DBF: allocate (alloc_traits.h:515)
+   n2: 901200 0x407DBF: std::_Vector_base<caseVariation, std::allocator<caseVariation> >::_M_allocate(unsigned long) (stl_vector.h:380)
+    n1: 891280 0x407CF0: std::_Vector_base<caseVariation, std::allocator<caseVariation> >::_M_create_storage(unsigned long) (stl_vector.h:398)
+     n1: 891280 0x407B61: std::_Vector_base<caseVariation, std::allocator<caseVariation> >::_Vector_base(unsigned long, std::allocator<caseVariation> const&) (stl_vector.h:334)
+      n1: 891280 0x407A4D: std::vector<caseVariation, std::allocator<caseVariation> >::vector(std::vector<caseVariation, std::allocator<caseVariation> > const&) (stl_vector.h:602)
+       n2: 891280 0x4072DB: WordTableEntry::WordTableEntry(WordTableEntry const&) (WordTableEntry.h:30)
+        n1: 824880 0x40E316: construct<WordTableEntry, const WordTableEntry &> (new_allocator.h:191)
+         n1: 824880 0x40E316: construct<WordTableEntry, const WordTableEntry &> (alloc_traits.h:575)
+          n1: 824880 0x40E316: void std::vector<WordTableEntry, std::allocator<WordTableEntry> >::_M_realloc_append<WordTableEntry const&>(WordTableEntry const&) (vector.tcc:634)
+           n2: 824880 0x40D69D: std::vector<WordTableEntry, std::allocator<WordTableEntry> >::push_back(WordTableEntry const&) (stl_vector.h:1294)
+            n1: 792720 0x40CF90: WordTable::reHash(unsigned long) (WordTable.cpp:36)
+             n1: 792720 0x40D1A0: WordTable::expand() (WordTable.cpp:51)
+              n1: 792720 0x406593: gerp::addNewWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:279)
+               n1: 792720 0x40608C: gerp::processWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:157)
+                n1: 792720 0x405EAE: gerp::processLine(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:149)
+                 n1: 792720 0x405B4B: gerp::processFile(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:139)
+                  n1: 792720 0x404B4B: gerp::initializeFiles(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:114)
+                   n1: 792720 0x4048A8: gerp::gerp(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:32)
+                    n0: 792720 0x40BD9E: main (main.cpp:24)
+            n0: 32160 in 1 place, below massif's threshold (1.00%)
+        n0: 66400 in 2 places, all below massif's threshold (1.00%)
+    n0: 9920 in 1 place, below massif's threshold (1.00%)
+ n0: 734030 in 16 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=10
+#-----------
+time=2218081306
+mem_heap_B=102947768
+mem_heap_extra_B=731944
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=11
+#-----------
+time=2542309799
+mem_heap_B=103988186
+mem_heap_extra_B=970006
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=12
+#-----------
+time=2827140771
+mem_heap_B=83967087
+mem_heap_extra_B=934089
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=13
+#-----------
+time=3112550455
+mem_heap_B=43031230
+mem_heap_extra_B=567194
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=14
+#-----------
+time=3334474734
+mem_heap_B=44022551
+mem_heap_extra_B=688513
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=15
+#-----------
+time=3524726585
+mem_heap_B=44064269
+mem_heap_extra_B=695323
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=16
+#-----------
+time=3746671202
+mem_heap_B=44805576
+mem_heap_extra_B=783856
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=17
+#-----------
+time=4000309512
+mem_heap_B=46088391
+mem_heap_extra_B=903449
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=18
+#-----------
+time=4181248387
+mem_heap_B=46551540
+mem_heap_extra_B=992052
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=19
+#-----------
+time=4343611912
+mem_heap_B=46946603
+mem_heap_extra_B=1072253
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=20
+#-----------
+time=4560112668
+mem_heap_B=47298171
+mem_heap_extra_B=1137109
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=21
+#-----------
+time=4884846113
+mem_heap_B=47891947
+mem_heap_extra_B=1235733
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=22
+#-----------
+time=5209593381
+mem_heap_B=49798455
+mem_heap_extra_B=1350609
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=23
+#-----------
+time=5509136905
+mem_heap_B=130362261
+mem_heap_extra_B=1377443
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=24
+#-----------
+time=5725622633
+mem_heap_B=130057333
+mem_heap_extra_B=1841811
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=25
+#-----------
+time=5887975793
+mem_heap_B=128783397
+mem_heap_extra_B=1701923
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=26
+#-----------
+time=6104561942
+mem_heap_B=209561925
+mem_heap_extra_B=1847203
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=27
+#-----------
+time=6321171345
+mem_heap_B=210809954
+mem_heap_extra_B=2066926
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=28
+#-----------
+time=6537703572
+mem_heap_B=212021416
+mem_heap_extra_B=2272728
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=29
+#-----------
+time=6808407944
+mem_heap_B=213596261
+mem_heap_extra_B=2538779
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=30
+#-----------
+time=7137397871
+mem_heap_B=215567173
+mem_heap_extra_B=2857987
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=31
+#-----------
+time=7286963755
+mem_heap_B=216489117
+mem_heap_extra_B=3005899
+mem_stacks_B=0
+heap_tree=peak
+n5: 216489117 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 200540016 0x40DE42: std::__new_allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > >::allocate(unsigned long, void const*) (new_allocator.h:151)
+  n1: 200540016 0x40DDCF: allocate (alloc_traits.h:515)
+   n2: 200540016 0x40DDCF: std::_Vector_base<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::_M_allocate(unsigned long) (stl_vector.h:380)
+    n1: 120324000 0x40EAB8: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::_M_allocate_and_copy<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > > >(unsigned long, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >) (stl_vector.h:1621)
+     n1: 120324000 0x40D76E: std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::operator=(std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > const&) (vector.tcc:238)
+      n1: 120324000 0x40D0A4: WordTable::reHash(unsigned long) (WordTable.cpp:44)
+       n1: 120324000 0x40D1A0: WordTable::expand() (WordTable.cpp:51)
+        n1: 120324000 0x406593: gerp::addNewWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:279)
+         n1: 120324000 0x40608C: gerp::processWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:157)
+          n1: 120324000 0x405EAE: gerp::processLine(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:149)
+           n1: 120324000 0x405B4B: gerp::processFile(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:139)
+            n1: 120324000 0x404B4B: gerp::initializeFiles(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:114)
+             n1: 120324000 0x4048A8: gerp::gerp(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:32)
+              n0: 120324000 0x40BD9E: main (main.cpp:24)
+    n1: 80216016 0x40DD60: std::_Vector_base<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::_M_create_storage(unsigned long) (stl_vector.h:398)
+     n1: 80216016 0x40DC21: std::_Vector_base<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::_Vector_base(unsigned long, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > const&) (stl_vector.h:334)
+      n2: 80216016 0x40D548: std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::vector(unsigned long, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > const&) (stl_vector.h:557)
+       n1: 80216016 0x40CE6A: WordTable::reHash(unsigned long) (WordTable.cpp:30)
+        n1: 80216016 0x40D1A0: WordTable::expand() (WordTable.cpp:51)
+         n1: 80216016 0x406593: gerp::addNewWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:279)
+          n1: 80216016 0x40608C: gerp::processWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:157)
+           n1: 80216016 0x405EAE: gerp::processLine(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:149)
+            n1: 80216016 0x405B4B: gerp::processFile(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:139)
+             n1: 80216016 0x404B4B: gerp::initializeFiles(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:114)
+              n1: 80216016 0x4048A8: gerp::gerp(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:32)
+               n0: 80216016 0x40BD9E: main (main.cpp:24)
+       n0: 0 in 1 place, below massif's threshold (1.00%)
+ n1: 7397248 0x408685: std::__new_allocator<unsigned long>::allocate(unsigned long, void const*) (new_allocator.h:151)
+  n1: 7397248 0x40860F: allocate (alloc_traits.h:515)
+   n2: 7397248 0x40860F: std::_Vector_base<unsigned long, std::allocator<unsigned long> >::_M_allocate(unsigned long) (stl_vector.h:380)
+    n1: 7397248 0x408540: std::_Vector_base<unsigned long, std::allocator<unsigned long> >::_M_create_storage(unsigned long) (stl_vector.h:398)
+     n1: 7397248 0x4083C1: std::_Vector_base<unsigned long, std::allocator<unsigned long> >::_Vector_base(unsigned long, std::allocator<unsigned long> const&) (stl_vector.h:334)
+      n2: 7397248 0x40823D: std::vector<unsigned long, std::allocator<unsigned long> >::vector(std::vector<unsigned long, std::allocator<unsigned long> > const&) (stl_vector.h:602)
+       n2: 3698624 0x407420: caseVariation::caseVariation(caseVariation const&) (WordTableEntry.h:20)
+        n1: 3698624 0x40800C: void std::_Construct<caseVariation, caseVariation const&>(caseVariation*, caseVariation const&) (stl_construct.h:119)
+         n1: 3698624 0x407F2B: caseVariation* std::__do_uninit_copy<__gnu_cxx::__normal_iterator<caseVariation const*, std::vector<caseVariation, std::allocator<caseVariation> > >, caseVariation*>(__gnu_cxx::__normal_iterator<caseVariation const*, std::vector<caseVariation, std::allocator<caseVariation> > >, __gnu_cxx::__normal_iterator<caseVariation const*, std::vector<caseVariation, std::allocator<caseVariation> > >, caseVariation*) (stl_uninitialized.h:120)
+          n1: 3698624 0x407ED4: caseVariation* std::__uninitialized_copy<false>::__uninit_copy<__gnu_cxx::__normal_iterator<caseVariation const*, std::vector<caseVariation, std::allocator<caseVariation> > >, caseVariation*>(__gnu_cxx::__normal_iterator<caseVariation const*, std::vector<caseVariation, std::allocator<caseVariation> > >, __gnu_cxx::__normal_iterator<caseVariation const*, std::vector<caseVariation, std::allocator<caseVariation> > >, caseVariation*) (stl_uninitialized.h:137)
+           n1: 3698624 0x407E8C: caseVariation* std::uninitialized_copy<__gnu_cxx::__normal_iterator<caseVariation const*, std::vector<caseVariation, std::allocator<caseVariation> > >, caseVariation*>(__gnu_cxx::__normal_iterator<caseVariation const*, std::vector<caseVariation, std::allocator<caseVariation> > >, __gnu_cxx::__normal_iterator<caseVariation const*, std::vector<caseVariation, std::allocator<caseVariation> > >, caseVariation*) (stl_uninitialized.h:184)
+            n1: 3698624 0x407BC8: caseVariation* std::__uninitialized_copy_a<__gnu_cxx::__normal_iterator<caseVariation const*, std::vector<caseVariation, std::allocator<caseVariation> > >, caseVariation*, caseVariation>(__gnu_cxx::__normal_iterator<caseVariation const*, std::vector<caseVariation, std::allocator<caseVariation> > >, __gnu_cxx::__normal_iterator<caseVariation const*, std::vector<caseVariation, std::allocator<caseVariation> > >, caseVariation*, std::allocator<caseVariation>&) (stl_uninitialized.h:373)
+             n1: 3698624 0x407AAD: std::vector<caseVariation, std::allocator<caseVariation> >::vector(std::vector<caseVariation, std::allocator<caseVariation> > const&) (stl_vector.h:606)
+              n1: 3698624 0x4072DB: WordTableEntry::WordTableEntry(WordTableEntry const&) (WordTableEntry.h:30)
+               n0: 3698624 in 3 places, all below massif's threshold (1.00%)
+        n0: 0 in 2 places, all below massif's threshold (1.00%)
+       n2: 3698624 0x407437: caseVariation::caseVariation(caseVariation const&) (WordTableEntry.h:20)
+        n1: 3698624 0x40800C: void std::_Construct<caseVariation, caseVariation const&>(caseVariation*, caseVariation const&) (stl_construct.h:119)
+         n1: 3698624 0x407F2B: caseVariation* std::__do_uninit_copy<__gnu_cxx::__normal_iterator<caseVariation const*, std::vector<caseVariation, std::allocator<caseVariation> > >, caseVariation*>(__gnu_cxx::__normal_iterator<caseVariation const*, std::vector<caseVariation, std::allocator<caseVariation> > >, __gnu_cxx::__normal_iterator<caseVariation const*, std::vector<caseVariation, std::allocator<caseVariation> > >, caseVariation*) (stl_uninitialized.h:120)
+          n1: 3698624 0x407ED4: caseVariation* std::__uninitialized_copy<false>::__uninit_copy<__gnu_cxx::__normal_iterator<caseVariation const*, std::vector<caseVariation, std::allocator<caseVariation> > >, caseVariation*>(__gnu_cxx::__normal_iterator<caseVariation const*, std::vector<caseVariation, std::allocator<caseVariation> > >, __gnu_cxx::__normal_iterator<caseVariation const*, std::vector<caseVariation, std::allocator<caseVariation> > >, caseVariation*) (stl_uninitialized.h:137)
+           n1: 3698624 0x407E8C: caseVariation* std::uninitialized_copy<__gnu_cxx::__normal_iterator<caseVariation const*, std::vector<caseVariation, std::allocator<caseVariation> > >, caseVariation*>(__gnu_cxx::__normal_iterator<caseVariation const*, std::vector<caseVariation, std::allocator<caseVariation> > >, __gnu_cxx::__normal_iterator<caseVariation const*, std::vector<caseVariation, std::allocator<caseVariation> > >, caseVariation*) (stl_uninitialized.h:184)
+            n1: 3698624 0x407BC8: caseVariation* std::__uninitialized_copy_a<__gnu_cxx::__normal_iterator<caseVariation const*, std::vector<caseVariation, std::allocator<caseVariation> > >, caseVariation*, caseVariation>(__gnu_cxx::__normal_iterator<caseVariation const*, std::vector<caseVariation, std::allocator<caseVariation> > >, __gnu_cxx::__normal_iterator<caseVariation const*, std::vector<caseVariation, std::allocator<caseVariation> > >, caseVariation*, std::allocator<caseVariation>&) (stl_uninitialized.h:373)
+             n1: 3698624 0x407AAD: std::vector<caseVariation, std::allocator<caseVariation> >::vector(std::vector<caseVariation, std::allocator<caseVariation> > const&) (stl_vector.h:606)
+              n1: 3698624 0x4072DB: WordTableEntry::WordTableEntry(WordTableEntry const&) (WordTableEntry.h:30)
+               n0: 3698624 in 3 places, all below massif's threshold (1.00%)
+        n0: 0 in 2 places, all below massif's threshold (1.00%)
+    n0: 0 in 2 places, all below massif's threshold (1.00%)
+ n1: 5030400 0x407E32: std::__new_allocator<caseVariation>::allocate(unsigned long, void const*) (new_allocator.h:151)
+  n1: 5030400 0x407DBF: allocate (alloc_traits.h:515)
+   n2: 5030400 0x407DBF: std::_Vector_base<caseVariation, std::allocator<caseVariation> >::_M_allocate(unsigned long) (stl_vector.h:380)
+    n1: 5030400 0x407CF0: std::_Vector_base<caseVariation, std::allocator<caseVariation> >::_M_create_storage(unsigned long) (stl_vector.h:398)
+     n1: 5030400 0x407B61: std::_Vector_base<caseVariation, std::allocator<caseVariation> >::_Vector_base(unsigned long, std::allocator<caseVariation> const&) (stl_vector.h:334)
+      n1: 5030400 0x407A4D: std::vector<caseVariation, std::allocator<caseVariation> >::vector(std::vector<caseVariation, std::allocator<caseVariation> > const&) (stl_vector.h:602)
+       n3: 5030400 0x4072DB: WordTableEntry::WordTableEntry(WordTableEntry const&) (WordTableEntry.h:30)
+        n1: 2515200 0x40AAFC: void std::_Construct<WordTableEntry, WordTableEntry const&>(WordTableEntry*, WordTableEntry const&) (stl_construct.h:119)
+         n1: 2515200 0x40AA1B: WordTableEntry* std::__do_uninit_copy<__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*>(__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, __gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*) (stl_uninitialized.h:120)
+          n1: 2515200 0x40A9C4: WordTableEntry* std::__uninitialized_copy<false>::__uninit_copy<__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*>(__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, __gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*) (stl_uninitialized.h:137)
+           n1: 2515200 0x40A97C: WordTableEntry* std::uninitialized_copy<__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*>(__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, __gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*) (stl_uninitialized.h:184)
+            n1: 2515200 0x40A758: WordTableEntry* std::__uninitialized_copy_a<__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*, WordTableEntry>(__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, __gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*, std::allocator<WordTableEntry>&) (stl_uninitialized.h:373)
+             n1: 2515200 0x40769D: std::vector<WordTableEntry, std::allocator<WordTableEntry> >::vector(std::vector<WordTableEntry, std::allocator<WordTableEntry> > const&) (stl_vector.h:606)
+              n1: 2515200 0x40EEFC: void std::_Construct<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::vector<WordTableEntry, std::allocator<WordTableEntry> > const&>(std::vector<WordTableEntry, std::allocator<WordTableEntry> >*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > const&) (stl_construct.h:119)
+               n1: 2515200 0x40EE1B: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::__do_uninit_copy<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*>(__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*) (stl_uninitialized.h:120)
+                n1: 2515200 0x40EDC4: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::__uninitialized_copy<false>::__uninit_copy<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*>(__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*) (stl_uninitialized.h:137)
+                 n1: 2515200 0x40ED7C: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::uninitialized_copy<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*>(__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*) (stl_uninitialized.h:184)
+                  n1: 2515200 0x40ED38: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::__uninitialized_copy_a<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >(__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > >&) (stl_uninitialized.h:373)
+                   n1: 2515200 0x40EAF1: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::_M_allocate_and_copy<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > > >(unsigned long, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >) (stl_vector.h:1624)
+                    n1: 2515200 0x40D76E: std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::operator=(std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > const&) (vector.tcc:238)
+                     n1: 2515200 0x40D0A4: WordTable::reHash(unsigned long) (WordTable.cpp:44)
+                      n1: 2515200 0x40D1A0: WordTable::expand() (WordTable.cpp:51)
+                       n1: 2515200 0x406593: gerp::addNewWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:279)
+                        n1: 2515200 0x40608C: gerp::processWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:157)
+                         n1: 2515200 0x405EAE: gerp::processLine(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:149)
+                          n1: 2515200 0x405B4B: gerp::processFile(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:139)
+                           n1: 2515200 0x404B4B: gerp::initializeFiles(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:114)
+                            n1: 2515200 0x4048A8: gerp::gerp(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:32)
+                             n0: 2515200 0x40BD9E: main (main.cpp:24)
+        n1: 2515200 0x40E316: construct<WordTableEntry, const WordTableEntry &> (new_allocator.h:191)
+         n1: 2515200 0x40E316: construct<WordTableEntry, const WordTableEntry &> (alloc_traits.h:575)
+          n1: 2515200 0x40E316: void std::vector<WordTableEntry, std::allocator<WordTableEntry> >::_M_realloc_append<WordTableEntry const&>(WordTableEntry const&) (vector.tcc:634)
+           n2: 2515200 0x40D69D: std::vector<WordTableEntry, std::allocator<WordTableEntry> >::push_back(WordTableEntry const&) (stl_vector.h:1294)
+            n1: 2515200 0x40CF90: WordTable::reHash(unsigned long) (WordTable.cpp:36)
+             n1: 2515200 0x40D1A0: WordTable::expand() (WordTable.cpp:51)
+              n1: 2515200 0x406593: gerp::addNewWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:279)
+               n1: 2515200 0x40608C: gerp::processWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:157)
+                n1: 2515200 0x405EAE: gerp::processLine(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:149)
+                 n1: 2515200 0x405B4B: gerp::processFile(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:139)
+                  n1: 2515200 0x404B4B: gerp::initializeFiles(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:114)
+                   n1: 2515200 0x4048A8: gerp::gerp(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:32)
+                    n0: 2515200 0x40BD9E: main (main.cpp:24)
+            n0: 0 in 1 place, below massif's threshold (1.00%)
+        n0: 0 in 1 place, below massif's threshold (1.00%)
+    n0: 0 in 1 place, below massif's threshold (1.00%)
+ n1: 3314944 0x40A935: std::__new_allocator<WordTableEntry>::allocate(unsigned long, void const*) (new_allocator.h:151)
+  n1: 3314944 0x40A8BF: allocate (alloc_traits.h:515)
+   n1: 3314944 0x40A8BF: std::_Vector_base<WordTableEntry, std::allocator<WordTableEntry> >::_M_allocate(unsigned long) (stl_vector.h:380)
+    n0: 3314944 in 2 places, all below massif's threshold (1.00%)
+ n0: 206509 in 15 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=32
+#-----------
+time=7538823649
+mem_heap_B=171665211
+mem_heap_extra_B=2008181
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=33
+#-----------
+time=7790115661
+mem_heap_B=90900504
+mem_heap_extra_B=1362656
+mem_stacks_B=0
+heap_tree=detailed
+n5: 90900504 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 80216016 0x40DE42: std::__new_allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > >::allocate(unsigned long, void const*) (new_allocator.h:151)
+  n1: 80216016 0x40DDCF: allocate (alloc_traits.h:515)
+   n2: 80216016 0x40DDCF: std::_Vector_base<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::_M_allocate(unsigned long) (stl_vector.h:380)
+    n1: 80216016 0x40EAB8: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::_M_allocate_and_copy<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > > >(unsigned long, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >) (stl_vector.h:1621)
+     n1: 80216016 0x40D76E: std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::operator=(std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > const&) (vector.tcc:238)
+      n1: 80216016 0x40D0A4: WordTable::reHash(unsigned long) (WordTable.cpp:44)
+       n1: 80216016 0x40D1A0: WordTable::expand() (WordTable.cpp:51)
+        n1: 80216016 0x406593: gerp::addNewWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:279)
+         n1: 80216016 0x40608C: gerp::processWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:157)
+          n1: 80216016 0x405EAE: gerp::processLine(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:149)
+           n1: 80216016 0x405B4B: gerp::processFile(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:139)
+            n1: 80216016 0x404B4B: gerp::initializeFiles(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:114)
+             n1: 80216016 0x4048A8: gerp::gerp(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:32)
+              n0: 80216016 0x40BD9E: main (main.cpp:24)
+    n0: 0 in 1 place, below massif's threshold (1.00%)
+ n1: 6258816 0x408685: std::__new_allocator<unsigned long>::allocate(unsigned long, void const*) (new_allocator.h:151)
+  n1: 6258816 0x40860F: allocate (alloc_traits.h:515)
+   n3: 6258816 0x40860F: std::_Vector_base<unsigned long, std::allocator<unsigned long> >::_M_allocate(unsigned long) (stl_vector.h:380)
+    n1: 5102400 0x40AC0C: void std::vector<unsigned long, std::allocator<unsigned long> >::_M_realloc_append<unsigned long const&>(unsigned long const&) (vector.tcc:596)
+     n2: 5102400 0x40778A: std::vector<unsigned long, std::allocator<unsigned long> >::push_back(unsigned long const&) (stl_vector.h:1294)
+      n1: 2551200 0x406B9C: gerp::ExactCaseExists(caseVariation*, unsigned long, unsigned long) (gerp.cpp:291)
+       n1: 2551200 0x406366: gerp::addIfExists(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:260)
+        n1: 2551200 0x406009: gerp::processWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:156)
+         n1: 2551200 0x405EAE: gerp::processLine(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:149)
+          n1: 2551200 0x405B4B: gerp::processFile(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:139)
+           n1: 2551200 0x404B4B: gerp::initializeFiles(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:114)
+            n1: 2551200 0x4048A8: gerp::gerp(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:32)
+             n0: 2551200 0x40BD9E: main (main.cpp:24)
+      n1: 2551200 0x406BAD: gerp::ExactCaseExists(caseVariation*, unsigned long, unsigned long) (gerp.cpp:292)
+       n1: 2551200 0x406366: gerp::addIfExists(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:260)
+        n1: 2551200 0x406009: gerp::processWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:156)
+         n1: 2551200 0x405EAE: gerp::processLine(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:149)
+          n1: 2551200 0x405B4B: gerp::processFile(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:139)
+           n1: 2551200 0x404B4B: gerp::initializeFiles(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:114)
+            n1: 2551200 0x4048A8: gerp::gerp(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:32)
+             n0: 2551200 0x40BD9E: main (main.cpp:24)
+    n1: 1156416 0x408540: std::_Vector_base<unsigned long, std::allocator<unsigned long> >::_M_create_storage(unsigned long) (stl_vector.h:398)
+     n1: 1156416 0x4083C1: std::_Vector_base<unsigned long, std::allocator<unsigned long> >::_Vector_base(unsigned long, std::allocator<unsigned long> const&) (stl_vector.h:334)
+      n1: 1156416 0x40823D: std::vector<unsigned long, std::allocator<unsigned long> >::vector(std::vector<unsigned long, std::allocator<unsigned long> > const&) (stl_vector.h:602)
+       n0: 1156416 in 2 places, all below massif's threshold (1.00%)
+    n0: 0 in 1 place, below massif's threshold (1.00%)
+ n1: 2560880 0x407E32: std::__new_allocator<caseVariation>::allocate(unsigned long, void const*) (new_allocator.h:151)
+  n1: 2560880 0x407DBF: allocate (alloc_traits.h:515)
+   n2: 2560880 0x407DBF: std::_Vector_base<caseVariation, std::allocator<caseVariation> >::_M_allocate(unsigned long) (stl_vector.h:380)
+    n1: 2541200 0x407CF0: std::_Vector_base<caseVariation, std::allocator<caseVariation> >::_M_create_storage(unsigned long) (stl_vector.h:398)
+     n1: 2541200 0x407B61: std::_Vector_base<caseVariation, std::allocator<caseVariation> >::_Vector_base(unsigned long, std::allocator<caseVariation> const&) (stl_vector.h:334)
+      n1: 2541200 0x407A4D: std::vector<caseVariation, std::allocator<caseVariation> >::vector(std::vector<caseVariation, std::allocator<caseVariation> > const&) (stl_vector.h:602)
+       n2: 2541200 0x4072DB: WordTableEntry::WordTableEntry(WordTableEntry const&) (WordTableEntry.h:30)
+        n1: 2506480 0x40AAFC: void std::_Construct<WordTableEntry, WordTableEntry const&>(WordTableEntry*, WordTableEntry const&) (stl_construct.h:119)
+         n1: 2506480 0x40AA1B: WordTableEntry* std::__do_uninit_copy<__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*>(__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, __gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*) (stl_uninitialized.h:120)
+          n1: 2506480 0x40A9C4: WordTableEntry* std::__uninitialized_copy<false>::__uninit_copy<__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*>(__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, __gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*) (stl_uninitialized.h:137)
+           n1: 2506480 0x40A97C: WordTableEntry* std::uninitialized_copy<__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*>(__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, __gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*) (stl_uninitialized.h:184)
+            n1: 2506480 0x40A758: WordTableEntry* std::__uninitialized_copy_a<__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*, WordTableEntry>(__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, __gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*, std::allocator<WordTableEntry>&) (stl_uninitialized.h:373)
+             n1: 2506480 0x40769D: std::vector<WordTableEntry, std::allocator<WordTableEntry> >::vector(std::vector<WordTableEntry, std::allocator<WordTableEntry> > const&) (stl_vector.h:606)
+              n1: 2506480 0x40EEFC: void std::_Construct<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::vector<WordTableEntry, std::allocator<WordTableEntry> > const&>(std::vector<WordTableEntry, std::allocator<WordTableEntry> >*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > const&) (stl_construct.h:119)
+               n1: 2506480 0x40EE1B: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::__do_uninit_copy<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*>(__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*) (stl_uninitialized.h:120)
+                n1: 2506480 0x40EDC4: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::__uninitialized_copy<false>::__uninit_copy<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*>(__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*) (stl_uninitialized.h:137)
+                 n1: 2506480 0x40ED7C: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::uninitialized_copy<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*>(__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*) (stl_uninitialized.h:184)
+                  n1: 2506480 0x40ED38: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::__uninitialized_copy_a<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >(__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > >&) (stl_uninitialized.h:373)
+                   n1: 2506480 0x40EAF1: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::_M_allocate_and_copy<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > > >(unsigned long, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >) (stl_vector.h:1624)
+                    n1: 2506480 0x40D76E: std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::operator=(std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > const&) (vector.tcc:238)
+                     n1: 2506480 0x40D0A4: WordTable::reHash(unsigned long) (WordTable.cpp:44)
+                      n1: 2506480 0x40D1A0: WordTable::expand() (WordTable.cpp:51)
+                       n1: 2506480 0x406593: gerp::addNewWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:279)
+                        n1: 2506480 0x40608C: gerp::processWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:157)
+                         n1: 2506480 0x405EAE: gerp::processLine(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:149)
+                          n1: 2506480 0x405B4B: gerp::processFile(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:139)
+                           n1: 2506480 0x404B4B: gerp::initializeFiles(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:114)
+                            n1: 2506480 0x4048A8: gerp::gerp(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:32)
+                             n0: 2506480 0x40BD9E: main (main.cpp:24)
+        n0: 34720 in 2 places, all below massif's threshold (1.00%)
+    n0: 19680 in 1 place, below massif's threshold (1.00%)
+ n1: 1686016 0x40A935: std::__new_allocator<WordTableEntry>::allocate(unsigned long, void const*) (new_allocator.h:151)
+  n1: 1686016 0x40A8BF: allocate (alloc_traits.h:515)
+   n2: 1686016 0x40A8BF: std::_Vector_base<WordTableEntry, std::allocator<WordTableEntry> >::_M_allocate(unsigned long) (stl_vector.h:380)
+    n1: 1657216 0x40A820: std::_Vector_base<WordTableEntry, std::allocator<WordTableEntry> >::_M_create_storage(unsigned long) (stl_vector.h:398)
+     n1: 1657216 0x40A6F1: std::_Vector_base<WordTableEntry, std::allocator<WordTableEntry> >::_Vector_base(unsigned long, std::allocator<WordTableEntry> const&) (stl_vector.h:334)
+      n1: 1657216 0x40763D: std::vector<WordTableEntry, std::allocator<WordTableEntry> >::vector(std::vector<WordTableEntry, std::allocator<WordTableEntry> > const&) (stl_vector.h:602)
+       n1: 1657216 0x40EEFC: void std::_Construct<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::vector<WordTableEntry, std::allocator<WordTableEntry> > const&>(std::vector<WordTableEntry, std::allocator<WordTableEntry> >*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > const&) (stl_construct.h:119)
+        n1: 1657216 0x40EE1B: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::__do_uninit_copy<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*>(__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*) (stl_uninitialized.h:120)
+         n1: 1657216 0x40EDC4: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::__uninitialized_copy<false>::__uninit_copy<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*>(__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*) (stl_uninitialized.h:137)
+          n1: 1657216 0x40ED7C: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::uninitialized_copy<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*>(__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*) (stl_uninitialized.h:184)
+           n1: 1657216 0x40ED38: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::__uninitialized_copy_a<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >(__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > >&) (stl_uninitialized.h:373)
+            n1: 1657216 0x40EAF1: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::_M_allocate_and_copy<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > > >(unsigned long, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >) (stl_vector.h:1624)
+             n1: 1657216 0x40D76E: std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::operator=(std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > const&) (vector.tcc:238)
+              n1: 1657216 0x40D0A4: WordTable::reHash(unsigned long) (WordTable.cpp:44)
+               n1: 1657216 0x40D1A0: WordTable::expand() (WordTable.cpp:51)
+                n1: 1657216 0x406593: gerp::addNewWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:279)
+                 n1: 1657216 0x40608C: gerp::processWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:157)
+                  n1: 1657216 0x405EAE: gerp::processLine(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:149)
+                   n1: 1657216 0x405B4B: gerp::processFile(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:139)
+                    n1: 1657216 0x404B4B: gerp::initializeFiles(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:114)
+                     n1: 1657216 0x4048A8: gerp::gerp(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:32)
+                      n0: 1657216 0x40BD9E: main (main.cpp:24)
+    n0: 28800 in 1 place, below massif's threshold (1.00%)
+ n0: 178776 in 15 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=34
+#-----------
+time=7957640749
+mem_heap_B=91386638
+mem_heap_extra_B=1407506
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=35
+#-----------
+time=8125160869
+mem_heap_B=91684923
+mem_heap_extra_B=1452741
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=36
+#-----------
+time=8292698419
+mem_heap_B=91936365
+mem_heap_extra_B=1508827
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=37
+#-----------
+time=8627731679
+mem_heap_B=92454765
+mem_heap_extra_B=1615403
+mem_stacks_B=0
+heap_tree=detailed
+n5: 92454765 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 80216016 0x40DE42: std::__new_allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > >::allocate(unsigned long, void const*) (new_allocator.h:151)
+  n1: 80216016 0x40DDCF: allocate (alloc_traits.h:515)
+   n2: 80216016 0x40DDCF: std::_Vector_base<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::_M_allocate(unsigned long) (stl_vector.h:380)
+    n1: 80216016 0x40EAB8: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::_M_allocate_and_copy<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > > >(unsigned long, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >) (stl_vector.h:1621)
+     n1: 80216016 0x40D76E: std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::operator=(std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > const&) (vector.tcc:238)
+      n1: 80216016 0x40D0A4: WordTable::reHash(unsigned long) (WordTable.cpp:44)
+       n1: 80216016 0x40D1A0: WordTable::expand() (WordTable.cpp:51)
+        n1: 80216016 0x406593: gerp::addNewWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:279)
+         n1: 80216016 0x40608C: gerp::processWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:157)
+          n1: 80216016 0x405EAE: gerp::processLine(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:149)
+           n1: 80216016 0x405B4B: gerp::processFile(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:139)
+            n1: 80216016 0x404B4B: gerp::initializeFiles(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:114)
+             n1: 80216016 0x4048A8: gerp::gerp(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:32)
+              n0: 80216016 0x40BD9E: main (main.cpp:24)
+    n0: 0 in 1 place, below massif's threshold (1.00%)
+ n1: 7023328 0x408685: std::__new_allocator<unsigned long>::allocate(unsigned long, void const*) (new_allocator.h:151)
+  n1: 7023328 0x40860F: allocate (alloc_traits.h:515)
+   n2: 7023328 0x40860F: std::_Vector_base<unsigned long, std::allocator<unsigned long> >::_M_allocate(unsigned long) (stl_vector.h:380)
+    n1: 6387424 0x40AC0C: void std::vector<unsigned long, std::allocator<unsigned long> >::_M_realloc_append<unsigned long const&>(unsigned long const&) (vector.tcc:596)
+     n2: 6387424 0x40778A: std::vector<unsigned long, std::allocator<unsigned long> >::push_back(unsigned long const&) (stl_vector.h:1294)
+      n1: 3193712 0x406B9C: gerp::ExactCaseExists(caseVariation*, unsigned long, unsigned long) (gerp.cpp:291)
+       n1: 3193712 0x406366: gerp::addIfExists(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:260)
+        n1: 3193712 0x406009: gerp::processWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:156)
+         n1: 3193712 0x405EAE: gerp::processLine(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:149)
+          n1: 3193712 0x405B4B: gerp::processFile(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:139)
+           n1: 3193712 0x404B4B: gerp::initializeFiles(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:114)
+            n1: 3193712 0x4048A8: gerp::gerp(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:32)
+             n0: 3193712 0x40BD9E: main (main.cpp:24)
+      n1: 3193712 0x406BAD: gerp::ExactCaseExists(caseVariation*, unsigned long, unsigned long) (gerp.cpp:292)
+       n1: 3193712 0x406366: gerp::addIfExists(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:260)
+        n1: 3193712 0x406009: gerp::processWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:156)
+         n1: 3193712 0x405EAE: gerp::processLine(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:149)
+          n1: 3193712 0x405B4B: gerp::processFile(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:139)
+           n1: 3193712 0x404B4B: gerp::initializeFiles(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:114)
+            n1: 3193712 0x4048A8: gerp::gerp(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:32)
+             n0: 3193712 0x40BD9E: main (main.cpp:24)
+    n0: 635904 in 2 places, all below massif's threshold (1.00%)
+ n1: 3039840 0x407E32: std::__new_allocator<caseVariation>::allocate(unsigned long, void const*) (new_allocator.h:151)
+  n1: 3039840 0x407DBF: allocate (alloc_traits.h:515)
+   n2: 3039840 0x407DBF: std::_Vector_base<caseVariation, std::allocator<caseVariation> >::_M_allocate(unsigned long) (stl_vector.h:380)
+    n1: 2815520 0x407CF0: std::_Vector_base<caseVariation, std::allocator<caseVariation> >::_M_create_storage(unsigned long) (stl_vector.h:398)
+     n1: 2815520 0x407B61: std::_Vector_base<caseVariation, std::allocator<caseVariation> >::_Vector_base(unsigned long, std::allocator<caseVariation> const&) (stl_vector.h:334)
+      n1: 2815520 0x407A4D: std::vector<caseVariation, std::allocator<caseVariation> >::vector(std::vector<caseVariation, std::allocator<caseVariation> > const&) (stl_vector.h:602)
+       n2: 2815520 0x4072DB: WordTableEntry::WordTableEntry(WordTableEntry const&) (WordTableEntry.h:30)
+        n1: 2423920 0x40AAFC: void std::_Construct<WordTableEntry, WordTableEntry const&>(WordTableEntry*, WordTableEntry const&) (stl_construct.h:119)
+         n1: 2423920 0x40AA1B: WordTableEntry* std::__do_uninit_copy<__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*>(__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, __gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*) (stl_uninitialized.h:120)
+          n1: 2423920 0x40A9C4: WordTableEntry* std::__uninitialized_copy<false>::__uninit_copy<__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*>(__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, __gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*) (stl_uninitialized.h:137)
+           n1: 2423920 0x40A97C: WordTableEntry* std::uninitialized_copy<__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*>(__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, __gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*) (stl_uninitialized.h:184)
+            n1: 2423920 0x40A758: WordTableEntry* std::__uninitialized_copy_a<__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*, WordTableEntry>(__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, __gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*, std::allocator<WordTableEntry>&) (stl_uninitialized.h:373)
+             n1: 2423920 0x40769D: std::vector<WordTableEntry, std::allocator<WordTableEntry> >::vector(std::vector<WordTableEntry, std::allocator<WordTableEntry> > const&) (stl_vector.h:606)
+              n1: 2423920 0x40EEFC: void std::_Construct<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::vector<WordTableEntry, std::allocator<WordTableEntry> > const&>(std::vector<WordTableEntry, std::allocator<WordTableEntry> >*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > const&) (stl_construct.h:119)
+               n1: 2423920 0x40EE1B: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::__do_uninit_copy<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*>(__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*) (stl_uninitialized.h:120)
+                n1: 2423920 0x40EDC4: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::__uninitialized_copy<false>::__uninit_copy<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*>(__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*) (stl_uninitialized.h:137)
+                 n1: 2423920 0x40ED7C: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::uninitialized_copy<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*>(__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*) (stl_uninitialized.h:184)
+                  n1: 2423920 0x40ED38: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::__uninitialized_copy_a<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >(__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > >&) (stl_uninitialized.h:373)
+                   n1: 2423920 0x40EAF1: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::_M_allocate_and_copy<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > > >(unsigned long, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >) (stl_vector.h:1624)
+                    n1: 2423920 0x40D76E: std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::operator=(std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > const&) (vector.tcc:238)
+                     n1: 2423920 0x40D0A4: WordTable::reHash(unsigned long) (WordTable.cpp:44)
+                      n1: 2423920 0x40D1A0: WordTable::expand() (WordTable.cpp:51)
+                       n1: 2423920 0x406593: gerp::addNewWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:279)
+                        n1: 2423920 0x40608C: gerp::processWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:157)
+                         n1: 2423920 0x405EAE: gerp::processLine(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:149)
+                          n1: 2423920 0x405B4B: gerp::processFile(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:139)
+                           n1: 2423920 0x404B4B: gerp::initializeFiles(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:114)
+                            n1: 2423920 0x4048A8: gerp::gerp(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:32)
+                             n0: 2423920 0x40BD9E: main (main.cpp:24)
+        n0: 391600 in 2 places, all below massif's threshold (1.00%)
+    n0: 224320 in 1 place, below massif's threshold (1.00%)
+ n1: 1984256 0x40A935: std::__new_allocator<WordTableEntry>::allocate(unsigned long, void const*) (new_allocator.h:151)
+  n1: 1984256 0x40A8BF: allocate (alloc_traits.h:515)
+   n2: 1984256 0x40A8BF: std::_Vector_base<WordTableEntry, std::allocator<WordTableEntry> >::_M_allocate(unsigned long) (stl_vector.h:380)
+    n1: 1654912 0x40A820: std::_Vector_base<WordTableEntry, std::allocator<WordTableEntry> >::_M_create_storage(unsigned long) (stl_vector.h:398)
+     n1: 1654912 0x40A6F1: std::_Vector_base<WordTableEntry, std::allocator<WordTableEntry> >::_Vector_base(unsigned long, std::allocator<WordTableEntry> const&) (stl_vector.h:334)
+      n1: 1654912 0x40763D: std::vector<WordTableEntry, std::allocator<WordTableEntry> >::vector(std::vector<WordTableEntry, std::allocator<WordTableEntry> > const&) (stl_vector.h:602)
+       n1: 1654912 0x40EEFC: void std::_Construct<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::vector<WordTableEntry, std::allocator<WordTableEntry> > const&>(std::vector<WordTableEntry, std::allocator<WordTableEntry> >*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > const&) (stl_construct.h:119)
+        n1: 1654912 0x40EE1B: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::__do_uninit_copy<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*>(__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*) (stl_uninitialized.h:120)
+         n1: 1654912 0x40EDC4: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::__uninitialized_copy<false>::__uninit_copy<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*>(__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*) (stl_uninitialized.h:137)
+          n1: 1654912 0x40ED7C: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::uninitialized_copy<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*>(__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*) (stl_uninitialized.h:184)
+           n1: 1654912 0x40ED38: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::__uninitialized_copy_a<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >(__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > >&) (stl_uninitialized.h:373)
+            n1: 1654912 0x40EAF1: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::_M_allocate_and_copy<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > > >(unsigned long, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >) (stl_vector.h:1624)
+             n1: 1654912 0x40D76E: std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::operator=(std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > const&) (vector.tcc:238)
+              n1: 1654912 0x40D0A4: WordTable::reHash(unsigned long) (WordTable.cpp:44)
+               n1: 1654912 0x40D1A0: WordTable::expand() (WordTable.cpp:51)
+                n1: 1654912 0x406593: gerp::addNewWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:279)
+                 n1: 1654912 0x40608C: gerp::processWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:157)
+                  n1: 1654912 0x405EAE: gerp::processLine(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:149)
+                   n1: 1654912 0x405B4B: gerp::processFile(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:139)
+                    n1: 1654912 0x404B4B: gerp::initializeFiles(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:114)
+                     n1: 1654912 0x4048A8: gerp::gerp(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:32)
+                      n0: 1654912 0x40BD9E: main (main.cpp:24)
+    n0: 329344 in 1 place, below massif's threshold (1.00%)
+ n0: 191325 in 15 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=38
+#-----------
+time=8962750726
+mem_heap_B=92894609
+mem_heap_extra_B=1688151
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=39
+#-----------
+time=9214028792
+mem_heap_B=93214475
+mem_heap_extra_B=1727421
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=40
+#-----------
+time=9465321474
+mem_heap_B=93595501
+mem_heap_extra_B=1787547
+mem_stacks_B=0
+heap_tree=detailed
+n5: 93595501 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 80216016 0x40DE42: std::__new_allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > >::allocate(unsigned long, void const*) (new_allocator.h:151)
+  n1: 80216016 0x40DDCF: allocate (alloc_traits.h:515)
+   n2: 80216016 0x40DDCF: std::_Vector_base<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::_M_allocate(unsigned long) (stl_vector.h:380)
+    n1: 80216016 0x40EAB8: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::_M_allocate_and_copy<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > > >(unsigned long, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >) (stl_vector.h:1621)
+     n1: 80216016 0x40D76E: std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::operator=(std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > const&) (vector.tcc:238)
+      n1: 80216016 0x40D0A4: WordTable::reHash(unsigned long) (WordTable.cpp:44)
+       n1: 80216016 0x40D1A0: WordTable::expand() (WordTable.cpp:51)
+        n1: 80216016 0x406593: gerp::addNewWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:279)
+         n1: 80216016 0x40608C: gerp::processWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:157)
+          n1: 80216016 0x405EAE: gerp::processLine(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:149)
+           n1: 80216016 0x405B4B: gerp::processFile(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:139)
+            n1: 80216016 0x404B4B: gerp::initializeFiles(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:114)
+             n1: 80216016 0x4048A8: gerp::gerp(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:32)
+              n0: 80216016 0x40BD9E: main (main.cpp:24)
+    n0: 0 in 1 place, below massif's threshold (1.00%)
+ n1: 7637664 0x408685: std::__new_allocator<unsigned long>::allocate(unsigned long, void const*) (new_allocator.h:151)
+  n1: 7637664 0x40860F: allocate (alloc_traits.h:515)
+   n2: 7637664 0x40860F: std::_Vector_base<unsigned long, std::allocator<unsigned long> >::_M_allocate(unsigned long) (stl_vector.h:380)
+    n1: 7043296 0x40AC0C: void std::vector<unsigned long, std::allocator<unsigned long> >::_M_realloc_append<unsigned long const&>(unsigned long const&) (vector.tcc:596)
+     n2: 7043296 0x40778A: std::vector<unsigned long, std::allocator<unsigned long> >::push_back(unsigned long const&) (stl_vector.h:1294)
+      n1: 3521648 0x406B9C: gerp::ExactCaseExists(caseVariation*, unsigned long, unsigned long) (gerp.cpp:291)
+       n1: 3521648 0x406366: gerp::addIfExists(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:260)
+        n1: 3521648 0x406009: gerp::processWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:156)
+         n1: 3521648 0x405EAE: gerp::processLine(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:149)
+          n1: 3521648 0x405B4B: gerp::processFile(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:139)
+           n1: 3521648 0x404B4B: gerp::initializeFiles(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:114)
+            n1: 3521648 0x4048A8: gerp::gerp(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:32)
+             n0: 3521648 0x40BD9E: main (main.cpp:24)
+      n1: 3521648 0x406BAD: gerp::ExactCaseExists(caseVariation*, unsigned long, unsigned long) (gerp.cpp:292)
+       n1: 3521648 0x406366: gerp::addIfExists(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:260)
+        n1: 3521648 0x406009: gerp::processWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:156)
+         n1: 3521648 0x405EAE: gerp::processLine(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:149)
+          n1: 3521648 0x405B4B: gerp::processFile(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:139)
+           n1: 3521648 0x404B4B: gerp::initializeFiles(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:114)
+            n1: 3521648 0x4048A8: gerp::gerp(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:32)
+             n0: 3521648 0x40BD9E: main (main.cpp:24)
+    n0: 594368 in 2 places, all below massif's threshold (1.00%)
+ n1: 3352400 0x407E32: std::__new_allocator<caseVariation>::allocate(unsigned long, void const*) (new_allocator.h:151)
+  n1: 3352400 0x407DBF: allocate (alloc_traits.h:515)
+   n2: 3352400 0x407DBF: std::_Vector_base<caseVariation, std::allocator<caseVariation> >::_M_allocate(unsigned long) (stl_vector.h:380)
+    n1: 3022800 0x407CF0: std::_Vector_base<caseVariation, std::allocator<caseVariation> >::_M_create_storage(unsigned long) (stl_vector.h:398)
+     n1: 3022800 0x407B61: std::_Vector_base<caseVariation, std::allocator<caseVariation> >::_Vector_base(unsigned long, std::allocator<caseVariation> const&) (stl_vector.h:334)
+      n1: 3022800 0x407A4D: std::vector<caseVariation, std::allocator<caseVariation> >::vector(std::vector<caseVariation, std::allocator<caseVariation> > const&) (stl_vector.h:602)
+       n2: 3022800 0x4072DB: WordTableEntry::WordTableEntry(WordTableEntry const&) (WordTableEntry.h:30)
+        n1: 2386160 0x40AAFC: void std::_Construct<WordTableEntry, WordTableEntry const&>(WordTableEntry*, WordTableEntry const&) (stl_construct.h:119)
+         n1: 2386160 0x40AA1B: WordTableEntry* std::__do_uninit_copy<__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*>(__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, __gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*) (stl_uninitialized.h:120)
+          n1: 2386160 0x40A9C4: WordTableEntry* std::__uninitialized_copy<false>::__uninit_copy<__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*>(__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, __gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*) (stl_uninitialized.h:137)
+           n1: 2386160 0x40A97C: WordTableEntry* std::uninitialized_copy<__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*>(__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, __gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*) (stl_uninitialized.h:184)
+            n1: 2386160 0x40A758: WordTableEntry* std::__uninitialized_copy_a<__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*, WordTableEntry>(__gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, __gnu_cxx::__normal_iterator<WordTableEntry const*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >, WordTableEntry*, std::allocator<WordTableEntry>&) (stl_uninitialized.h:373)
+             n1: 2386160 0x40769D: std::vector<WordTableEntry, std::allocator<WordTableEntry> >::vector(std::vector<WordTableEntry, std::allocator<WordTableEntry> > const&) (stl_vector.h:606)
+              n1: 2386160 0x40EEFC: void std::_Construct<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::vector<WordTableEntry, std::allocator<WordTableEntry> > const&>(std::vector<WordTableEntry, std::allocator<WordTableEntry> >*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > const&) (stl_construct.h:119)
+               n1: 2386160 0x40EE1B: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::__do_uninit_copy<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*>(__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*) (stl_uninitialized.h:120)
+                n1: 2386160 0x40EDC4: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::__uninitialized_copy<false>::__uninit_copy<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*>(__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*) (stl_uninitialized.h:137)
+                 n1: 2386160 0x40ED7C: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::uninitialized_copy<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*>(__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*) (stl_uninitialized.h:184)
+                  n1: 2386160 0x40ED38: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::__uninitialized_copy_a<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >(__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > >&) (stl_uninitialized.h:373)
+                   n1: 2386160 0x40EAF1: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::_M_allocate_and_copy<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > > >(unsigned long, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >) (stl_vector.h:1624)
+                    n1: 2386160 0x40D76E: std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::operator=(std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > const&) (vector.tcc:238)
+                     n1: 2386160 0x40D0A4: WordTable::reHash(unsigned long) (WordTable.cpp:44)
+                      n1: 2386160 0x40D1A0: WordTable::expand() (WordTable.cpp:51)
+                       n1: 2386160 0x406593: gerp::addNewWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:279)
+                        n1: 2386160 0x40608C: gerp::processWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:157)
+                         n1: 2386160 0x405EAE: gerp::processLine(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:149)
+                          n1: 2386160 0x405B4B: gerp::processFile(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:139)
+                           n1: 2386160 0x404B4B: gerp::initializeFiles(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:114)
+                            n1: 2386160 0x4048A8: gerp::gerp(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:32)
+                             n0: 2386160 0x40BD9E: main (main.cpp:24)
+        n0: 636640 in 2 places, all below massif's threshold (1.00%)
+    n0: 329600 in 1 place, below massif's threshold (1.00%)
+ n1: 2189376 0x40A935: std::__new_allocator<WordTableEntry>::allocate(unsigned long, void const*) (new_allocator.h:151)
+  n1: 2189376 0x40A8BF: allocate (alloc_traits.h:515)
+   n2: 2189376 0x40A8BF: std::_Vector_base<WordTableEntry, std::allocator<WordTableEntry> >::_M_allocate(unsigned long) (stl_vector.h:380)
+    n1: 1652864 0x40A820: std::_Vector_base<WordTableEntry, std::allocator<WordTableEntry> >::_M_create_storage(unsigned long) (stl_vector.h:398)
+     n1: 1652864 0x40A6F1: std::_Vector_base<WordTableEntry, std::allocator<WordTableEntry> >::_Vector_base(unsigned long, std::allocator<WordTableEntry> const&) (stl_vector.h:334)
+      n1: 1652864 0x40763D: std::vector<WordTableEntry, std::allocator<WordTableEntry> >::vector(std::vector<WordTableEntry, std::allocator<WordTableEntry> > const&) (stl_vector.h:602)
+       n1: 1652864 0x40EEFC: void std::_Construct<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::vector<WordTableEntry, std::allocator<WordTableEntry> > const&>(std::vector<WordTableEntry, std::allocator<WordTableEntry> >*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > const&) (stl_construct.h:119)
+        n1: 1652864 0x40EE1B: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::__do_uninit_copy<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*>(__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*) (stl_uninitialized.h:120)
+         n1: 1652864 0x40EDC4: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::__uninitialized_copy<false>::__uninit_copy<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*>(__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*) (stl_uninitialized.h:137)
+          n1: 1652864 0x40ED7C: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::uninitialized_copy<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*>(__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*) (stl_uninitialized.h:184)
+           n1: 1652864 0x40ED38: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::__uninitialized_copy_a<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*, std::vector<WordTableEntry, std::allocator<WordTableEntry> > >(__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, std::vector<WordTableEntry, std::allocator<WordTableEntry> >*, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > >&) (stl_uninitialized.h:373)
+            n1: 1652864 0x40EAF1: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::_M_allocate_and_copy<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > > >(unsigned long, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >) (stl_vector.h:1624)
+             n1: 1652864 0x40D76E: std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::operator=(std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > const&) (vector.tcc:238)
+              n1: 1652864 0x40D0A4: WordTable::reHash(unsigned long) (WordTable.cpp:44)
+               n1: 1652864 0x40D1A0: WordTable::expand() (WordTable.cpp:51)
+                n1: 1652864 0x406593: gerp::addNewWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:279)
+                 n1: 1652864 0x40608C: gerp::processWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:157)
+                  n1: 1652864 0x405EAE: gerp::processLine(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:149)
+                   n1: 1652864 0x405B4B: gerp::processFile(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:139)
+                    n1: 1652864 0x404B4B: gerp::initializeFiles(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:114)
+                     n1: 1652864 0x4048A8: gerp::gerp(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:32)
+                      n0: 1652864 0x40BD9E: main (main.cpp:24)
+    n0: 536512 in 1 place, below massif's threshold (1.00%)
+ n0: 200045 in 15 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=41
+#-----------
+time=9800356083
+mem_heap_B=94038247
+mem_heap_extra_B=1833801
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=42
+#-----------
+time=10051640559
+mem_heap_B=94396930
+mem_heap_extra_B=1867462
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=43
+#-----------
+time=10219149793
+mem_heap_B=94673396
+mem_heap_extra_B=1892356
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=44
+#-----------
+time=10470452958
+mem_heap_B=95032976
+mem_heap_extra_B=1932944
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=45
+#-----------
+time=10637973077
+mem_heap_B=99309290
+mem_heap_extra_B=1985926
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=46
+#-----------
+time=10805519034
+mem_heap_B=99579127
+mem_heap_extra_B=2022481
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=47
+#-----------
+time=10973042455
+mem_heap_B=99889069
+mem_heap_extra_B=2075003
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=48
+#-----------
+time=11224325009
+mem_heap_B=100323205
+mem_heap_extra_B=2147147
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=49
+#-----------
+time=11475638351
+mem_heap_B=100707216
+mem_heap_extra_B=2190264
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=50
+#-----------
+time=11621894143
+mem_heap_B=100913541
+mem_heap_extra_B=2217507
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=51
+#-----------
+time=11768128583
+mem_heap_B=101096631
+mem_heap_extra_B=2234657
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=52
+#-----------
+time=11914366851
+mem_heap_B=95711664
+mem_heap_extra_B=1652608
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=53
+#-----------
+time=12060605499
+mem_heap_B=85256111
+mem_heap_extra_B=577145
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=54
+#-----------
+time=12206847206
+mem_heap_B=82213364
+mem_heap_extra_B=255716
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=55
+#-----------
+time=12353087732
+mem_heap_B=81229300
+mem_heap_extra_B=124732
+mem_stacks_B=0
+heap_tree=detailed
+n3: 81229300 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 80216016 0x40DE42: std::__new_allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > >::allocate(unsigned long, void const*) (new_allocator.h:151)
+  n1: 80216016 0x40DDCF: allocate (alloc_traits.h:515)
+   n2: 80216016 0x40DDCF: std::_Vector_base<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::_M_allocate(unsigned long) (stl_vector.h:380)
+    n1: 80216016 0x40EAB8: std::vector<WordTableEntry, std::allocator<WordTableEntry> >* std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::_M_allocate_and_copy<__gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > > >(unsigned long, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >, __gnu_cxx::__normal_iterator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > const*, std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > >) (stl_vector.h:1621)
+     n1: 80216016 0x40D76E: std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > >::operator=(std::vector<std::vector<WordTableEntry, std::allocator<WordTableEntry> >, std::allocator<std::vector<WordTableEntry, std::allocator<WordTableEntry> > > > const&) (vector.tcc:238)
+      n1: 80216016 0x40D0A4: WordTable::reHash(unsigned long) (WordTable.cpp:44)
+       n1: 80216016 0x40D1A0: WordTable::expand() (WordTable.cpp:51)
+        n1: 80216016 0x406593: gerp::addNewWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:279)
+         n1: 80216016 0x40608C: gerp::processWord(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:157)
+          n1: 80216016 0x405EAE: gerp::processLine(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int, int) (gerp.cpp:149)
+           n1: 80216016 0x405B4B: gerp::processFile(int, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:139)
+            n1: 80216016 0x404B4B: gerp::initializeFiles(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:114)
+             n1: 80216016 0x4048A8: gerp::gerp(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >) (gerp.cpp:32)
+              n0: 80216016 0x40BD9E: main (main.cpp:24)
+    n0: 0 in 1 place, below massif's threshold (1.00%)
+ n1: 909312 0x40A935: std::__new_allocator<WordTableEntry>::allocate(unsigned long, void const*) (new_allocator.h:151)
+  n1: 909312 0x40A8BF: allocate (alloc_traits.h:515)
+   n1: 909312 0x40A8BF: std::_Vector_base<WordTableEntry, std::allocator<WordTableEntry> >::_M_allocate(unsigned long) (stl_vector.h:380)
+    n0: 909312 in 2 places, all below massif's threshold (1.00%)
+ n0: 103972 in 17 places, all below massif's threshold (1.00%)

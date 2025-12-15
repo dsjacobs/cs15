@@ -22,9 +22,8 @@ using namespace std;
 struct FileStruct {
     int fileID;
     string fileName;
-    vector<string> textVector;
-    FileStruct(int myID, string myName, vector<string> myText) :
-        fileID(myID), fileName(myName), textVector(myText) {};
+    FileStruct(int myID, string myName): 
+        fileID(myID), fileName(myName) {}; 
 };
 
 class gerp {

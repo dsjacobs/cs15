@@ -36,7 +36,7 @@ ofstream gerp::createOfstream(string filename) {
     ofstream myofstream; 
     myofstream.open(filename);  
     if (not myofstream.is_open()) {
-            cerr << "Error: could not open file " << filename << endl;
+        cerr << "Error: could not open file " << filename << endl;
     }
     return myofstream;
 }
@@ -44,6 +44,10 @@ ofstream gerp::createOfstream(string filename) {
 // Destructor
 gerp::~gerp() {
     gerpFileList.clear();
+    for (size_t x = 0; x < gerpWordTable.gerpWordList.size(); x++) {
+        gerpWordTable.gerpWordList[x].clear();
+    }
+    gerpWordTable.gerpWordList.clear();
 };
 
 // Keeps the gerp program running until user quits. Takes in input user and
@@ -111,6 +115,8 @@ void gerp::initializeFiles(string directory) {
     }
 };
 
+// Given a filename, opens and returns an inupt filestream. If that file 
+// does not already exist, makes it.
 ifstream readFileOpenStream(string filename) {
    ifstream myifstream; 
     myifstream.open(filename);
@@ -123,22 +129,20 @@ ifstream readFileOpenStream(string filename) {
     return myifstream;
 }
 
+// Takes a file ID and name. 
 void gerp::processFile(int fileID, string fileName) {
     ifstream fstream = readFileOpenStream(fileName);
     string line;
-    vector<string> myVector;
     int lineCounter = 0;
     while (getline(fstream, line)) {
         processLine(line, fileID, lineCounter);
-        myVector.push_back(line);
-        lineCounter++;
     }
-    FileStruct newFileStruct(fileID, fileName, myVector);
+    FileStruct newFileStruct(fileID, fileName);
     gerpFileList.push_back(newFileStruct);
 }
 
 void gerp::processLine(string line, int fileID, int lineNum) {
-    stringstream linestream(line);
+   stringstream linestream(line);
     string word;
     while (linestream >> word) {
         processWord(word, fileID, lineNum);
@@ -206,13 +210,24 @@ void gerp::printAllInstancesOfWord(WordTableEntry wte) {
 };
 
 void gerp::printAllInstancesOfCasing(caseVariation cv) {
+    // size_t currentFile = 0;
     for (size_t i = 0; i < cv.caseFileList.size(); i++) {
         int fileNum = cv.caseFileList[i];
         int lineNum = cv.caseLineList[i];
+        //
         string fileName = gerpFileList[fileNum].fileName;
-        string text = gerpFileList[fileNum].textVector[lineNum];
+        string line;
+        ifstream fstream = readFileOpenStream(fileName);
+        int lineCounter = 0;
+        while (getline(fstream, line) and lineCounter < lineNum) {
+            lineCounter++;
+        }
+        // myVector.push_back(line);
+        // li+;
+    // }
+        // string text = gerpFileList[fileNum].textVector[lineNum];
         outputStream << fileName << ":" << lineNum;
-        outputStream << ": " << text << endl;
+        outputStream << ": " << line << endl;
     }
 };
 
@@ -254,13 +269,7 @@ bool gerp::addIfExists(string word, string wordLower, int fileID,int LineNum)  {
 
 void gerp::addNewWord(string word, string wordLower, int fileID,int LineNum)    
 {  
-    size_t hashValue = gerpWordTable.myHash(wordLower);
-    size_t currentCapacity = gerpWordTable.wordCapacity();
-    size_t hashMod = hashValue % currentCapacity;
     gerpWordTable.addLower(word, wordLower, fileID, LineNum);
-    if (((gerpWordTable.gerpWordList))[hashMod].size() >= 3) {
-        gerpWordTable.expand();
-    }
 }
 
 void gerp::ExactCaseExists(caseVariation *cv, size_t fileID, size_t LineNum) {
@@ -279,8 +288,7 @@ void gerp::ExactCaseExists(caseVariation *cv, size_t fileID, size_t LineNum) {
 void gerp::LowercaseExists(WordTableEntry *wte, string word, int fileID,
                                                                    int LineNum) 
 {
-    caseVariation cv;
-    cv.spelling = word;
+    caseVariation cv(word);
     cv.caseFileList.push_back(fileID);
     cv.caseLineList.push_back(LineNum);
     wte->caseVariations.push_back(cv);

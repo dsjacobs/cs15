@@ -2,6 +2,11 @@
 Danielle Jacobs
 December 6, 2025
 Project 3, Gerp
+
+The word table (Hash table) can be expanded and rehashed when the load factor
+is high. The size, capacity, and load factor can be checked. New words, with
+no existing match in the word table of any case variation, can be added.
+
 */
 
 #include <vector>
@@ -23,20 +28,25 @@ WordTable::~WordTable() {
 void WordTable::reHash(size_t oldCapacity) {
     vector<vector<WordTableEntry>> newGerpWordList(capacity);
     for (size_t i = 0; i < oldCapacity; i++) {
-        vector<WordTableEntry> collisionlist = gerpWordList[i];
-        for (size_t j = 0; j < collisionlist.size(); j++) {
-            WordTableEntry wte = collisionlist[j];
+        for (size_t j = 0; j < gerpWordList[i].size(); j++) {
+            WordTableEntry &wte = gerpWordList[i][j];
             size_t hashID = myHash(wte.spellingLower);
             size_t newHashMod = hashID%wordCapacity();
-        newGerpWordList[newHashMod].push_back(wte);
+            newGerpWordList[newHashMod].push_back(wte);
+            for (size_t k = 0; k < wte.caseVariations.size(); k++) {
+               wte.caseVariations[k].caseLineList.clear();
+            }
      }
+     gerpWordList[i].clear();
     }
+    gerpWordList.clear();
     this->gerpWordList = newGerpWordList;
 };
 
 void WordTable::expand() {
     size_t oldCapacity = capacity;
     capacity = (capacity * 2) + 2;
+    cout << "expanding from: " << oldCapacity << " to: " << capacity << endl;
     reHash(oldCapacity);
 };
 
@@ -66,8 +76,7 @@ void WordTable::addLower(string word, string wordLower, int fileID, int
     size_t hashmod = myHash(wordLower)%wordCapacity();
     
     // build lower case    
-    caseVariation cv;
-    cv.spelling = word;
+    caseVariation cv(word);
     cv.caseFileList.push_back(fileID);
     cv.caseLineList.push_back(LineNum);
 

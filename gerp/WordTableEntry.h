@@ -21,6 +21,10 @@ struct caseVariation {
     string spelling;
     vector<size_t> caseFileList;
     vector<size_t> caseLineList; 
+    caseVariation(string mySpelling): 
+        spelling(mySpelling), caseFileList(), caseLineList() {};
+    caseVariation(): 
+        spelling(""), caseFileList(), caseLineList() {};
 };
 
 class WordTableEntry {

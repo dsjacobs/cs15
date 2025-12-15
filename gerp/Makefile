@@ -2,40 +2,46 @@
 ### Makefile for Gerp Project
 ###
 ### Author:  Danielle Jacobs
-
-## Note, you do NOT need rules for
-## FSTree.o and DirNode.o as those (pre-compiled) object files are 
-## provided to you.
-## 
-## At the end, you can delete this comment
-## 
+### November 2025
+###
+### This Makefile defines relationships and dependencies
+### between files, and how/what to run to ensure complete
+### compilation.
 
 CXX      = clang++
 CXXFLAGS = -g3 -Wall -Wextra -Wpedantic -Wshadow
 LDFLAGS  = -g3 
 
+#This rule builds the gerp executable
 gerp: gerp.o main.o processing.o WordTable.o WordTableEntry.o DirNode.o FSTree.o
 	$(CXX) $(CXXFLAGS) -o gerp gerp.o main.o processing.o WordTable.o \
 	WordTableEntry.o DirNode.o FSTree.o
 
+#This rule build main.o
 main.o: main.cpp
 	$(CXX) $(CXXFLAGS) -c main.cpp gerp.h
 
+#This rule builds gerp.o
 gerp.o: gerp.cpp gerp.h processing.h 
 	$(CXX) $(CXXFLAGS) -c gerp.cpp
 
+#This rule builds processing.o
 processing.o: processing.cpp FSTree.h DirNode.h
 	$(CXX) $(CXXFLAGS) -c processing.cpp
 
+#This rule builds WordTable.o
 WordTable.o: WordTable.cpp WordTableEntry.h
 	$(CXX) $(CXXFLAGS) -c WordTable.cpp
 
+#This rule builds WordTableEntry.o
 WordTableEntry.o: WordTableEntry.cpp
 	$(CXX) $(CXXFLAGS) -c WordTableEntry.cpp
 
+#This rule builds unit_tests.o
 unit_tests.o: unit_tests.cpp processing.h
 	$(CXX) $(CXXFLAGS) -c unit_tests.cpp
 
+#This rule builids the unit_tests executable
 unit_tests: unit_tests.o 
 	$(CXX) $(CXXFLAGS) -o unit_tests unit_tests.o \
 	processing.o DirNode.o FSTree.o gerp.o WordTable.o
