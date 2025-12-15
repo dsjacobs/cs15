@@ -38,12 +38,12 @@ WordTableEntry.o: WordTableEntry.cpp
 	$(CXX) $(CXXFLAGS) -c WordTableEntry.cpp
 
 #This rule builds unit_tests.o
-unit_tests.o: unit_tests.cpp processing.h
-	$(CXX) $(CXXFLAGS) -c unit_tests.cpp
+unitTests.o: unitTests.cpp processing.h
+	$(CXX) $(CXXFLAGS) -c unitTests.cpp
 
 #This rule builids the unit_tests executable
-unit_tests: unit_tests.o 
-	$(CXX) $(CXXFLAGS) -o unit_tests unit_tests.o \
+unitTests: unitTests.o 
+	$(CXX) $(CXXFLAGS) -o unitTests unitTests.o \
 	processing.o DirNode.o FSTree.o gerp.o WordTable.o
 ##
 ## Here is a special rule that removes all .o files besides the provided ones 

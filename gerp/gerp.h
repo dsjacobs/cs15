@@ -26,7 +26,7 @@ struct FileStruct {
         fileID(myID), fileName(myName) {}; 
 };
 
-class gerp {
+class gerp {g\
     public:
         gerp(string inputDirectory, string outputFile);
         ~gerp();
