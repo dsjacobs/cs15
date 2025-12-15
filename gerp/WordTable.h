@@ -22,8 +22,7 @@ class WordTable {
     public: 
         WordTable();
         ~WordTable();
-        WordTable(const WordTable &other);
-        vector<vector<WordTableEntry>> *gerpWordList;
+        vector<vector<WordTableEntry>> gerpWordList;
 
         size_t size();
         size_t wordCapacity() const;
@@ -34,7 +33,6 @@ class WordTable {
         void expand();
         void addLower(string word, string wordLower, int fileID, int LineNum);
     
-    private:
         size_t entrySize;
         size_t capacity;
 };

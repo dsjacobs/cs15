@@ -42,7 +42,9 @@ ofstream gerp::createOfstream(string filename) {
 }
 
 // Destructor
-gerp::~gerp() {};
+gerp::~gerp() {
+    gerpFileList.clear();
+};
 
 // Keeps the gerp program running until user quits. Takes in input user and
 // sends to route cmd for processing.
@@ -135,15 +137,21 @@ void gerp::processFile(int fileID, string fileName) {
     gerpFileList.push_back(newFileStruct);
 }
 
-void gerp::processLine(string line, int fileID, int LineNum) {
+void gerp::processLine(string line, int fileID, int lineNum) {
     stringstream linestream(line);
     string word;
     while (linestream >> word) {
-        string wordClean = stripNonAlphaNum(word);
-        string wordLower = wordToLower(wordClean);
-        newWord(wordClean, wordLower, fileID, LineNum); 
+        processWord(word, fileID, lineNum);
     }
 }
+
+void gerp::processWord(string word, int fileID,int LineNum) {
+    string wordClean = stripNonAlphaNum(word);
+    string wordLower = wordToLower(wordClean);
+    bool found = addIfExists(wordClean, wordLower, fileID, LineNum);
+    if (not found) {addNewWord(wordClean, wordLower, fileID, LineNum);}
+}
+
 
 void gerp::quit() {
     hasQuit = true;
@@ -211,58 +219,78 @@ void gerp::printAllInstancesOfCasing(caseVariation cv) {
 vector<WordTableEntry> gerp::inputToCollisionList(string wordLower) {
     size_t hashID = gerpWordTable.myHash(wordLower);
     size_t hashMod = hashID%gerpWordTable.wordCapacity();
-    vector<WordTableEntry> wordlist = (*(gerpWordTable.gerpWordList))[hashMod];
+    vector<WordTableEntry> wordlist = gerpWordTable.gerpWordList[hashMod];
     return wordlist;
 };
 
-void gerp::newWord(string word, string wordLower, int fileID,int LineNum) {
+
+bool gerp::addIfExists(string word, string wordLower, int fileID,int LineNum)  {
     size_t hashValue = gerpWordTable.myHash(wordLower);
     size_t currentCapacity = gerpWordTable.wordCapacity();
     size_t hashMod = hashValue % currentCapacity;
-    vector<WordTableEntry> wordlist = (*(gerpWordTable.gerpWordList))[hashMod];
-    bool found = false;
-    for (size_t x = 0; x < wordlist.size(); x++) {
-        WordTableEntry &wte = (*(gerpWordTable.gerpWordList))[hashMod][x];
+    bool lowerFound = false;   
+    bool exactMatchFound = false; 
+    cout << word << endl;
+    cout << "with an original hash value of: " << hashValue << endl;
+    cout << "and a table capacity of: " << currentCapacity << endl;
+    cout << "and a hashmod of: " << hashMod << endl;
+    cout << "words at that hashmod: " << gerpWordTable.gerpWordList[hashMod].size() << endl;
+
+    for (size_t x = 0; x < gerpWordTable.gerpWordList[hashMod].size(); x++) {
+        WordTableEntry wte = gerpWordTable.gerpWordList[hashMod][x];
         // upper case match
         if (wte.spellingLower==wordLower) {
+            lowerFound = true;
+            cout << wordLower << endl;
             // lower case match
-            bool exactMatchFound = false;
             for (size_t j = 0; j < wte.caseVariations.size(); j++) {
-                caseVariation &cv = wte.caseVariations[j];
+                caseVariation cv = wte.caseVariations[j];
                 if (cv.spelling==word) {
-                    ExactCaseExists(&wte, j, fileID, LineNum);
+                    cout << "Exact match found" << endl;
+                    ExactCaseExists(wte, j, fileID, LineNum);
                     exactMatchFound = true;
-                    break;
                 }
             }
             if (not exactMatchFound) {
-                LowercaseExists(word, &wte, fileID, LineNum);
+                cout << "Lowercase only found" << endl;
+                LowercaseExists(word, wte, fileID, LineNum);
             }
-            found = true;
-            break;
         }
     }
-    if (not found) {
-        gerpWordTable.addLower(word, wordLower, fileID, LineNum);
-        if ((*(gerpWordTable.gerpWordList))[hashMod].size() >= 3) {
-            gerpWordTable.expand();
-        }
+    cout << "was a lower match found? " << lowerFound << endl;
+    return lowerFound;
+}
+
+void gerp::addNewWord(string word, string wordLower, int fileID,int LineNum)    {  
+    size_t hashValue = gerpWordTable.myHash(wordLower);
+    size_t currentCapacity = gerpWordTable.wordCapacity();
+    size_t hashMod = hashValue % currentCapacity;
+    gerpWordTable.addLower(word, wordLower, fileID, LineNum);
+    if (((gerpWordTable.gerpWordList))[hashMod].size() >= 3) {
+        cout << "attempting expansion" << endl;
+        gerpWordTable.expand();
     }
 }
 
-void gerp::ExactCaseExists(WordTableEntry *wte, size_t CVI, size_t fileID, 
-    size_t LineNum)
- {
-    wte->caseVariations[CVI].caseFileList.push_back(fileID);
-    wte->caseVariations[CVI].caseLineList.push_back(LineNum);
+void gerp::ExactCaseExists(WordTableEntry wte, size_t CVI, size_t fileID, 
+    size_t LineNum) {
+//  {
+//     size_t ocurrenceses = wte.caseVariations[CVI].caseFileList.size();
+//     size_t mostRecentFile = wte.caseVariations[CVI].caseFileList[ocurrenceses-1];
+//     size_t mostRecentLine = wte.caseVariations[CVI].caseLineList[ocurrenceses-1];
+//     bool thisLine = (fileID==mostRecentFile and LineNum==mostRecentLine);
+//     if (not thisLine) {
+//         wte.caseVariations[CVI].caseFileList.push_back(fileID);
+//         wte.caseVariations[CVI].caseLineList.push_back(LineNum);
+//     }
 };
 
-void gerp::LowercaseExists(string word, WordTableEntry *wte, int fileID, int 
+void gerp::LowercaseExists(string word, WordTableEntry wte, int fileID, int 
     LineNum) 
 {
-    caseVariation cv;
-    cv.spelling = word;
-    cv.caseFileList.push_back(fileID);
-    cv.caseLineList.push_back(LineNum);
-    wte->caseVariations.push_back(cv);
+    // caseVariation cv;
+    // cv.spelling = word;
+    // cv.caseFileList.push_back(fileID);
+    // cv.caseLineList.push_back(LineNum);
+    // wte.caseVariations.push_back(cv);
 }

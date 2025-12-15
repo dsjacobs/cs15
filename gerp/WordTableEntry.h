@@ -31,9 +31,6 @@ class WordTableEntry {
         size_t hashID;
         string spellingLower;
         vector<caseVariation> caseVariations;
-        size_t tableCapacity;
-
-        int caseVariationIndex(string origCasing);
         void add(caseVariation newVariation);
 };
 
