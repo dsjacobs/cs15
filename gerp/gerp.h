@@ -53,10 +53,9 @@ class gerp {
         bool addIfExists(string word, string wordLower, int fileID,int LineNum);
         void addNewWord(string word, string wordLower, 
                                                     int fileID,int LineNum);   
-        void ExactCaseExists(WordTableEntry wte, size_t CVI, 
-                                    size_t fileID, size_t LineNum);
-        void LowercaseExists(string word, WordTableEntry wte, 
-                                    int fileID, int LineNum);
+        void ExactCaseExists(caseVariation *cv, size_t fileID, size_t LineNum); 
+        void LowercaseExists(WordTableEntry *wte, string word,
+                                                     int fileID,  int LineNum);
         void initializeFiles(string directory);
         void processFile(int fileID, string fileName);
         void processLine(string line, int fileID, int LineNum);

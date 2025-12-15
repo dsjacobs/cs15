@@ -22,20 +22,13 @@ WordTable::~WordTable() {
 
 void WordTable::reHash(size_t oldCapacity) {
     vector<vector<WordTableEntry>> newGerpWordList(capacity);
-    cout << "rehash party" << endl;
     for (size_t i = 0; i < oldCapacity; i++) {
         vector<WordTableEntry> collisionlist = gerpWordList[i];
-        cout << "at " << i << endl;
         for (size_t j = 0; j < collisionlist.size(); j++) {
-            cout << "my house  " << i << endl;
             WordTableEntry wte = collisionlist[j];
-            cout << "with " << wte.spellingLower << endl;
             size_t hashID = myHash(wte.spellingLower);
             size_t newHashMod = hashID%wordCapacity();
-            cout << "and a new hashmod of " << newHashMod << endl;
-        cout << newGerpWordList[newHashMod].size() << endl;
         newGerpWordList[newHashMod].push_back(wte);
-        cout << "can we get it down? " << endl;
      }
     }
     this->gerpWordList = newGerpWordList;
