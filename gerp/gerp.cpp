@@ -136,6 +136,7 @@ void gerp::processFile(int fileID, string fileName) {
     int lineCounter = 0;
     while (getline(fstream, line)) {
         processLine(line, fileID, lineCounter);
+        lineCounter++;
     }
     FileStruct newFileStruct(fileID, fileName);
     gerpFileList.push_back(newFileStruct);
@@ -214,7 +215,6 @@ void gerp::printAllInstancesOfCasing(caseVariation cv) {
     for (size_t i = 0; i < cv.caseFileList.size(); i++) {
         int fileNum = cv.caseFileList[i];
         int lineNum = cv.caseLineList[i];
-        //
         string fileName = gerpFileList[fileNum].fileName;
         string line;
         ifstream fstream = readFileOpenStream(fileName);
@@ -222,12 +222,7 @@ void gerp::printAllInstancesOfCasing(caseVariation cv) {
         while (getline(fstream, line) and lineCounter < lineNum) {
             lineCounter++;
         }
-        // myVector.push_back(line);
-        // li+;
-    // }
-        // string text = gerpFileList[fileNum].textVector[lineNum];
-        outputStream << fileName << ":" << lineNum;
-        outputStream << ": " << line << endl;
+        outputStream << fileName << ":" << lineNum << ": " << line << endl;
     }
 };
 
