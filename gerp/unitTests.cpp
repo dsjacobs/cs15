@@ -4,7 +4,9 @@ November 23
 Gerp
 Unit Tests
 
-Tests processing functions, gerp and word table functionality.
+Tests processing functions, constructors for word table, word 
+table entries, and case variations, as well as gerp functionality
+to add and search.
 
 */
 #include "processing.h"  
@@ -123,6 +125,83 @@ void a12_Gerp_create_ofstream_not_working_stream() {
     myGerp.quit();
 };
 
+// WordTable constructs properly
+void wt13_wordtable_constructor() {
+    cout << "Test 13" << endl;
+    WordTable myWT;
+    assert(myWT.wordCapacity()==100);
+    assert(myWT.size()==0);
+};
+
+void wt14_wordtable_size() {
+    cout << "Test 14" << endl;
+    WordTable myWT;
+    myWT.addLower("pineapple","pineapple",3,4);
+    myWT.addLower("banana","banana",7,8);
+    assert(myWT.size()==2);
+};
+
+void wt15_wordtable_expand() {
+    cout << "Test 15" << endl;
+    WordTable myWT;
+    assert(myWT.wordCapacity()==100);
+    myWT.expand();
+    assert(myWT.wordCapacity()==202);
+}
+
+void wt16_wordtable_addLower() {
+    cout << "Test 16" << endl;
+    WordTable myWT;
+    myWT.addLower("banana", "banana", 1, 2);
+    size_t hashID = myWT.myHash("banana");
+    size_t hashMod = hashID%myWT.wordCapacity();
+    assert(myWT.gerpWordList[hashMod].size()==1);
+}
+
+void wte17_wordtableentry_defaultconstructor() {
+        cout << "Test 17" << endl;
+    WordTableEntry wte;
+    wte.spellingLower = "grapefruit";
+    assert(wte.spellingLower=="grapefruit");
+    assert(wte.allFileIDs.size()==0);
+    assert(wte.allLineNums.size()==0);
+}
+
+void wte18_wordtableentry_customconstructor() {
+    cout << "Test 18" << endl;
+    WordTable myWT;
+    WordTableEntry wte("grape",100);
+    assert(wte.spellingLower=="grape");
+    assert(wte.allFileIDs.size()==0);
+    assert(wte.allLineNums.size()==0);
+}
+
+void cv19_casevariation_defaultconstructor() {
+    cout << "Test 19" << endl;
+    caseVariation cv;
+    assert(cv.spelling=="");
+    assert(cv.caseFileList.size()==0);
+    assert(cv.caseLineList.size()==0);
+}
+
+void cv20_casevariation_customconstructor() {
+    cout << "Test 20" << endl;
+    caseVariation cv("mango");
+    assert(cv.spelling=="mango");
+    assert(cv.caseFileList.size()==0);
+    assert(cv.caseLineList.size()==0);
+}
+
+void wte21_addCV() {
+    cout << "Test 21" << endl;
+    WordTableEntry wte;
+    caseVariation cv1("mango");
+    caseVariation cv2("mAngo");
+    wte.add(cv1);
+    wte.add(cv2);
+    assert(wte.caseVariations.size()==2);
+}
+
 int main () {
 
     a01_Processing_stripNonAlphaNum_reg_word();
@@ -137,5 +216,14 @@ int main () {
     a10_Gerp_gerp_input_and_output();
     a11_Gerp_create_ofstream_working_stream();
     a12_Gerp_create_ofstream_not_working_stream();
+     wt13_wordtable_constructor();
+     wt14_wordtable_size();
+     wt15_wordtable_expand();
+     wt16_wordtable_addLower();
+     wte17_wordtableentry_defaultconstructor();
+    wte18_wordtableentry_customconstructor();
+    cv19_casevariation_defaultconstructor();
+    cv20_casevariation_customconstructor();
+    wte21_addCV();
     return 0;
 }
