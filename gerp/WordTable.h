@@ -6,6 +6,10 @@ Danielle Jacobs
 December 7, 2025
 Project 3, Gerp
 
+The word table (a hash table) stores all words from the input directory for 
+easy search and lookup. Each hashmod contains a collision list of words found
+at that hashmod.
+
 */
 
 #include <vector>

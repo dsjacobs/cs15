@@ -5,6 +5,8 @@ Danielle Jacobs
 November 23, 2025
 Project 3, Gerp
 
+Cleans words and reads directory structures for use within hash table.
+
 */
 
 #ifndef __PROCESSING_H

@@ -20,14 +20,19 @@ and prints out all file paths in a directory.
 
 using namespace std;
 
+// recursive helper function for traverseDir
+// takes in: a directory, its path, and a string stream.
+// returns: the full paths of the filenames
 void traverseDirNode(DirNode directory, string dirpath,std::stringstream &boo ) {
     if (not directory.isEmpty()) {
         int numSubDirs = directory.numSubDirs();
         int numFiles = directory.numFiles();
+        // all files in parent directory
         for (int f = 0; f < numFiles; f++) {
             std::string filename =  directory.getFile(f);
             boo << dirpath << "/" << filename <<  std::endl;
         }
+        // all child directories
         for (int d = 0; d < numSubDirs; d++) {
             DirNode *child_directory = directory.getSubDir(d);
             std::string nextpath = dirpath + "/" + child_directory->getName();
@@ -36,6 +41,8 @@ void traverseDirNode(DirNode directory, string dirpath,std::stringstream &boo ) 
     }
 }
 
+// takes in: a directory
+// returns: the full paths of the filenames from that directory
 std::stringstream traverseDirectory(string directory) {
     FSTree my_fstree(directory);
     DirNode *root = my_fstree.getRoot();
@@ -46,15 +53,21 @@ std::stringstream traverseDirectory(string directory) {
     return f;
 }
 
+// takes in: a word
+// returns: that word cleaned of any leading and trailing 
+// nonalphanumeric characters
 string stripNonAlphaNum(string input) {
     size_t firstalpha = 0;
     size_t lastalpha = input.length()-1;
+    //leading
     while (firstalpha < input.length() and not isalnum(input[firstalpha])) {
         firstalpha++;
     }
+    // trailing
     while (lastalpha > 0 and not isalnum(input[lastalpha])) {
         lastalpha--;
     }
+    // entirely non alpha numeric
     if (firstalpha==input.length()-1 and lastalpha==0) {
         return "";
     }
@@ -65,6 +78,8 @@ string stripNonAlphaNum(string input) {
     }
 }
 
+// takes in: a word
+// returns: that word in all lowercase
 string wordToLower(string word) {
     string word_lower = "";
         for (size_t l = 0; l < word.size(); l++) {

@@ -4,6 +4,8 @@ November 23
 Gerp
 Unit Tests
 
+Tests processing functions, gerp and word table functionality.
+
 */
 #include "processing.h"  
 #include "gerp.h"

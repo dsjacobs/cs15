@@ -6,6 +6,10 @@ November 22, 2025
 Project 3, gerp
 Danielle Jacobs
 
+The Gerp class is the main class, where searches and file processing 
+happen. It contains a list of files from the input directory, an output file,
+a hash table as defined in WordTable.h, and instructions for how to route input from the user. 
+
 */
 
 #ifndef GERP_H
@@ -26,7 +30,7 @@ struct FileStruct {
         fileID(myID), fileName(myName) {}; 
 };
 
-class gerp {g\
+class gerp {
     public:
         gerp(string inputDirectory, string outputFile);
         ~gerp();

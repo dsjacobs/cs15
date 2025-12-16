@@ -4,7 +4,9 @@ November 22, 2025
 Project 3, gerp
 Danielle Jacobs
 
-Purpose: TODO
+Gerp can read input files, process them word by word and store them in the Word
+Table, perform searches on input from the user, and direct the results to an
+output file.
 */
 
 #include <string>
@@ -20,8 +22,10 @@ Purpose: TODO
 
 using namespace std;
 
-// Given an output file, and input directory, creates an instance of the gerp
-// program. Sets quit to false, and initializes files to build data structures.
+// Takes in: an output file, and input directory
+// Output: none
+// Purpose: creates an instance of the gerp program.
+// Effects: Sets quit to false, and initializes files to build data structures.
 gerp::gerp(string inputDirectory, string outputFile) 
     :outputFile(outputFile),
     inputDirectory(inputDirectory),
@@ -31,7 +35,10 @@ gerp::gerp(string inputDirectory, string outputFile)
     initializeFiles(inputDirectory);
 };
 
-// Given a filename, creates and returns an output stream to that file. 
+// Takes in: a filename
+// Output: an output file stream 
+// Purpose: allows search results to be saved to an ouput file.
+// Other: returns an error if the file is unopenable.
 ofstream gerp::createOfstream(string filename) {
     ofstream myofstream; 
     myofstream.open(filename);  
@@ -42,6 +49,8 @@ ofstream gerp::createOfstream(string filename) {
 }
 
 // Destructor
+// No input or output
+// Effects: clears all memory associated with the file list and word table.
 gerp::~gerp() {
     gerpFileList.clear();
     for (size_t x = 0; x < gerpWordTable.gerpWordList.size(); x++) {
@@ -50,8 +59,8 @@ gerp::~gerp() {
     gerpWordTable.gerpWordList.clear();
 };
 
-// Keeps the gerp program running until user quits. Takes in input user and
-// sends to route cmd for processing.
+// Purpose: Keeps the gerp program running until user quits.
+// No output or other effects
 void gerp::run() {
     while (not hasQuit) {
         vector<string> input = requestInput();
@@ -59,7 +68,8 @@ void gerp::run() {
     }
 };
 
-// Requests input from the user with "Query?" and returns that input
+// Requests input from the user with "Query?"
+// Returns the input as a vector of strings, where each string is a word.
 vector<string> gerp::requestInput() {
     cout << "Query?" << endl;
     string input;
@@ -73,27 +83,27 @@ vector<string> gerp::requestInput() {
     return inputVec;
 };
 
-// Given an input string from the user, determines whether to quit, create a 
-// new file, or perform case sensitive or insensitve search.
+// Takes in: an input string from the user
+// Determines:whether to quit, create a new file, or perform a case sensitive
+// or case insensitve search.
 void gerp::routeCmd(vector<string> input) {
+    // new file
     if (input[0]=="@f"){
         string newFilename;
-        // TODO: Fix for multi word filenames
-        // for (size_t x = 1; x < input.size()-1; x++) {
-        //     newFilename += input[x];
-        //     newFilename += " "; 
-        // }
         newFilename = input[1];
         outputStream = createOfstream(newFilename);
     }
+    // quit
     else if (input[0]=="@q" or input[0]=="@quit") {
         quit();
     }
+    // insensitive search
     else if(input[0]=="@i" or input[0]=="@insensitive") {
         for (size_t x = 1; x < input.size(); x++) {
             insensitiveSearch(input[x]);
         }
     }
+    // sensitive search
     else {
         for (size_t x = 0; x < input.size(); x++) {
             search(input[x]);
@@ -101,8 +111,10 @@ void gerp::routeCmd(vector<string> input) {
     }
 }
 
-// Called as part of the constructor. Takes in a list files that is output
-// from traverse directory, and stores the content of each file.
+// Called as part of the constructor.
+// Takes in: a list files from the directory
+// Effects: maps each file name to an ID, and sends the file contents to 
+// later functions to be read into the hash table.
 void gerp::initializeFiles(string directory) {
     stringstream fstream = traverseDirectory(directory);
     int counter = 0;
@@ -115,8 +127,9 @@ void gerp::initializeFiles(string directory) {
     }
 };
 
-// Given a filename, opens and returns an inupt filestream. If that file 
-// does not already exist, makes it.
+// Takes in: a filename
+// Output: opens and returns an inupt filestream
+// Also: if that file does not exist, creates it
 ifstream readFileOpenStream(string filename) {
    ifstream myifstream; 
     myifstream.open(filename);
@@ -129,7 +142,9 @@ ifstream readFileOpenStream(string filename) {
     return myifstream;
 }
 
-// Takes a file ID and name. 
+// Takes in: a file ID and file name from initializeFiles()
+// Effects: sends each file to further functions to be read into the hash table.
+// Saves the file ID and name for reference
 void gerp::processFile(int fileID, string fileName) {
     ifstream fstream = readFileOpenStream(fileName);
     string line;
@@ -142,6 +157,9 @@ void gerp::processFile(int fileID, string fileName) {
     gerpFileList.push_back(newFileStruct);
 }
 
+// Takes in: a line string, and the file ID and line number where it was found.
+// Effects: Sends each word in the line to further functions to be read into
+// the hash table.
 void gerp::processLine(string line, int fileID, int lineNum) {
    stringstream linestream(line);
     string word;
@@ -150,6 +168,9 @@ void gerp::processLine(string line, int fileID, int lineNum) {
     }
 }
 
+// Takes in: a word, and the file ID and line number where it was found.
+// Determines if it is already in the hash table, and how to add this instance
+// of the word to the hashtable.
 void gerp::processWord(string word, int fileID,int LineNum) {
     string wordClean = stripNonAlphaNum(word);
     string wordLower = wordToLower(wordClean);
@@ -157,22 +178,29 @@ void gerp::processWord(string word, int fileID,int LineNum) {
     if (not found) {addNewWord(wordClean, wordLower, fileID, LineNum);}
 }
 
-
+// Closes gerp program
 void gerp::quit() {
     hasQuit = true;
     cout << "Goodbye! Thank you and have a nice day." << endl;
 }
 
+// Case sensitive search.
+// Takes in a word
+// Compares it against the hash table
+// If an exact match is found, prints all matches to the output file.
 void gerp::search(string input) {
     string wordClean = stripNonAlphaNum(input);
     string wordLower = wordToLower(wordClean);
     vector<WordTableEntry> collisionList = inputToCollisionList(wordClean);
     bool foundMatch = false;
+    // for all words in that collision list, IE at that hashmod
     for (size_t e = 0; e < collisionList.size(); e++) {
         WordTableEntry wte = collisionList[e];
+        // determine if the lowercase spelling is a match
         if (wte.spellingLower==wordLower) {
             for (size_t x = 0; x < wte.caseVariations.size(); x++) {
                 caseVariation cv = wte.caseVariations[x];
+                // determines if any of the specific case variations are a match
                 if (cv.spelling==wordClean) {
                     foundMatch = true;
                     printAllInstancesOfCasing(cv);
@@ -186,11 +214,16 @@ void gerp::search(string input) {
     }
 }
 
+// Case insensitive search
+// takes in a word 
+// Determines if its lowercase version is in the hash table.
+// If so, prints all instances of that word to the output file.
 void gerp::insensitiveSearch(string input) {
     string wordClean = stripNonAlphaNum(input);
     string wordLower = wordToLower(input);
     vector<WordTableEntry> collisionList = inputToCollisionList(wordClean);
     bool matchFound = false;
+    // for all words in that collision list, IE at that hashmod
     for (size_t e = 0; e < collisionList.size(); e++) {
         WordTableEntry wte = collisionList[e];
         if (wte.spellingLower==wordLower) {
@@ -203,6 +236,9 @@ void gerp::insensitiveSearch(string input) {
     }
 };
 
+// Takes in a hash table entry (a lower case spelling and its associated 
+// variations and occurrences) and prints all occurrences of all variations to 
+// the output file.
 void gerp::printAllInstancesOfWord(WordTableEntry wte) {
     for (size_t x = 0; x < wte.caseVariations.size(); x++) {
         caseVariation cv = wte.caseVariations[x];
@@ -234,6 +270,10 @@ vector<WordTableEntry> gerp::inputToCollisionList(string wordLower) {
 };
 
 
+// Takes in: a word, its lowercase spelling, file ID and line number.
+// Determines if it is already in the word table
+// If it is, adds it to that entry.
+// If its not, returns true.
 bool gerp::addIfExists(string word, string wordLower, int fileID,int LineNum)  {
     size_t hashValue = gerpWordTable.myHash(wordLower);
     size_t currentCapacity = gerpWordTable.wordCapacity();
@@ -243,10 +283,10 @@ bool gerp::addIfExists(string word, string wordLower, int fileID,int LineNum)  {
 
     for (size_t x = 0; x < gerpWordTable.gerpWordList[hashMod].size(); x++) {
         WordTableEntry &wte = gerpWordTable.gerpWordList[hashMod][x];
-        // upper case match
+        // lower case match (banana and BANANA match)
         if (wte.spellingLower==wordLower) {
             lowerFound = true;
-            // lower case match
+            // exact case match (banana and BANANA do NOT match)
             for (size_t j = 0; j < wte.caseVariations.size(); j++) {
                 caseVariation &cv = wte.caseVariations[j];
                 if (cv.spelling==word) {
@@ -262,24 +302,35 @@ bool gerp::addIfExists(string word, string wordLower, int fileID,int LineNum)  {
     return lowerFound;
 }
 
+// Takes in: a word, its lowercase spelling, and the fileID and line number
+// where it was read from.
+// Effects: adds a new entry for it into the hash table.
 void gerp::addNewWord(string word, string wordLower, int fileID,int LineNum)    
 {  
     gerpWordTable.addLower(word, wordLower, fileID, LineNum);
 }
 
+// Takes in: a pointer to a case variation, a file ID, and a line number.
+// Effects: adds this occurrence of that exact word to that case variation.
 void gerp::ExactCaseExists(caseVariation *cv, size_t fileID, size_t LineNum) {
-    // check if the exact file and line are already there
+    
+    // checks for a repeat recently entered within the same file and line
     size_t cvSize = cv->caseFileList.size();
     size_t mostRecentFile = cv->caseFileList[cvSize-1];
     size_t mostRecentLine = cv->caseLineList[cvSize-1];
     bool thisLine = (fileID==mostRecentFile and LineNum==mostRecentLine);    
     
+    // makes sure its not a repeat within the line
     if (not thisLine) {
         cv->caseFileList.push_back(fileID);  
         cv->caseLineList.push_back(LineNum);  
     }
 };
 
+// Takes in: pointer to a word table entry, the exact spelling of a word
+// and the file ID and line number where it was found.
+// Effects: adds a new case variation containing this occurrence of this 
+// spelling. 
 void gerp::LowercaseExists(WordTableEntry *wte, string word, int fileID,
                                                                    int LineNum) 
 {

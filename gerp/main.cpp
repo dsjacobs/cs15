@@ -3,8 +3,8 @@ Project 3, Gerp
 Danielle Jacobs
 November 22, 2025
 
-Purpose:
-
+Purpose: Starts the gerp program from the command line, and provides it the input directory
+and output file name so that it can run.
 */
 
 #include "gerp.h"
@@ -14,9 +14,10 @@ Purpose:
 
 int main(int argc, char *argv[])
 {
+    // needs to be exactly 3 arguments
     if (argc!=3) {
         std::cerr << "Usage : ./ gerp inputDirectory outputFile";
-        // return EXIT_FAILURE;
+        return EXIT_FAILURE;
     }
     else {
         std::string input_directory = argv[1];
