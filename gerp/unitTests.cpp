@@ -202,6 +202,15 @@ void wte21_addCV() {
     assert(wte.caseVariations.size()==2);
 }
 
+void processing_fromgs() {
+    cout << "Test 22" << endl;
+    string input = "{...";
+    string output = stripNonAlphaNum(input);
+    cout << output;
+    cout << output.size();
+    cout << "Test 22 over" << endl;
+}
+
 int main () {
 
     a01_Processing_stripNonAlphaNum_reg_word();
@@ -216,14 +225,15 @@ int main () {
     a10_Gerp_gerp_input_and_output();
     a11_Gerp_create_ofstream_working_stream();
     a12_Gerp_create_ofstream_not_working_stream();
-     wt13_wordtable_constructor();
-     wt14_wordtable_size();
-     wt15_wordtable_expand();
-     wt16_wordtable_addLower();
-     wte17_wordtableentry_defaultconstructor();
+    wt13_wordtable_constructor();
+    wt14_wordtable_size();
+    wt15_wordtable_expand();
+    wt16_wordtable_addLower();
+    wte17_wordtableentry_defaultconstructor();
     wte18_wordtableentry_customconstructor();
     cv19_casevariation_defaultconstructor();
     cv20_casevariation_customconstructor();
     wte21_addCV();
+    processing_fromgs();
     return 0;
 }

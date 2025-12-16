@@ -93,6 +93,18 @@ void gerp::routeCmd(vector<string> input) {
     // new file
     if (input[0]=="@f"){
         string newFilename;
+        if (input.size()==2) {
+            newFilename = input[1];
+        }
+        // constructing multiword filenames
+        else {
+            newFilename = "";
+            for (size_t i = 1; i < input.size()-1; i++) {
+                newFilename+=input[i];
+                newFilename+=" ";
+            }
+            newFilename+=input[input.size()];
+        }
         newFilename = input[1];
         outputStream = createOfstream(newFilename);
     }
@@ -194,28 +206,31 @@ void gerp::quit() {
 // Compares it against the hash table
 // If an exact match is found, prints all matches to the output file.
 void gerp::search(string input) {
-    string wordClean = stripNonAlphaNum(input);
-    string wordLower = wordToLower(wordClean);
-    size_t hashID = gerpWordTable.myHash(wordLower);
-    size_t hashMod = hashID%gerpWordTable.wordCapacity();
     bool foundMatch = false;
-    // for all words in that collision list, IE at that hashmod
-    for (size_t e = 0; e < gerpWordTable.gerpWordList[hashMod].size(); e++) {
-        WordTableEntry &wte = gerpWordTable.gerpWordList[hashMod][e];
-        // determine if the lowercase spelling is a match
-        if (wte.spellingLower==wordLower) {
-            for (size_t x = 0; x < wte.caseVariations.size(); x++) {
-                caseVariation cv = wte.caseVariations[x];
-                // determines if any of the specific case variations are a match
-                if (cv.spelling==wordClean) {
-                    foundMatch = true;
-                    printAllInstancesOfCasing(cv);
+    string wordClean = stripNonAlphaNum(input);
+    if (wordClean!="") {
+        string wordLower = wordToLower(wordClean);
+        size_t hashID = gerpWordTable.myHash(wordLower);
+        size_t hashMod = hashID%gerpWordTable.wordCapacity();
+        // for all words in that collision list, IE at that hashmod
+        for (size_t e = 0; e < gerpWordTable.gerpWordList[hashMod].size(); e++) 
+            {WordTableEntry &wte = gerpWordTable.gerpWordList[hashMod][e];
+            // determine if the lowercase spelling is a match
+            if (wte.spellingLower==wordLower) {
+                for (size_t x = 0; x < wte.caseVariations.size(); x++) {
+                    caseVariation cv = wte.caseVariations[x];
+                    // determines if any of the specific 
+                    // case variations are a match
+                    if (cv.spelling==wordClean) {
+                        foundMatch = true;
+                        printAllInstancesOfCasing(cv);
+                    }
                 }
             }
         }
     }
-    if (not foundMatch) {
-        outputStream << input << " Not Found. Try with @insensitive or @i.";
+    if (not foundMatch or wordClean=="") {
+        outputStream << wordClean << " Not Found. Try with @insensitive or @i.";
         outputStream << endl;
     }
 }
@@ -225,20 +240,22 @@ void gerp::search(string input) {
 // Determines if its lowercase version is in the hash table.
 // If so, prints all instances of that word to the output file.
 void gerp::insensitiveSearch(string input) {
-    string wordClean = stripNonAlphaNum(input);
-    string wordLower = wordToLower(input);
-    vector<WordTableEntry> collisionList = inputToCollisionList(wordClean);
     bool matchFound = false;
-    // for all words in that collision list, IE at that hashmod
-    for (size_t e = 0; e < collisionList.size(); e++) {
-        WordTableEntry wte = collisionList[e];
-        if (wte.spellingLower==wordLower) {
-           matchFound = true;
-           printAllInstancesOfWord(wte);
+    string wordClean = stripNonAlphaNum(input);
+    if (input!="") {
+        string wordLower = wordToLower(input);
+        vector<WordTableEntry> collisionList = inputToCollisionList(wordClean);
+        // for all words in that collision list, IE at that hashmod
+        for (size_t e = 0; e < collisionList.size(); e++) {
+            WordTableEntry wte = collisionList[e];
+            if (wte.spellingLower==wordLower) {
+            matchFound = true;
+            printAllInstancesOfWord(wte);
+            }
         }
     }
-    if (not matchFound) {
-        outputStream << input << " Not Found." << endl;
+    if (not matchFound or wordClean=="") {
+        outputStream << wordClean << " Not Found." << endl;
     }
 };
 

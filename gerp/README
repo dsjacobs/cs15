@@ -99,8 +99,16 @@ Data structures:
     handles a lot of the heap/stack allocation. I still need to pass pointers
     around when I want to update existing word table entries, rather than
     meaningless copies.
-
+Te
 Testing details:
+    I ran my program and compared output against the reference:
+    empty directories, multi-word file names, multi-word search queries, 
+    case sensitive and insensitive searches, and on all the gutenbergs and 
+    tiny Data. I made sure the correct line number was printed, 
+    including first and last lines of files, and in a similar order.
+    I used gerp_perf to make sure I met time and space constraints.
+    I wrote some unit tests on things that could be easily unit tested,
+    including my class constructors, and the cleaning of various input strings.
 
 Hours worked:
     I worked around 40 hours on this project.
