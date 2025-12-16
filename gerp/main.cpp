@@ -3,8 +3,8 @@ Project 3, Gerp
 Danielle Jacobs
 November 22, 2025
 
-Purpose: Starts the gerp program from the command line, and provides it the input directory
-and output file name so that it can run.
+Purpose: Starts the gerp program from the command line, and provides it the 
+input directory and output file name so that it can run.
 */
 
 #include "gerp.h"

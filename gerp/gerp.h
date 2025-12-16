@@ -8,7 +8,8 @@ Danielle Jacobs
 
 The Gerp class is the main class, where searches and file processing 
 happen. It contains a list of files from the input directory, an output file,
-a hash table as defined in WordTable.h, and instructions for how to route input from the user. 
+a hash table as defined in WordTable.h, and instructions for how to route input 
+from the user. 
 
 */
 

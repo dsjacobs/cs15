@@ -23,7 +23,8 @@ using namespace std;
 // recursive helper function for traverseDir
 // takes in: a directory, its path, and a string stream.
 // returns: the full paths of the filenames
-void traverseDirNode(DirNode directory, string dirpath,std::stringstream &boo ) {
+void traverseDirNode(DirNode directory, string dirpath,std::stringstream &boo)
+{
     if (not directory.isEmpty()) {
         int numSubDirs = directory.numSubDirs();
         int numFiles = directory.numFiles();
