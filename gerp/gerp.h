@@ -25,9 +25,9 @@ using namespace std;
 
 // maps file ID to file name
 struct FileStruct {
-    int fileID;
+    size_t fileID;
     string fileName;
-    FileStruct(int myID, string myName): 
+    FileStruct(size_t myID, string myName): 
         fileID(myID), fileName(myName) {}; 
 };
 
@@ -54,16 +54,20 @@ class gerp {
         void determineWord(string input);
         void routeCmd(vector<string> input);
 
-        void processWord(string word, int fileID,int LineNum);    
-        bool addIfExists(string word, string wordLower, int fileID,int LineNum);
+        void processWord(string word, size_t fileID,size_t LineNum);    
+        bool addIfExists(string word, string wordLower, size_t fileID,
+                                                                size_t LineNum);
         void addNewWord(string word, string wordLower, 
-                                                    int fileID,int LineNum);   
+                                             size_t fileID, size_t LineNum);   
         void ExactCaseExists(caseVariation *cv, size_t fileID, size_t LineNum); 
         void LowercaseExists(WordTableEntry *wte, string word,
-                                                     int fileID,  int LineNum);
+                                                size_t fileID,  size_t LineNum);
+        bool mostRecentMatch(WordTableEntry *wte, size_t fileID, 
+                                                        size_t ineNum);
         void initializeFiles(string directory);
-        void processFile(int fileID, string fileName);
-        void processLine(string line, int fileID, int LineNum);
+        void processFile(size_t fileID, string fileName);
+        void processLine(string line, size_t ileID, size_t LineNum);
+        void printLine(size_t fileID, size_t lineNum);
         void printAllInstancesOfWord(WordTableEntry wte);
         void printAllInstancesOfCasing(caseVariation cv);
         vector<WordTableEntry> inputToCollisionList(string input);

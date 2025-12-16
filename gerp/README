@@ -15,7 +15,8 @@ I received help, advice, and suggestions from Ariel Jacobs.
 
 Files:
 Processing.cpp: 
-    Contains the strip non alpha numeric characters function, and the directory traversal function. 
+    Contains the strip non alpha numeric characters function,
+    and the directory traversal function. 
 
 Gerp.cpp
 Gerp.h

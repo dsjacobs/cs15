@@ -42,6 +42,8 @@ class WordTableEntry {
         string spellingLower;
         vector<caseVariation> caseVariations;
         void add(caseVariation newVariation);
+        vector<size_t> allFileIDs;
+        vector<size_t> allLineNums;
 };
 
 #endif

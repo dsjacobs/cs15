@@ -22,7 +22,7 @@ WordTable::WordTable() {
     gerpWordList = vector<vector<WordTableEntry>>(capacity);
 };
 
-// destructor, clears all stack memory
+// destructor
 WordTable::~WordTable() {
     gerpWordList.clear();
 };
@@ -45,6 +45,8 @@ void WordTable::reHash(size_t oldCapacity) {
             for (size_t k = 0; k < wte.caseVariations.size(); k++) {
                wte.caseVariations[k].caseLineList.clear();
             }
+            wte.allFileIDs.clear();
+            wte.allLineNums.clear();
      }
      gerpWordList[i].clear();
     }
@@ -84,8 +86,8 @@ size_t WordTable::wordCapacity() const {
 // adds a new lowercase word to the table.
 // takes in: a word, its lowercase spelling, and the file ID and line number
 // where it was found.
-void WordTable::addLower(string word, string wordLower, int fileID, 
-                                                                int LineNum) {
+void WordTable::addLower(string word, string wordLower, size_t fileID, 
+                                                            size_t LineNum) {
 
     if (loadFactor() > 0.7) {
         expand();
@@ -100,6 +102,9 @@ void WordTable::addLower(string word, string wordLower, int fileID,
      // build all case entry
     WordTableEntry wte(wordLower, wordCapacity());
     wte.caseVariations.push_back(cv);
+
+    wte.allFileIDs.push_back(fileID);
+    wte.allLineNums.push_back(LineNum);
     gerpWordList[hashmod].push_back(wte);
     entrySize++;
 };

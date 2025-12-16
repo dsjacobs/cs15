@@ -22,6 +22,8 @@ WordTableEntry::WordTableEntry(string wordLower, size_t capacity):
     spellingLower(wordLower) {
     hash<string> myHash;
     hashID = myHash(spellingLower)/capacity;
+    allFileIDs = vector<size_t>();
+    allLineNums = vector<size_t>();
 };
 
 // destructor

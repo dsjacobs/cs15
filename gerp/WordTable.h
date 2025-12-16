@@ -35,7 +35,8 @@ class WordTable {
         size_t myHash(string word);
         void reHash(size_t oldCapacity);
         void expand();
-        void addLower(string word, string wordLower, int fileID, int LineNum);
+        void addLower(string word, string wordLower, size_t fileID, 
+                                                                size_t LineNum);
     
         size_t entrySize;
         size_t capacity;
