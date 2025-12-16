@@ -252,8 +252,10 @@ void gerp::printAllInstancesOfWord(WordTableEntry wte) {
     }
 };
 
+// Takes in a case variation, and prints all lines where it is found in the
+// input directory, along with their fileIDs and line numbers, to the 
+// output file.
 void gerp::printAllInstancesOfCasing(caseVariation cv) {
-    // size_t currentFile = 0;
     for (size_t i = 0; i < cv.caseFileList.size(); i++) {
         size_t fileID = cv.caseFileList[i];
         size_t LineNum = cv.caseLineList[i];
@@ -261,6 +263,8 @@ void gerp::printAllInstancesOfCasing(caseVariation cv) {
     }
 };
 
+// Takes in a fileID and LineNum.
+// Prints the fileID, LineNum, and the line of text to the output file.
 void gerp::printLine(size_t fileID, size_t lineNum) {
     string fileName = gerpFileList[fileID].fileName;
     string line;
@@ -272,6 +276,8 @@ void gerp::printLine(size_t fileID, size_t lineNum) {
     outputStream << fileName << ":" << lineNum << ": " << line << endl;
 }
 
+// Takes in a lowercase word.
+// Returns the collision list of all the words found at that word's hashmod.
 vector<WordTableEntry> gerp::inputToCollisionList(string wordLower) {
     size_t hashID = gerpWordTable.myHash(wordLower);
     size_t hashMod = hashID%gerpWordTable.wordCapacity();
@@ -317,6 +323,9 @@ bool gerp::addIfExists(string word, string wordLower, size_t fileID,
     return lowerFound;
 }
 
+// Takes in a pointer to a word table entry, a file ID, and a line Number.
+// Returns whether the most recent addition to the all case file and line lists
+// are the same as the line and ID that were input.
 bool gerp::mostRecentMatch(WordTableEntry *wte, size_t fileID, size_t LineNum) {
     size_t fileListSize = wte->allFileIDs.size();
     size_t mostRecentFile = wte->allFileIDs[fileListSize-1];

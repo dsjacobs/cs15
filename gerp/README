@@ -12,32 +12,96 @@ and created.
 Acknowledgments:
 I went to office hours with Daniel and Chris.
 I received help, advice, and suggestions from Ariel Jacobs.
+I talked to the class chatbot.
 
 Files:
-Processing.cpp: 
-    Contains the strip non alpha numeric characters function,
-    and the directory traversal function. 
+- Processing.h:
+    Cleans words and traverses directories.
 
-Gerp.cpp
-Gerp.h
-WordTable.cpp
-WordTable.h
-WordTableEntry.cpp
-WordTableEntry.h
-main.cpp
+- Processing.cpp: 
+    Strip non alpha numeric characters from words, and directory traversal
+    to return the names of all the files in the directory.
 
-Makefile: Defines how ./unit_tests and ./gerp are compiled and run.
+- Gerp.cpp
+    Defines how new words are added and stored, how the files are processed
+    and searched, and how input from the user is routed.
 
+- Gerp.h
+    Gerp can interact with files, store words from an input directory to
+    make them easily searchable later.
 
-unit_tests.cpp
+- WordTable.h
+    The word table acts as the hash table for this project. It stores all words
+    found in the input directory at the hashMod of their lowercase spelling.
+
+- WordTable.cpp
+    The load factor (how filled the word table is) can be checked, as well as
+    the current size and capacity. New words, with no existing matches,
+    can be added.
+
+- WordTableEntry.h
+    A word table entry is a lowercase spelling of a word and all its contained
+    information, including the various different spelling/casings of a word
+    and where they were found in the input directory.
+
+- WordTableEntry.cpp
+    Different spellings (case variations) of a word can be added to the 
+    relevant word table entry.
+
+- main.cpp
+    When the startup command is submitted through the terminal, starts the 
+    gerp program and supplies it the starting information from the user 
+    (input directory and initial output file).
+
+- Makefile: 
+    Defines how ./unit_tests and ./gerp are compiled and run.
+
+- unit_tests.cpp
+    Tests that word table entries can properly be accessed and searched, that
+    words are cleaned properly, that output matches the reference both in 
+    the command line and the output file, that load factor and expansion 
+    work as expected.
 
 Compile and run:
+    compile: make
+    run: ./gerp inputDirectory outputFile
 
 Architectural overview:
+    Gerp is the main class with most of the functionality. Main simply runs the 
+    program. Within gerp, there is a WordTable (hash table) that contains
+    vectors (collision lists) of WordTableEntries at each hashMod.
+    A wordTableEntry has a spelling in all lowercase, and information about
+    each variation of that spelling and all the places they can be found
+    in the input directory.
 
 Data structures:
+    My program is built on the standard hash function, as well as many vectors
+    of vectors. Standard hash is known to be robust and well distributed.
+    My outer vector: one entry for each hashmod (the std hash of the 
+    word mod the hash table capacity). Next vector: one entry for each word
+    found at that hashmod. Within those WordTableEntries, I keep a few more 
+    vectors: a vector of various spellings, which each contain vectors 
+    with the line numbers and file IDs where they can be found.
+    I chose vectors whenever possible because indexing into them provides an
+    O(1) search time, which was essential for this search program. I did not
+    store all the files from the input directory in memory, even though I
+    started with that approach thinking it might save time on lookup.
+    However opening them and reading them each time saved a ton of memory 
+    and only slightly increased the time. 
+
+    The other option discussed in class to handle collisions in a hash table
+    was linear probing. I found this easier to think about and keep track of
+    where I might find an entry.
+
+    I also tried storing my hashtable on the heap but found many values were
+    getting initialized with garbage and discussed with Chris during office ours
+    that I could have even largeGutenberg on the stack, because the std vector
+    handles a lot of the heap/stack allocation. I still need to pass pointers
+    around when I want to update existing word table entries, rather than
+    meaningless copies.
 
 Testing details:
 
 Hours worked:
+    I worked around 40 hours on this project.
 
