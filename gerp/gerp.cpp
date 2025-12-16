@@ -166,7 +166,7 @@ void gerp::processFile(size_t fileID, string fileName) {
 // Effects: Sends each word in the line to further functions to be read into
 // the hash table.
 void gerp::processLine(string line, size_t fileID, size_t lineNum) {
-   stringstream linestream(line);
+    stringstream linestream(line);
     string word;
     while (linestream >> word) {
         processWord(word, fileID, lineNum);
@@ -196,11 +196,12 @@ void gerp::quit() {
 void gerp::search(string input) {
     string wordClean = stripNonAlphaNum(input);
     string wordLower = wordToLower(wordClean);
-    vector<WordTableEntry> collisionList = inputToCollisionList(wordClean);
+    size_t hashID = gerpWordTable.myHash(wordLower);
+    size_t hashMod = hashID%gerpWordTable.wordCapacity();
     bool foundMatch = false;
     // for all words in that collision list, IE at that hashmod
-    for (size_t e = 0; e < collisionList.size(); e++) {
-        WordTableEntry wte = collisionList[e];
+    for (size_t e = 0; e < gerpWordTable.gerpWordList[hashMod].size(); e++) {
+        WordTableEntry &wte = gerpWordTable.gerpWordList[hashMod][e];
         // determine if the lowercase spelling is a match
         if (wte.spellingLower==wordLower) {
             for (size_t x = 0; x < wte.caseVariations.size(); x++) {

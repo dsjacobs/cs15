@@ -44,7 +44,7 @@ unitTests.o: unitTests.cpp processing.h
 #This rule builids the unit_tests executable
 unitTests: unitTests.o 
 	$(CXX) $(CXXFLAGS) -o unitTests unitTests.o \
-	processing.o DirNode.o FSTree.o gerp.o WordTable.o
+	processing.o DirNode.o FSTree.o gerp.o WordTable.o WordTableEntry.o
 ##
 ## Here is a special rule that removes all .o files besides the provided ones 
 ## (DirNode.o and FSTree.o), all temporary files (ending with ~), and 
