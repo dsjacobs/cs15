@@ -33,6 +33,7 @@ gerp::gerp(string inputDirectory, string outputFile)
 {
     hasQuit = false;
     initializeFiles(inputDirectory);
+    previousSearchLength=1;
 };
 
 // Takes in: a filename
@@ -71,7 +72,9 @@ void gerp::run() {
 // Requests input from the user with "Query?"
 // Returns the input as a vector of strings, where each string is a word.
 vector<string> gerp::requestInput() {
-    cout << "Query?" << endl;
+    for (size_t i = 0; i < previousSearchLength; i++) {
+        cout << "Query? ";
+    }
     string input;
     getline(cin, input);
     stringstream inputstream(input);
@@ -102,12 +105,14 @@ void gerp::routeCmd(vector<string> input) {
         for (size_t x = 1; x < input.size(); x++) {
             insensitiveSearch(input[x]);
         }
+        previousSearchLength = input.size() - 1;
     }
     // sensitive search
     else {
         for (size_t x = 0; x < input.size(); x++) {
             search(input[x]);
         }
+        previousSearchLength = input.size();
     }
 }
 
@@ -148,7 +153,7 @@ ifstream readFileOpenStream(string filename) {
 void gerp::processFile(int fileID, string fileName) {
     ifstream fstream = readFileOpenStream(fileName);
     string line;
-    int lineCounter = 0;
+    int lineCounter = 1;
     while (getline(fstream, line)) {
         processLine(line, fileID, lineCounter);
         lineCounter++;
@@ -254,7 +259,7 @@ void gerp::printAllInstancesOfCasing(caseVariation cv) {
         string fileName = gerpFileList[fileNum].fileName;
         string line;
         ifstream fstream = readFileOpenStream(fileName);
-        int lineCounter = 0;
+        int lineCounter = 1;
         while (getline(fstream, line) and lineCounter < lineNum) {
             lineCounter++;
         }

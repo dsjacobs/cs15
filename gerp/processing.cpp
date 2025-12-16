@@ -67,8 +67,17 @@ string stripNonAlphaNum(string input) {
     while (lastalpha > 0 and not isalnum(input[lastalpha])) {
         lastalpha--;
     }
+    // if one character word
+    if (input.length()==1) {
+        if (isalnum(input[firstalpha])) {
+            return input;
+        }
+        else {
+            return "";
+        }
+    }
     // entirely non alpha numeric
-    if (firstalpha==input.length()-1 and lastalpha==0) {
+    else if (firstalpha==input.length()-1 and lastalpha==0) {
         return "";
     }
     else {

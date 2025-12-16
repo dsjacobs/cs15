@@ -1,0 +1,8 @@
+gerp-test-dirs/tinyData/a/found:6: I really learnt a lot.
+b Not Found. Try with @insensitive or @i.
+c Not Found. Try with @insensitive or @i.
+banana Not Found. Try with @insensitive or @i.
+pie Not Found. Try with @insensitive or @i.
+MY Not Found.
+LOVE Not Found.
+IS Not Found.

@@ -1,9 +1,21 @@
 Danielle Jacobs
 December 7, 2025
 
-Processing.cpp:  contains the strip non alpha numeric characters function,
-and the directory traversal function. Processing unit tests file is to test
-these functions.
+Purpose:
+The gerp project takes in an input directory, and allows the user to search
+for any word or series of words within that directory. All occurrences of 
+that word, along with their file name and line numbers and the full line of
+text, are printed to an output file. Searches can be case sensitive or case
+insensitive. The program can be quit, and a new output file can be named
+and created.
+
+Acknowledgments:
+I went to office hours with Daniel and Chris.
+I received help, advice, and suggestions from Ariel Jacobs.
+
+Files:
+Processing.cpp: 
+    Contains the strip non alpha numeric characters function, and the directory traversal function. 
 
 Gerp.cpp
 Gerp.h
@@ -17,4 +29,14 @@ Makefile: Defines how ./unit_tests and ./gerp are compiled and run.
 
 
 unit_tests.cpp
+
+Compile and run:
+
+Architectural overview:
+
+Data structures:
+
+Testing details:
+
+Hours worked:
 

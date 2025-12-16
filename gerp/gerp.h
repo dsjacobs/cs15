@@ -23,6 +23,7 @@ a hash table as defined in WordTable.h, and instructions for how to route input 
 
 using namespace std;
 
+// maps file ID to file name
 struct FileStruct {
     int fileID;
     string fileName;
@@ -47,6 +48,7 @@ class gerp {
         string inputDirectory;
         vector<FileStruct> gerpFileList;
         ofstream outputStream;
+        size_t previousSearchLength;
 
         vector<string> requestInput();
         void determineWord(string input);
